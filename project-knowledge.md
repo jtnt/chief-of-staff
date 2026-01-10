@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 9, 2026 (late evening)
+**Last Updated:** January 9, 2026 (night)
 
 ---
 
@@ -10,26 +10,32 @@
 **Status:** Active - Primary Focus
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
+**Source:** `/Users/jtnt/Documents/Projects/Razzo`
+**Last synced:** 2026-01-09 (evening - Sprint positioning complete)
 
 **Current Strategic Direction:**
-The AI Workflow Sprint is becoming the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
+The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
 
 **Key Insight:** Professionals adopt tools by solving real problems, not through passive learning. The Sprint's action-learning approach addresses the "knowing-doing gap" that traditional training creates.
 
-**Pricing:**
-- Individual format (up to 10 people): $3,500
-- Team format (25-30 people): $5,000
+**Current Offerings:**
+- AI Workflow Sprint: 2 weeks, $3,500 (individual) or $5,000 (team) - LEAD OFFERING
+- Sales Teams Bootcamp: 4 sessions, $5,000
+- Marketing Teams Bootcamp: 4 sessions, $5,000
+- Sales Managers Workshop: 90 min, $1,500
+- Office Hours: $250/hr
 
 **Recent Work:**
-- 2026-01-09: Updated website to reflect Sprint-first positioning. Created Sprint offering page, repositioned in navigation, added to homepage.
+- 2026-01-09: Sprint positioning work COMPLETED
+  - All pending TODO items finished (Sprint section on homepage, softened 4-week emphasis, added "Beyond the Workflows" benefits, moved examples to bottom)
+  - Website now fully reflects Sprint-first positioning
+  - Repository reorganized with website/, Planning/, Assets/ folders
+  - CLAUDE.md split into root (project-wide), website-specific, and strategic context (project-knowledge.md)
 
 **Open Items:**
-- Move Example Workflows section to bottom of Sprint page
-- Add "Beyond the Workflows" benefits section (champion identification, etc.)
-- Fix bullet font sizing (CSS)
-- Soften 4-week methodology language on homepage/about
-- Add featured Sprint section above course grid on homepage
-- Reframe "training adoption" language
+- Monitor Sprint positioning effectiveness with market
+- Evaluate Sprint → Bootcamp conversion pathway
+- Consider quarterly sprint model for ongoing client engagement
 
 ---
 
@@ -91,21 +97,28 @@ This system tracks work across all projects, synthesizes information, identifies
 - Initial structure operational (project-knowledge.md, project-sources.md, CLAUDE.md)
 - Two-way sync workflows built: pull from Chief of Staff ("update [project]") and push from projects (`/update-cos`)
 - Tracking 4 projects: Razzo, CPF, Caregiver App, and Chief of Staff itself
-- **Stop hook active:** Reminds about `/update-knowledge` when significant session work is complete and user is wrapping up
+- **CLAUDE.md instruction active:** Claude reminds about `/update-knowledge` naturally at session end
 
 **Recent Work:**
 - 2026-01-09: Initial setup ([session log](Projects/Chief of Staff/20260109-initial-setup.md))
-- 2026-01-09 (late evening): Implemented `/update-knowledge` reminder system
-  - Removed failed SessionStart auto-sync hook attempts (additionalContext wasn't reliably visible)
-  - Created prompt-based Stop hook to remind about `/update-knowledge` at session end
-  - Hook uses LLM to evaluate if: (1) significant work was done AND (2) user is wrapping up
-  - Only reminds when both conditions are met to avoid noise
-  - Added Claude Code hooks reference documentation to Resources folder for future reference
+- 2026-01-09 (night): Refined `/update-knowledge` workflow
+  - Tested prompt-based Stop hook - worked but showed confusing "error" messages
+  - Analysis: Stop hooks that block inherently show error-like output (can't be suppressed)
+  - Token cost negligible (~$0.10-0.20/month) but UX was poor
+  - **Solution:** Removed Stop hook, added instruction to `~/.claude/CLAUDE.md` instead
+  - Claude now sees reminder at session start and naturally reminds at appropriate moments
+  - Zero noise, zero token cost, simpler implementation
+  - Added Claude Code hooks & slash commands reference docs to Resources
+  - Set up GitHub repo: https://github.com/jtnt/chief-of-staff.git
+  - Fixed `/update-cos` command to use correct Chief of Staff path
+  - **Improved `/update-knowledge`:** Now prompts user to sync to Chief of Staff after updating
 
 **Technical Setup:**
-- Stop hook in `~/.claude/settings.json` uses LLM to intelligently detect when to remind about `/update-knowledge`
+- `~/.claude/CLAUDE.md` contains "Session Workflow" instruction for `/update-knowledge` reminders
 - CLAUDE.md contains instructions for Chief of Staff workflows and project sync
-- SessionStart auto-sync postponed - focusing on Problem 1 first
+- `/update-knowledge` command now includes optional CoS sync step
+- GitHub repo established for version control
+- SessionStart auto-sync postponed for now
 
 **Philosophy:** Keep it simple. Markdown files in folders. User provides information, Claude organizes and synthesizes.
 

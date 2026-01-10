@@ -4,7 +4,17 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 
 ---
 
+## Razzo
+- **Source:** `/Users/jtnt/Documents/Projects/Razzo`
+- **Key files:** `project-knowledge.md`, `CLAUDE.md`, `website/CLAUDE.md`
+- **Last synced:** 2026-01-09 (evening - Sprint positioning complete)
+
 ## Context Profile Framework
 - **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `Business/business-knowledge.md`, `Research/Industry Thinking.md`
 - **Last synced:** 2026-01-09 (evening - major architecture evolution documented)
+
+## Chief of Staff
+- **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
+- **Key files:** `project-knowledge.md`, `CLAUDE.md`, `project-sources.md`
+- **Last synced:** 2026-01-09 (night - workflow refinements and GitHub setup)
