@@ -18,3 +18,13 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `project-sources.md`
 - **Last synced:** 2026-01-09 (night - workflow refinements and GitHub setup)
+
+## LinkedIn My Posts Extractor
+- **Source:** `/Users/jtnt/Documents/Projects/linkedin-my-posts-extractor`
+- **Key files:** `CLAUDE.md`
+- **Last synced:** Never (newly added)
+
+## LinkedIn Scraper Extension
+- **Source:** `/Users/jtnt/Documents/Projects/linkedin-scraper-extension`
+- **Key files:** `CLAUDE.md`, `README.md`
+- **Last synced:** Never (newly added)

@@ -65,6 +65,21 @@ project-sources.md              # External project folder locations for syncing
 - **Strategy documents**: File in strategy/, reference key points in index
 - **Raw notes**: Help organize and clarify
 
+## Session Files in Technical Projects
+
+Some technical/coding projects may have a `session.md` file during active development. This is Claude's working memory for complex sessions.
+
+**Key points:**
+- Session files are temporary - used during active work, then deleted
+- They capture technical details needed for continuity (CSS selectors, error messages, debugging notes)
+- When work completes, lasting technical notes get extracted to that project's CLAUDE.md
+- Outcomes and strategic decisions get summarized to that project's project-knowledge.md
+- **Do NOT sync session file contents to Chief of Staff** - only sync outcomes from project-knowledge.md
+
+**Lifecycle**: Create during significant work → Update throughout session → Extract notes to CLAUDE.md → Delete session.md
+
+Git commits already capture granular history, so session files don't need to persist long-term.
+
 ## Project Sync Workflow
 
 Some projects have external source folders (e.g., separate Claude Code projects). These are tracked in `project-sources.md`.

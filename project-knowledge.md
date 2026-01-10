@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 9, 2026 (night)
+**Last Updated:** January 9, 2026 (late night - added LinkedIn extensions tracking)
 
 ---
 
@@ -121,6 +121,50 @@ This system tracks work across all projects, synthesizes information, identifies
 - SessionStart auto-sync postponed for now
 
 **Philosophy:** Keep it simple. Markdown files in folders. User provides information, Claude organizes and synthesizes.
+
+---
+
+### LinkedIn My Posts Extractor
+**Status:** Active - Utility Tool
+**What it is:** Chrome extension that scrapes your own LinkedIn posts from your profile activity page and stores them locally
+**Source:** `/Users/jtnt/Documents/Projects/linkedin-my-posts-extractor`
+**Last synced:** Never (newly added)
+
+**Purpose:** Extract and archive your own LinkedIn posts for analysis, backup, or content repurposing.
+
+**Key Features:**
+- Scrapes posts from LinkedIn profile activity page (`/in/[username]/recent-activity/all/`)
+- Automatic scrolling to load all posts (max 50 scroll attempts)
+- Stores posts in Chrome local storage
+- Web-based dashboard for viewing, searching, and exporting posts
+- Export to CSV for use in spreadsheets
+- Post deduplication by ID
+
+**Technical Stack:** Chrome Extension (Manifest V3), vanilla JavaScript
+
+**Status:** Working tool, last commit December 24, 2025 (v1.3 - date parsing fixes)
+
+---
+
+### LinkedIn Scraper Extension
+**Status:** Active - Utility Tool
+**What it is:** Chrome extension that scrapes LinkedIn saved posts and stores them locally
+**Source:** `/Users/jtnt/Documents/Projects/linkedin-scraper-extension`
+**Last synced:** Never (newly added)
+
+**Purpose:** Extract and organize saved LinkedIn posts for reference, content inspiration, or research.
+
+**Key Features:**
+- Scrapes saved posts from LinkedIn saved posts page (`/my-items/saved-posts/`)
+- Automatic scrolling and "Show more" button detection
+- Stores posts in Chrome local storage
+- Web-based dashboard with search, filter, export functionality
+- Filters out unavailable/deleted posts ("Status is offline")
+- Multiple CSS selector fallbacks for different post types
+
+**Technical Stack:** Chrome Extension (Manifest V3), vanilla JavaScript
+
+**Status:** Working tool, last commit December 24, 2025 (session progress documentation)
 
 ---
 
