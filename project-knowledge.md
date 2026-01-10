@@ -147,6 +147,10 @@ This system tracks work across all projects, synthesizes information, identifies
     - Changed from vague "Review the conversation" bullet to standalone step: "Analyze this conversation session - Before doing anything else..."
     - Added emphasis: "This is the PRIMARY source of insights"
     - Tested in another project - initial version was being skipped, new version forces explicit analysis
+  - **Removed automatic session.md deletion**
+    - Previously `/update-knowledge` would delete session.md after extracting notes
+    - User pointed out: session.md might still be in use, not ready to delete
+    - Now leaves session.md alone - user decides when to delete it
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
