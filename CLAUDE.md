@@ -183,12 +183,25 @@ Explicit commands are also available:
 - `/journal` - Personal journal entry
 - `/review-checkins` - Analyze check-ins for patterns and insights
 
-### Project Routing
+### Project Routing (Bidirectional Flow)
 
 When check-in content relates to a tracked project:
-- Offer to create a note in that project's folder: `Projects/[Name]/YYYYMMDD-checkin-note.md`
-- Original check-in stays in Check-Ins/ folder (single source of truth)
-- Journal entries are never routed (always private)
+
+**Push to project (NEW - bidirectional):**
+1. Ask user: "This mentions [Project]. Want me to add it to that project's inbox?"
+2. If yes, write to project's inbox: `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
+   - If file doesn't exist, create it with standard structure (Pending / Archive sections)
+   - Add entry under "## Pending" with: date, source, context, content
+3. ALSO create CoS internal log: `Projects/[Name]/YYYYMMDD-checkin-note.md` (keeps CoS record)
+
+**When the user opens that project:**
+- Global `~/.claude/CLAUDE.md` instructs Claude to check for `cos-inbox.md` at session start
+- Claude notifies: "You have X item(s) from Chief of Staff" and lists them
+- User decides what to do (act on, archive, discuss)
+
+**Original check-in stays in Check-Ins/ folder** (single source of truth)
+
+**Journal entries are never routed** (always private)
 
 ## Current Projects
 

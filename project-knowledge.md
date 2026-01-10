@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 10, 2026
+**Last Updated:** January 10, 2026 (evening)
 
 ---
 
@@ -101,6 +101,7 @@ This system tracks work across all projects, synthesizes information, identifies
 - **Three-layer documentation model established** across all projects
 - **Smart project status detection** - only checks/reports projects with actual changes
 - **Check-in system operational** - Four types for daily planning, reflection, and thought capture
+- **Bidirectional flow implemented** - CoS can now push items to project inboxes
 
 **Recent Work:**
 - 2026-01-09: Initial setup ([session log](Projects/Chief of Staff/20260109-initial-setup.md))
@@ -204,6 +205,26 @@ This system tracks work across all projects, synthesizes information, identifies
     - Multiple thoughts per day (separate timestamped files)
     - Multiple journal entries per day (appended with timestamps)
     - Pattern analysis identifies themes, energy trends, completion patterns, ideas worth developing
+
+- 2026-01-10 (evening): **Implemented bidirectional information flow (CoS → Projects)**
+  - **Problem identified:** Check-ins could route to CoS internal log, but items didn't surface when opening projects
+  - **Solution:** Created `cos-inbox.md` mechanism
+  - **How it works:**
+    1. During CoS check-ins, when project mentioned: "Want to add to [Project]'s inbox?"
+    2. If yes, writes to `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
+    3. Also logs to CoS internal folder (keeps record in Chief of Staff)
+    4. When user opens that project, Claude auto-notifies: "You have X items from Chief of Staff"
+  - **Inbox structure:** Pending / Archive sections
+    - Items include: date, source (morning/evening/thought), context, content
+    - Manual archive workflow: user says "archive that" to move items
+  - **Files modified:**
+    - `/Users/jtnt/.claude/commands/morning.md` - Updated project routing to push to cos-inbox.md
+    - `/Users/jtnt/.claude/commands/evening.md` - Same
+    - `/Users/jtnt/.claude/commands/thought.md` - Same
+    - `/Users/jtnt/.claude/CLAUDE.md` - Added "Chief of Staff Inbox Check" section for auto-notification
+    - Chief of Staff `CLAUDE.md` - Documented bidirectional flow mechanism
+  - **Key design decision:** Dual write (project inbox + CoS log) ensures visibility in both places
+  - **UX improvement:** Items now persist where they're actionable (in the project), not just logged in CoS
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
