@@ -114,6 +114,24 @@ Some projects have external source folders (e.g., separate Claude Code projects)
 5. Update `project-knowledge.md` with refreshed project summary
 6. Update "Last synced" date in `project-sources.md`
 
+## Command Dependencies
+
+Three commands work together and should be modified carefully:
+
+- **`/update-knowledge`** - Updates project-knowledge.md and CLAUDE.md based on conversation analysis
+- **`/update-cos`** - Syncs project to Chief of Staff (creates sync entry, updates CoS knowledge files, commits/pushes)
+- **`/save-progress`** - All-in-one: calls `/update-knowledge`, then commits/pushes project changes, then calls `/update-cos`
+
+**When modifying these commands:**
+- `/update-knowledge` and `/update-cos` are standalone - changes here automatically flow to `/save-progress`
+- `/save-progress` orchestrates the other two - it should just call them, not duplicate logic
+- Test all three after making changes to any one
+
+**Locations:**
+- `/Users/jtnt/.claude/commands/update-knowledge.md`
+- `/Users/jtnt/.claude/commands/update-cos.md`
+- `/Users/jtnt/.claude/commands/save-progress.md`
+
 ## Syncing Chief of Staff Itself
 
 **IMPORTANT:** Chief of Staff tracks its own work just like any other project.

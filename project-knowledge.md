@@ -166,6 +166,11 @@ This system tracks work across all projects, synthesizes information, identifies
     - Was maintaining separate copies of `/update-knowledge` and `/update-cos` logic
     - Now just calls those commands - fixes propagate automatically
     - Simpler, more maintainable, single source of truth
+  - **Added "Command Dependencies" section to CLAUDE.md**
+    - Documents the relationship between `/update-knowledge`, `/update-cos`, and `/save-progress`
+    - Notes that changes to the first two automatically flow to `/save-progress`
+    - Reminder to test all three when modifying any one
+    - Prevents future duplication of logic
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
