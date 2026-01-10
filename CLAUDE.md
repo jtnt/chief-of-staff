@@ -43,6 +43,10 @@ This happens automatically - no user confirmation needed.
 ## Project Structure
 
 ```
+Check-Ins/                      # Personal check-ins and reflections
+  daily/                        # Morning and evening check-ins
+  thoughts/                     # Quick captures (quotes, links, ideas)
+  journal/                      # Personal reflections
 Projects/[Name]/                # Project-specific documents (I organize these as needed)
 Weekly Reviews/                 # Periodic synthesis documents
 project-knowledge.md            # Master context (update frequently)
@@ -143,6 +147,48 @@ When running `/update-knowledge` or `/save-progress` while working IN the Chief 
 3. Then commit and push to git
 
 **Do NOT skip the sync entry step.** Chief of Staff maintains its own activity log in `Projects/Chief of Staff/` just like all other tracked projects.
+
+## Check-In System
+
+The Chief of Staff includes a check-in system for daily reflections, planning, and thought capture. Four types:
+
+### Natural Language Detection
+
+Recognize check-in intent from natural language and offer to capture appropriately:
+
+**Morning check-ins** - Triggered by:
+- "Good morning" / "Starting my day" / "Here's what I want to do today"
+- Response: Offer to do morning check-in or proceed directly
+
+**Evening check-ins** - Triggered by:
+- "End of day" / "Wrapping up" / "Here's what I got done"
+- Response: Offer to do evening check-in or proceed directly
+
+**Thoughts** - Triggered by:
+- "Random thought" / "Quick note" / "Here's a link" / sharing a quote or article
+- User pastes a URL or shares something brief and standalone
+- Response: Capture as a thought or confirm: "Sounds like a thought. Want me to save this?"
+
+**Journal entries** - Triggered by:
+- Extended personal reflection / "I've been thinking about..." / life musings
+- Anything introspective about feelings, life, personal matters
+- Response: Offer to save as journal entry or confirm: "This sounds like a journal entry. Want me to save it?"
+
+### Slash Commands
+
+Explicit commands are also available:
+- `/morning` - Morning check-in with optional prompts
+- `/evening` - Evening check-in with optional prompts
+- `/thought` - Quick thought capture
+- `/journal` - Personal journal entry
+- `/review-checkins` - Analyze check-ins for patterns and insights
+
+### Project Routing
+
+When check-in content relates to a tracked project:
+- Offer to create a note in that project's folder: `Projects/[Name]/YYYYMMDD-checkin-note.md`
+- Original check-in stays in Check-Ins/ folder (single source of truth)
+- Journal entries are never routed (always private)
 
 ## Current Projects
 
