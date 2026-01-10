@@ -162,6 +162,10 @@ This system tracks work across all projects, synthesizes information, identifies
     - Fixed git staging order: Stage → Generate message → Commit (was generating message before staging)
     - Updated CoS sync to use `git -C` instead of `cd` (directory safety fix)
     - Now properly implements all the fixes made to `/update-knowledge` and `/update-cos`
+  - **Refactored `/save-progress` to call commands instead of duplicating logic**
+    - Was maintaining separate copies of `/update-knowledge` and `/update-cos` logic
+    - Now just calls those commands - fixes propagate automatically
+    - Simpler, more maintainable, single source of truth
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
