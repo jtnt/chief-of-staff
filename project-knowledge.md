@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 9, 2026
+**Last Updated:** January 10, 2026
 
 ---
 
@@ -99,6 +99,7 @@ This system tracks work across all projects, synthesizes information, identifies
 - Tracking 6 projects: Razzo, CPF, LinkedIn My Posts Extractor, LinkedIn Scraper Extension, Caregiver App, and Chief of Staff itself
 - **Three-layer documentation model established** across all projects
 - **Smart project status detection** - only checks/reports projects with actual changes
+- **Check-in system operational** - Four types for daily planning, reflection, and thought capture
 
 **Recent Work:**
 - 2026-01-09: Initial setup ([session log](Projects/Chief of Staff/20260109-initial-setup.md))
@@ -181,6 +182,27 @@ This system tracks work across all projects, synthesizes information, identifies
     - Reordered: Run `/update-knowledge` first, THEN check git status
     - This ensures conversation insights are captured even if no files manually edited
     - **This was the fundamental flaw** - the command couldn't work as designed with the original order
+
+- 2026-01-10: **Implemented check-in system for daily planning and reflection**
+  - Created `Check-Ins/` folder structure with three subfolders: `daily/`, `thoughts/`, `journal/`
+  - Built four check-in types:
+    - `/morning` - Capture day intentions and priorities (optional prompts)
+    - `/evening` - What got done, spillover items, tomorrow plans (optional prompts)
+    - `/thought` - Quick captures: quotes, links, articles, random ideas (timestamped files)
+    - `/journal` - Personal reflection, completely freeform (never routed to projects)
+  - Added `/review-checkins` command for pattern analysis across check-ins
+  - **Natural language detection** - All four types can be triggered naturally:
+    - "Good morning" → morning check-in
+    - "End of day" → evening check-in
+    - Sharing a link/quote → thought capture
+    - Personal reflection → journal entry
+  - **Project routing** - Check-ins can link to project folders when relevant (except journal entries)
+  - Updated CLAUDE.md with natural language detection guidance
+  - **Design philosophy:** Low-friction capture with flexible structure
+    - Morning/evening can use prompts or go freeform
+    - Multiple thoughts per day (separate timestamped files)
+    - Multiple journal entries per day (appended with timestamps)
+    - Pattern analysis identifies themes, energy trends, completion patterns, ideas worth developing
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
