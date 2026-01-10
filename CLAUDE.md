@@ -80,6 +80,19 @@ Some technical/coding projects may have a `session.md` file during active develo
 
 Git commits already capture granular history, so session files don't need to persist long-term.
 
+## Checking Project Status
+
+When asked "what's the status" or "does anything need syncing":
+
+1. Read `project-sources.md` to get all projects and last sync dates
+2. For each project, check for changes:
+   - **Git repos:** Run `git status --short` (uncommitted changes) + `git log --since="[last sync date]" --oneline` (new commits)
+   - **Non-git folders:** Run `find /path -type f -newermt "[last sync date]" -not -path "*/.*" | head -5` (modified files)
+3. Report only projects with changes (uncommitted or new commits)
+4. Summarize quiet projects briefly (e.g., "3 projects quiet, no changes")
+
+This keeps noise down while ensuring no work is missed.
+
 ## Project Sync Workflow
 
 Some projects have external source folders (e.g., separate Claude Code projects). These are tracked in `project-sources.md`.
