@@ -151,6 +151,12 @@ This system tracks work across all projects, synthesizes information, identifies
     - Previously `/update-knowledge` would delete session.md after extracting notes
     - User pointed out: session.md might still be in use, not ready to delete
     - Now leaves session.md alone - user decides when to delete it
+  - **Fixed directory switching bug in `/update-cos`**
+    - User ran `/update-cos` from CPF, Claude used `cd` to switch to CoS for git operations
+    - `cd` persisted - subsequent commands ran in wrong directory
+    - Added "Directory Safety" section: Never use `cd`, always use `git -C <path>` and absolute paths
+    - Made git commit/push step explicit (was happening implicitly)
+    - Now stays in original project directory throughout
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
