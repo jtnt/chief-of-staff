@@ -98,6 +98,7 @@ This system tracks work across all projects, synthesizes information, identifies
 - Two-way sync workflows built: pull from Chief of Staff ("update [project]") and push from projects (`/update-cos`)
 - Tracking 6 projects: Razzo, CPF, LinkedIn My Posts Extractor, LinkedIn Scraper Extension, Caregiver App, and Chief of Staff itself
 - **Three-layer documentation model established** across all projects
+- **Smart project status detection** - only checks/reports projects with actual changes
 
 **Recent Work:**
 - 2026-01-09: Initial setup ([session log](Projects/Chief of Staff/20260109-initial-setup.md))
@@ -124,6 +125,10 @@ This system tracks work across all projects, synthesizes information, identifies
   - Updated Chief of Staff CLAUDE.md with session file guidance
   - Enhanced `/update-knowledge` command to handle both project-knowledge.md AND CLAUDE.md
   - Updated project-sources.md to remove session file references
+  - **Added smart project status detection:**
+    - Git repos: check `git status` + `git log --since` for changes
+    - Non-git folders: check file modification dates
+    - Only report projects with actual changes (reduces noise from inactive projects)
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
