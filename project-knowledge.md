@@ -157,6 +157,11 @@ This system tracks work across all projects, synthesizes information, identifies
     - Added "Directory Safety" section: Never use `cd`, always use `git -C <path>` and absolute paths
     - Made git commit/push step explicit (was happening implicitly)
     - Now stays in original project directory throughout
+  - **Fixed `/save-progress` to match all recent improvements**
+    - Removed session.md deletion reference (now leaves it alone)
+    - Fixed git staging order: Stage → Generate message → Commit (was generating message before staging)
+    - Updated CoS sync to use `git -C` instead of `cd` (directory safety fix)
+    - Now properly implements all the fixes made to `/update-knowledge` and `/update-cos`
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
