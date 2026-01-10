@@ -114,7 +114,7 @@ This system tracks work across all projects, synthesizes information, identifies
   - Fixed `/update-cos` command to use correct Chief of Staff path
   - **Improved `/update-knowledge`:** Now prompts user to sync to Chief of Staff after updating
 
-- 2026-01-09 (late night): Established three-layer documentation model
+- 2026-01-09 (late night): Established three-layer documentation model and automation
   - Added LinkedIn My Posts Extractor and LinkedIn Scraper Extension to tracking
   - Cleaned up session-progress files from LinkedIn projects (consolidated into CLAUDE.md)
   - **Created documentation convention:**
@@ -129,13 +129,19 @@ This system tracks work across all projects, synthesizes information, identifies
     - Git repos: check `git status` + `git log --since` for changes
     - Non-git folders: check file modification dates
     - Only report projects with actual changes (reduces noise from inactive projects)
+  - **Created `/save-progress` command:**
+    - All-in-one: updates knowledge files, commits to git, pushes to GitHub, syncs to CoS
+    - Auto-generates commit messages
+    - Callable multiple times per session (checkpointing)
+    - Exits early if nothing to save
+    - Handles edge cases (no git, no remote, non-tracked projects)
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
 - CLAUDE.md contains instructions for Chief of Staff workflows, project sync, and session file handling
-- `/update-knowledge` command now updates both project-knowledge.md and CLAUDE.md
+- `/update-knowledge` command updates both project-knowledge.md and CLAUDE.md (removed unnecessary user questions)
+- `/save-progress` command automates full save workflow (knowledge + git + CoS sync)
 - GitHub repo established for version control
-- SessionStart auto-sync postponed for now
 
 **Philosophy:** Keep it simple. Markdown files in folders. User provides information, Claude organizes and synthesizes.
 
