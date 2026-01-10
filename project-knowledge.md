@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 9, 2026 (late night - added LinkedIn extensions tracking)
+**Last Updated:** January 9, 2026 (late night - documentation model established)
 
 ---
 
@@ -96,8 +96,8 @@ This system tracks work across all projects, synthesizes information, identifies
 **Current State:**
 - Initial structure operational (project-knowledge.md, project-sources.md, CLAUDE.md)
 - Two-way sync workflows built: pull from Chief of Staff ("update [project]") and push from projects (`/update-cos`)
-- Tracking 4 projects: Razzo, CPF, Caregiver App, and Chief of Staff itself
-- **CLAUDE.md instruction active:** Claude reminds about `/update-knowledge` naturally at session end
+- Tracking 6 projects: Razzo, CPF, LinkedIn My Posts Extractor, LinkedIn Scraper Extension, Caregiver App, and Chief of Staff itself
+- **Three-layer documentation model established** across all projects
 
 **Recent Work:**
 - 2026-01-09: Initial setup ([session log](Projects/Chief of Staff/20260109-initial-setup.md))
@@ -113,10 +113,22 @@ This system tracks work across all projects, synthesizes information, identifies
   - Fixed `/update-cos` command to use correct Chief of Staff path
   - **Improved `/update-knowledge`:** Now prompts user to sync to Chief of Staff after updating
 
+- 2026-01-09 (late night): Established three-layer documentation model
+  - Added LinkedIn My Posts Extractor and LinkedIn Scraper Extension to tracking
+  - Cleaned up session-progress files from LinkedIn projects (consolidated into CLAUDE.md)
+  - **Created documentation convention:**
+    - `session.md` - temporary working notes (deleted after extraction)
+    - `project-knowledge.md` - strategic context, decisions, outcomes (persistent)
+    - `CLAUDE.md` - technical instructions for Claude (known issues, patterns, preferences)
+  - Updated `~/.claude/CLAUDE.md` to document the three-layer model for all projects
+  - Updated Chief of Staff CLAUDE.md with session file guidance
+  - Enhanced `/update-knowledge` command to handle both project-knowledge.md AND CLAUDE.md
+  - Updated project-sources.md to remove session file references
+
 **Technical Setup:**
-- `~/.claude/CLAUDE.md` contains "Session Workflow" instruction for `/update-knowledge` reminders
-- CLAUDE.md contains instructions for Chief of Staff workflows and project sync
-- `/update-knowledge` command now includes optional CoS sync step
+- `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
+- CLAUDE.md contains instructions for Chief of Staff workflows, project sync, and session file handling
+- `/update-knowledge` command now updates both project-knowledge.md and CLAUDE.md
 - GitHub repo established for version control
 - SessionStart auto-sync postponed for now
 
@@ -142,7 +154,10 @@ This system tracks work across all projects, synthesizes information, identifies
 
 **Technical Stack:** Chrome Extension (Manifest V3), vanilla JavaScript
 
-**Status:** Working tool, last commit December 24, 2025 (v1.3 - date parsing fixes)
+**Recent Work:**
+- 2026-01-09 (late night): Cleaned up session files, consolidated technical notes into CLAUDE.md
+
+**Status:** Working tool, stable
 
 ---
 
@@ -164,7 +179,10 @@ This system tracks work across all projects, synthesizes information, identifies
 
 **Technical Stack:** Chrome Extension (Manifest V3), vanilla JavaScript
 
-**Status:** Working tool, last commit December 24, 2025 (session progress documentation)
+**Recent Work:**
+- 2026-01-09 (late night): Cleaned up session files, consolidated technical notes into CLAUDE.md
+
+**Status:** Working tool, stable
 
 ---
 
