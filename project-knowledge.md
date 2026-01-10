@@ -171,6 +171,16 @@ This system tracks work across all projects, synthesizes information, identifies
     - Notes that changes to the first two automatically flow to `/save-progress`
     - Reminder to test all three when modifying any one
     - Prevents future duplication of logic
+  - **Added Git Commit Policy to global CLAUDE.md**
+    - Explicit guidance: only commit when user asks
+    - Exceptions documented for `/save-progress` and `/update-cos`
+    - Added after realizing I was auto-committing throughout session
+  - **Fixed critical `/save-progress` logic bug**
+    - Was checking git status BEFORE running `/update-knowledge`
+    - Would exit with "Nothing to save" without analyzing conversation
+    - Reordered: Run `/update-knowledge` first, THEN check git status
+    - This ensures conversation insights are captured even if no files manually edited
+    - **This was the fundamental flaw** - the command couldn't work as designed with the original order
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
