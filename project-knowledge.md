@@ -143,6 +143,10 @@ This system tracks work across all projects, synthesizes information, identifies
     - Git log and session.md become supplementary, not primary
   - **Strategic decision:** Capture "latent intelligence" from conversations automatically (no user prompting needed)
   - This solves the gap where `/save-progress` could miss conversation insights if there were no file changes
+  - **Follow-up fix:** Made conversation analysis instruction more explicit
+    - Changed from vague "Review the conversation" bullet to standalone step: "Analyze this conversation session - Before doing anything else..."
+    - Added emphasis: "This is the PRIMARY source of insights"
+    - Tested in another project - initial version was being skipped, new version forces explicit analysis
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
