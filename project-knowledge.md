@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 9, 2026 (late night - documentation model established)
+**Last Updated:** January 9, 2026
 
 ---
 
@@ -135,6 +135,14 @@ This system tracks work across all projects, synthesizes information, identifies
     - Callable multiple times per session (checkpointing)
     - Exits early if nothing to save
     - Handles edge cases (no git, no remote, non-tracked projects)
+
+- 2026-01-09 (night): Enhanced conversation intelligence capture
+  - **Key insight:** Most projects are non-technical (Razzo strategy, Chief of Staff). The valuable insights live in conversations - decisions, strategic thinking, patterns observed - not in file diffs or session.md files.
+  - **Updated `/update-knowledge` workflow** to make conversation review the PRIMARY context source:
+    - Explicitly extract: decisions + rationale, strategic shifts, things learned, patterns, open questions
+    - Git log and session.md become supplementary, not primary
+  - **Strategic decision:** Capture "latent intelligence" from conversations automatically (no user prompting needed)
+  - This solves the gap where `/save-progress` could miss conversation insights if there were no file changes
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction

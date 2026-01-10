@@ -114,6 +114,18 @@ Some projects have external source folders (e.g., separate Claude Code projects)
 5. Update `project-knowledge.md` with refreshed project summary
 6. Update "Last synced" date in `project-sources.md`
 
+## Syncing Chief of Staff Itself
+
+**IMPORTANT:** Chief of Staff tracks its own work just like any other project.
+
+When running `/update-knowledge` or `/save-progress` while working IN the Chief of Staff repo:
+
+1. Update `project-knowledge.md` as normal
+2. **Also create a sync entry** in `Projects/Chief of Staff/YYYYMMDD-[identifier]-sync.md` documenting what was done
+3. Then commit and push to git
+
+**Do NOT skip the sync entry step.** Chief of Staff maintains its own activity log in `Projects/Chief of Staff/` just like all other tracked projects.
+
 ## Current Projects
 
 - **Context Profile Framework** (Active): Framework + service for AI context libraries. Source tracked in `project-sources.md`.
