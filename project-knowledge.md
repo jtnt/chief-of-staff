@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 10, 2026 (evening - post journal entries)
+**Last Updated:** January 10, 2026 (night - session transcript commands)
 
 ---
 
@@ -272,6 +272,29 @@ This system tracks work across all projects, synthesizes information, identifies
   - Second entry: Personal reflection on Bob Weir
   - Journal entries demonstrate system is functional and low-friction
   - Natural multiple-entries-per-day pattern working as designed
+
+- 2026-01-10 (night): **Added priority tracking and session transcript analysis**
+  - **Priority context established:** User shared stakes clearly - unemployed nearly a year, need revenue or need a job
+  - **Added "Current Priorities" section** to top of project-knowledge.md
+    - P0: Revenue generation (Razzo clients via Sprint, CPF pilots)
+    - Everything else deprioritized
+    - Chief of Staff role: keep user focused, flag drift
+  - **Updated check-ins for priority alignment:**
+    - `/morning` now reads priorities and checks if planned work aligns
+    - `/evening` compares actual work vs. stated priorities, tracks patterns
+  - **Discovered session transcripts** at `~/.claude/projects/[encoded-path]/[uuid].jsonl`
+    - JSONL format with user/assistant messages, timestamps, summaries
+    - Can be used for pattern detection, missed insight recovery
+  - **Created `/analyze-sessions` command:**
+    - Analyzes all projects by default (last 7 days)
+    - Surfaces missed insights not captured in project-knowledge.md
+    - Tracks priority signals (which projects get attention)
+    - Compares against knowledge files, offers to update
+  - **Created `/export-session` command:**
+    - Exports any session to readable markdown (ALL projects, not just tracked)
+    - Interactive session picker grouped by project path
+    - Asks where to save each time
+    - `--verbose` flag includes tool calls
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
