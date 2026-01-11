@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 10, 2026 (late night - factual accuracy policy)
+**Last Updated:** January 10, 2026 (late night - ContextOS integration planning)
 
 ---
 
@@ -308,6 +308,25 @@ This system tracks work across all projects, synthesizes information, identifies
   - **Strategic insight:** User prioritizes factual accuracy over appearing knowledgeable
     - Would rather hear "I don't know" than receive confident but wrong information
     - This establishes a fundamental quality standard for all interactions
+
+- 2026-01-10 (late night): **ContextOS integration planning**
+  - **Context:** User downloaded gtm-context-os-quickstart system and tested it
+    - Impressed by automatic decision capture and attribution system (VERIFIED/INFERRED tags)
+    - Asked to explore integrating its best features into Chief of Staff
+  - **Research completed:** Full exploration of ContextOS architecture
+    - Three agents analyzed: ontological layer, knowledge structure, root architecture
+    - Key insight: Automatic capture happens via CLAUDE.md instructions, not folder structure
+  - **Features identified for integration:**
+    - Attribution system - tag every claim as VERIFIED/INFERRED to prevent fabrication
+    - Automatic decision capture - strategic questions auto-create decision documents
+    - Pattern validation lifecycle - Hypothesis (N=1) → Validated (N=2+) → Canonical
+    - Light ontological layer - YAML files for quality standards and routing rules
+  - **Plan saved:** Full integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
+    - Marked as "SAVED FOR LATER REVIEW"
+    - Added reminder to TODO.md
+    - Key unresolved question: How to handle `/update-knowledge` (other projects use it)
+  - **Decision:** Review with fresh eyes before implementation
+  - **Strategic insight:** The goal should be eliminating manual knowledge capture commands entirely by making capture continuous during conversation
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
