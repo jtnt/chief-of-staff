@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** 2026-01-10 11:21 PM EST
+**Last Updated:** 2026-01-11 11:32 AM EST
 
 ---
 
@@ -130,7 +130,7 @@ The Context Infrastructure now has four distinct layers in the middle network:
 ### Chief of Staff
 **Status:** Active - Meta
 **What it is:** The knowledge management system itself
-**Last synced:** 2026-01-10 10:00 (added TODO for timestamp fix)
+**Last synced:** 2026-01-11 11:32 AM EST (MCP server exploration)
 
 This system tracks work across all projects, synthesizes information, identifies patterns, and supports strategic decision-making.
 
@@ -327,6 +327,23 @@ This system tracks work across all projects, synthesizes information, identifies
     - Key unresolved question: How to handle `/update-knowledge` (other projects use it)
   - **Decision:** Review with fresh eyes before implementation
   - **Strategic insight:** The goal should be eliminating manual knowledge capture commands entirely by making capture continuous during conversation
+
+- 2026-01-11 11:32 AM EST: **Memory MCP server exploration**
+  - **Context:** User added three MCP servers to Claude Code global config (`~/.claude.json`):
+    - `notion` - Notion API integration
+    - `sequential-thinking` - Structured problem-solving tool
+    - `memory` - Knowledge graph memory system (testing phase)
+  - **Focus:** Understanding how Memory MCP works and potential integration with CoS
+  - **Memory MCP architecture:**
+    - Uses knowledge graph with three components: entities (people/things), relations (connections), observations (atomic facts)
+    - Stored in JSONL format at `/Users/jtnt/.claude/memory.jsonl`
+    - Nine tools: create/delete entities, relations, observations; read/search graph
+  - **Potential CoS integration identified:**
+    - Memory graph as **fast-access index** for factual lookups (current priorities, key people, project relationships)
+    - CoS markdown files remain **strategic narrative** (session summaries, decisions with context)
+    - Complementary systems: graph for speed, markdown for richness
+  - **Status:** Exploratory - user testing the memory server, may add/remove MCP servers as needed
+  - **Note:** This is Claude Code infrastructure experimentation, not core CoS feature work
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction

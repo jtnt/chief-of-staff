@@ -17,7 +17,7 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 ## Chief of Staff
 - **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `project-sources.md`
-- **Last synced:** 2026-01-10 10:00 (added TODO for timestamp fix)
+- **Last synced:** 2026-01-11 11:32 AM EST (MCP server exploration)
 
 ## LinkedIn My Posts Extractor
 - **Source:** `/Users/jtnt/Documents/Projects/linkedin-my-posts-extractor`
