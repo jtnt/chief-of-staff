@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** January 10, 2026 (night - session transcript commands)
+**Last Updated:** January 10, 2026 (late night - factual accuracy policy)
 
 ---
 
@@ -295,6 +295,19 @@ This system tracks work across all projects, synthesizes information, identifies
     - Interactive session picker grouped by project path
     - Asks where to save each time
     - `--verbose` flag includes tool calls
+
+- 2026-01-10 (late night): **Established factual accuracy policy**
+  - **Incident:** User called out that I gave completely wrong information about Claude Code CLI flags in previous session
+    - Made up `claude -d` and `--dangerouslyDisableSandbox` flags that don't exist
+    - Particularly problematic because I AM Claude Code - should know my own CLI or admit I don't
+  - **Core issue:** Fabricated information instead of researching or saying "I don't know"
+  - **Action taken:** Added "Critical: Never Make Things Up" section to `~/.claude/CLAUDE.md`
+    - Explicit instruction: Never fabricate ANY information (technical, factual, historical)
+    - If uncertain → Use WebSearch/WebFetch OR explicitly say "I don't know"
+    - Core principle: "Uncertainty is acceptable. Fabrication is not."
+  - **Strategic insight:** User prioritizes factual accuracy over appearing knowledgeable
+    - Would rather hear "I don't know" than receive confident but wrong information
+    - This establishes a fundamental quality standard for all interactions
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
