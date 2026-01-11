@@ -1,8 +1,20 @@
 # Chief of Staff TODO
 
+## Fix /update-knowledge Interruption in /save-progress
+
+**Added:** 2026-01-10 11:21 PM EST
+
+**Issue:** When `/save-progress` calls `/update-knowledge`, the workflow stops to ask "Would you like to sync this to Chief of Staff?" This interrupts the automated flow since `/save-progress` already handles the CoS sync.
+
+**Solution:** `/update-knowledge` should detect if it's being called from `/save-progress` and skip the sync question in that case. Or simplify: just remove the question from `/update-knowledge` entirely since users can run `/update-cos` manually if they want.
+
+**Priority:** Medium - workflow works but requires manual intervention
+
+---
+
 ## Revisit ContextOS Integration Plan
 
-**Added:** 2026-01-10 (late night)
+**Added:** 2026-01-10 11:21 PM EST
 **Plan file:** `~/.claude/plans/spicy-popping-puzzle.md`
 
 Explored ContextOS system and designed integration to bring its best features to CoS:
