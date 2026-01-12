@@ -43,7 +43,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/Razzo`
-**Last synced:** 2026-01-09 (evening - Sprint positioning complete)
+**Last synced:** 2026-01-11 (StoryBrand messaging exploration)
 
 **Current Strategic Direction:**
 The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
@@ -51,13 +51,20 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Key Insight:** Professionals adopt tools by solving real problems, not through passive learning. The Sprint's action-learning approach addresses the "knowing-doing gap" that traditional training creates.
 
 **Current Offerings:**
-- AI Workflow Sprint: 2 weeks, $3,500 (individual) or $5,000 (team) - LEAD OFFERING
+- AI Workflow Sprint: 2 weeks, $3,500 (individual) or $7,500 (team) - LEAD OFFERING
 - Sales Teams Bootcamp: 4 sessions, $5,000
 - Marketing Teams Bootcamp: 4 sessions, $5,000
 - Sales Managers Workshop: 90 min, $1,500
 - Office Hours: $250/hr
 
 **Recent Work:**
+- 2026-01-11: StoryBrand messaging exploration (IN PROGRESS)
+  - Applied PEACE framework to find compelling "problem soundbite"
+  - Clarified the core problem: scattered usage, no shared systems, nothing compounds
+  - Rejected multiple framings that sounded like jargon or deliverables
+  - Key insight: "AI training that drives revenue" works because it connects to what teams actually do
+  - **Unresolved:** Still searching for the right soundbite
+  - Also: Team Format pricing updated to $7,500
 - 2026-01-09: Sprint positioning work COMPLETED
   - All pending TODO items finished (Sprint section on homepage, softened 4-week emphasis, added "Beyond the Workflows" benefits, moved examples to bottom)
   - Website now fully reflects Sprint-first positioning
@@ -65,6 +72,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
   - CLAUDE.md split into root (project-wide), website-specific, and strategic context (project-knowledge.md)
 
 **Open Items:**
+- **PRIORITY:** Find the right problem soundbite (StoryBrand "own the hole")
 - Monitor Sprint positioning effectiveness with market
 - Evaluate Sprint → Bootcamp conversion pathway
 - Consider quarterly sprint model for ongoing client engagement
