@@ -40,18 +40,52 @@ This happens automatically - no user confirmation needed.
 4. **Plan** - Help think through priorities, plan days/weeks, and make strategic decisions
 5. **Remember** - Maintain continuity by keeping `project-knowledge.md` current
 
-## Project Structure
+## Folder Structure
 
 ```
-Check-Ins/                      # Personal check-ins and reflections
-  daily/                        # Morning and evening check-ins
-  thoughts/                     # Quick captures (quotes, links, ideas)
-  journal/                      # Personal reflections
-Projects/[Name]/                # Project-specific documents (I organize these as needed)
-Weekly Reviews/                 # Periodic synthesis documents
-project-knowledge.md            # Master context (update frequently)
-project-sources.md              # External project folder locations for syncing
+Chief of Staff/
+├── Check-Ins/                          # Personal check-ins and reflections
+│   ├── daily/                          # Morning and evening check-ins
+│   ├── thoughts/                       # Quick captures (quotes, links, ideas)
+│   └── journal/                        # Personal reflections
+│
+├── Projects/                           # Project-specific tracking and logs
+│   ├── Caregiver App/                  # YYYYMMDD-*.md sync files only
+│   ├── Chief of Staff/                 # YYYYMMDD-*.md sync files only
+│   ├── Context Profile Framework/      # YYYYMMDD-*.md sync files only
+│   ├── LinkedIn My Posts Extractor/    # YYYYMMDD-*.md sync files only
+│   ├── LinkedIn Scraper Extension/     # YYYYMMDD-*.md sync files only
+│   └── Razzo/                          # YYYYMMDD-*.md sync files only
+│
+├── Resources/                          # Reference materials and guides
+│   ├── Claude Code/                    # Claude Code documentation
+│   └── Donald Miller StoryBrand Framework.md  # Marketing reference
+│
+├── Weekly Reviews/                     # Periodic synthesis documents
+│
+├── CLAUDE.md                           # Instructions for Claude Code (this file)
+├── project-knowledge.md                # Master context (update frequently)
+└── project-sources.md                  # External project folder locations for syncing
 ```
+
+## Projects Folder Standard
+
+**CRITICAL RULE:** Each project folder under `Projects/` contains **ONLY dated sync files** (format: `YYYYMMDD-*.md` or `YYYYMMDD-[identifier]-sync.md`).
+
+**Do NOT:**
+- Create subfolders (reference/, session-logs/, strategy/, etc.)
+- Duplicate project-knowledge.md files
+- Store project content or reference materials
+- Create any structure beyond flat dated sync files
+
+**Why:** Chief of Staff tracks projects, it doesn't store their content. All actual project files (project-knowledge.md, CLAUDE.md, code, docs) live in the real project folders. Chief of Staff only maintains sync logs documenting what changed and what was learned.
+
+**Each sync file should contain:**
+- Date and context
+- What changed (from git history, file reads)
+- Current state summary
+- Key insights or decisions
+- Open items or next steps
 
 ## When Updating project-knowledge.md
 
@@ -66,8 +100,24 @@ project-sources.md              # External project folder locations for syncing
 - **Session summaries**: Like the Razzo Sprint positioning doc - extract strategic insights and open items
 - **Meeting transcripts**: Summarize key decisions and action items
 - **AI chat transcripts**: Pull out what was decided or built
-- **Strategy documents**: File in strategy/, reference key points in index
+- **Strategy documents**: File in appropriate project folder, reference key points in project-knowledge.md
 - **Raw notes**: Help organize and clarify
+- **Podcast transcripts / Reference materials**: Extract insights and save to Resources/ folder
+
+## Resources Folder
+
+The `Resources/` folder contains reference materials that inform strategic work across projects:
+
+- **Marketing frameworks** (e.g., Donald Miller's StoryBrand)
+- **Claude Code documentation** (hooks, commands, guides)
+- **Industry insights** (transcripts, articles with extracted key points)
+- **Methodologies and frameworks** (repeatable approaches)
+
+**When adding to Resources:**
+- Extract and synthesize - don't just dump raw content
+- Write clear summaries with examples
+- Keep materials project-agnostic (specific applications go in project folders)
+- Use descriptive filenames
 
 ## Session Files in Technical Projects
 

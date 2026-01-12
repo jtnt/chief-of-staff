@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** 2026-01-11 11:32 AM EST
+**Last Updated:** 2026-01-11 (Folder structure cleanup)
 
 ---
 
@@ -130,7 +130,7 @@ The Context Infrastructure now has four distinct layers in the middle network:
 ### Chief of Staff
 **Status:** Active - Meta
 **What it is:** The knowledge management system itself
-**Last synced:** 2026-01-11 11:32 AM EST (MCP server exploration)
+**Last synced:** 2026-01-11 (Folder structure cleanup)
 
 This system tracks work across all projects, synthesizes information, identifies patterns, and supports strategic decision-making.
 
@@ -344,6 +344,42 @@ This system tracks work across all projects, synthesizes information, identifies
     - Complementary systems: graph for speed, markdown for richness
   - **Status:** Exploratory - user testing the memory server, may add/remove MCP servers as needed
   - **Note:** This is Claude Code infrastructure experimentation, not core CoS feature work
+
+- 2026-01-11 (afternoon): **Added Donald Miller StoryBrand reference to Resources**
+  - **Context:** User provided podcast transcript (Donald Miller at Guru Conference, Episode 470)
+  - **Work done:**
+    - Extracted comprehensive insights from podcast
+    - Created `Resources/Donald Miller StoryBrand Framework.md` with pure reference capture
+    - Included all principles, examples (aquarium company, Oura Ring, YNAB, etc.), and quotes
+    - Updated CLAUDE.md with complete folder structure and Resources folder guidance
+  - **Key decision:** Resources folder is for project-agnostic reference materials
+    - Extract and synthesize insights, don't dump raw content
+    - Keep application/analysis separate from reference capture
+    - This reference will inform future Razzo marketing work (done separately)
+  - **Resources folder purpose clarified:**
+    - Marketing frameworks and methodologies
+    - Claude Code documentation
+    - Industry insights with extracted key points
+    - Repeatable approaches
+
+- 2026-01-11 (evening): **Fixed structural inconsistencies in project tracking**
+  - **Problem discovered:** Project folders had inconsistent structure
+    - Razzo had subfolders (reference/, session-logs/, strategy/) with content in one
+    - CPF had duplicate outdated `project-knowledge.md` file
+    - Violated principle that CoS only tracks projects, doesn't store content
+  - **Root cause:** Initial setup wasn't clear about standard; created structure that seemed helpful but broke the model
+  - **Actions taken:**
+    - Converted Razzo session-logs content to proper sync file (20260109-sprint-positioning-sync.md)
+    - Deleted outdated CPF project-knowledge.md copy (real one is current)
+    - Removed empty Razzo subfolders (reference/, strategy/)
+    - Added "Projects Folder Standard" section to CLAUDE.md with explicit rules
+    - Updated folder tree in CLAUDE.md to show standard
+  - **The standard (now documented):**
+    - Each project folder: ONLY dated sync files (YYYYMMDD-*.md)
+    - Flat structure, no subfolders
+    - No duplicated knowledge files
+    - No stored project content
+  - **Why this matters:** Consistency is essential for a knowledge management system - Chief of Staff tracks projects, doesn't become a second home for their files
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
