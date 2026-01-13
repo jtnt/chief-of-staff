@@ -496,6 +496,44 @@ This system tracks work across all projects, synthesizes information, identifies
 
 ---
 
+### Context Profile Builder
+**Status:** Active - MVP Built
+**What it is:** Web app for creating Context Profile Framework documents
+**Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
+**GitHub:** https://github.com/jtnt/context-profile-builder.git
+**Last synced:** 2026-01-13 (MVP completed)
+
+**Relationship to CPF:** This is the productized web app version of the Context Profile Framework. The parent project contains framework docs and research; this repo is the implementation.
+
+**Current State:**
+MVP functional with Company Background document flow working end-to-end:
+- User signs up, verifies email, logs in
+- Creates organization with company name and website
+- Website analyzed via Jina Reader + Claude for pre-fill
+- Questionnaire generates LLM-optimized document
+- Download, save as draft, or mark complete
+
+**Tech stack:** Next.js 16, TypeScript, Supabase, shadcn/ui, Claude API, Jina Reader
+
+**Recent Work (2026-01-13):**
+- Built complete MVP in single session
+- Full auth flow, organization onboarding, website research
+- Company Background questionnaire with AI generation
+- Document preview with download button
+- Resolved RLS policy issues (temporarily disabled)
+- Fixed save button logic, added loading toasts
+
+**Open Items:**
+- Add persistent loading indicator (user wants more visible than toast)
+- Fix research status polling on dashboard
+- Re-enable RLS with correct policies
+- Add questionnaires for ICP, Competitors, Brand Voice
+- Proper markdown rendering
+- Generate Supabase types
+- Deploy to Vercel
+
+---
+
 ## Patterns & Observations
 
 **Shared philosophy across Razzo and CPF:** Both projects are built on the same insight - professionals adopt tools by solving real problems, not through passive learning. Razzo's Sprint has teams *build* workflows; CPF *builds* context libraries rather than handing over templates. "Action beats instruction" and "transformation over templates" are the same idea applied differently.

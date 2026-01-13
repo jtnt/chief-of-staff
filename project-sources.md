@@ -28,3 +28,9 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/linkedin-scraper-extension`
 - **Key files:** `CLAUDE.md`, `README.md`
 - **Last synced:** Never (newly added)
+
+## Context Profile Builder
+- **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
+- **Key files:** `project-knowledge.md`, `CLAUDE.md`, `TODO.md`
+- **GitHub:** https://github.com/jtnt/context-profile-builder.git
+- **Last synced:** 2026-01-13 (MVP completed)
