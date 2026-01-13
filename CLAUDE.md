@@ -288,6 +288,16 @@ When check-in content relates to a tracked project:
 
 **Design principle:** Workflows should work in both environments. Use natural language triggers as primary interface, slash commands as CLI convenience.
 
+### Known Issue: Cowork May Set Local Git Config
+
+Cowork mode (and possibly Claude Code on web) may set a **local git config** in the repo that overrides global settings. This can cause GitHub push failures with "GH007: Your push would publish a private email address."
+
+**To check:** `git config --local user.email`
+
+**To fix:** `git config --local --unset user.email`
+
+If push fails after using Cowork, check for local git config overrides first.
+
 ## Current Projects
 
 - **Context Profile Framework** (Active): Framework + service for AI context libraries. Source tracked in `project-sources.md`.

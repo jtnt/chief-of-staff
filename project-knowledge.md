@@ -417,6 +417,14 @@ This system tracks work across all projects, synthesizes information, identifies
     - Some automation features designed for CLI won't work in desktop app
   - **Strategic insight:** Cowork mode and CLI are different environments with different capabilities - need to design workflows that work in both, or document which features require which environment
 
+- 2026-01-12 (night): **Discovered Cowork sets local git config**
+  - **Problem:** Git push failing with "GH007: Your push would publish a private email address"
+  - **Root cause:** Chief of Staff repo had a local git config (`jtntolson@gmail.com`) overriding global config (`n@razzo-ai.com`)
+  - **Likely cause:** Cowork mode or Claude Code on web set the local git config when initializing the session
+  - **Solution:** `git config --local --unset user.email` then rewrote commits with correct author
+  - **Added to CLAUDE.md:** Known issue section with check/fix commands
+  - **Lesson:** If git push fails after using Cowork, check for local git config overrides first
+
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
 - CLAUDE.md contains instructions for Chief of Staff workflows, project sync, and session file handling
