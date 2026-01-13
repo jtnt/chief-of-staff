@@ -83,7 +83,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Early Exploration
 **What it is:** Framework + done-for-you service for creating AI context libraries
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-10 (ContextOS analysis complete)
+**Last synced:** 2026-01-12 (Cowork post + writing style preferences)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The service actually builds it for them.
 
@@ -109,6 +109,11 @@ The Context Infrastructure now has four distinct layers in the middle network:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; Context Library solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-12: **Cowork hot takes post** - LinkedIn post about Claude Cowork, tying file system access to CPF
+  - Key insight: Cowork + Context Profile = always-on structured context access without manual loading into Claude Projects
+  - AI can also update context documents on the fly (not just read)
+  - Documented writing style preferences in CLAUDE.md (trust reader, brevity, no dumbed-down explanations)
+  - Post at `Writing/20260112_cowork-hot-takes/post.md`
 - 2026-01-10: **ContextOS Analysis** - Full analysis of gtm-context-os-quickstart (Jacob Dietle, taste.systems)
   - Tested ingestion on sample data and real Razzo content
   - Real content produced significantly better results (coherent node network, resolved links)
