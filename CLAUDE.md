@@ -253,6 +253,41 @@ When check-in content relates to a tracked project:
 
 **Journal entries are never routed** (always private)
 
+## Cowork Mode vs CLI Differences
+
+**IMPORTANT:** Chief of Staff was originally designed for Claude Code CLI but is now also used in Cowork mode (Claude desktop app). These environments have different capabilities:
+
+### CLI (Command Line)
+- ✅ Slash commands work (`/journal`, `/morning`, `/update-knowledge`, etc.)
+- ✅ All custom commands in `~/.claude/commands/` accessible
+- ✅ Full MCP connector availability
+- ✅ Can read files anywhere on system (within permissions)
+
+### Cowork Mode (Desktop App)
+- ❌ Slash commands return "Unknown skill" errors
+- ❌ Cannot access `~/.claude/commands/` (outside workspace folder)
+- ⚠️ Limited MCP connector availability (some work, some don't)
+- ❌ Can only read files in selected workspace folder
+
+### Working in Cowork Mode
+
+**For check-ins:**
+- Use natural language triggers instead of slash commands
+- "I want to make a journal entry" instead of `/journal`
+- "Let's do a morning check-in" instead of `/morning`
+
+**For knowledge updates:**
+- Say "run the update-knowledge workflow" and I'll execute it
+- User can upload command files directly if needed
+- Natural language requests work: "update project knowledge based on this session"
+
+**For git operations:**
+- ✅ Git works normally (commit, push, etc.)
+- ✅ File operations work (read, write, edit)
+- ✅ Bash commands work within workspace
+
+**Design principle:** Workflows should work in both environments. Use natural language triggers as primary interface, slash commands as CLI convenience.
+
 ## Current Projects
 
 - **Context Profile Framework** (Active): Framework + service for AI context libraries. Source tracked in `project-sources.md`.

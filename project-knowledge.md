@@ -1,6 +1,6 @@
 # Chief of Staff Index
 
-**Last Updated:** 2026-01-11 (Folder structure cleanup)
+**Last Updated:** 2026-01-12 (Cowork mode limitations discovery)
 
 ---
 
@@ -388,6 +388,29 @@ This system tracks work across all projects, synthesizes information, identifies
     - No duplicated knowledge files
     - No stored project content
   - **Why this matters:** Consistency is essential for a knowledge management system - Chief of Staff tracks projects, doesn't become a second home for their files
+
+- 2026-01-12 (evening): **Discovered Cowork mode vs CLI differences**
+  - **Context:** First time using Cowork mode (Claude desktop app) instead of Claude Code CLI
+  - **Key discoveries:**
+    - **Slash commands don't work in Cowork mode** - Commands like `/journal`, `/morning`, `/update-knowledge` return "Unknown skill" errors
+    - Slash commands are CLI-only feature, not available in desktop app's Cowork mode
+    - All custom commands in `~/.claude/commands/` are functional but only accessible via CLI
+  - **Other limitations found:**
+    - **MCP connector availability** - Gmail connector configured globally but not available in Cowork session
+    - **File access restrictions** - Can't read files outside selected workspace folder (e.g., can't access `~/.claude/commands/`)
+    - Some MCP servers work (Notion, Apple Notes, Chrome), others don't appear
+  - **Workaround implemented:**
+    - User uploaded `/update-knowledge` command file directly
+    - Can execute command logic manually by reading uploaded file
+    - Natural language triggers still work (can ask "run update-knowledge workflow")
+  - **Accidental learning:**
+    - Created `.claude/commands/journal.md` in Chief of Staff folder thinking commands were missing
+    - Actually, commands exist in global `~/.claude/commands/` but aren't accessible from Cowork mode
+  - **Implications:**
+    - Check-in system (`/morning`, `/evening`, `/journal`, `/thought`) needs natural language triggers in Cowork mode
+    - Knowledge update workflows need manual execution or natural language requests
+    - Some automation features designed for CLI won't work in desktop app
+  - **Strategic insight:** Cowork mode and CLI are different environments with different capabilities - need to design workflows that work in both, or document which features require which environment
 
 **Technical Setup:**
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
