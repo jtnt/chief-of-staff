@@ -33,4 +33,4 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `TODO.md`
 - **GitHub:** https://github.com/jtnt/context-profile-builder.git
-- **Last synced:** 2026-01-13 (MVP completed)
+- **Last synced:** 2026-01-14 (Opinionated workflow implementation)

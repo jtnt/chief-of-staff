@@ -218,6 +218,7 @@ Recognize check-in intent from natural language and offer to capture appropriate
 - "Random thought" / "Quick note" / "Here's a link" / sharing a quote or article
 - User pastes a URL or shares something brief and standalone
 - Response: Capture as a thought or confirm: "Sounds like a thought. Want me to save this?"
+- **Filename convention:** Use descriptive filenames that will be searchable and distinguishable later (e.g., `20260114-maven-ai-product-sense-vibe-code-personal-os.md` not `20260114-maven-course.md`). Include enough detail to differentiate from similar items.
 
 **Journal entries** - Triggered by:
 - Extended personal reflection / "I've been thinking about..." / life musings

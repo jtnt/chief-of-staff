@@ -502,38 +502,37 @@ This system tracks work across all projects, synthesizes information, identifies
 ---
 
 ### Context Profile Builder
-**Status:** Active - MVP Built
+**Status:** Active - MVP Built, Opinionated Workflow Complete
 **What it is:** Web app for creating Context Profile Framework documents
 **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
 **GitHub:** https://github.com/jtnt/context-profile-builder.git
-**Last synced:** 2026-01-13 (MVP completed)
+**Last synced:** 2026-01-14 (Opinionated workflow implementation)
 
 **Relationship to CPF:** This is the productized web app version of the Context Profile Framework. The parent project contains framework docs and research; this repo is the implementation.
 
 **Current State:**
-MVP functional with Company Background document flow working end-to-end:
+MVP functional with opinionated workflow:
 - User signs up, verifies email, logs in
 - Creates organization with company name and website
-- Website analyzed via Jina Reader + Claude for pre-fill
-- Questionnaire generates LLM-optimized document
-- Download, save as draft, or mark complete
+- Website analyzed via Jina Reader + Claude (with status polling)
+- Company Background questionnaire with AI generation
+- Sequential document locking (Company Background → ICP → Competitor → Brand Voice)
+- Auto-save on generate (inputs AND generated content)
+- Tab-specific UI (save buttons on Preview, generate on Questionnaire)
 
 **Tech stack:** Next.js 16, TypeScript, Supabase, shadcn/ui, Claude API, Jina Reader
 
-**Recent Work (2026-01-13):**
-- Built complete MVP in single session
-- Full auth flow, organization onboarding, website research
-- Company Background questionnaire with AI generation
-- Document preview with download button
-- Resolved RLS policy issues (temporarily disabled)
-- Fixed save button logic, added loading toasts
+**Recent Work:**
+- 2026-01-14: Opinionated Software Implementation
+  - Phase 1: Sequential workflow with document dependencies
+  - Phase 2: Quick fixes (download filename, save behavior, research polling)
+  - Phase 3: Bug fixes (auto-save content, default tab, tab-specific buttons)
+- 2026-01-13: Built complete MVP in single session
 
 **Open Items:**
-- Add persistent loading indicator (user wants more visible than toast)
-- Fix research status polling on dashboard
+- Progress steps UI during generation
+- ICP, Competitor, Brand Voice questionnaires
 - Re-enable RLS with correct policies
-- Add questionnaires for ICP, Competitors, Brand Voice
-- Proper markdown rendering
 - Generate Supabase types
 - Deploy to Vercel
 
