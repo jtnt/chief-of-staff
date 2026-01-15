@@ -8,7 +8,11 @@ This is a personal Chief of Staff system - a knowledge management and strategic 
 
 ## At the Start of Each Session
 
-Always read `project-knowledge.md` first. This is the living document that maintains context across sessions - current project status, recent decisions, open items, and observations.
+Always read these two files first:
+1. **`project-knowledge.md`** - About Chief of Staff itself (system state, recent CoS work, key decisions)
+2. **`project-index.md`** - Summaries of all tracked projects (status, recent work, open items)
+
+Together these maintain context across sessions.
 
 ### Auto-Sync on Session Start
 
@@ -20,12 +24,68 @@ When a Chief of Staff session starts, a SessionStart hook injects the `AUTORUN_S
 3. For each project:
    - Read git log since last sync
    - Read key files
-   - Create dated sync entry in Projects/[Name]/YYYYMMDD-sync.md
-   - Update project-knowledge.md with new information
+   - Create dated sync entry in project's `logs/` folder
+   - Update Chief of Staff's project-index.md with summary
 4. Update "Last synced" dates in project-sources.md
 5. Provide brief summary: "Synced [N] projects: [names]"
 
 This happens automatically - no user confirmation needed.
+
+## Proactive Knowledge Capture
+
+**Goal:** Capture insights continuously throughout the session, not just when the user runs `/update-knowledge`.
+
+### Session Context File
+
+At the start of any Chief of Staff session where substantive work will happen:
+
+1. **Create `session-context.md`** if it doesn't exist:
+```markdown
+# Session Context
+*Started: [timestamp from `date "+%Y-%m-%d %I:%M %p %Z"`]*
+
+## Session Goals
+[What we're trying to accomplish - extracted from user's initial request]
+
+## Decisions Made
+[Updated as decisions happen during session]
+
+## In Progress
+[Current work being done]
+
+## Open Questions
+[Questions that emerged during work]
+
+## Notes for Later
+[Insights to merge into project-knowledge.md]
+```
+
+2. **Update it throughout the session:**
+   - After clarifying session goals
+   - After making decisions (capture decision + brief rationale)
+   - When switching focus to different work
+   - When insights or patterns emerge
+
+3. **After context compaction:** If you notice you've lost context (conversation history seems short), read `session-context.md` immediately to recover what was happening.
+
+### Proactive project-knowledge.md Updates
+
+**Don't wait for `/update-knowledge`.** When *significant* things happen, update `project-knowledge.md` immediately:
+
+- Strategic decisions with lasting impact
+- Major insights or pattern discoveries
+- Completed milestones
+- New open questions that need tracking
+
+Use your judgment on "significant" - not every small decision, but anything that should survive even if the session ends unexpectedly.
+
+### Session End
+
+When `/update-knowledge` or `/save-progress` runs:
+1. Merge any remaining `session-context.md` contents into `project-knowledge.md`
+2. Delete `session-context.md` after successful merge
+
+This ensures nothing is lost while keeping `project-knowledge.md` as the permanent record.
 
 ## Important Rules
 
@@ -49,13 +109,8 @@ Chief of Staff/
 │   ├── thoughts/                       # Quick captures (quotes, links, ideas)
 │   └── journal/                        # Personal reflections
 │
-├── Projects/                           # Project-specific tracking and logs
-│   ├── Caregiver App/                  # YYYYMMDD-*.md sync files only
-│   ├── Chief of Staff/                 # YYYYMMDD-*.md sync files only
-│   ├── Context Profile Framework/      # YYYYMMDD-*.md sync files only
-│   ├── LinkedIn My Posts Extractor/    # YYYYMMDD-*.md sync files only
-│   ├── LinkedIn Scraper Extension/     # YYYYMMDD-*.md sync files only
-│   └── Razzo/                          # YYYYMMDD-*.md sync files only
+├── logs/                               # Chief of Staff's own session logs
+│   └── YYYYMMDD-*.md                   # Dated sync files for CoS itself
 │
 ├── Resources/                          # Reference materials and guides
 │   ├── Claude Code/                    # Claude Code documentation
@@ -64,36 +119,54 @@ Chief of Staff/
 ├── Weekly Reviews/                     # Periodic synthesis documents
 │
 ├── CLAUDE.md                           # Instructions for Claude Code (this file)
-├── project-knowledge.md                # Master context (update frequently)
+├── project-knowledge.md                # About Chief of Staff itself (system state, decisions)
+├── project-index.md                    # Summaries of all tracked projects
 └── project-sources.md                  # External project folder locations for syncing
 ```
 
-## Projects Folder Standard
+## Where Logs Live (Important)
 
-**CRITICAL RULE:** Each project folder under `Projects/` contains **ONLY dated sync files** (format: `YYYYMMDD-*.md` or `YYYYMMDD-[identifier]-sync.md`).
+**Detailed logs live WITH their projects, not in Chief of Staff.**
 
-**Do NOT:**
-- Create subfolders (reference/, session-logs/, strategy/, etc.)
-- Duplicate project-knowledge.md files
-- Store project content or reference materials
-- Create any structure beyond flat dated sync files
+Each tracked project has its own `logs/` folder:
+```
+Razzo/
+├── logs/
+│   ├── 20260109-sync.md
+│   └── 20260111-storybrand-sync.md
+├── project-knowledge.md
+└── CLAUDE.md
 
-**Why:** Chief of Staff tracks projects, it doesn't store their content. All actual project files (project-knowledge.md, CLAUDE.md, code, docs) live in the real project folders. Chief of Staff only maintains sync logs documenting what changed and what was learned.
+Context Profile Framework/
+├── logs/
+│   └── 20260109-sync.md
+├── project-knowledge.md
+└── CLAUDE.md
+```
 
-**Each sync file should contain:**
-- Date and context
-- What changed (from git history, file reads)
-- Current state summary
-- Key insights or decisions
-- Open items or next steps
+**Why:** Projects are portable. When you move/archive a project, its complete history travels with it. Chief of Staff is an index/dashboard, not a repository.
 
-## When Updating project-knowledge.md
+**Chief of Staff's role:**
+- Maintains `project-index.md` with **summaries** of each tracked project
+- Maintains `project-knowledge.md` for CoS system info (its own state, decisions, work)
+- Reads from project `logs/` folders when it needs detail
+- Has its own `logs/` folder for Chief of Staff system work
 
-- Update the "Last Updated" date
+## When Updating project-index.md
+
+- Update the "Last Updated" date at the top
 - Keep project status current (Active, Paused, Completed)
 - Move completed open items out; add new ones
-- Add to "Patterns & Observations" when insights emerge
+- Add to "Patterns & Observations" when cross-project insights emerge
 - Keep it concise - this is a summary, not an archive
+
+## When Updating project-knowledge.md (CoS itself)
+
+- Update the "Last Updated" date
+- Document significant decisions about the CoS system
+- Update "Current State" when capabilities change
+- Keep "Recent Work" section current with CoS system work
+- This is about Chief of Staff itself, not tracked projects
 
 ## Document Types You May Receive
 
@@ -161,20 +234,22 @@ Some projects have external source folders (e.g., separate Claude Code projects)
 1. Read `project-sources.md` to get source path and last sync date
 2. Run `git log --since="[last sync date]"` in source folder to see what changed
 3. Read key files listed for that project (e.g., `project-knowledge.md`, `CLAUDE.md`)
-4. Create dated sync entry: `Projects/[Name]/YYYYMMDD-sync.md` documenting:
+4. Create dated sync entry in the project's `logs/` folder documenting:
    - What changed (from git history)
    - Current state summary
    - New insights or open items
-5. Update `project-knowledge.md` with refreshed project summary
+5. Update `project-index.md` with refreshed project summary
 6. Update "Last synced" date in `project-sources.md`
 
 ## Command Dependencies
 
 Three commands work together and should be modified carefully:
 
-- **`/update-knowledge`** - Updates project-knowledge.md and CLAUDE.md based on conversation analysis
-- **`/update-cos`** - Syncs project to Chief of Staff (creates sync entry, updates CoS knowledge files, commits/pushes)
-- **`/save-progress`** - All-in-one: calls `/update-knowledge`, then commits/pushes project changes, then calls `/update-cos`
+- **`/update-knowledge`** - Updates project-knowledge.md, CLAUDE.md, AND creates a log entry in `./logs/`. This is where logs are created because it has conversation context.
+- **`/update-cos`** - Syncs project summary to Chief of Staff. Does NOT create logs - just updates CoS's project-index.md and project-sources.md.
+- **`/save-progress`** - All-in-one: calls `/update-knowledge` (creates log), commits/pushes project changes, then calls `/update-cos` (syncs summary).
+
+**Key insight:** Logs are created by `/update-knowledge` during active work when we have conversation context. `/update-cos` only syncs summaries - it can't create meaningful logs because it doesn't have the session context.
 
 **When modifying these commands:**
 - `/update-knowledge` and `/update-cos` are standalone - changes here automatically flow to `/save-progress`
@@ -193,10 +268,10 @@ Three commands work together and should be modified carefully:
 When running `/update-knowledge` or `/save-progress` while working IN the Chief of Staff repo:
 
 1. Update `project-knowledge.md` as normal
-2. **Also create a sync entry** in `Projects/Chief of Staff/YYYYMMDD-[identifier]-sync.md` documenting what was done
+2. **Also create a sync entry** in `logs/YYYYMMDD-[identifier]-sync.md` documenting what was done
 3. Then commit and push to git
 
-**Do NOT skip the sync entry step.** Chief of Staff maintains its own activity log in `Projects/Chief of Staff/` just like all other tracked projects.
+**Do NOT skip the sync entry step.** Chief of Staff maintains its own activity log in `logs/` just like all other tracked projects.
 
 ## Check-In System
 
@@ -238,12 +313,12 @@ Explicit commands are also available:
 
 When check-in content relates to a tracked project:
 
-**Push to project (NEW - bidirectional):**
+**Push to project (bidirectional):**
 1. Ask user: "This mentions [Project]. Want me to add it to that project's inbox?"
 2. If yes, write to project's inbox: `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
    - If file doesn't exist, create it with standard structure (Pending / Archive sections)
    - Add entry under "## Pending" with: date, source, context, content
-3. ALSO create CoS internal log: `Projects/[Name]/YYYYMMDD-checkin-note.md` (keeps CoS record)
+3. ALSO create log in project: `[ProjectName]/logs/YYYYMMDD-checkin-note.md` (keeps record with project)
 
 **When the user opens that project:**
 - Global `~/.claude/CLAUDE.md` instructs Claude to check for `cos-inbox.md` at session start
