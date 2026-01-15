@@ -142,9 +142,18 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Open Items
 
-- Test proactive knowledge capture workflow in more sessions
-- Consider global rollout of session-context.md pattern if successful
+- **Proactive capture not being followed** (2026-01-14): The proactive knowledge capture instructions exist in CLAUDE.md but weren't followed during the 2026-01-14 session - no session-context.md created, no proactive p-k.md updates during work. Need to be more disciplined about this in future CoS sessions.
+- Consider global rollout of session-context.md pattern if successful (currently CoS-only)
 - Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
+
+### Design Note: No Separate Insights File
+
+The original inspiration (screenshot pattern) had three files: context.md, todos.md, insights.md. Our implementation maps these differently:
+- **context.md** → `session-context.md` (recovery file)
+- **todos.md** → TodoWrite tool (in-memory, ephemeral)
+- **insights.md** → Proactive updates to `project-knowledge.md` directly
+
+We chose NOT to have a separate insights file - insights go straight to p-k.md. The "Notes for Later" section in session-context.md can serve as a staging area if needed. This decision can be revisited if the current approach proves insufficient.
 
 ---
 
