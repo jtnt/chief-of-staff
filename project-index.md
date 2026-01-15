@@ -220,6 +220,41 @@ MVP functional with two working document types:
 
 ---
 
+### Chief of Staff
+**Status:** Active - Infrastructure
+**What it is:** Personal knowledge management and strategic planning system
+**Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
+**Last synced:** 2026-01-15 (Writing style preferences expanded)
+
+**Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
+
+**Current State:**
+- Three-layer documentation model established (session.md, project-knowledge.md, CLAUDE.md)
+- Two-way sync workflows: pull ("update [project]") and push (`/update-cos`)
+- Check-in system operational (morning, evening, thought, journal)
+- Bidirectional flow: CoS can push items to project inboxes
+- Logs live WITH projects in their `logs/` folders
+- Proactive knowledge capture via session-context.md (testing in CoS only)
+
+**Recent Work:**
+- 2026-01-15: Expanded writing style preferences in `~/.claude/CLAUDE.md`
+  - Added rhetorical questions, self-deprecating humor, thematic bookending
+  - New Structure & Format subsection
+  - Added Phrases to Avoid (AI-isms) section
+  - Captured thought on AI context → linked to CPF post
+- 2026-01-14: Proactive knowledge capture + log restructure
+  - Moved all logs from CoS to project folders
+  - Command responsibilities clarified (update-knowledge creates logs, update-cos syncs summaries)
+  - Split project-knowledge.md from project-index.md
+- 2026-01-12: Cowork mode vs CLI differences documented
+- 2026-01-10-11: Check-in system + priority tracking built
+
+**Open Items:**
+- Consider global rollout of session-context.md pattern
+- Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
+
+---
+
 ## Patterns & Observations
 
 **Shared philosophy across Razzo and CPF:** Both projects are built on the same insight - professionals adopt tools by solving real problems, not through passive learning. Razzo's Sprint has teams *build* workflows; CPF *builds* context libraries rather than handing over templates. "Action beats instruction" and "transformation over templates" are the same idea applied differently.
