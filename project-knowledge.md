@@ -502,40 +502,51 @@ This system tracks work across all projects, synthesizes information, identifies
 ---
 
 ### Context Profile Builder
-**Status:** Active - MVP Built, Full Opinionated UX Complete
+**Status:** Active - MVP Built, Industry Profile Complete
 **What it is:** Web app for creating Context Profile Framework documents
 **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
 **GitHub:** https://github.com/jtnt/context-profile-builder.git
-**Last synced:** 2026-01-14 (Progress steps + UX fixes)
+**Last synced:** 2026-01-14 (Industry Profile implementation)
 
 **Relationship to CPF:** This is the productized web app version of the Context Profile Framework. The parent project contains framework docs and research; this repo is the implementation.
 
+**Core Philosophy: Opinionated Software**
+All features, UX, and UI decisions are viewed through this lens. The app enforces a particular workflow because each step genuinely depends on the previous ones. This is the value proposition, not a constraint.
+- Sequential by design (documents build on each other)
+- Transparency over magic (show what's happening)
+- Minimal decisions (auto-unlock, auto-save, one clear action)
+- Cross-document intelligence (each doc informs the next)
+
 **Current State:**
-MVP functional with full opinionated workflow:
-- Sequential document locking (Company Background → ICP → Competitor → Brand Voice)
-- Progress steps modal during generation (animated, 7 steps)
-- Minimized button set (no Update/Regenerate confusion)
+MVP functional with two working document types:
+- Company Background: questionnaire-based generation
+- Industry Profile: multi-step research flow (Input → URL Discovery → Verification → Generate)
+- Sequential document locking (Company Background → Industry Profile → ICP → Competitor → Brand Voice)
+- Cross-document intelligence (Company Background informs Industry Profile)
+- Progress steps modal during generation
 - Auto-save working correctly
-- Start blocked until research completes
 
 **Tech stack:** Next.js 16, TypeScript, Supabase, shadcn/ui, Claude API, Jina Reader
 
 **Recent Work:**
+- 2026-01-14 (night): Industry Profile Implementation
+  - Built new document type with multi-step research flow
+  - URL suggestions from Claude's training knowledge (not external search)
+  - User verification step for URL selection
+  - Cross-document intelligence: Company Background passed to Industry Profile generation
+  - Custom page component (different UX from questionnaire-based docs)
 - 2026-01-14 (evening): Progress Steps + UX Fixes
   - Built progress steps modal with simulated animation
-  - Button simplification (removed Update, removed Regenerate from Preview)
-  - Fixed auto-save bug (React state closure issue)
-  - Block Start until research completes
+  - Button simplification, auto-save bug fix
 - 2026-01-14 (afternoon): Opinionated Software Implementation
   - Sequential workflow with document dependencies
-  - Quick fixes (download filename, save behavior, research polling)
-  - Bug fixes (auto-save content, default tab, tab-specific buttons)
 - 2026-01-13: Built complete MVP in single session
 
 **Open Items:**
-- ICP, Competitor, Brand Voice questionnaires
-- Cross-document intelligence
-- Onboarding redesign (progress page during initial research)
+- Run database migration for industry_profile enum
+- Phase 6 UX refinements (7 items identified from testing)
+- ICP, Competitor, Brand Voice questionnaires (with pre-fill from Industry Profile)
+- Onboarding redesign
 - Re-enable RLS, generate Supabase types, deploy
 
 ---
