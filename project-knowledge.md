@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-14 11:45 PM EST
+**Last Updated:** 2026-01-15 04:51 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -88,6 +88,15 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-15: Writing Style Preferences Expanded
+
+- Expanded writing style section in `~/.claude/CLAUDE.md` with additional guidance
+- Added: rhetorical questions, self-deprecating humor, thematic bookending
+- Added new **Structure & Format** subsection: parallel structure in lists, framework mapping
+- Added **Phrases to Avoid (AI-isms)** section with specific forbidden phrases
+- Captured thought on AI context requirements → linked to CPF "Context is Everything" post
+- Created `cos-inbox.md` for Context Profile Framework project (first use of inbox structure there)
 
 ### 2026-01-14 (late night): Proactive Knowledge Capture + Log Restructure
 
