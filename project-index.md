@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-14
+**Last Updated:** 2026-01-15
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -53,7 +53,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Early Exploration
 **What it is:** Framework + done-for-you service for creating AI context libraries
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-14 (Context Profile benefits article draft)
+**Last synced:** 2026-01-15 ("Context is Everything" article finalized)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The service actually builds it for them.
 
@@ -63,7 +63,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 - Transformation over templates: converting raw content to structured knowledge is the value
 - Google Drive delivery with Claude Projects sync
 - Context as competitive advantage positioning - when everyone has same AI models, context quality becomes differentiation
-- **NEW:** Opinionated structure compounds intelligently - random accumulation doesn't compound, structured accumulation does
+- Opinionated structure compounds intelligently - random accumulation doesn't compound, structured accumulation does
 
 **Architecture Evolution:**
 The Context Infrastructure now has four distinct layers in the middle network:
@@ -79,28 +79,21 @@ The Context Infrastructure now has four distinct layers in the middle network:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; Context Library solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
-- 2026-01-14: **Context Profile benefits article (WIP)** - Drafted article on four key value props
-  - Better AI results, efficiency, consistency, easier maintenance
-  - Copyedited and reviewed for style
-  - Article at `Writing/20260114_context-profile-benefits/article.md`
+- 2026-01-15: **"Context is Everything" article finalized** - Introduces CPF by showing gap between what people tell AI vs. what AI needs
+  - Uses four parallel problem bullets mapping to four solution bullets (aligned with CPF layers)
+  - Bookended with "Context is everything" / "Context is *everything*" for thematic punch
+  - Article at `Writing/20260115_context-is-everything/context-is-everything.md`
+  - Ready for publication
+- 2026-01-14: **Context Profile benefits article (WIP)** - Four key value props: better AI results, efficiency, consistency, easier maintenance
+  - Article at `Writing/20260114_context-profile-benefits/context-profile-benefits.md`
   - Remaining: complete truncated "Hello," sentence, expand maintenance section
 - 2026-01-12: **Cowork hot takes post** - LinkedIn post about Claude Cowork, tying file system access to CPF
   - Key insight: Cowork + Context Profile = always-on structured context access without manual loading into Claude Projects
-  - AI can also update context documents on the fly (not just read)
-  - Documented writing style preferences in CLAUDE.md (trust reader, brevity, no dumbed-down explanations)
-  - Post at `Writing/20260112_cowork-hot-takes/post.md`
+  - Post at `Writing/20260112_cowork-hot-takes/cowork-hot-takes.md`
 - 2026-01-10: **ContextOS Analysis** - Full analysis of gtm-context-os-quickstart (Jacob Dietle, taste.systems)
-  - Tested ingestion on sample data and real Razzo content
-  - Real content produced significantly better results (coherent node network, resolved links)
-  - Key concepts to adopt: atomic concepts (single source of truth), constitutional documents (taxonomy/ontology), knowledge lifecycle states, attribution discipline, ingestion workflows
   - **Strategic insight:** "The value isn't just in structure—it's in opinionated structure that compounds intelligently"
-  - CPF should be more explicit about: domain presets, extraction guidance, relationship types, quality standards
-  - Two organizational axes (reusability vs. scope) are orthogonal and can combine
   - Full analysis: `Working/contextos-analysis.md`
-- 2026-01-09 (evening): Major conceptual update to architecture based on context graphs research
-  - Added detailed framework for decision traces (exception logic, precedents, cross-system synthesis, approval chains)
-  - Documented agents as context graph builders
-  - Added human role evolution: from doers to context managers
+- 2026-01-09: Major conceptual update to architecture based on context graphs research
 - Research prompts developed: Company Context (v4), Industry Context (v2)
 - Testing with SalesIntel as testbed
 
