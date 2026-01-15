@@ -502,39 +502,41 @@ This system tracks work across all projects, synthesizes information, identifies
 ---
 
 ### Context Profile Builder
-**Status:** Active - MVP Built, Opinionated Workflow Complete
+**Status:** Active - MVP Built, Full Opinionated UX Complete
 **What it is:** Web app for creating Context Profile Framework documents
 **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
 **GitHub:** https://github.com/jtnt/context-profile-builder.git
-**Last synced:** 2026-01-14 (Opinionated workflow implementation)
+**Last synced:** 2026-01-14 (Progress steps + UX fixes)
 
 **Relationship to CPF:** This is the productized web app version of the Context Profile Framework. The parent project contains framework docs and research; this repo is the implementation.
 
 **Current State:**
-MVP functional with opinionated workflow:
-- User signs up, verifies email, logs in
-- Creates organization with company name and website
-- Website analyzed via Jina Reader + Claude (with status polling)
-- Company Background questionnaire with AI generation
+MVP functional with full opinionated workflow:
 - Sequential document locking (Company Background → ICP → Competitor → Brand Voice)
-- Auto-save on generate (inputs AND generated content)
-- Tab-specific UI (save buttons on Preview, generate on Questionnaire)
+- Progress steps modal during generation (animated, 7 steps)
+- Minimized button set (no Update/Regenerate confusion)
+- Auto-save working correctly
+- Start blocked until research completes
 
 **Tech stack:** Next.js 16, TypeScript, Supabase, shadcn/ui, Claude API, Jina Reader
 
 **Recent Work:**
-- 2026-01-14: Opinionated Software Implementation
-  - Phase 1: Sequential workflow with document dependencies
-  - Phase 2: Quick fixes (download filename, save behavior, research polling)
-  - Phase 3: Bug fixes (auto-save content, default tab, tab-specific buttons)
+- 2026-01-14 (evening): Progress Steps + UX Fixes
+  - Built progress steps modal with simulated animation
+  - Button simplification (removed Update, removed Regenerate from Preview)
+  - Fixed auto-save bug (React state closure issue)
+  - Block Start until research completes
+- 2026-01-14 (afternoon): Opinionated Software Implementation
+  - Sequential workflow with document dependencies
+  - Quick fixes (download filename, save behavior, research polling)
+  - Bug fixes (auto-save content, default tab, tab-specific buttons)
 - 2026-01-13: Built complete MVP in single session
 
 **Open Items:**
-- Progress steps UI during generation
 - ICP, Competitor, Brand Voice questionnaires
-- Re-enable RLS with correct policies
-- Generate Supabase types
-- Deploy to Vercel
+- Cross-document intelligence
+- Onboarding redesign (progress page during initial research)
+- Re-enable RLS, generate Supabase types, deploy
 
 ---
 
