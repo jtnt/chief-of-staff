@@ -31,6 +31,6 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 
 ## Context Profile Builder
 - **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
-- **Key files:** `project-knowledge.md`, `CLAUDE.md`, `TODO.md`
+- **Key files:** `project-knowledge.md`, `CLAUDE.md`, `TODO.md`, `prd-export.md`
 - **GitHub:** https://github.com/jtnt/context-profile-builder.git
-- **Last synced:** 2026-01-14 (Phase 6 UX committed)
+- **Last synced:** 2026-01-16 (PRD export for rebuild)

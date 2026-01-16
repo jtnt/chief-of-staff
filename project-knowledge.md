@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-16 07:20 AM EST
+**Last Updated:** 2026-01-16 04:09 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -89,7 +89,16 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
-### 2026-01-16: Transcription Workflow Optimization
+### 2026-01-16 (afternoon): Context Window Optimization
+
+- Investigated why sessions start at 25% context usage
+- Discovered MCP servers (Notion, Playwright, Memory) were consuming ~12% of context with unused tool schemas
+- Disabled all three MCP servers → reduced starting context from 25% to 13%
+- Initially attempted to optimize CLAUDE.md files (moved writing style to reference file)
+- **Key insight:** MCP servers are the real context hogs, not documentation
+- Established pattern: Use `/mcp enable [server]` temporarily when needed, disable after
+
+### 2026-01-16 (morning): Transcription Workflow Optimization
 
 - Tested mlx-whisper performance on Mac Silicon across 5 model sizes
 - Compared accuracy on medical terminology and technical terms

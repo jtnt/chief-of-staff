@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "google-calendar": {
+      "command": "npx",
+      "args": ["@cocal/google-calendar-mcp"],
+      "env": {
+        "GOOGLE_OAUTH_CREDENTIALS": "/Users/jtnt/Documents/Projects/Chief of Staff/.claude/gcp-oauth.keys.json"
+      }
+    }
+  }
+}

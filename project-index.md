@@ -114,11 +114,11 @@ The Context Infrastructure now has four distinct layers in the middle network:
 ---
 
 ### Context Profile Builder
-**Status:** Active - MVP Built, Phase 6 UX Complete
+**Status:** Active - Potential Rebuild
 **What it is:** Web app for creating Context Profile Framework documents
 **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
 **GitHub:** https://github.com/jtnt/context-profile-builder.git
-**Last synced:** 2026-01-14 (Phase 6 committed and pushed)
+**Last synced:** 2026-01-16 (PRD export for rebuild)
 
 **Relationship to CPF:** This is the productized web app version of the Context Profile Framework. The parent project contains framework docs and research; this repo is the implementation.
 
@@ -130,38 +130,35 @@ All features, UX, and UI decisions are viewed through this lens. The app enforce
 - Cross-document intelligence (each doc informs the next)
 
 **Current State:**
-MVP functional with two working document types:
+User considering rebuilding from scratch. Comprehensive PRD created at `prd-export.md` capturing:
+- Full product vision (all 4 layers + custom documents)
+- Document specifications and user flows
+- Key learnings from V1 implementation
+- Ontological layer / knowledge graph future vision (inspired by ContextOS)
+- Cross-document intelligence patterns
+
+V1 MVP is functional with two working document types:
 - Company Background: questionnaire-based generation
 - Industry Profile: multi-step research flow (Input → URL Discovery → Verification → Generate)
-- Sequential document locking (Company Background → Industry Profile → ICP → Competitor → Brand Voice)
-- Cross-document intelligence (Company Background informs Industry Profile)
-- Progress steps modal during generation
-- Auto-save working correctly
-- **Phase 6 UX refinements complete:** Smart pre-fill, source attribution, preview toggle, button consistency, enhanced styling
+- Sequential document locking, progress modal, auto-save all working
 
-**Tech stack:** Next.js 16, TypeScript, Supabase, shadcn/ui, Claude API, Jina Reader
+**Tech stack (V1):** Next.js 16, TypeScript, Supabase, shadcn/ui, Claude API, Jina Reader
 
 **Recent Work:**
-- 2026-01-14 (late night): **Phase 6 UX Refinements - All 7 items complete**
-  - Smart pre-fill: Industry Profile parses Company Background for industry/niche
-  - Source attribution: API returns sources, UI has Sources tab, markdown includes Sources section
-  - Preview toggle: Rendered vs raw markdown toggle in both editors
-  - Button consistency: Download/Save in header, Edit in footer
-  - Enhanced prose styling for markdown previews
-  - Filename includes company name for Industry Profile
+- 2026-01-16: **PRD Export for Potential Rebuild**
+  - Created comprehensive PRD (~540 lines) capturing full product vision
+  - Documented all 4 layers (Company, Department, Project, Individual) + custom documents
+  - Added ontological layer / knowledge graph future vision (atomic concepts, operational docs, metadata, taxonomy, status tracking)
+  - Captured implementation learnings (Jina Reader, Claude URL suggestions, UX patterns)
+  - Tech stack left open for rebuild flexibility
+- 2026-01-14 (late night): Phase 6 UX Refinements complete
 - 2026-01-14 (night): Industry Profile Implementation
-  - Built new document type with multi-step research flow
-  - URL suggestions from Claude's training knowledge (not external search)
-  - User verification step for URL selection
-  - Cross-document intelligence: Company Background passed to Industry Profile generation
-- 2026-01-14 (evening): Progress Steps + UX Fixes
-- 2026-01-14 (afternoon): Opinionated Software Implementation
 - 2026-01-13: Built complete MVP in single session
 
 **Open Items:**
-- ICP, Competitor, Brand Voice questionnaires (with pre-fill from Industry Profile)
-- Onboarding redesign
-- Re-enable RLS, generate Supabase types, deploy
+- Decision: Rebuild from scratch vs. continue current implementation
+- If rebuilding: choose AI coding tool / tech stack
+- Future vision documented in PRD: ontological layer, knowledge graph, document maintenance
 
 ---
 
