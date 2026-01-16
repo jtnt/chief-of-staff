@@ -7,7 +7,7 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 ## Razzo
 - **Source:** `/Users/jtnt/Documents/Projects/Razzo`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `website/CLAUDE.md`
-- **Last synced:** 2026-01-11 (StoryBrand messaging exploration)
+- **Last synced:** 2026-01-15 (Context Profile Framework landing page)
 
 ## Context Profile Framework
 - **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`

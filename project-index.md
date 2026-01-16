@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-15
+**Last Updated:** 2026-01-15 7:00 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -13,7 +13,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/Razzo`
-**Last synced:** 2026-01-11 (StoryBrand messaging exploration)
+**Last synced:** 2026-01-15 (Context Profile Framework landing page)
 
 **Current Strategic Direction:**
 The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
@@ -26,26 +26,31 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 - Marketing Teams Bootcamp: 4 sessions, $5,000
 - Sales Managers Workshop: 90 min, $1,500
 - Office Hours: $250/hr
+- Context Profile Framework: landing page + waitlist for app (NEW)
 
 **Recent Work:**
+- 2026-01-15: **Context Profile Framework landing page** COMPLETED
+  - New page at `/context-profile-framework/` to introduce CPF and capture app waitlist signups
+  - Headline: "Capture What AI Needs to Know About Your Business"
+  - Sidebar layout with sticky waitlist CTA + framework graphic
+  - Added "Context Profile Framework" as top-level nav item with vertical separators
+  - Visual assets: chaos-to-order illustration, framework diagram (lightbox), Ethan Mollick quote
+  - Images compressed from 13MB to ~350KB
+  - Audience: wide net (anyone using AI), not narrowly targeted at B2B ICP
 - 2026-01-11: StoryBrand messaging exploration (IN PROGRESS)
   - Applied PEACE framework to find compelling "problem soundbite"
   - Clarified the core problem: scattered usage, no shared systems, nothing compounds
-  - Rejected multiple framings that sounded like jargon or deliverables
-  - Key insight: "AI training that drives revenue" works because it connects to what teams actually do
   - **Unresolved:** Still searching for the right soundbite
-  - Also: Team Format pricing updated to $7,500
 - 2026-01-09: Sprint positioning work COMPLETED
-  - All pending TODO items finished (Sprint section on homepage, softened 4-week emphasis, added "Beyond the Workflows" benefits, moved examples to bottom)
-  - Website now fully reflects Sprint-first positioning
+  - Website fully reflects Sprint-first positioning
   - Repository reorganized with website/, Planning/, Assets/ folders
-  - CLAUDE.md split into root (project-wide), website-specific, and strategic context (project-knowledge.md)
 
 **Open Items:**
 - **PRIORITY:** Find the right problem soundbite (StoryBrand "own the hole")
+- Integrate waitlist form with email tool
+- Consider hosting CPF articles on razzohq.com (currently on Substack)
+- Clarify relationship between CPF offering and core Razzo training services
 - Monitor Sprint positioning effectiveness with market
-- Evaluate Sprint → Bootcamp conversion pathway
-- Consider quarterly sprint model for ongoing client engagement
 
 ---
 
