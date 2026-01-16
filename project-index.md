@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-15 7:00 PM EST
+**Last Updated:** 2026-01-16 07:20 AM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -229,7 +229,7 @@ MVP functional with two working document types:
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-15 (Writing style preferences expanded)
+**Last synced:** 2026-01-16 (Transcription workflow optimization)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -240,8 +240,15 @@ MVP functional with two working document types:
 - Bidirectional flow: CoS can push items to project inboxes
 - Logs live WITH projects in their `logs/` folders
 - Proactive knowledge capture via session-context.md (testing in CoS only)
+- **Transcription workflow optimized:** Using mlx-whisper with medium model for Mac Silicon
 
 **Recent Work:**
+- 2026-01-16: **Transcription workflow optimization**
+  - Tested mlx-whisper performance across 5 model sizes (tiny through large)
+  - Compared accuracy on medical terminology and technical terms
+  - **Updated `~/.claude/scripts/transcribe.py`** to use mlx-whisper with medium model as default
+  - Key findings: Medium model = ~8min for 1hr podcasts, significantly better accuracy than base
+  - Full comparison documented in `logs/20260116-transcription-optimization-sync.md`
 - 2026-01-15: Expanded writing style preferences in `~/.claude/CLAUDE.md`
   - Added rhetorical questions, self-deprecating humor, thematic bookending
   - New Structure & Format subsection

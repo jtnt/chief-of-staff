@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-15 04:51 PM EST
+**Last Updated:** 2026-01-16 07:20 AM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -88,6 +88,14 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-16: Transcription Workflow Optimization
+
+- Tested mlx-whisper performance on Mac Silicon across 5 model sizes
+- Compared accuracy on medical terminology and technical terms
+- **Updated `~/.claude/scripts/transcribe.py`** to use mlx-whisper with medium model as default
+- Key findings: Medium model = ~8min for 1hr podcasts, significantly better accuracy than base
+- Documented full comparison in `logs/20260116-transcription-optimization-sync.md`
 
 ### 2026-01-15: Writing Style Preferences Expanded
 
