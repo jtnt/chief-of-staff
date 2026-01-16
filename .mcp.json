@@ -6,6 +6,13 @@
       "env": {
         "GOOGLE_OAUTH_CREDENTIALS": "/Users/jtnt/Documents/Projects/Chief of Staff/.claude/gcp-oauth.keys.json"
       }
+    },
+    "gmail": {
+      "command": "npx",
+      "args": ["@gongrzhe/server-gmail-autoauth-mcp"],
+      "env": {
+        "GMAIL_OAUTH_PATH": "/Users/jtnt/Documents/Projects/Chief of Staff/.claude/gcp-oauth.keys.json"
+      }
     }
   }
 }

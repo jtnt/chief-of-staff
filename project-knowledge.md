@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-16 04:09 PM EST
+**Last Updated:** 2026-01-16 05:25 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -88,6 +88,25 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-16 (late afternoon): Google Calendar & Gmail MCP Integration
+
+- Set up MCP (Model Context Protocol) servers for Google Calendar and Gmail
+- Project-scoped configuration (Chief of Staff only, not global)
+- **Google Calendar:** Using `@cocal/google-calendar-mcp` with full calendar access
+- **Gmail:** Using `@gongrzhe/server-gmail-autoauth-mcp` with modify + settings access
+- OAuth setup process:
+  - Created Google Cloud project (`claude-code-484521`)
+  - Enabled Calendar API and Gmail API
+  - Created web application OAuth client (Desktop app didn't support redirect URIs)
+  - Added multiple redirect URIs for different ports (3000, 3500, 3501)
+  - Configured OAuth consent screen (External, testing mode)
+  - Added user as test user in Audience section
+- Configuration stored in `.mcp.json` in project root
+- Credentials: `/Users/jtnt/Documents/Projects/Chief of Staff/.claude/gcp-oauth.keys.json`
+- Tokens stored globally: `~/.config/google-calendar-mcp/tokens.json` and `~/.gmail-mcp/credentials.json`
+- **User preference:** Check BOTH calendars when querying (primary + nicholas@razzohq.com)
+- **Known limitation:** Both services have broader permissions than initially desired (Calendar has edit, Gmail has send) but user accepted this trade-off
 
 ### 2026-01-16 (afternoon): Context Window Optimization
 

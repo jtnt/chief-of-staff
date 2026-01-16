@@ -374,6 +374,12 @@ Cowork mode (and possibly Claude Code on web) may set a **local git config** in 
 
 If push fails after using Cowork, check for local git config overrides first.
 
+## Calendar Preferences
+
+When checking calendar or asking "what's on my calendar":
+- Always check BOTH calendars: `primary` (jtntolson@gmail.com) and `nicholas@razzohq.com`
+- Combine and show events from both calendars
+
 ## Current Projects
 
 - **Context Profile Framework** (Active): Framework + service for AI context libraries. Source tracked in `project-sources.md`.
