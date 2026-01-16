@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-16 05:25 PM EST
+**Last Updated:** 2026-01-16 05:28 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -88,6 +88,16 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-16 (evening): Command Automation Fix
+
+- Fixed recurring issue where `/update-knowledge` and `/update-cos` asked for confirmation in Chief of Staff
+- **Root cause:** Commands treated Chief of Staff like any other project, requiring manual confirmation
+- **Solution:**
+  - `/update-cos`: Added Step 0 to detect if we're IN Chief of Staff, skip sync logic, auto-commit/push
+  - `/update-knowledge`: Changed to automatically call `/update-cos` when in Chief of Staff (no asking)
+- **Result:** Both commands now fully automatic when run in Chief of Staff - no user confirmation needed
+- Updated command files: `~/.claude/commands/update-knowledge.md` and `~/.claude/commands/update-cos.md`
 
 ### 2026-01-16 (late afternoon): Google Calendar & Gmail MCP Integration
 
