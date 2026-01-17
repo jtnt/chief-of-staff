@@ -12,7 +12,7 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 ## Context Profile Framework
 - **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `Business/business-knowledge.md`, `Research/Industry Thinking.md`, `Working/contextos-analysis.md`
-- **Last synced:** 2026-01-15 ("Context is Everything" article finalized)
+- **Last synced:** 2026-01-17
 
 ## Chief of Staff
 - **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
