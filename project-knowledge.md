@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-16 05:28 PM EST
+**Last Updated:** 2026-01-17 10:47 AM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -88,6 +88,15 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-17: Status Line Display Fix
+
+- Fixed status line breaking "Chief of Staff" across multiple lines
+- **Issue:** Status line used `basename` which caused directory name with spaces to wrap
+- **Solution:** Changed to display full path (`~/Documents/Projects/Chief of Staff`) instead of just basename
+- Modified `~/.claude/settings.json` statusLine command - removed `| xargs basename` pipe
+- Full paths render better in terminals than isolated words with spaces
+- User preference: No quotes around directory name in display
 
 ### 2026-01-16 (evening): Command Automation Fix
 
