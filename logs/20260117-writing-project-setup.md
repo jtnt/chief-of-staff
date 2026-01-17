@@ -1,6 +1,7 @@
 # Session Log: Writing Project Setup
 
 **Date:** 2026-01-17
+**Session Type:** meta-work
 
 ## What Was Done
 

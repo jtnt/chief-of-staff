@@ -1,7 +1,7 @@
 # Chief of Staff Sync: ContextOS Integration Planning
 
 **Date:** 2026-01-10 11:21 PM EST
-**Type:** Session work
+**Session Type:** meta-work
 
 ---
 

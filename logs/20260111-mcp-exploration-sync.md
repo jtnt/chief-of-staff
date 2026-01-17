@@ -1,6 +1,7 @@
 # Chief of Staff: Sync from Source
 
 **Date:** 2026-01-11 11:32 AM EST
+**Session Type:** meta-work
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
 
 ## Recent Git Activity

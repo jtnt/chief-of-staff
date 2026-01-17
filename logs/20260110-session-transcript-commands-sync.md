@@ -1,5 +1,7 @@
 # Chief of Staff Sync - January 10, 2026 (Session Transcript Commands)
 
+**Session Type:** meta-work
+
 ## What Changed
 
 Added two new commands for working with Claude Code session transcripts, plus priority tracking improvements.

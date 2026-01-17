@@ -1,6 +1,7 @@
 # Chief of Staff Sync: Folder Structure Cleanup
 
 **Date:** January 11, 2026
+**Session Type:** meta-work
 **Context:** Fixed structural inconsistencies in project tracking folders
 
 ---

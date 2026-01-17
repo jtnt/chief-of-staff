@@ -1,6 +1,7 @@
 # Chief of Staff: Sync Entry
 
 **Date:** 2026-01-12 (evening)
+**Session Type:** meta-work
 **Context:** Cowork mode vs CLI differences discovered
 
 ## What Happened

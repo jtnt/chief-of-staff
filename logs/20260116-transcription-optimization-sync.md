@@ -1,6 +1,7 @@
 # Chief of Staff: Session Log
 
 **Date:** 2026-01-16 07:20 AM EST
+**Session Type:** mixed
 
 ## What Was Done
 

@@ -1,5 +1,7 @@
 # Chief of Staff Sync - January 10, 2026 (Priority Tracking)
 
+**Session Type:** meta-work
+
 ## What Changed
 
 Added priority tracking and focus-keeping capabilities to the Chief of Staff system.

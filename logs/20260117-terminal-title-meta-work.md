@@ -32,6 +32,4 @@
 
 - None - session was exploratory/meta-work, no real work completed
 
-## Session Type
-
-**Meta-work** - Environment configuration and tooling discussion
+**Session Type:** meta-work

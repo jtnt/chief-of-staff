@@ -1,6 +1,7 @@
 # Chief of Staff: Sync from Source
 
 **Date:** January 11, 2026
+**Session Type:** mixed
 **Source:** /Users/jtnt/Documents/Projects/Chief of Staff
 
 ---

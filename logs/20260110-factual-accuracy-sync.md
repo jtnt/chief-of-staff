@@ -1,7 +1,7 @@
 # Chief of Staff Sync: Factual Accuracy Policy
 
 **Date:** 2026-01-10 (late night)
-**Type:** Session work
+**Session Type:** meta-work
 
 ---
 
