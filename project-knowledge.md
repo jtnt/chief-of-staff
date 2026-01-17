@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-17 10:47 AM EST
+**Last Updated:** 2026-01-17 08:21 AM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -49,7 +49,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ## Current State
 
 - Initial structure operational (project-knowledge.md, project-index.md, project-sources.md, CLAUDE.md)
-- Two-way sync workflows built: pull from Chief of Staff ("update [project]") and push from projects (`/update-cos`)
+- **Simplified workflow commands** - `/log` (quick capture) and `/save` (full workflow) replace the previous three-command system
+- Two-way sync workflows built: pull from Chief of Staff ("update [project]") and push from projects (`/save`)
 - Tracking 6 projects: Razzo, CPF, Context Profile Builder, LinkedIn My Posts Extractor, LinkedIn Scraper Extension, Caregiver App
 - **Three-layer documentation model established** across all projects
 - **Smart project status detection** - only checks/reports projects with actual changes
@@ -66,7 +67,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 - **Logs live with projects** (2026-01-14): Each project has its own `logs/` folder. Chief of Staff is an index/dashboard, not a repository. When you move/archive a project, its complete history travels with it.
 
-- **Command responsibilities** (2026-01-14): `/update-knowledge` creates logs (has conversation context). `/update-cos` only syncs summaries (no context for meaningful logs). `/save-progress` orchestrates both.
+- **Simplified workflow commands** (2026-01-17): Replaced three commands (`/update-knowledge`, `/update-cos`, `/save-progress`) with two simpler ones: `/log` (quick capture) and `/save` (full workflow). Claude writes logs (has conversation context), script handles cross-repo sync (file operations only).
 
 - **Proactive knowledge capture** (2026-01-14): Hybrid approach - session-context.md for recovery after context compaction + immediate project-knowledge.md updates for significant decisions. Testing in Chief of Staff only before considering global rollout.
 
@@ -80,14 +81,41 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 - `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
 - CLAUDE.md contains instructions for Chief of Staff workflows, project sync, and session file handling
-- `/update-knowledge` command updates both project-knowledge.md and CLAUDE.md
-- `/update-cos` command syncs summaries to Chief of Staff
-- `/save-progress` command automates full save workflow (knowledge + git + CoS sync)
+- `/log` command creates log entries in `./logs/` (Claude writes, no git/sync)
+- `/save` command does full workflow: log + git commit/push + CoS sync via `sync-to-cos.sh` script
+- `~/.claude/scripts/sync-to-cos.sh` handles cross-repo operations (updating project-sources.md, committing CoS changes)
 - GitHub repo established for version control
 
 ---
 
 ## Recent Work
+
+### 2026-01-17: Simplified Project Workflow System
+
+**Problem:** Three commands (`/update-knowledge`, `/update-cos`, `/save-progress`) tried to call each other, which didn't work because slash commands can't invoke other slash commands.
+
+**Solution:** Simplified to two commands with clear responsibilities:
+- `/log` - Quick capture: Claude analyzes conversation and writes log to `./logs/`. No git, no sync.
+- `/save` - Full workflow: creates log + git commit/push + syncs to Chief of Staff via script.
+
+**Key design decisions:**
+- Claude writes logs (needs conversation context for decisions, rationale)
+- Script (`sync-to-cos.sh`) handles cross-repo sync (just file operations)
+- Commands are independent - no trying to call each other
+
+**Files created:**
+- `~/.claude/commands/log.md`
+- `~/.claude/commands/save.md`
+- `~/.claude/scripts/sync-to-cos.sh`
+
+**Files deleted:**
+- `~/.claude/commands/update-knowledge.md`
+- `~/.claude/commands/update-cos.md`
+- `~/.claude/commands/save-progress.md`
+
+**Files updated:**
+- `~/.claude/CLAUDE.md` - Updated Session Workflow section, Git Commit Policy
+- `Chief of Staff/CLAUDE.md` - Updated workflow documentation throughout
 
 ### 2026-01-17: Status Line Display Fix
 

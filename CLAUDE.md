@@ -33,7 +33,7 @@ This happens automatically - no user confirmation needed.
 
 ## Proactive Knowledge Capture
 
-**Goal:** Capture insights continuously throughout the session, not just when the user runs `/update-knowledge`.
+**Goal:** Capture insights continuously throughout the session, not just at session end.
 
 ### Session Context File
 
@@ -70,7 +70,7 @@ At the start of any Chief of Staff session where substantive work will happen:
 
 ### Proactive project-knowledge.md Updates
 
-**Don't wait for `/update-knowledge`.** When *significant* things happen, update `project-knowledge.md` immediately:
+**Don't wait for session end.** When *significant* things happen, update `project-knowledge.md` immediately:
 
 - Strategic decisions with lasting impact
 - Major insights or pattern discoveries
@@ -81,7 +81,7 @@ Use your judgment on "significant" - not every small decision, but anything that
 
 ### Session End
 
-When `/update-knowledge` or `/save-progress` runs:
+When `/log` or `/save` runs:
 1. Merge any remaining `session-context.md` contents into `project-knowledge.md`
 2. Delete `session-context.md` after successful merge
 
@@ -227,7 +227,7 @@ Some projects have external source folders (e.g., separate Claude Code projects)
 **Two ways to sync:**
 
 1. **From Chief of Staff (pull):** Say "update [project]" or "sync all" here
-2. **From any project (push):** Run `/update-cos` from that project's Claude Code session
+2. **From any project (push):** Run `/save` from that project's Claude Code session
 
 **When user says "update [project]" or "sync all":**
 
@@ -241,37 +241,31 @@ Some projects have external source folders (e.g., separate Claude Code projects)
 5. Update `project-index.md` with refreshed project summary
 6. Update "Last synced" date in `project-sources.md`
 
-## Command Dependencies
+## Workflow Commands
 
-Three commands work together and should be modified carefully:
+Two commands for saving work (simplified from the previous three-command system):
 
-- **`/update-knowledge`** - Updates project-knowledge.md, CLAUDE.md, AND creates a log entry in `./logs/`. This is where logs are created because it has conversation context.
-- **`/update-cos`** - Syncs project summary to Chief of Staff. Does NOT create logs - just updates CoS's project-index.md and project-sources.md.
-- **`/save-progress`** - All-in-one: calls `/update-knowledge` (creates log), commits/pushes project changes, then calls `/update-cos` (syncs summary).
+- **`/log`** - Quick capture: creates a log entry in `./logs/` (no git, no sync). Use before context compaction or for mid-session checkpoints.
+- **`/save`** - Full workflow: creates log + git commit/push + syncs to Chief of Staff via `sync-to-cos.sh` script.
 
-**Key insight:** Logs are created by `/update-knowledge` during active work when we have conversation context. `/update-cos` only syncs summaries - it can't create meaningful logs because it doesn't have the session context.
-
-**When modifying these commands:**
-- `/update-knowledge` and `/update-cos` are standalone - changes here automatically flow to `/save-progress`
-- `/save-progress` orchestrates the other two - it should just call them, not duplicate logic
-- Test all three after making changes to any one
+**Key insight:** Logs are created by Claude (who has conversation context), while cross-repo sync operations are handled by the `sync-to-cos.sh` script.
 
 **Locations:**
-- `/Users/jtnt/.claude/commands/update-knowledge.md`
-- `/Users/jtnt/.claude/commands/update-cos.md`
-- `/Users/jtnt/.claude/commands/save-progress.md`
+- `/Users/jtnt/.claude/commands/log.md`
+- `/Users/jtnt/.claude/commands/save.md`
+- `/Users/jtnt/.claude/scripts/sync-to-cos.sh`
 
 ## Syncing Chief of Staff Itself
 
 **IMPORTANT:** Chief of Staff tracks its own work just like any other project.
 
-When running `/update-knowledge` or `/save-progress` while working IN the Chief of Staff repo:
+When running `/log` or `/save` while working IN the Chief of Staff repo:
 
-1. Update `project-knowledge.md` as normal
-2. **Also create a sync entry** in `logs/YYYYMMDD-[identifier]-sync.md` documenting what was done
-3. Then commit and push to git
+1. Create log entry in `logs/YYYYMMDD-[identifier].md` documenting what was done
+2. Update `project-knowledge.md` as needed
+3. If `/save`: commit and push to git (but skip CoS sync - we ARE CoS)
 
-**Do NOT skip the sync entry step.** Chief of Staff maintains its own activity log in `logs/` just like all other tracked projects.
+**Do NOT skip the log entry step.** Chief of Staff maintains its own activity log in `logs/` just like all other tracked projects.
 
 ## Check-In System
 
@@ -334,7 +328,7 @@ When check-in content relates to a tracked project:
 **IMPORTANT:** Chief of Staff was originally designed for Claude Code CLI but is now also used in Cowork mode (Claude desktop app). These environments have different capabilities:
 
 ### CLI (Command Line)
-- ✅ Slash commands work (`/journal`, `/morning`, `/update-knowledge`, etc.)
+- ✅ Slash commands work (`/journal`, `/morning`, `/log`, `/save`, etc.)
 - ✅ All custom commands in `~/.claude/commands/` accessible
 - ✅ Full MCP connector availability
 - ✅ Can read files anywhere on system (within permissions)
@@ -353,9 +347,9 @@ When check-in content relates to a tracked project:
 - "Let's do a morning check-in" instead of `/morning`
 
 **For knowledge updates:**
-- Say "run the update-knowledge workflow" and I'll execute it
+- Say "run the save workflow" or "create a log entry" and I'll execute it
 - User can upload command files directly if needed
-- Natural language requests work: "update project knowledge based on this session"
+- Natural language requests work: "save my progress" or "create a session log"
 
 **For git operations:**
 - ✅ Git works normally (commit, push, etc.)
