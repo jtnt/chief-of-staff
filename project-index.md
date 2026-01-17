@@ -232,7 +232,7 @@ V1 MVP is functional with two working document types:
 
 **Current State:**
 - Three-layer documentation model established (session.md, project-knowledge.md, CLAUDE.md)
-- Two-way sync workflows: pull ("update [project]") and push (`/update-cos`)
+- Two-way sync workflows: pull ("update [project]") and push (`/save`)
 - Check-in system operational (morning, evening, thought, journal)
 - Bidirectional flow: CoS can push items to project inboxes
 - Logs live WITH projects in their `logs/` folders
@@ -253,7 +253,7 @@ V1 MVP is functional with two working document types:
   - Captured thought on AI context → linked to CPF post
 - 2026-01-14: Proactive knowledge capture + log restructure
   - Moved all logs from CoS to project folders
-  - Command responsibilities clarified (update-knowledge creates logs, update-cos syncs summaries)
+  - Simplified workflow commands (`/log` and `/save` replace three-command system)
   - Split project-knowledge.md from project-index.md
 - 2026-01-12: Cowork mode vs CLI differences documented
 - 2026-01-10-11: Check-in system + priority tracking built

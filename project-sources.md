@@ -14,11 +14,6 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `Business/business-knowledge.md`, `Research/Industry Thinking.md`, `Working/contextos-analysis.md`
 - **Last synced:** 2026-01-17
 
-## Chief of Staff
-- **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-- **Key files:** `project-knowledge.md`, `CLAUDE.md`, `project-sources.md`
-- **Last synced:** 2026-01-16 (Transcription workflow optimization)
-
 ## LinkedIn My Posts Extractor
 - **Source:** `/Users/jtnt/Documents/Projects/linkedin-my-posts-extractor`
 - **Key files:** `CLAUDE.md`
