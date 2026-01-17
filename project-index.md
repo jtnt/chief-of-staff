@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-16 07:20 AM EST
+**Last Updated:** 2026-01-17 10:35 AM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -84,17 +84,12 @@ The Context Infrastructure now has four distinct layers in the middle network:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; Context Library solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-17: **Writing folder migrated** - All CPF writing moved to central Writing project
+  - See `writing-refs.md` in CPF for index of related writing
+  - Writing now at `/Users/jtnt/Documents/Projects/Writing/Published/`
 - 2026-01-15: **"Context is Everything" article finalized** - Introduces CPF by showing gap between what people tell AI vs. what AI needs
-  - Uses four parallel problem bullets mapping to four solution bullets (aligned with CPF layers)
-  - Bookended with "Context is everything" / "Context is *everything*" for thematic punch
-  - Article at `Writing/20260115_context-is-everything/context-is-everything.md`
-  - Ready for publication
-- 2026-01-14: **Context Profile benefits article (WIP)** - Four key value props: better AI results, efficiency, consistency, easier maintenance
-  - Article at `Writing/20260114_context-profile-benefits/context-profile-benefits.md`
-  - Remaining: complete truncated "Hello," sentence, expand maintenance section
-- 2026-01-12: **Cowork hot takes post** - LinkedIn post about Claude Cowork, tying file system access to CPF
-  - Key insight: Cowork + Context Profile = always-on structured context access without manual loading into Claude Projects
-  - Post at `Writing/20260112_cowork-hot-takes/cowork-hot-takes.md`
+- 2026-01-14: **Context Profile benefits article (WIP)** - Four key value props
+- 2026-01-12: **Cowork hot takes post** - LinkedIn post tying file system access to CPF
 - 2026-01-10: **ContextOS Analysis** - Full analysis of gtm-context-os-quickstart (Jacob Dietle, taste.systems)
   - **Strategic insight:** "The value isn't just in structure—it's in opinionated structure that compounds intelligently"
   - Full analysis: `Working/contextos-analysis.md`
@@ -209,6 +204,32 @@ V1 MVP is functional with two working document types:
 - 2026-01-09 (late night): Cleaned up session files, consolidated technical notes into CLAUDE.md
 
 **Status:** Working tool, stable
+
+---
+
+### Writing
+**Status:** Active - Repository
+**What it is:** Central repository for all writing - LinkedIn posts, blog articles, thought leadership content
+**Source:** `/Users/jtnt/Documents/Projects/Writing`
+**Last synced:** 2026-01-17 (initial setup)
+
+**Purpose:** Store all writing in one place regardless of which project it relates to (or if it's standalone). Organized by status (Drafts, Published) rather than platform.
+
+**Structure:**
+- `Drafts/` - Work in progress
+- `Published/` - Final, posted pieces (in `YYYYMMDD_topic-slug/` folders)
+
+**Bidirectional Linking:**
+- Each piece has front-matter with `projects: ["ProjectName"]` to link forward
+- Each project has `writing-refs.md` to link back to related writing
+
+**Recent Work:**
+- 2026-01-17: **Initial setup** - Created structure, migrated all CPF writing
+- Migrated 4 CPF posts + Ideas folder from `/Users/jtnt/Documents/Projects/Context Profile Framework/Writing/`
+
+**Current Content:**
+- 5 published pieces (4 CPF-related, 1 standalone)
+- See `writing-index.md` for full list
 
 ---
 
