@@ -1,6 +1,6 @@
 ---
 url: https://astro.build/
-category: Technical
+category: Web-Dev
 tags: [web-framework, static-sites, performance, javascript, islands-architecture]
 date_saved: 2026-01-17
 saved_from: manual

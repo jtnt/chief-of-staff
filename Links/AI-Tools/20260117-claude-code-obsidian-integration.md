@@ -1,6 +1,6 @@
 ---
 url: https://kyleygao.com/blog/2025/using-claude-code-with-obsidian/
-category: Technical
+category: AI-Tools
 tags: [claude-code, obsidian, knowledge-management, automation, note-taking]
 date_saved: 2026-01-17
 saved_from: manual
