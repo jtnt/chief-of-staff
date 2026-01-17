@@ -14,6 +14,43 @@ Always read these two files first:
 
 Together these maintain context across sessions.
 
+### Logs Are the Primary Source
+
+**When analyzing recent work across projects, read the `logs/` folders first - not git history.**
+
+Logs capture what git commits don't: decisions, rationale, context, open items. Git commits are terse; logs are narrative. The whole point of maintaining logs is to use them.
+
+- To understand what happened in a project: read its `logs/` folder
+- To understand cross-project patterns: read logs from multiple projects
+- Git history is a fallback, not the primary source
+
+### Meta-Work Balance Check
+
+After reading those files, check the meta-work ratio from recent logs:
+
+1. List files in `logs/` folder from the last 7 days
+2. Read each log's `Session Type` field (if present)
+3. Count: project-work, meta-work, mixed, planning sessions
+4. Calculate: meta-work sessions / total sessions
+
+**If meta-work ratio > 30%, display warning:**
+```
+---
+META-WORK ALERT
+
+Last 7 days: X of Y sessions were meta-work (Z%)
+Target: 20% meta-work
+
+The Chief of Staff system is working. Consider focusing on Razzo or CPF revenue work today.
+---
+```
+
+**Notes:**
+- Logs without Session Type field = skip (don't count either way)
+- Mixed sessions count as 0.5 meta-work
+- Planning sessions are neutral (don't count toward ratio)
+- This is informational, not blocking - user decides what to do
+
 ### Auto-Sync on Session Start
 
 When a Chief of Staff session starts, a SessionStart hook injects the `AUTORUN_SYNC_ALL` flag via additionalContext.
