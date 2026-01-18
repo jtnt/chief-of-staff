@@ -28,3 +28,9 @@
 ## Open Items
 
 - Test the auto-tracking workflow on a new project to verify it works as expected
+
+---
+
+## Update (10:11 AM EST)
+
+**Additional change:** Updated `/save` command description from "log, commit, push" to "capture session, commit, push" to prevent `/log` autocomplete from selecting `/save` due to the word "log" in the description.
