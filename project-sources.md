@@ -38,4 +38,4 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 ## JRAD
 - **Source:** `/Users/jtnt/Documents/Projects/JRAD`
 - **Key files:** `CLAUDE.md`
-- **Last synced:** Never (newly added)
+- **Last synced:** 2026-01-18
