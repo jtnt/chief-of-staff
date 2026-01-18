@@ -233,6 +233,34 @@ V1 MVP is functional with two working document types:
 
 ---
 
+### JRAD
+**Status:** Active - Side Project
+**What it is:** WordPress-to-static-site conversion for joerussosalmostdead.com (Joe Russo's Almost Dead band website)
+**Source:** `/Users/jtnt/Documents/Projects/JRAD`
+**Last synced:** 2026-01-18 (newly added)
+
+**Goal:** Convert existing WordPress site into a simple static website.
+
+**Current WordPress Site:**
+- One-page music theme ("Speaker" by WPWolf)
+- Full-window hero with band photo background
+- Logo, social media icons, "Live Recordings" and "Tour Dates" links
+- Tour dates section using Seated widget (external service)
+
+**Conversion Approach:**
+- Use rendered `jrad_home.html` as primary reference
+- Keep minimal - single page with hero + tour dates
+- Preserve parallax effect and responsive design
+
+**Technical Stack:** Static HTML/CSS, Seated widget for tour dates
+
+**Open Items:**
+- Complete static site conversion
+- Evaluate which jQuery dependencies are actually needed
+- Update http:// URLs to https://
+
+---
+
 ### Caregiver App (Unnamed)
 **Status:** Paused
 **What it is:** Web app to help caregivers communicate updates about the person they're caring for to family and friends. Post notes about doctor visits, medications, general updates. Use AI to summarize transcripts.

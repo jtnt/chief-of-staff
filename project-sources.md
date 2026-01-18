@@ -34,3 +34,8 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/Writing`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `writing-index.md`
 - **Last synced:** 2026-01-17 (initial setup, CPF writing migrated)
+
+## JRAD
+- **Source:** `/Users/jtnt/Documents/Projects/JRAD`
+- **Key files:** `CLAUDE.md`
+- **Last synced:** Never (newly added)
