@@ -1,0 +1,24 @@
+<% if (inboxItems.length === 0) { %>
+  <div class="empty-state">Inbox is empty</div>
+<% } else { %>
+  <% inboxItems.forEach((item, idx) => { %>
+    <div class="inbox-item">
+      <div class="inbox-item-header">
+        <span class="inbox-item-title"><%= item.title %></span>
+        <span class="inbox-item-source"><%= item.source %></span>
+      </div>
+      <% if (item.date) { %>
+        <div class="inbox-item-date"><%= item.date %></div>
+      <% } %>
+      <div class="inbox-item-actions">
+        <button class="btn-archive"
+                hx-post="/api/inbox/archive"
+                hx-vals='{"file": "<%= item.filePath %>", "index": "<%= item.index %>"}'
+                hx-target="#inbox"
+                hx-swap="innerHTML">
+          Archive
+        </button>
+      </div>
+    </div>
+  <% }) %>
+<% } %>

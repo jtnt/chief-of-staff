@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Chief of Staff</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/htmx.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <%- include('partials/sidebar', { currentPage }) %>
+    <main class="main">
+      <div class="page-header">
+        <h2>Activity</h2>
+        <div class="date">Recent logs and thoughts</div>
+      </div>
+
+      <div class="grid grid-2">
+        <!-- Logs -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Session Logs</h3>
+              <span class="badge"><%= logs.length %> logs</span>
+            </div>
+            <div class="card-body">
+              <% if (logs.length === 0) { %>
+                <div class="empty-state">No session logs found</div>
+              <% } else { %>
+                <div class="timeline">
+                  <% logs.forEach(log => { %>
+                    <a href="/logs/<%= log.file %>" class="timeline-item-link">
+                      <div class="timeline-item log">
+                        <div class="timeline-date"><%= log.date || 'Unknown date' %></div>
+                        <div class="timeline-content">
+                          <div class="timeline-title"><%= log.title %></div>
+                          <% if (log.sessionType) { %>
+                            <span class="log-type"><%= log.sessionType %></span>
+                          <% } %>
+                          <% if (log.summary) { %>
+                            <div class="timeline-preview"><%= log.summary %></div>
+                          <% } %>
+                        </div>
+                      </div>
+                    </a>
+                  <% }) %>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thoughts -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Recent Thoughts</h3>
+              <span class="badge"><%= thoughts.length %> thoughts</span>
+            </div>
+            <div class="card-body">
+              <% if (thoughts.length === 0) { %>
+                <div class="empty-state">No recent thoughts captured</div>
+              <% } else { %>
+                <div class="timeline">
+                  <% thoughts.forEach(thought => { %>
+                    <a href="/thoughts/<%= thought.file %>" class="timeline-item-link">
+                      <div class="timeline-item thought">
+                        <div class="timeline-date"><%= thought.date || 'Unknown date' %></div>
+                        <div class="timeline-content">
+                          <div class="timeline-title"><%= thought.title %></div>
+                          <% if (thought.preview) { %>
+                            <div class="timeline-preview"><%= thought.preview %>...</div>
+                          <% } %>
+                        </div>
+                      </div>
+                    </a>
+                  <% }) %>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Chief of Staff</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <%- include('partials/sidebar', { currentPage }) %>
+    <main class="main">
+      <div class="detail-header">
+        <a href="/activity" class="back-link">&larr; Back to Activity</a>
+      </div>
+
+      <article class="detail-page">
+        <header class="detail-meta">
+          <h1 class="detail-title"><%= log.title %></h1>
+          <div class="detail-info">
+            <% if (log.date) { %>
+              <span class="detail-date"><%= log.date %></span>
+            <% } %>
+            <% if (log.sessionType) { %>
+              <span class="log-type"><%= log.sessionType %></span>
+            <% } %>
+          </div>
+        </header>
+
+        <div class="detail-content markdown-body">
+          <%- log.htmlContent %>
+        </div>
+      </article>
+    </main>
+  </div>
+</body>
+</html>

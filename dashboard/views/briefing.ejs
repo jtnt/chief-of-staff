@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Chief of Staff</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/htmx.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <%- include('partials/sidebar', { currentPage }) %>
+    <main class="main">
+      <div class="page-header">
+        <h2>Today's Briefing</h2>
+        <div class="date"><%= new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></div>
+      </div>
+
+      <div class="grid grid-2">
+        <!-- Left column -->
+        <div>
+          <!-- Daily Focus -->
+          <div class="card focus-card">
+            <div class="card-header">
+              <h3>Today's Focus</h3>
+              <span class="badge"><%= dailyFocus.items.length %> items</span>
+            </div>
+            <div class="card-body" id="daily-focus">
+              <%- include('partials/daily-focus', { dailyFocus, carriedOver }) %>
+            </div>
+          </div>
+
+          <!-- Inbox -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Inbox</h3>
+              <span class="badge"><%= inboxItems.length %> pending</span>
+            </div>
+            <div class="card-body" id="inbox">
+              <%- include('partials/inbox', { inboxItems }) %>
+            </div>
+          </div>
+
+          <!-- Priorities -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Strategic Priorities</h3>
+            </div>
+            <div class="card-body">
+              <%- include('partials/priorities', { priorities }) %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div>
+          <%- include('partials/calendar', { calendarData }) %>
+
+          <!-- Recent Logs -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Recent Activity</h3>
+            </div>
+            <div class="card-body">
+              <%- include('partials/recent-logs', { recentLogs }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

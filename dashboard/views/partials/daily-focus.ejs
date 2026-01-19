@@ -1,0 +1,30 @@
+<% if (typeof carriedOver !== 'undefined' && carriedOver && carriedOver.length > 0) { %>
+  <div class="carried-over-banner">
+    <span class="carried-over-icon">&#8634;</span>
+    Carried over <%= carriedOver.length %> unfinished <%= carriedOver.length === 1 ? 'task' : 'tasks' %> from yesterday
+  </div>
+<% } %>
+
+<% if (dailyFocus.items.length === 0) { %>
+  <div class="empty-state">No priorities set for today</div>
+<% } else { %>
+  <ol class="focus-list">
+    <% dailyFocus.items.forEach((item, index) => { %>
+      <li class="focus-item <%= item.checked ? 'checked' : '' %>">
+        <span class="focus-number"><%= index + 1 %></span>
+        <input type="checkbox"
+               <%= item.checked ? 'checked' : '' %>
+               hx-post="/api/daily-focus/toggle"
+               hx-vals='{"date": "<%= dailyFocus.date %>", "index": "<%= index %>", "checked": "<%= !item.checked %>"}'
+               hx-target="#daily-focus"
+               hx-swap="innerHTML">
+        <span class="focus-text"><%= item.text %></span>
+      </li>
+    <% }) %>
+  </ol>
+<% } %>
+
+<form class="add-focus-form" hx-post="/api/daily-focus/add" hx-target="#daily-focus" hx-swap="innerHTML">
+  <input type="text" name="text" placeholder="Add a priority..." autocomplete="off">
+  <button type="submit">Add</button>
+</form>
