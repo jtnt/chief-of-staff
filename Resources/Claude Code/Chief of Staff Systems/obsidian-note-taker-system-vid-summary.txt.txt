@@ -1,0 +1,429 @@
+The Setup: Your Digital Brain’s Foundation
+Before we explain Mckay Wrigley's workflows, you need two things:
+
+Obsidian: A free note-taking app that stores your notes as simple markdown files on your computer. This is key—you own your data completely. Download it from obsidian.md. (1:04)
+Claude Code: Anthropic’s AI command-line tool. You'll need to install it by running a command in your terminal. If that sounds scary, don’t worry. You can copy the instructions from the Claude Code overview page and ask ChatGPT or Claude for step-by-step help. (1:15) You will need an active Claude subscription to use it.
+Once installed, create a new "Vault" in Obsidian (which is just a folder) and open your computer’s terminal to that folder's location. Type claude and press Enter. You now have an AI agent ready to work directly with your files.
+
+Updated Pricing (December 2025):
+
+Pro Plan ($20/month): Now includes Opus 4.5 access with increased limits.
+Max Plan ($100-200/month): Opus 4.5 with roughly same token allocation as previous Sonnet limits.
+Team/Enterprise: Claude Code now bundled—no separate purchase needed.
+For personal assistant use: The Max plan gives you generous all-day Opus 4.5 usage, making it practical to use Claude as your full-time chief of staff.
+
+Which Model for Personal Assistant Tasks?
+
+Here's a good decision framework from Claudedog:
+
+Use Sonnet 4.5 ($3/$15 per million tokens) for:
+
+Quick file organization
+Simple research queries
+Daily journaling/note creation
+Fast email drafts
+Use Opus 4.5 ($5/$25 per million tokens) for:
+
+Deep research across multiple sources
+Complex project planning
+Strategic document creation
+Multi-step automation workflows
+Long-running research projects
+Here's how you. can set Sonnet as your default, then switch to Opus for heavy lifting:
+
+bash
+
+export ANTHROPIC_MODEL="claude-sonnet-4-5-20250929"
+claude --model claude-opus-4-5-20251101 "Deep research task"
+
+If that's confusing to you, just ask Claude for help once its set up.
+
+The Tutorial in Brief
+If you only have < 5 minutes to learn about turning Claude Code into your personal assistant, here’s the quick-and-dirty guide to getting started:
+
+First, you set up a master "rules" file (CLAUDE.md) in your notes folder. This is like a constitution for your AI, telling it exactly how to format notes, who you are, and what your goals are. (5:28) This step is huge for getting consistent, high-quality output.
+
+Once that's done, you can command it with simple text prompts to perform tasks on your files:
+
+Brainstorming: "Create a new note outlining a marketing plan for a new coffee brand." (9:17)
+Organizing: "Create a 'Projects' folder and move all notes related to the coffee brand into it." (12:46)
+Research: "Spin up three sub-agents to research the pricing of OpenAI, Google, and Anthropic models and put the results in a table." (41:31)
+But here's where it becomes a true agent.
+
+This setup unlocks two game-changing capabilities that show the future of personal AI:
+
+It connects to your other apps. Using something called MCP servers, you can ask Claude to pull a document from your Google Drive or analyze data from Stripe, right from your notes. (44:17)
+It works for you while you're away. By linking your notes to GitHub, you can assign research tasks to Claude from your phone. When you get back to your computer, the finished note is waiting for you. (51:28)
+‍What you should do now: If you're tired of copy-pasting between a chatbot and your documents, this workflow is your solution. Start by setting up Claude Code and Obsidian. Your first goal should be to create a /init rules file and customize it. Then, try a simple research task using sub-agents to see the power of parallel processing. This setup moves AI from a passive tool to an active collaborator, fundamentally changing how you manage information. For the full deep dive, check out McKay's full tutorial.
+
+Now let's go over all that a little more in depth...
+
+‍Workflow 1: Setting the Rules of Engagement with /init (5:28)
+UPDATE: New Agent Configuration. Beyond your CLAUDE.md rules file, you can now configure Claude Code with specific agent settings that define system prompts, tool restrictions, and preferred models. Use the --agent flag to override settings for specific sessions:
+
+bash
+
+claude --agent personal-assistant
+
+This lets you create custom agent profiles for different use cases: one for research, one for file organization, one for writing assistance.
+
+With that in mind, read on below.
+
+Once you've installed Claude Code and Obsidian, McKay says the first thing you should do is type /init in the Claude Code session. This creates a file named CLAUDE.md in your vault. Think of this file as the constitution for your AI assistant. It’s a master system prompt that Claude reads before every single task.
+
+Take time to customize this file. You can tell it:
+
+How to format new notes.
+To always include a summary at the top.
+To automatically add relevant tags.
+What tone of voice to use.
+This initial setup is crucial because it governs the quality and consistency of every interaction you have with your AI assistant.
+
+Workflow 2: The Core Chat Experience
+Interacting with Claude Code feels like a familiar chatbot, but with a superpower: it can directly manipulate your files. You can ask it to:
+
+Create Files: "Create a new note summarizing the key points of the Fibonacci sequence." (9:17).
+Edit Files: To edit a specific file, use the @ symbol. For example: Please add an "Interesting Facts" section to @Fibonacci-in-Nature.md (11:41).
+Organize Your Vault: "Create a 'Math' folder and move all related notes into it." Claude is smart enough to identify which notes are math-related on its own. (12:46)
+Delete Files: "Delete the 'Welcome' note, I don't need it anymore." (11:07)
+Workflow 3: 4x Your Speed with Speech-to-Text (14:40)
+This is a simple but game-changing tip. You can speak about four times faster than you can type. By using a speech-to-text tool like Wispr Flow or Willow, you can dictate complex thoughts, instructions, or entire brain dumps directly to Claude Code. This turns the interaction from a slow, deliberate typing session into a fluid conversation, allowing you to offload ideas as quickly as you think of them. Best of all, you can treat Claude like an actual personal assistant... just tell it what you want to do, then complain when Claude gets it wrong! 
+
+Workflow 4: Use Custom Commands
+You can also build a library of reusable prompts with "Custom Commands" (27:15) and create an automated organizational system by defining your tagging and linking rules in a central file (34:35).
+
+This is where you build the engine for true automation. Custom Commands are reusable prompts—or "recipes"—for tasks you perform frequently. Instead of typing out a long instruction every time, you can create a simple command like /daily-journal to execute a complex workflow.
+
+Here’s a step-by-step guide to creating your first one:
+
+Create the Command Folder: This is the trickiest part. You need to create a hidden folder in your vault. Using your computer's file manager (Finder on Mac, File Explorer on Windows), go to your vault's root directory and create a new folder named .claude. Inside that, create another folder named commands. The full path is .claude/commands/. You have to do this outside of Obsidian, as it hides these "dotfiles" by default. (29:08)
+Create Your Command File: Inside the commands folder, create a new markdown file. The name of the file becomes the command. For example, creating daily-template.md will give you a /daily-template command. (31:21)
+Write the Prompt and Add Arguments: The content of the markdown file is the prompt itself. To make it dynamic, use the special keyword $ARGUMENTS. Whatever text you type after your command in the terminal will be inserted at that spot. For your daily-template.md, the content could be:
+codeMarkdown
+
+# Daily Template
+You are given the following context for my day:
+$ARGUMENTS
+
+Please create a new note in the "Daily Notes" folder.
+The title should be "Daily Note - YYYY-MM-DD" using today's date.
+Format the note with sections for "Priorities" and "Blockers" based on the context provided.
+
+Activate and Use Your Command: This is important. You must restart your Claude session in the terminal for it to recognize new commands (30:43). Once restarted, you can now use your new command:
+
+Example: "/daily-template My main priority is finishing the quarterly report, but I'm blocked by the finance team."‍
+
+Claude will now execute the detailed instructions from your markdown file using the context you provided.
+
+This is how you build an automated organizational system (34:35). You could create a /tag-file command that consults a central TAGS.md rulebook to automatically apply the correct tags, or a /link-project command to find and create wiki-style links between related project notes.
+
+Workflow 5: Plan Mode for Complex Tasks (21:29)
+For multi-step projects, like conducting research from multiple sources, McKay says you can activate "Plan Mode" by pressing Shift + Tab twice. Instead of immediately executing your request, Claude will first present a detailed, step-by-step plan. You can review this plan, suggest changes, and only give the green light once you're satisfied with its approach. This gives you a powerful layer of control and ensures the AI tackles complex tasks exactly as you intend.
+
+For heavy-duty research, you can even command Claude to spin up multiple "sub-agents" to tackle different parts of a problem in parallel, dramatically speeding up the process (40:56).
+
+New features up through December 2025:
+1. Background agents: let you run multiple autonomous tasks simultaneously. You can have one agent organizing your files, another conducting research, and a third updating your meeting notes—all running in parallel.
+
+Example workflow:
+
+bash
+
+# Start a research agent in the background
+claude "Research Q1 budget trends and save to /Projects/Finance" &
+
+# Meanwhile, work on something else
+claude "Organize photos from last month into dated folders"
+
+Use /bashes to view and manage all background tasks.
+
+2. Rewind Feature (v2.0.0): Add this critical safety net. Undo Mistakes with Rewind: Press Escape twice or use /rewind to roll back both Claude's conversation and your file changes to previous points. This is crucial when Claude makes an error organizing your personal files—you can instantly undo it.
+
+3. Desktop App Integration (November 2025): You no longer need the terminal exclusively. Claude Code now works in the desktop app, letting you run multiple sessions in parallel with a better visual interface. Perfect for non-technical users who found the terminal intimidating.
+
+This is huge for the "personal assistant" use case—you can have your research session, file organization session, and writing assistance session all open simultaneously in tabs.
+
+4. Voice Mode Integration (Mobile, October 2025): Though not for desktop yet, mention that Claude mobile now has voice mode, perfect for brainstorming while away from your computer—dictate tasks for Claude Code to execute when you return.
+
+5. Claude for Chrome Extension (Available to Max Users): If you're a Max user, this lets Claude handle browser-based research and data gathering, then integrate findings into your Obsidian vault via Claude Code.
+
+6. "Effort Parameter for Personal Use" (Key Improvement): Opus 4.5's new effort setting is really helpful; Claude gave us a more in-depth guide on this down below, but here's the sparknotes:
+
+High effort (default) - best for complex personal projects
+Medium effort - 76% fewer tokens, faster responses for routine tasks
+7. Enhanced Plan Mode with Opus 4.5: Plan Mode now creates a plan.mdfile that you can review and edit before Claude executes. This is perfect for complex personal projects:
+
+Tell Claude your goal (e.g., "Research and create a comprehensive vacation planning doc for Japan trip")
+Claude asks clarifying questions upfront
+Claude creates plan.md with structured breakdown
+You edit the plan to adjust priorities
+Claude executes based on your approved plan
+This prevents Claude from going down rabbit holes on complex personal projects.
+
+With all these updates, you technically don't NEED Obsidian anymore—but it's still the optimal setup. Here's the honest breakdown:
+
+What's Changed That Makes Obsidian Optional
+You can now use Claude Code as a personal assistant with ANY folder structure:
+
+Desktop app: No longer terminal-only, so you have a visual interface
+Background agents: Can organize any files, not just markdown
+Better context management: Claude maintains memory across sessions
+Web-based Claude: Can reference your Google Drive, Notion, etc. through MCP servers
+So if you already have a system (Notion, Apple Notes, Google Drive), you can work with that directly.
+
+Why Obsidian is STILL the Best Companion
+Here's the thing: Obsidian is YOUR interface to your knowledge base. Claude Code is CLAUDE's interface.
+
+1. You still need to read/reference your own stuff
+
+Obsidian's graph view, quick switcher, and search are unmatched
+Claude Code is for automation; Obsidian is for human browsing
+You want to see what Claude organized, right?
+2. Markdown + local storage = ideal for AI
+
+.md files are the easiest format for Claude to read/write
+Local storage means Claude Code has direct file access (no API limits)
+You own your data completely
+3. The combo is more powerful than either alone
+
+You in Obsidian: "I need to review my Japan trip research"
+Claude in Claude Code: "Compile all Japan research into structured itinerary"
+They work on the same files, different interfaces
+4. Obsidian plugins extend what Claude can do
+
+Dataview for querying your notes
+Calendar for daily notes structure
+Templates that Claude can use via your CLAUDE.md rules
+Advanced Workflows: Building a Truly Agentic System
+Once you've mastered the basics, you can unlock even more powerful capabilities.
+
+Custom Commands (27:15): Do you find yourself repeating the same tasks, like creating a daily journal entry or summarizing meeting notes? You can create reusable prompts called "Custom Commands." By creating a markdown file in a special .claude/commands/ folder, you can define a template for any task. For instance, you could create a /dailybrief command that automatically generates a new note with today's date, sections for your priorities and blockers, and even pulls in context from your calendar.
+
+Automated Organization (34:35): Create a TAGS.md file that serves as the "source of truth" for your entire organizational system. Define your main categories, sub-categories, and rules for how they should be applied. Then, instruct Claude in your main CLAUDE.md file to always consult this TAGS.md file when organizing notes. Over time, the AI will learn your system and begin to tag, link, and file new information autonomously, keeping your digital brain perfectly organized.
+
+Sub-Agents for Parallel Processing (40:56): For big research projects, you can ask Claude to "spin up three sub-agents." (41:31) Each agent can work on a different part of the task in parallel. For example, one can research OpenAI's pricing, another can research Anthropic's, and a third can research Google's. They will work simultaneously and then combine their findings into a single, comprehensive note, drastically cutting down your research time.
+
+Learn more about sub-agents from this overview video and this setup guide.
+Check out the official documentation and this library of pre-built agents.
+A Masterclass in Using Sub-Agents Effectively
+Allow us a tangent to talk more in depth about "sub-agents." So you've learned that you can spin up sub-agents to tackle tasks in parallel. But if you've tried it, you might have been disappointed. As Jason Zhou says, a common complaint is that sub-agents feel slow, burn through tokens, and don't actually produce better results (0:10).
+
+
+So, what gives? Jason's tutorial provides a crucial insight into the right way to design and use sub-agents, transforming them from a confusing feature into a powerhouse tool.
+
+The "Why": Sub-Agents Were Born to Manage Context
+First, you have to understand why sub-agents exist. The original problem was context window overload. The main Claude agent would read a few large files to understand a project and instantly clog up its memory. This forced a "conversation compact," which is basically AI amnesia, leading to a dramatic drop in performance (1:04).
+
+Sub-agents solve this. They are designed to be context-saving deputies. You delegate the token heavy "research" tasks (like reading files) to a sub-agent. That sub-agent works in its own isolated session, does the heavy lifting, and then returns a concise summary or a plan to the parent. The parent agent's context window stays clean, only receiving the critical information it needs to proceed (1:41).
+
+The Common Mistake: Don't Let Your Sub-Agents Code
+Here’s the rub: most people try to get their sub-agents to do the implementation, too. They'll create a "frontend agent" and a "backend agent." This seems logical, but it falls apart the moment you need to fix a bug (2:16).
+
+The problem is that each agent works in a silo. The frontend agent has no idea what the backend agent did, and vice-versa. The parent agent is even more clueless; it only sees that the tasks were "completed," not the specific code changes. When you ask it to fix a bug, no agent has the full picture, and the system grinds to a halt.
+
+The Best Practice: Researchers, Not Implementers
+This is the "Aha!" moment. The best practice, confirmed by the Claude Code engineering team (4:11), is to follow one simple rule:
+
+Sub-agents research and plan; the parent agent executes.
+
+Think of sub-agents as specialist researchers. Their only job is to gather information and return a detailed plan. The parent agent, which maintains the full project context, is the only one that should ever write or edit files. And since this tutorial is all about how to use Claude Code as a personal assistant, NOT a coding assistant, you can apply the same logic to using sub-agents as your "sub-assistants", not your "personal chief of staff" as we described it at the beginning.
+
+The "How": A Step-by-Step Guide to Building Expert Agents
+Here's how to put this theory into practice and build a team of expert sub-agents.
+
+Define the Agent's Sole Purpose: Planning. In the agent's configuration, explicitly state its goal. A crucial line to include is: "Your goal is to propose a detailed implementation plan and never do the actual implementation." (10:14)
+Prime it with Knowledge. Create specialized agents for the tools you use, like a "Vercel AI SDK Expert" or a "Shadcn UI Expert." In their system prompts, paste key documentation, migration guides, and best practices directly from the official websites (11:20). This ensures they always work with the latest information.
+Create a Shared Brain Using the File System. This is the masterstroke for solving the context-sharing problem (5:27). Instead of just passing messages, use markdown files as a persistent, shared memory:
+The parent agent creates a main context.md file in a .claude/tasks/ folder, outlining the overall project goal.
+Before starting, every sub-agent is instructed to read this context.md file to get the big picture.
+When a sub-agent finishes its research, it writes its detailed plan to its own file (e.g., ui_plan.md) and then updates the main context.md with a summary of its work.
+This ensures every agent, including the parent, is always on the same page.
+Instruct the Parent Agent on Delegation. Finally, update your main CLAUDE.md file with rules on how to use its new team. Tell it about the expert agents you've created and instruct it to delegate planning tasks to them, making sure it always passes the path to the shared context.md file (12:04).
+By following this "researcher, not implementer" model, you align your workflow with the core purpose of sub-agents, leading to dramatically better performance, higher success rates, and a truly collaborative agentic system.
+
+MCP Servers: Connecting to the Outside World (44:17)
+This is where things get truly wild. MCP (Model Context Protocol) allows Claude Code to connect to external tools and services. Imagine connecting it to your Google Drive to pull in documents, to Stripe to analyze sales data, or to Notion to create new pages. McKay Wrigley demonstrates this by using a service that provides up-to-date software documentation, but the possibilities are endless. You can even build your own MCP server—for example, one that accepts a YouTube link, transcribes the video, summarizes it, and saves it as a new note in your vault (and here's how to install them and use them with Claude Desktop).
+
+Cloud Automation with GitHub (51:28)
+This final workflow is the ultimate demonstration of agentic power. By connecting your Obsidian vault to a GitHub repository, you can trigger Claude Code to work for you even when you're away from your computer. The process is stunningly simple and effective:
+
+While on your phone, you open the GitHub app and create a new "Issue" with a research request (e.g., "Summarize the latest advancements in solid-state batteries"). (56:13)
+You add a comment to the issue, tagging @claude and saying "Please handle this." (56:51)
+This triggers an automated process in the cloud. Claude gets the request, performs the research, creates a new note with the findings, and saves it to your vault.
+When you get back to your desk and sync your files, the new, fully researched note is already there waiting for you. (59:03)
+What’s New in Claude Code: A Guide to the Latest Features
+Now, these foundational workflows are powerful, but recent updates have made Claude Code an even more capable personal agent.
+
+Output Styles: Customizing Claude’s Personality
+‍
+
+
+As Ray Amjad breaks down, this new feature is the key to unlocking Claude for non-coding tasks. Output Styles fundamentally change how Claude communicates by altering its core system prompt. The crucial insight is that non-default styles turn off the parts of the system prompt specific to software engineering, making Claude less of a coder and more of a general-purpose agent.
+
+This is the most significant new feature, allowing you to fundamentally change how Claude communicates, adapting it for uses far beyond software engineering.
+
+You can switch styles with the /output-style command.
+
+Built-in Styles: Anthropic has added two new modes besides the coding-focused Default:
+Explanatory: This style adds an "Insight" section to its responses, explaining the reasoning behind its code, like why it chose one database over another. It’s perfect for understanding the why.
+Learning: This mode turns Claude into a pair-programming tutor. It will write most of the code but leave TODO (human) comments, giving you specific tasks to complete yourself before it checks your work and continues.
+Making Your Own Output Styles (1:52): You can also create a custom style with a simple prompt, like /output-style:new write everything in the style of Shakespeare. Claude will generate a new configuration file for this personality.
+CRITICAL CAVEAT (2:44): Using any style other than "Default" turns off the parts of Claude's system prompt specifically optimized for software engineering. This makes it worse at coding but potentially much better at other tasks like creative writing or deep research, effectively turning it into a specialized agent.
+See the Master Prompt (3:58): If you want to build a truly effective custom style, you can see Claude's hidden default system prompt by running the claude trace command. This will show you the exact instructions the AI uses, which you can then adapt for your own styles.
+Opus Plan Mode (4:40)
+This is a "best of both worlds" setting for complex tasks. When you select this model with /model, Claude will use the superior (but more expensive) Opus 4.1 model for the high-level planning phase, then switch to the faster and cheaper Sonnet 4 model for the actual execution.
+
+Multiple MCP Configs (5:00)
+You can now load multiple, separate tool configurations when you launch Claude Code (e.g., claude --mcp-config supabase.json context7.json). This is perfect for when you want to use a specific subset of your tools for a particular project without loading every single MCP server you have connected.
+
+Permissions Management (6:32)
+The /permissions command gives you a new UI to manage which tools Claude can use and when. You can set tools to Allow, Deny, or the new Ask state, which forces Claude to request confirmation every time it wants to use a specific tool.
+
+How to Activate the 1 Million Token Context Window (7:00)
+To use Sonnet 4's massive 1M context window, you can't be on the standard Claude Code subscription plan. You must switch to API-based billing.
+
+Run /logout in your terminal.
+Restart Claude and choose to connect with your "Anthropic console account (API usage billing)."
+Run the command /model sonnet[1m] to activate the large context window.
+Remember: this will definitely add up, so make sure to set limits to your card or you could easily burn through 1M tokens like it's nothing, ESPECIALLY when using Claude as an all-purpose general assistant.
+
+Bonus Tips for Power Users
+
+"Always Allow" Edits (1:29): When Claude asks for permission to edit a file, there's a new, unannounced option to "always allow modifying files in this project." This adds a rule to your local settings file so Claude will stop asking for permission for that specific project.
+Increase Thinking Time (7:47): You can potentially improve Claude’s performance on complex tasks by allowing it more "thinking" tokens. Add the line "MAX_THINKING_TOKENS": 32000 to your .claude/settings.local.json file.
+Other Key Features to Know:
+Here’s a breakdown of a few more game-changing features from Better Stack, a channel we're coming to really love because of their timely and useful updates on code-specific Ai tools:
+
+
+‍
+
+1. Custom Status Line (0:24)
+This feature adds a dynamic, contextual information bar at the bottom of your terminal, below the prompt. Instead of a blank slate, you can see useful info at a glance.
+
+How it works: Run the /statusline command. Claude will try to mimic your existing terminal prompt. For more control, you can give it a natural language prompt like /statusline colorful with emojis separated by a pipe to have it generate a custom script.
+Why it matters: It keeps key information like the current project, Git branch, and model you're using visible at all times, making the tool feel deeply integrated into your workflow.
+Background Commands (1:05)
+This is a massive productivity booster. You can now run long-running processes, like a development server or a script that tails logs, in the background without tying up your Claude session.
+
+How it works: When Claude is running a bash command, simply press Ctrl+B to send it to the background. You can then view and manage all background tasks with the /bashes command.
+Why it matters: You can start a server and immediately begin asking Claude to analyze its output or perform other tasks, all in the same window. No more juggling multiple terminals.
+Bonus Tip: Release Notes in Your Terminal (3:18)
+Want to keep up with all these changes without leaving your workflow? Just run the /release-notes command, and Claude will show you the full changelog for your version of the tool.
+
+Claude Opus 4.5's Three Effort Levels Explained
+One of Opus 4.5's most practical features is something most people don't know exists: the effort parameter. Think of it as Claude's thinking dial—you can tell it to think harder or move faster depending on the task.
+
+Here's what makes this game-changing for personal assistant use: at medium effort, Opus 4.5 uses 76% fewer tokens while matching Sonnet 4.5's best performance. At high effort (the default), it uses 48% fewer tokens than Sonnet while being significantly better.
+
+High effort (default)
+
+Claude takes its time, explores multiple approaches, double-checks reasoning
+Best for: Complex research, strategic planning, important documents
+Token usage: Most expensive, but most thorough
+Speed: Slower responses
+Medium effort
+
+Claude thinks just enough to get quality results
+Best for: Most personal assistant tasks, daily organization, research synthesis
+Token usage: 76% fewer output tokens than high effort
+Speed: Noticeably faster
+Low effort (not officially available yet, but coming)
+
+Quick responses with less internal reasoning
+Best for: Simple file organization, basic queries, quick notes
+Token usage: Minimal
+Speed: Fast
+When to Use Each Setting for Personal Tasks
+Use High Effort (default) for:
+
+Deep research that combines multiple sources ("Research best investment strategies for 2026 based on current market trends")
+Strategic planning ("Create a comprehensive 6-month plan for launching my side business")
+Complex document creation ("Draft a detailed contract for my freelance consulting work")
+Multi-step automation workflows ("Set up a system to automatically organize, tag, and summarize my meeting notes")
+Use Medium Effort for:
+
+Daily note organization ("Sort this week's notes into project folders")
+Standard research tasks ("Compile information about visiting Japan for 2 weeks")
+Email drafting and correspondence
+File management and cleanup
+Creating structured summaries from your documents
+Most routine personal assistant work
+Real-world example: AJ Orbach, CEO of Text2SQL.ai, said it perfectly: "The effort parameter is brilliant. Claude Opus 4.5 feels dynamic rather than overthinking, and at lower effort delivers the same quality we need while being dramatically more efficient."
+
+How to Actually Set It
+In Claude Code (terminal):
+
+bash
+
+# Set medium effort for your session (recommended for most personal tasks)
+claude --model claude-opus-4-5-20251101 --effort medium "Organize my project notes"
+
+# Default is high effort (no flag needed)
+claude --model claude-opus-4-5-20251101 "Deep research task"
+
+Via the API (if you're using the Claude Agent SDK for custom agents)
+
+pythonimport anthropicclient = anthropic.Anthropic()response = client.messages.create(    model="claude-opus-4-5-20251101",    max_tokens=1024,    thinking={        "type": "enabled",        "budget_tokens": 5000  # Medium effort uses ~5K thinking tokens    },    messages=[{        "role": "user",        "content": "Organize my meeting notes from this week"    }])
+The Cost-Benefit Math
+Let's say you're on a Max plan using Claude as your full-time personal assistant. Here's the practical difference:
+
+Scenario: Daily note organization (30 tasks per day)
+
+All high effort:
+
+Average: 2,000 output tokens per task
+Monthly: 30 tasks × 30 days × 2,000 tokens = 1.8M tokens
+You'll hit your usage limits faster
+Strategic mix (25 medium, 5 high):
+
+Medium: 25 tasks × 480 tokens = 12,000 tokens/day
+High: 5 tasks × 2,000 tokens = 10,000 tokens/day
+Monthly: 660K tokens (saves 1.14M tokens!)
+You get way more mileage from your Max subscription
+Claude's Recommendation: Set Medium as Your Default
+For 90% of personal assistant tasks, medium effort hits the sweet spot. Here's why:
+
+Medium effort is fast enough to feel responsive (you're not waiting 30 seconds for Claude to organize a folder), smart enough to handle complex organization (it can still manage multi-step workflows), and efficient enough to maximize your usage limits (you'll get 4x more tasks from your subscription).
+
+When to override to high effort:
+
+You explicitly say "this is important" or "be thorough"
+The task involves money, legal stuff, or important decisions
+You need multiple perspectives or deep analysis
+You're planning something that has downstream consequences
+Quick Reference: Personal Assistant Task → Effort Level
+Task TypeEffort LevelWhyOrganize files/notesMediumSpeed matters, straightforward taskDaily journaling setupMediumRoutine, well-definedQuick research (1-2 sources)MediumDoesn't need deep synthesisEmail draftsMediumGood enough > perfectDeep research projectHighQuality and thoroughness crucialStrategic planningHighDownstream consequencesComplex automationHighYou want it done right onceFinancial analysisHighAccuracy is critical
+
+Power User Tip: Create Custom Commands for Each Effort Level
+Remember those custom commands we talked about earlier? Here's how to set up effort-specific shortcuts:
+
+bash
+
+# In /home/claude/.claude/commands/# quick-organize.md (medium effort)
+Use medium effort to organize these files:
+$ARGUMENTS
+
+# deep-research.md (high effort)  
+Use high effort to conduct thorough research on:
+$ARGUMENTS
+
+Now you can just type:
+
+bash
+
+/quick-organize "last week's meeting notes"
+/deep-research "AI agent market landscape"
+
+The Bottom Line
+Think of effort settings like this: high effort is hiring a consultant who analyzes everything from every angle. Medium effort is hiring a smart generalist who gets things done efficiently.
+
+For your personal assistant workflows, you want the smart generalist most of the time—with the consultant on speed dial for when it really matters.
+
+Start with medium effort as your default. If you find yourself thinking "I wish Claude had been more thorough," switch that specific task to high effort. Over time, you'll develop an intuition for which of your personal tasks need the extra thinking horsepower.
+
+‍
+
+The Future is Agentic
+So the inspiration from this post came from one friend of ours who explained how they used Claude Code as a non-coder. They said the real power of this workflow is in context management. "The key problem I find with AI is it just can't remember enough, so using Claude Code helps me assist its memory and thinking, telling it where to look, where we saved things, etc."
+
+By setting up Claude Code as a personal assistant, you're not just getting a better way to take notes. You're building a customized, intelligent system that can learn your workflows, connect to your tools, and automate the tedious parts of your knowledge work, freeing you up to focus on what truly matters.
