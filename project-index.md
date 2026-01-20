@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-17 10:35 AM EST
+**Last Updated:** 2026-01-19 09:44 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -258,6 +258,51 @@ V1 MVP is functional with two working document types:
 - Complete static site conversion
 - Evaluate which jQuery dependencies are actually needed
 - Update http:// URLs to https://
+
+---
+
+### Job Search
+**Status:** Active - Personal
+**What it is:** Personal job search toolkit with workflow-optimized materials and processes
+**Source:** `/Users/jtnt/Documents/Projects/Job Search`
+**Last synced:** 2026-01-19 (Toolkit reorganization complete)
+
+**Context:** Laid off March 2025; building Razzo AI consulting while also exploring job opportunities. 51 years old, 25+ years across B2B and DTC, agency and in-house. C-suite experience (CEO, CMO, CTO, CRO roles).
+
+**Structure:**
+- `Toolkit/Profile/` - Master profile, achievements (STAR-ready), career narrative, skills inventory
+- `Toolkit/Active/` - Current job pursuits (one folder per application)
+- `Toolkit/Templates/` - Resume base files, cover letter template
+- `Toolkit/Interview Prep/` - Behavioral questions, Amazon LPs
+- `Toolkit/Research/` - Target companies, industry research
+- `Toolkit/Past Applications/` - 13 company folders for reference
+- `Toolkit/Resume Archive/` - Historical versions by year (2017-2025)
+
+**Key Files:**
+- `Profile/master-profile.md` - Quick reference + career timeline
+- `Profile/achievements.md` - 15+ STAR-ready accomplishments by capability
+- `Profile/career-narrative.md` - Positioning + objection responses + four career trajectories
+- `Profile/skills-inventory.md` - Skills by category with proficiency levels
+- `Templates/cover-letter-template.md` - Customization framework with samples
+- `Interview Prep/behavioral-questions.md` - Common questions matched to achievements
+
+**Target Industries:**
+1. Audio/Music/Consumer Electronics
+2. AI Enablement & Strategy
+3. Premium Consumer Brands
+4. SaaS/Tech
+
+**Recent Work:**
+- 2026-01-19: **Toolkit reorganization COMPLETE**
+  - Transformed Filing Cabinet from storage archive to workflow-optimized Toolkit
+  - Migrated 148 files → 163 files (new synthesis docs created)
+  - Created 7 new synthesis documents: master-profile.md, achievements.md, career-narrative.md, skills-inventory.md, cover-letter-template.md, behavioral-questions.md, target-companies.md
+  - Updated CLAUDE.md with comprehensive job search context and workflows
+
+**Open Items:**
+- [ ] Test workflow with a real job posting to verify findability
+- [ ] Delete Filing Cabinet/ once confirmed all materials are accessible
+- [ ] Update contact info placeholders in master-profile.md
 
 ---
 
