@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 12:20 PM EST
+**Last Updated:** 2026-01-20 03:32 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -58,6 +58,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - **Bidirectional flow implemented** - CoS can now push items to project inboxes
 - **Proactive knowledge capture** - session-context.md for recovery, immediate p-k.md updates for significant decisions (Chief of Staff only, testing before global rollout)
 - **Log restructure complete** - Logs live WITH projects in `logs/` folders, not in Chief of Staff
+- **Claude.ai conversation extraction tool** - Complete toolset for extracting and organizing Claude.ai conversations from data exports (search, review, extract workflows)
 
 ---
 
@@ -89,6 +90,12 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: Claude.ai Conversation Extraction Tool
+
+Built complete toolset for extracting Claude.ai conversations from data exports into searchable markdown files. Three CLI tools (find, review, extract) with memory-efficient streaming for 100MB+ files, confidence scoring for keyword search, and comprehensive documentation. Addresses fundamental export limitation (no project-conversation mapping) with 80-95% automated discovery + manual review workflow that's 10x faster than copying UUIDs. Validated on SalesIntel data (15 conversations, 470 messages, zero failures).
+
+Location: `Tools/claude-web-extractor/`
 
 ### 2026-01-20: Status Line Investigation + Permission Fixes
 

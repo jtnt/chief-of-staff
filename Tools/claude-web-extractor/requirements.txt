@@ -1,0 +1,15 @@
+# Claude.ai Conversation Extraction Tool Dependencies
+
+# Streaming JSON parser for memory-efficient processing of large files
+ijson>=3.2.0
+
+# Progress bars for long-running operations
+tqdm>=4.66.0
+
+# Standard library dependencies (included for reference):
+# - json: JSON parsing
+# - pathlib: File path handling
+# - datetime: Timestamp formatting
+# - re: Regular expressions for slugification
+# - argparse: Command-line interface
+# - typing: Type hints
