@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 05:50 PM EST
+**Last Updated:** 2026-01-20 06:03 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -93,6 +93,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: MCP Configuration Consolidation
+
+Cleaned up MCP configuration for Chief of Staff project. The Notion MCP server was configured in `~/.claude.json` under project-specific settings, while google-calendar and gmail were in the project's `.mcp.json` file. Consolidated all three into `.mcp.json` for consistency - this is the cleaner approach since it lives with the project and is version-controlled. Removed the duplicate from `~/.claude.json` and removed notion from the `disabledMcpServers` array.
 
 ### 2026-01-20: RivalSearchMCP Added
 

@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 06:00 PM EST
+**Last Updated:** 2026-01-20 06:03 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -386,7 +386,7 @@ Structured conversation library extracted from Claude.ai conversations documenti
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-20 (RivalSearchMCP added)
+**Last synced:** 2026-01-20 (MCP configuration consolidation)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
