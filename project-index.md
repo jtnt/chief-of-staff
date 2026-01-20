@@ -261,7 +261,7 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Personal
 **What it is:** Personal job search toolkit with workflow-optimized materials and processes
 **Source:** `/Users/jtnt/Documents/Projects/Job Search`
-**Last synced:** 2026-01-20 (PostHog TAM v2→v3 revision planning)
+**Last synced:** 2026-01-20 (PostHog TAM v9 holistic fixes)
 
 **Context:** Laid off March 2025; building Razzo AI consulting while also exploring job opportunities. 51 years old, 25+ years across B2B and DTC, agency and in-house. C-suite experience (CEO, CMO, CTO, CRO roles).
 
@@ -289,12 +289,16 @@ V1 MVP is functional with two working document types:
 4. SaaS/Tech
 
 **Recent Work:**
+- 2026-01-20: **PostHog TAM v9 holistic fixes**
+  - Addressed feedback that v8 edits were myopic/piecemeal by taking story-driven approach
+  - Summary now tells connected story: C-suite breadth → technical foundation → complete flip → no-playbook pattern
+  - Four changes: C-suite order (CTO first), "websites and digital products", added business leaders flip, fixed Razzo tense
+  - Created `Toolkit/Active/PostHog - TAM/J Nicholas Tolson Resume 2026 PostHog v9.md`
 - 2026-01-20: **PostHog TAM v2→v3 revision planning**
   - Created v2 files from initial plan, received detailed feedback
   - Researched latest resume and cover letter best practices (2025-2026)
   - Key corrections needed: "18 years" is wrong (career is 28+ years), em dashes, odd specifics
   - Created comprehensive v3 plan addressing all feedback
-  - Plan at `~/.claude/plans/cosmic-wibbling-brook.md`
 - 2026-01-19 (evening): **PostHog TAM application planning**
   - Analyzed job fit: Art school → programmer → managing dev/product teams matches their "technical enough" requirement
   - Key differentiator: Cor feature flags/A/B testing experience + currently a PostHog customer
@@ -305,7 +309,6 @@ V1 MVP is functional with two working document types:
   - Created 7 new synthesis documents
 
 **Open Items:**
-- [ ] **NEXT:** Execute PostHog TAM v3 revisions (plan at `~/.claude/plans/cosmic-wibbling-brook.md`)
 - [ ] Cover letter ending: Need to determine best approach from three options
 - [ ] LTA technical translation bullet: Craft right phrasing
 - [ ] Ultramarathon phrasing: Naturally incorporate balance/consistency phrase
