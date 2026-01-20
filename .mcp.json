@@ -13,6 +13,13 @@
       "env": {
         "GMAIL_OAUTH_PATH": "/Users/jtnt/Documents/Projects/Chief of Staff/.claude/gcp-oauth.keys.json"
       }
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_TOKEN": "ntn_E6271082391aIB5YP8N4VA3gZ1TfXP4IiPCIm0SafAY9tJ"
+      }
     }
   }
 }
