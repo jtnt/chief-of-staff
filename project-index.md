@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 04:43 PM EST
+**Last Updated:** 2026-01-20 04:49 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -377,7 +377,7 @@ Structured conversation library extracted from Claude.ai conversations documenti
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-20 (`/claude-web-extract` command)
+**Last synced:** 2026-01-20 (MCP configuration & Brave Search)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -391,8 +391,10 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - **Transcription workflow optimized:** Using mlx-whisper with medium model for Mac Silicon
 - **Claude.ai conversation extraction tool:** Complete toolset at `Tools/claude-web-extractor/`
 - **`/claude-web-extract` command:** User-friendly guided workflow wrapping the extraction tool
+- **Brave Search MCP:** User-level configuration for global web search capabilities
 
 **Recent Work:**
+- 2026-01-20: **MCP configuration & Brave Search** - Fixed fundamental misunderstanding of MCP structure in Claude Code. Learned ALL MCP config lives in `~/.claude.json` at three levels (user/local/project), not separate `.mcp.json` files. Added Brave Search MCP to user-level configuration. Fixed permission issues - added patterns for `git -C:*` and `mkdir -p:*` to prevent /save and /log prompts.
 - 2026-01-20: **`/claude-web-extract` command** COMPLETED - Implemented user-friendly guided workflow that wraps the claude-web-extractor tool. Provides 6-step process: environment validation, search criteria gathering (with keyword guidance), search execution, manual review pause (human judgment required), review verification and extraction, results summary. Smart default output directory (`./Claude.ai Chats/`), extensive error handling, prominent "GOOD vs. BAD keywords" guidance. Follows patterns from `/export-session` and `/podcast-extract`. Created `~/.claude/commands/claude-web-extract.md`.
 - 2026-01-20: **Claude.ai conversation extraction tool** COMPLETED - Built three CLI tools (find, review, extract) for organizing Claude.ai conversations from data exports. Memory-efficient streaming handles 100MB+ files, confidence scoring for keyword search, comprehensive documentation. Addresses fundamental export limitation (no project-conversation mapping) with 80-95% automated discovery + manual review. Validated on SalesIntel data (15 conversations, 470 messages, zero failures).
 - 2026-01-20: **Status line + permission fixes** - Investigated context percentage discrepancy (status line vs compaction warnings), discovered they measure different things (Claude Code limitation). Added missing global permissions for /log and /save commands (mkdir, pwd, date, git diff/log, sync script).

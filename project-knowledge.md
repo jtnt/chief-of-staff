@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 04:13 PM EST
+**Last Updated:** 2026-01-20 04:49 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -60,6 +60,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - **Log restructure complete** - Logs live WITH projects in `logs/` folders, not in Chief of Staff
 - **Claude.ai conversation extraction tool** - Complete toolset for extracting and organizing Claude.ai conversations from data exports (search, review, extract workflows)
 - **`/claude-web-extract` command** - User-friendly guided workflow wrapping the extraction tool (6-step process with validation, keyword guidance, manual review pause)
+- **Brave Search MCP** - Added to user-level MCP configuration for global web search capabilities across all projects
 
 ---
 
@@ -91,6 +92,12 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: MCP Configuration & Brave Search
+
+Fixed fundamental misunderstanding of MCP configuration structure in Claude Code. Initially created incorrect `~/.claude/mcp.json` file (doesn't exist). Researched official documentation and learned ALL MCP config lives in `~/.claude.json` at three levels: user-level (global, all projects), local-level (per-project, private), and project-level (`.mcp.json` in project root, version controlled). Added Brave Search MCP to user-level configuration. Also fixed permission issues causing /save and /log to prompt - added patterns for `git -C:*` and `mkdir -p:*` instead of one-off permissions.
+
+Key learning: Gmail and Google Calendar belong in Chief of Staff's `.mcp.json` (project-specific OAuth credentials), but general tools like Brave Search belong at user-level.
 
 ### 2026-01-20: `/claude-web-extract` Command
 
