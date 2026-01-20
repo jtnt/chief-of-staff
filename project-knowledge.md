@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 05:07 PM EST
+**Last Updated:** 2026-01-20 05:50 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -61,6 +61,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - **Claude.ai conversation extraction tool** - Complete toolset for extracting and organizing Claude.ai conversations from data exports (search, review, extract workflows)
 - **`/claude-web-extract` command** - User-friendly guided workflow wrapping the extraction tool (6-step process with validation, keyword guidance, manual review pause)
 - **Brave Search MCP** - Added to user-level MCP configuration for global web search capabilities across all projects
+- **RivalSearchMCP** - Added free alternative search MCP (hosted version) alongside Brave Search, providing DuckDuckGo/Yahoo/Wikipedia search plus specialized tools (social scanning, GitHub search, academic papers, document analysis)
 
 ---
 
@@ -92,6 +93,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: RivalSearchMCP Added
+
+Added RivalSearchMCP as a free alternative search MCP alongside Brave Search. User found the GitHub repo (damionrashford/RivalSearchMCP), which provides search via DuckDuckGo/Yahoo/Wikipedia with automatic fallbacks plus specialized tools (social media scanning, GitHub search, academic papers, document analysis). Used hosted version (`https://RivalSearchMCP.fastmcp.app/mcp`) with HTTP transport (SSE transport failed to connect). Both search providers now available - Brave for primary quality, Rival for additional specialized tools.
 
 ### 2026-01-20: File Versioning Policy & /save Permissions
 

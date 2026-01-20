@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 05:07 PM EST
+**Last Updated:** 2026-01-20 05:50 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -383,7 +383,7 @@ Structured conversation library extracted from Claude.ai conversations documenti
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-20 (File versioning policy & /save permissions)
+**Last synced:** 2026-01-20 (RivalSearchMCP added)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -398,8 +398,10 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - **Claude.ai conversation extraction tool:** Complete toolset at `Tools/claude-web-extractor/`
 - **`/claude-web-extract` command:** User-friendly guided workflow wrapping the extraction tool
 - **Brave Search MCP:** User-level configuration for global web search capabilities
+- **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-20: **RivalSearchMCP added** - Added free alternative search MCP alongside Brave Search (hosted version with HTTP transport). Provides DuckDuckGo/Yahoo/Wikipedia search plus specialized tools (social scanning, GitHub search, academic papers, document analysis).
 - 2026-01-20: **File versioning policy & /save permissions** - Added File Editing Policy to global CLAUDE.md (version files instead of edit-in-place). Fixed /save permission prompts by adding Edit/Write permissions for CoS files to global settings.json.
 - 2026-01-20: **MCP configuration & Brave Search** - Fixed fundamental misunderstanding of MCP structure in Claude Code. Learned ALL MCP config lives in `~/.claude.json` at three levels (user/local/project), not separate `.mcp.json` files. Added Brave Search MCP to user-level configuration. Fixed permission issues - added patterns for `git -C:*` and `mkdir -p:*` to prevent /save and /log prompts.
 - 2026-01-20: **`/claude-web-extract` command** COMPLETED - Implemented user-friendly guided workflow that wraps the claude-web-extractor tool. Provides 6-step process: environment validation, search criteria gathering (with keyword guidance), search execution, manual review pause (human judgment required), review verification and extraction, results summary. Smart default output directory (`./Claude.ai Chats/`), extensive error handling, prominent "GOOD vs. BAD keywords" guidance. Follows patterns from `/export-session` and `/podcast-extract`. Created `~/.claude/commands/claude-web-extract.md`.
