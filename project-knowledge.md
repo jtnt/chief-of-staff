@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 03:32 PM EST
+**Last Updated:** 2026-01-20 04:13 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -59,6 +59,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - **Proactive knowledge capture** - session-context.md for recovery, immediate p-k.md updates for significant decisions (Chief of Staff only, testing before global rollout)
 - **Log restructure complete** - Logs live WITH projects in `logs/` folders, not in Chief of Staff
 - **Claude.ai conversation extraction tool** - Complete toolset for extracting and organizing Claude.ai conversations from data exports (search, review, extract workflows)
+- **`/claude-web-extract` command** - User-friendly guided workflow wrapping the extraction tool (6-step process with validation, keyword guidance, manual review pause)
 
 ---
 
@@ -90,6 +91,12 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: `/claude-web-extract` Command
+
+Implemented user-friendly guided workflow command that wraps the claude-web-extractor tool. Provides 6-step process: environment validation, search criteria gathering (with keyword guidance), search execution, manual review pause (human judgment required), review verification and extraction, results summary. Key features include smart default output directory (`./Claude.ai Chats/`), extensive error handling, prominent "GOOD vs. BAD keywords" guidance (proper names/specific events work best), clear pause at manual review step, and reusability notes for confirmed_uuids.txt. Follows established patterns from `/export-session` and `/podcast-extract`.
+
+Created: `~/.claude/commands/claude-web-extract.md` (10.5 KB)
 
 ### 2026-01-20: Claude.ai Conversation Extraction Tool
 

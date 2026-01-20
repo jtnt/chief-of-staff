@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 03:32 PM EST
+**Last Updated:** 2026-01-20 04:13 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -375,7 +375,7 @@ Structured conversation library extracted from Claude.ai conversations documenti
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-20 (Claude.ai conversation extraction tool)
+**Last synced:** 2026-01-20 (`/claude-web-extract` command)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -388,8 +388,10 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - Proactive knowledge capture via session-context.md (testing in CoS only)
 - **Transcription workflow optimized:** Using mlx-whisper with medium model for Mac Silicon
 - **Claude.ai conversation extraction tool:** Complete toolset at `Tools/claude-web-extractor/`
+- **`/claude-web-extract` command:** User-friendly guided workflow wrapping the extraction tool
 
 **Recent Work:**
+- 2026-01-20: **`/claude-web-extract` command** COMPLETED - Implemented user-friendly guided workflow that wraps the claude-web-extractor tool. Provides 6-step process: environment validation, search criteria gathering (with keyword guidance), search execution, manual review pause (human judgment required), review verification and extraction, results summary. Smart default output directory (`./Claude.ai Chats/`), extensive error handling, prominent "GOOD vs. BAD keywords" guidance. Follows patterns from `/export-session` and `/podcast-extract`. Created `~/.claude/commands/claude-web-extract.md`.
 - 2026-01-20: **Claude.ai conversation extraction tool** COMPLETED - Built three CLI tools (find, review, extract) for organizing Claude.ai conversations from data exports. Memory-efficient streaming handles 100MB+ files, confidence scoring for keyword search, comprehensive documentation. Addresses fundamental export limitation (no project-conversation mapping) with 80-95% automated discovery + manual review. Validated on SalesIntel data (15 conversations, 470 messages, zero failures).
 - 2026-01-20: **Status line + permission fixes** - Investigated context percentage discrepancy (status line vs compaction warnings), discovered they measure different things (Claude Code limitation). Added missing global permissions for /log and /save commands (mkdir, pwd, date, git diff/log, sync script).
 - 2026-01-20: **Settings cleanup and writing standards** - Fixed malformed permission pattern in settings.local.json (125→68 entries). Updated global CLAUDE.md Writing Style section to reference new standards at `/Users/jtnt/Documents/Projects/Writing/Standards/`.
