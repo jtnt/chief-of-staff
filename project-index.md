@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 12:20 PM EST
+**Last Updated:** 2026-01-20 01:52 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -310,6 +310,53 @@ V1 MVP is functional with two working document types:
 - [ ] LTA technical translation bullet: Craft right phrasing
 - [ ] Ultramarathon phrasing: Naturally incorporate balance/consistency phrase
 - [ ] Delete Filing Cabinet/ once confirmed all materials are accessible
+
+---
+
+### SalesIntel
+**Status:** Active - Client Project
+**What it is:** AI training and consulting engagement with SalesIntel (B2B sales intelligence platform)
+**Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
+**Last synced:** 2026-01-20 (newly added)
+
+Structured conversation library extracted from Claude.ai conversations documenting complete 2.5-month engagement (Nov 2025 - Jan 2026). 15 conversations (470 messages) organized into searchable markdown format with thematic synthesis documents.
+
+**Engagement Evolution:**
+1. Initial lunch & learn presentation (Dec 2025)
+2. Post-session proposal for expanded work ($18.4k Q1: training + governance + advisory)
+3. Pivot to use-case driven sprint model at CEO's direction
+4. SKO build sprint delivered (Jan 2026) - 3 teams built AI workflows in 10 days
+5. Successful SKO session - "everyone's minds racing" on additional AI applications
+
+**Key Stakeholders:**
+- **Manoj Ramnani (CEO):** Initial contact, relationship development, contract negotiation
+- **Mike Levy (CRO):** Primary sponsor, discovery calls, SKO participation
+- **GTM Team:** ~30-40 people (BDRs, AEs, AMs, CS reps)
+
+**Conversation Library Structure:**
+- 15 individual conversation markdown files (date-first naming)
+- 4 thematic synthesis documents (Planning & Discovery, Lunch & Learn Delivery, Engagement Expansion, Service Development)
+- Master index with navigation and search capabilities
+- Reusable Python extraction script for future projects
+
+**Recent Work:**
+- 2026-01-20: **Conversation library extraction** COMPLETED
+  - Extracted 15 conversations from Claude.ai data export (143MB, 453 total conversations)
+  - Created searchable markdown library with YAML front matter, themes, timestamps
+  - Wrote 4 synthesis documents analyzing patterns across project phases
+  - Documented reusable extraction process for future project archives
+  - All files: `/Claude.ai Chats/` subdirectory
+
+**Key Insights from Engagement:**
+- Workflow build sprint model emerged as productizable Razzo offering
+- TaCO Framework evolved from content creation to GTM workflow prompts
+- "75% useful = success" design principle validated through sprint
+- Use-case driven learning (hands-on building) beats traditional training
+- Fast iteration competitive advantage: 14 days negotiation → delivery → expansion
+
+**Open Items:**
+- Revenue intelligence platform project with Mike (separate track from main engagement)
+- Continued engagement signals - follow-up scheduled for broader AI adoption roadmap
 
 ---
 

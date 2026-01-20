@@ -44,3 +44,8 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/Job Search`
 - **Key files:** `CLAUDE.md`, `Toolkit/Profile/master-profile.md`, `Toolkit/Profile/achievements.md`
 - **Last synced:** 2026-01-20 (PostHog TAM v2→v3 revision planning)
+
+## SalesIntel
+- **Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
+- **Key files:** `Claude.ai Chats/index.md`, `Claude.ai Chats/extraction-process.md`, `Claude.ai Chats/synthesis-*.md`
+- **Last synced:** 2026-01-20 (newly added - conversation library extraction)
