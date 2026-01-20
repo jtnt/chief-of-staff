@@ -12,7 +12,7 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 ## Context Profile Framework
 - **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `Business/business-knowledge.md`, `Research/Industry Thinking.md`, `Working/contextos-analysis.md`
-- **Last synced:** 2026-01-17
+- **Last synced:** 2026-01-20
 
 ## LinkedIn My Posts Extractor
 - **Source:** `/Users/jtnt/Documents/Projects/linkedin-my-posts-extractor`

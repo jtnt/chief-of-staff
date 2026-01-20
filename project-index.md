@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 10:48 AM EST
+**Last Updated:** 2026-01-20 11:08 AM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -55,56 +55,52 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 ---
 
 ### Context Profile Framework
-**Status:** Active - R&D / Early Exploration
-**What it is:** Framework + done-for-you service for creating AI context libraries
+**Status:** Active - R&D / Product Direction
+**What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-15 ("Context is Everything" article finalized)
+**Last synced:** 2026-01-20 (Octave competitive intel + strategic positioning)
 
-**The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The service actually builds it for them.
+**The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
 **Current Strategic Direction:**
-- Manual MVP phase - validate with 3-5 companies before building software
+- **Product direction** (not service) - building toward a product for smaller businesses
+- **General-purpose** targeting smaller B2B ($5-25M) using standard AI chatbots (Claude, ChatGPT)
 - Creation friction is the primary barrier (not maintenance, not access)
-- Transformation over templates: converting raw content to structured knowledge is the value
-- Google Drive delivery with Claude Projects sync
 - Context as competitive advantage positioning - when everyone has same AI models, context quality becomes differentiation
 - Opinionated structure compounds intelligently - random accumulation doesn't compound, structured accumulation does
 
+**Key Positioning (clarified 2026-01-20):**
+CPF is **context infrastructure for general chatbots** - users work in Claude/ChatGPT, with context documents making those tools more effective. This is **adjacent to, not competitive with** point solutions like Octave (which is a direct-use GTM system where users work inside the tool).
+
 **Architecture Evolution:**
-The Context Infrastructure now has four distinct layers in the middle network:
+The Context Infrastructure has four distinct layers:
 1. **Knowledge Layer** - Raw facts, atomic concepts
 2. **Ontological Layer** - Relationships, what connects to what
 3. **Reasoning Layer** - Purpose, the why behind connections
 4. **Precedent Layer** - Decision traces (the "what vs. why" gap)
 
-**Key Recent Insight:** Agents don't just consume context—they CREATE decision traces by doing work. Each agent action adds to the precedent layer, building institutional memory that turns exceptions into searchable precedent.
+**Key Insight:** Agents don't just consume context—they CREATE decision traces by doing work.
 
-**Pricing:** $3,500-$5,000 for complete context library, delivered in ~1 week
-
-**Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; Context Library solves the creation friction that prevents applying what's learned.
+**Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-20: **Octave competitive intel + strategic positioning**
+  - Researched Octave (octavehq.com) as closest existing product to CPF vision
+  - Company: Zach & Julian (founders), $7.9M raised, 2,500+ GTM teams, $399-999/mo pricing
+  - Key insight: Octave is adjacent (direct-use GTM system), not competitive (CPF layers onto chatbots)
+  - Validates broader context infrastructure thesis without saturating our segment
+  - Full analysis: `project-knowledge.md` "Market Validation: Octave" section
 - 2026-01-17: **Writing folder migrated** - All CPF writing moved to central Writing project
-  - See `writing-refs.md` in CPF for index of related writing
-  - Writing now at `/Users/jtnt/Documents/Projects/Writing/Published/`
-- 2026-01-15: **"Context is Everything" article finalized** - Introduces CPF by showing gap between what people tell AI vs. what AI needs
-- 2026-01-14: **Context Profile benefits article (WIP)** - Four key value props
-- 2026-01-12: **Cowork hot takes post** - LinkedIn post tying file system access to CPF
-- 2026-01-10: **ContextOS Analysis** - Full analysis of gtm-context-os-quickstart (Jacob Dietle, taste.systems)
+- 2026-01-15: **"Context is Everything" article finalized**
+- 2026-01-10: **ContextOS Analysis** - Full analysis of gtm-context-os-quickstart
   - **Strategic insight:** "The value isn't just in structure—it's in opinionated structure that compounds intelligently"
-  - Full analysis: `Working/contextos-analysis.md`
-- 2026-01-09: Major conceptual update to architecture based on context graphs research
-- Research prompts developed: Company Context (v4), Industry Context (v2)
-- Testing with SalesIntel as testbed
 
 **Open Items:**
+- Is general-purpose the right bet, or should we pick a domain?
+- What's the right price point for smaller businesses? ($399/mo may be too high for our ICP)
+- What's our equivalent of Octave's "holy shit moment"?
 - How to implement atomic concepts in CPF without over-complicating?
-- Design constitutional documents for CPF service
-- Define clearer node type criteria or simplify
-- Should CPF structure be prescriptive or emergent? (agents discover vs. pre-defined)
-- How do we design for agent-created context? (bootstrap question)
-- Context as competitive advantage—positioning as feature vs. core message?
-- Develop remaining research prompts (Competitor Intelligence, Brand Voice, ICP Definition)
+- Should CPF structure be prescriptive or emergent?
 
 ---
 
