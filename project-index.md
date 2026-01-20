@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 11:08 AM EST
+**Last Updated:** 2026-01-20 12:20 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -322,7 +322,7 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-20 (Settings cleanup and writing standards)
+**Last synced:** 2026-01-20 (Status line investigation + permission fixes)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -336,6 +336,7 @@ V1 MVP is functional with two working document types:
 - **Transcription workflow optimized:** Using mlx-whisper with medium model for Mac Silicon
 
 **Recent Work:**
+- 2026-01-20: **Status line + permission fixes** - Investigated context percentage discrepancy (status line vs compaction warnings), discovered they measure different things (Claude Code limitation). Added missing global permissions for /log and /save commands (mkdir, pwd, date, git diff/log, sync script).
 - 2026-01-20: **Settings cleanup and writing standards** - Fixed malformed permission pattern in settings.local.json (125→68 entries). Updated global CLAUDE.md Writing Style section to reference new standards at `/Users/jtnt/Documents/Projects/Writing/Standards/`.
 - 2026-01-19: **Fixed project tracking system** - Added auto-tracking for new projects in /save, made sync conversation-driven (log → project-index.md), added CoS self-tracking, simplified sync script, added Job Search to tracking
 - 2026-01-16: **Transcription workflow optimization**

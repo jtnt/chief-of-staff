@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 10:48 AM EST
+**Last Updated:** 2026-01-20 12:20 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -89,6 +89,20 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: Status Line Investigation + Permission Fixes
+
+**Part 3: Status line context percentage discrepancy**
+- User reported status line showing 79% while warnings said only 8% remaining
+- Investigated available fields: `used_percentage` (cumulative), `current_usage.input_tokens` (last call only), `total_input_tokens`
+- Discovered these measure fundamentally different things - no field matches compaction warnings
+- Reverted to `used_percentage` after testing alternatives (0% with current_usage, partial with total_input)
+- **Conclusion:** This is a Claude Code limitation, not fixable with available fields
+
+**Part 4: Added missing global permissions**
+- /log and /save commands were still prompting for mkdir, git, date commands
+- Added to `~/.claude/settings.json`: mkdir, pwd, date, git diff, git log, sync-to-cos.sh
+- Reviewed sync-to-cos.sh for safety (confirmed safe: just git operations scoped to CoS repo)
 
 ### 2026-01-20: Settings Cleanup and Writing Standards
 
