@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 04:49 PM EST
+**Last Updated:** 2026-01-20 05:07 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -92,6 +92,12 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: File Versioning Policy & /save Permissions
+
+1. **Added File Editing Policy to global CLAUDE.md** - New section specifying when revising markdown files, create new versions with version numbers (e.g., `document-v2.md`) rather than editing in place. Edit-in-place only when explicitly instructed.
+
+2. **Fixed /save permission prompts** - The `allowedTools` frontmatter in commands doesn't actually grant permissions - those must be in global `settings.json`. Added Edit permissions for Chief of Staff files (`project-index.md`, `project-sources.md`, `project-knowledge.md`) and Write permission for `logs/**` so `/save` from other projects can update CoS without prompting.
 
 ### 2026-01-20: MCP Configuration & Brave Search
 
