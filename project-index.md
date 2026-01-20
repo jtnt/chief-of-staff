@@ -261,7 +261,7 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Personal
 **What it is:** Personal job search toolkit with workflow-optimized materials and processes
 **Source:** `/Users/jtnt/Documents/Projects/Job Search`
-**Last synced:** 2026-01-20 (PostHog TAM v9 holistic fixes)
+**Last synced:** 2026-01-20 (PostHog TAM v10 planning - failed)
 
 **Context:** Laid off March 2025; building Razzo AI consulting while also exploring job opportunities. 51 years old, 25+ years across B2B and DTC, agency and in-house. C-suite experience (CEO, CMO, CTO, CRO roles).
 
@@ -289,29 +289,22 @@ V1 MVP is functional with two working document types:
 4. SaaS/Tech
 
 **Recent Work:**
+- 2026-01-20: **PostHog TAM v10 planning - FAILED**
+  - v9 feedback: still no story, still uses em dashes, not holistic
+  - Read all context (job description, career narrative, master profile, writing standards)
+  - Proposed bridge sentence + new close, but user correctly identified it as word shuffling
+  - "This is just the same bullshit as before" - incremental changes don't equal genuine rethinking
+  - **Needs fundamentally different approach, not more iterations**
 - 2026-01-20: **PostHog TAM v9 holistic fixes**
-  - Addressed feedback that v8 edits were myopic/piecemeal by taking story-driven approach
-  - Summary now tells connected story: C-suite breadth → technical foundation → complete flip → no-playbook pattern
-  - Four changes: C-suite order (CTO first), "websites and digital products", added business leaders flip, fixed Razzo tense
-  - Created `Toolkit/Active/PostHog - TAM/J Nicholas Tolson Resume 2026 PostHog v9.md`
-- 2026-01-20: **PostHog TAM v2→v3 revision planning**
-  - Created v2 files from initial plan, received detailed feedback
-  - Researched latest resume and cover letter best practices (2025-2026)
-  - Key corrections needed: "18 years" is wrong (career is 28+ years), em dashes, odd specifics
-  - Created comprehensive v3 plan addressing all feedback
+  - Four changes made but failed to create actual story structure
+  - Em dashes still present (violates writing standards)
 - 2026-01-19 (evening): **PostHog TAM application planning**
-  - Analyzed job fit: Art school → programmer → managing dev/product teams matches their "technical enough" requirement
-  - Key differentiator: Cor feature flags/A/B testing experience + currently a PostHog customer
-  - Initial plan executed, created v2 materials
+  - Analyzed job fit, created initial materials
 - 2026-01-19: **Toolkit reorganization COMPLETE**
-  - Transformed Filing Cabinet from storage archive to workflow-optimized Toolkit
-  - Migrated 148 files → 163 files (new synthesis docs created)
-  - Created 7 new synthesis documents
 
 **Open Items:**
-- [ ] Cover letter ending: Need to determine best approach from three options
-- [ ] LTA technical translation bullet: Craft right phrasing
-- [ ] Ultramarathon phrasing: Naturally incorporate balance/consistency phrase
+- [ ] **BLOCKED: PostHog TAM summary** - needs complete rethink, not more word shuffling
+- [ ] Cover letter ending: Need to determine best approach
 - [ ] Delete Filing Cabinet/ once confirmed all materials are accessible
 
 ---
