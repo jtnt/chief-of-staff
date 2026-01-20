@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-19 09:44 PM EST
+**Last Updated:** 2026-01-19 10:25 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -293,6 +293,12 @@ V1 MVP is functional with two working document types:
 4. SaaS/Tech
 
 **Recent Work:**
+- 2026-01-19 (evening): **PostHog TAM application planning**
+  - Analyzed job fit: Art school → programmer → 18 years managing dev/product teams matches their "technical enough" requirement
+  - Key differentiator: Cor feature flags/A/B testing experience + currently a PostHog customer
+  - Full application plan saved at `~/.claude/plans/proud-wishing-lake.md`
+  - Deliverables: Complete resume rework, cover letter (casual/weird tone), two versions of "sold to engineers" answer
+  - Ready to execute tomorrow
 - 2026-01-19: **Toolkit reorganization COMPLETE**
   - Transformed Filing Cabinet from storage archive to workflow-optimized Toolkit
   - Migrated 148 files → 163 files (new synthesis docs created)
@@ -300,7 +306,7 @@ V1 MVP is functional with two working document types:
   - Updated CLAUDE.md with comprehensive job search context and workflows
 
 **Open Items:**
-- [ ] Test workflow with a real job posting to verify findability
+- [ ] **NEXT:** Execute PostHog TAM application (plan at `~/.claude/plans/proud-wishing-lake.md`)
 - [ ] Delete Filing Cabinet/ once confirmed all materials are accessible
 - [ ] Update contact info placeholders in master-profile.md
 

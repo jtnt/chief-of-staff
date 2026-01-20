@@ -43,4 +43,4 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 ## Job Search
 - **Source:** `/Users/jtnt/Documents/Projects/Job Search`
 - **Key files:** `CLAUDE.md`, `Toolkit/Profile/master-profile.md`, `Toolkit/Profile/achievements.md`
-- **Last synced:** 2026-01-19 (Toolkit reorganization complete)
+- **Last synced:** 2026-01-19 (PostHog TAM application planning)

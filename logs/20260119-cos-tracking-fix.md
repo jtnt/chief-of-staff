@@ -1,6 +1,6 @@
 # Chief of Staff: Session Log
 
-**Date:** 2026-01-19 09:49 PM EST (updated 10:03 PM)
+**Date:** 2026-01-19 09:49 PM EST (final 10:24 PM)
 **Session Type:** meta-work
 
 ## What Was Done
@@ -20,6 +20,8 @@ Fixed the Chief of Staff project tracking system which had three interconnected 
 6. **Added "No Empty Promises" principle to global CLAUDE.md** - When corrected on behavior, don't say "I'll do X going forward" without saving the preference. Either the instruction exists (acknowledge violation) or it doesn't (add it to CLAUDE.md).
 
 7. **Strengthened git `-C` instruction** - Made the "Working Across Repositories" section more prominent with CRITICAL label, explicit correct/wrong examples, since the existing instruction was violated.
+
+8. **Added `Bash(git -C:*)` to /save allowedTools** - So /save runs without prompting for permission when using `git -C` commands.
 
 ## Key Decisions
 
