@@ -47,5 +47,5 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 
 ## SalesIntel
 - **Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
-- **Key files:** `CLAUDE.md`, `Claude.ai Chats/index.md`, `Sales Intelligence Platform/Sales Intelligence Platform Eval Criteria.md`
-- **Last synced:** 2026-01-20 (CLAUDE.md created)
+- **Key files:** `CLAUDE.md`, `Claude.ai Chats/index.md`, `Sales Intelligence Platform/CRO-Recommendation-Summary.md`
+- **Last synced:** 2026-01-20 (CRO platform recommendation finalized)

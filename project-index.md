@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 04:13 PM EST
+**Last Updated:** 2026-01-20 04:43 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -317,7 +317,7 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Client Project
 **What it is:** AI training and consulting engagement with SalesIntel (B2B sales intelligence platform)
 **Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
-**Last synced:** 2026-01-20 (newly added)
+**Last synced:** 2026-01-20 (CRO platform recommendation with validated data)
 
 Structured conversation library extracted from Claude.ai conversations documenting complete 2.5-month engagement (Nov 2025 - Jan 2026). 15 conversations (470 messages) organized into searchable markdown format with thematic synthesis documents.
 
@@ -340,13 +340,14 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - Reusable Python extraction script for future projects
 
 **Recent Work:**
-- 2026-01-20: **CLAUDE.md created** - Project initialization for Claude Code with engagement context, directory structure, navigation guidance, and key files for ongoing platform evaluation work
+- 2026-01-20: **CRO platform recommendation finalized** with validated data
+  - Top 3 platforms: Momentum.io (recommended), Sybill.ai (best conversational AI), RevenueGrid (Salesforce-native)
+  - Critical price correction: Momentum.io $7-17k (not $20-24k) - now well under budget
+  - Sybill.ai Outreach integration downgraded to "not found" (significant gap)
+  - Created Validation-Notes.md documenting all corrections and sources
+  - Deliverable: `Sales Intelligence Platform/CRO-Recommendation-Summary.md`
+- 2026-01-20: **CLAUDE.md created** - Project initialization for Claude Code
 - 2026-01-20: **Conversation library extraction** COMPLETED
-  - Extracted 15 conversations from Claude.ai data export (143MB, 453 total conversations)
-  - Created searchable markdown library with YAML front matter, themes, timestamps
-  - Wrote 4 synthesis documents analyzing patterns across project phases
-  - Extraction tooling moved to separate project (Chief of Staff `Tools/claude-web-extractor/`)
-  - All conversation files: `/Claude.ai Chats/` subdirectory
 
 **Key Insights from Engagement:**
 - Workflow build sprint model emerged as productizable Razzo offering
@@ -356,7 +357,8 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - Fast iteration competitive advantage: 14 days negotiation → delivery → expansion
 
 **Open Items:**
-- Revenue intelligence platform project with Mike (separate track from main engagement)
+- Mike to demo Momentum.io (confirm Executive Briefs match CRO use case)
+- If Sybill interests Mike, need explicit vendor confirmation of Outreach capabilities
 - Continued engagement signals - follow-up scheduled for broader AI adoption roadmap
 
 ---
