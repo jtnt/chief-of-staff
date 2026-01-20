@@ -1,6 +1,6 @@
 # Chief of Staff: Session Log
 
-**Date:** 2026-01-19 09:49 PM EST
+**Date:** 2026-01-19 09:49 PM EST (updated 10:03 PM)
 **Session Type:** meta-work
 
 ## What Was Done
@@ -17,6 +17,10 @@ Fixed the Chief of Staff project tracking system which had three interconnected 
 
 5. **Added Job Search to tracking** - Added the new project to both project-sources.md and project-index.md with full details extracted from its CLAUDE.md.
 
+6. **Added "No Empty Promises" principle to global CLAUDE.md** - When corrected on behavior, don't say "I'll do X going forward" without saving the preference. Either the instruction exists (acknowledge violation) or it doesn't (add it to CLAUDE.md).
+
+7. **Strengthened git `-C` instruction** - Made the "Working Across Repositories" section more prominent with CRITICAL label, explicit correct/wrong examples, since the existing instruction was violated.
+
 ## Key Decisions
 
 - **Conversation → log → project-index.md pipeline**: The log entry IS the intelligence. Claude reads it to update tracking files, ensuring meaningful content flows through rather than just timestamps.
@@ -32,6 +36,8 @@ Files modified:
 - `~/.claude/scripts/sync-to-cos.sh` - Simplified to just git operations
 - `/Users/jtnt/Documents/Projects/Chief of Staff/project-sources.md` - Added Job Search entry
 - `/Users/jtnt/Documents/Projects/Chief of Staff/project-index.md` - Added Job Search entry, updated Last Updated date
+- `/Users/jtnt/Documents/Projects/Chief of Staff/project-knowledge.md` - Added recent work entry for tracking fix
+- `~/.claude/CLAUDE.md` - Added "No Empty Promises" core principle, strengthened git -C instruction
 
 ## Open Items
 
