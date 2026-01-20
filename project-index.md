@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-20 04:49 PM EST
+**Last Updated:** 2026-01-20 05:00 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -317,7 +317,7 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Client Project
 **What it is:** AI training and consulting engagement with SalesIntel (B2B sales intelligence platform)
 **Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
-**Last synced:** 2026-01-20 (CRO platform recommendation with validated data)
+**Last synced:** 2026-01-20 (v2 Brave Search validation)
 
 Structured conversation library extracted from Claude.ai conversations documenting complete 2.5-month engagement (Nov 2025 - Jan 2026). 15 conversations (470 messages) organized into searchable markdown format with thematic synthesis documents.
 
@@ -340,6 +340,12 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - Reusable Python extraction script for future projects
 
 **Recent Work:**
+- 2026-01-20: **v2 validated recommendation** - Brave Search validation of all research
+  - **Critical Oliv.ai pricing error found:** Deal Driver is $199/mo (not $49) - removes from budget consideration
+  - Sybill corrected to $79/mo (not $90)
+  - Momentum Outreach integration reconfirmed as native
+  - Created v2 deliverables: `CRO-Recommendation-Summary-v2.md`, `Validation-Notes-v2.md`
+  - Added validation notes to all 6 research files
 - 2026-01-20: **CRO platform recommendation finalized** with validated data
   - Top 3 platforms: Momentum.io (recommended), Sybill.ai (best conversational AI), RevenueGrid (Salesforce-native)
   - Critical price correction: Momentum.io $7-17k (not $20-24k) - now well under budget
