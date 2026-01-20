@@ -320,7 +320,7 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-16 (Transcription workflow optimization)
+**Last synced:** 2026-01-19 (Fixed project tracking system)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -334,6 +334,7 @@ V1 MVP is functional with two working document types:
 - **Transcription workflow optimized:** Using mlx-whisper with medium model for Mac Silicon
 
 **Recent Work:**
+- 2026-01-19: **Fixed project tracking system** - Added auto-tracking for new projects in /save, made sync conversation-driven (log → project-index.md), added CoS self-tracking, simplified sync script, added Job Search to tracking
 - 2026-01-16: **Transcription workflow optimization**
   - Tested mlx-whisper performance across 5 model sizes (tiny through large)
   - Compared accuracy on medical terminology and technical terms

@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-17 08:21 AM EST
+**Last Updated:** 2026-01-19 09:49 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -89,6 +89,22 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-19: Fixed Project Tracking System
+
+**Problem:** The CoS tracking system was broken in three ways:
+1. `/save` didn't auto-track new projects (only `/log` did)
+2. Sync only updated timestamps, not actual project content
+3. CoS work itself wasn't tracked because "CoS doesn't sync to itself"
+
+**Solution:**
+- Added Step 0 to `/save` for auto-tracking new projects
+- Made sync conversation-driven: log entry → project-index.md content updates
+- Added CoS self-tracking: `/save` in CoS now updates project-knowledge.md
+- Simplified sync-to-cos.sh to just git operations (Claude handles content)
+- Added Job Search project to tracking
+
+**Key design insight:** The log entry IS the intelligence. Claude reads it to update tracking files with meaningful content rather than just timestamps.
 
 ### 2026-01-17: Simplified Project Workflow System
 
