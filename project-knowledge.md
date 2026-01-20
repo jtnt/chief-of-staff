@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-19 09:49 PM EST
+**Last Updated:** 2026-01-20 10:48 AM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -89,6 +89,21 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-20: Settings Cleanup and Writing Standards
+
+**Part 1: Fixed malformed permission pattern**
+- `.claude/settings.local.json` had a malformed multi-line commit message that broke Claude Code startup
+- Cleaned up and reorganized: 125 entries → 68 entries
+- Removed all accumulated one-time commit permissions
+- Organized into logical groups: Web, Git, Bash, Skills, MCP tools
+- Added general `Bash(git -C *:*)` pattern for cross-repo operations
+
+**Part 2: Updated global Writing Style section**
+- User added writing standards at `/Users/jtnt/Documents/Projects/Writing/Standards/`
+- Three files: elements-of-style.md, write-like-you-talk.md, dont-sound-like-ai.md
+- Updated `~/.claude/CLAUDE.md` Writing Style section to apply to ALL writing tasks
+- Key rules embedded inline for quick reference
 
 ### 2026-01-19: Fixed Project Tracking System
 
