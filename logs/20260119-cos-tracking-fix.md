@@ -23,6 +23,8 @@ Fixed the Chief of Staff project tracking system which had three interconnected 
 
 8. **Added `Bash(git -C:*)` to /save allowedTools** - So /save runs without prompting for permission when using `git -C` commands.
 
+9. **Fixed `mkdir` permission pattern** - Changed `Bash(mkdir -p ./logs)` to `Bash(mkdir:*)` in both /log and /save since exact match wasn't working.
+
 ## Key Decisions
 
 - **Conversation → log → project-index.md pipeline**: The log entry IS the intelligence. Claude reads it to update tracking files, ensuring meaningful content flows through rather than just timestamps.
