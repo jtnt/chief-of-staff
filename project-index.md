@@ -13,7 +13,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/Razzo`
-**Last synced:** 2026-01-15 (Context Profile Framework landing page)
+**Last synced:** 2026-01-20 (GTM-focused post update)
 
 **Current Strategic Direction:**
 The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
@@ -29,6 +29,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 - Context Profile Framework: landing page + waitlist for app (NEW)
 
 **Recent Work:**
+- 2026-01-20: **GTM-focused post update** - Updated LinkedIn post about AI productivity-to-innovation cycle to include sales and customer success elements. Added parallel GTM track showing how AI insights feed sales intelligence (objection handling, discovery questions) and customer success (expansion opportunities, training gaps). Created image generation prompt for updated graphic.
 - 2026-01-15: **Context Profile Framework landing page** COMPLETED
   - New page at `/context-profile-framework/` to introduce CPF and capture app waitlist signups
   - Headline: "Capture What AI Needs to Know About Your Business"
