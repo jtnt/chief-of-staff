@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-21 05:41 PM EST
+**Last Updated:** 2026-01-21 06:12 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -93,6 +93,16 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-21: Claude Code Feature Analysis
+
+Analyzed Claude Code feature usage to identify underutilized capabilities. Key findings:
+- SessionStart hook for auto-sync is described in CLAUDE.md but not implemented
+- Extended thinking (`Option+T`), plan mode (`Shift+Tab`), and session naming not being used
+- Path-specific rules (`~/.claude/rules/`) not configured
+- Custom agents folder was occupied by leftover GSD framework files (removed)
+
+Created reference document at `Resources/Claude Code/underused-features.md` with prioritized recommendations. User most interested in Extended Thinking for strategic analysis work.
 
 ### 2026-01-21: Humanizer Integration
 
