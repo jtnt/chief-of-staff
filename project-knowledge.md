@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-20 06:03 PM EST
+**Last Updated:** 2026-01-21 05:41 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -93,6 +93,18 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-21: Humanizer Integration
+
+Integrated humanizer patterns into the writing system so they inform writing inline (not just as post-process cleanup):
+
+1. **Replaced `dont-sound-like-ai.md`** with enhanced version (404 lines, up from 147) - Added "Personality and Soul" section, merged all 24 patterns from blader/humanizer (based on Wikipedia AI Cleanup), preserved unique LinkedIn-bro patterns
+
+2. **Updated global CLAUDE.md writing section** - Added "The soul principle (most important)" with five key points: have opinions, vary rhythm, acknowledge complexity, use "I", be specific about feelings
+
+3. **Created `/humanize` command** - Full standalone command for explicit post-draft cleanup when wanted
+
+Key insight: Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as obvious as slop. Good writing has a human behind it.
 
 ### 2026-01-20: MCP Configuration Consolidation
 
