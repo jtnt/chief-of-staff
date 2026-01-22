@@ -48,13 +48,19 @@ echo '{"mode": "status", "processed_meetings_path": "/Users/jtnt/.claude/data/pr
 
 **Part A: Recently processed meetings (last 24h)**
 - From the script output `recently_processed` array
-- For each: show 1-line summary and any open follow-ups
+- For each meeting, show:
+  - Meeting title and date
+  - `one_line_summary` field (the key takeaway)
+  - Any open follow-ups from `follow_ups` array where `status == "open"`
+- Group by date (Yesterday, Today, etc.)
 - Skip this section if empty
 
 **Part B: Unprocessed meetings (last 7 days)**
-- From the script output `unprocessed` array
+- From the script output `unprocessed` array (these have transcripts but no summaries)
 - If any exist, note count and suggest running `/meeting-review`
 - Skip this section if empty
+
+**Note:** The script now filters out future events automatically - only past meetings appear.
 
 **Step 5: Format strategic briefing**
 
@@ -87,12 +93,15 @@ Last P0 content: N days ago - "[Title]" ([Project])
 
 ## Recent Meetings
 **Yesterday:**
-• "[Meeting title]" - [one-line summary]
-  ↳ Follow-up: [action item if any]
+• "[Meeting title]" ([project]) - [one_line_summary from processed-meetings.json]
+  ↳ Open: [action item from follow_ups where status="open"]
+• "[Meeting title]" - [one_line_summary]
 
-📋 **Unprocessed:** N meetings without summaries
+**Earlier this week:**
+• "[Meeting title]" (Mon) - [one_line_summary]
+
+📋 **Unprocessed:** N meetings need review
 - [Date]: "[Title]" (has transcript)
-- [Date]: "[Title]"
 💡 Run `/meeting-review` to process
 
 ---
@@ -115,8 +124,9 @@ What would you like to focus on?
 - Meta-work ≤30%: Omit the meta-work footnote entirely
 - All projects active and healthy: Keep it brief, focus on what's next
 - No recent meetings processed AND no unprocessed: Omit "Recent Meetings" section entirely
-- Only unprocessed meetings (no recent processed): Show only the "Unprocessed" part
-- Only recently processed (no unprocessed): Show only the summary with follow-ups
+- Only unprocessed meetings (no recent processed): Show only the "Unprocessed" part with count
+- Only recently processed (no unprocessed): Show meetings with summaries, omit "Unprocessed" line
+- Meetings with open follow-ups: Always show the follow-up items prominently
 
 ### Quick References
 For deeper context when needed:
