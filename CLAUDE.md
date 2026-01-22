@@ -8,56 +8,84 @@ This is a personal Chief of Staff system - a knowledge management and strategic 
 
 ## Session Start
 
-### CRITICAL: Morning Briefing
+### CRITICAL: Strategic Morning Briefing
 
 **When you see `BRIEFING_REQUIRED` in session context:**
 
-Your FIRST response MUST be a morning briefing. Execute these steps:
+Your FIRST response MUST be a strategic briefing. A good Chief of Staff surfaces what matters, connects dots, and biases toward high-impact work.
 
 **Step 1: Fetch calendar**
 - Call `mcp__google-calendar__list-events` for BOTH `primary` and `nicholas@razzohq.com`
 - Time range: today 00:00 to 23:59, timezone America/New_York
 
-**Step 2: Read recent logs**
-- Read the files listed in "Recent logs:" from hook output (they're in `./logs/`)
-- Extract "What Was Done" section (summarize to 1-2 sentences per day)
-- Collect "Open Items" as follow-ups
+**Step 2: Assess ALL project health**
+- Read `project-sources.md` to get the list of tracked projects
+- For EACH project: use Glob tool (not Bash) to find logs, e.g., `Glob("[project-path]/logs/*.md")` - Glob returns files sorted by modification time
+- Read the most recent log file for each project to get status/blockers
+- **IMPORTANT:** Use Glob and Read tools only - do NOT use Bash/ls commands (they require permission prompts)
+- Categorize projects:
+  - 🟢 **Active**: Activity in last 1-2 days, clear momentum
+  - 🟡 **Needs Attention**: Blocked, waiting on external response, decision needed, or stale (3+ days no activity)
+  - ⚪ **Stable**: Infrastructure/tools projects, no action needed
 
-**Step 3: Read inbox**
+**Step 3: Assess content/writing**
+- Use Glob to check `Writing/Published/**/*.md` for most recent P0-related content
+- Use Glob to check `Writing/Drafts/*.md` for anything in progress
+- Use Glob to check `Check-Ins/thoughts/*.md` for recent ideas
+- **IMPORTANT:** Use Glob and Read tools only - do NOT use Bash commands
+- If content gap >7 days or relevant ideas exist: suggest specific content opportunities
+
+**Step 4: Read inbox**
 - Read `cos-inbox.md`, extract items under "## Pending"
 
-**Step 4: Format and present briefing**
+**Step 5: Format strategic briefing**
 
 ```
 Good morning/afternoon/evening!
 
 ## Today's Calendar
 - [time] - [event summary]
-- [time] - [event summary]
 
-## Recent Work
-**Yesterday:** [1-2 sentence summary from log]
-**[Date]:** [1-2 sentence summary from log]
+## Project Health
+🟢 ACTIVE
+  • [Project] (yesterday): [1-line status from log]
+  • [Project] (yesterday): [1-line status]
 
-## Follow-Ups
-- [Open item from recent logs]
-- [Open item from recent logs]
+🟡 NEEDS ATTENTION
+  • [Project] (N days): [Blocker or waiting-on context]
+  • [Project] (N days): [Decision needed or stale reason]
+
+⚪ STABLE ([list project names])
+
+## Content & Writing
+Last P0 content: N days ago - "[Title]" ([Project])
+💡 Ready to develop:
+  • Ideas: [Recent thought title] (date), [Another idea] (date)
+📝 Suggest: [Specific content suggestion based on context]
 
 ## Inbox (N items)
 1. [First pending item]
 2. [Second pending item]
 
 ---
-📊 Meta-work at X% (target: 20%)
+📊 Meta-work at X% this week (target: 20%)
+↳ [Specific suggestion based on what needs attention]
 
 What would you like to focus on?
 ```
 
+**Key principles:**
+- Surface blockers prominently with context
+- Connect dots: recent ideas → content opportunities, stale projects → nudges
+- Be specific: "Razzo sprint content" not "revenue work"
+- Suggest, don't just report: "Consider finishing that draft" vs "Last writing 7 days ago"
+
 **Edge cases:**
-- No calendar events today: Show "No events scheduled"
-- No recent logs found: Show "No recent sessions logged"
+- No calendar events: Show "No events scheduled"
+- No recent logs for a project: Categorize as 🟡 Needs Attention with "(no recent logs)"
 - Empty inbox: Show "Inbox clear"
 - Meta-work ≤30%: Omit the meta-work footnote entirely
+- All projects active and healthy: Keep it brief, focus on what's next
 
 ### Quick References
 For deeper context when needed:
@@ -69,9 +97,9 @@ For deeper context when needed:
 The SessionStart hook injects `BRIEFING_REQUIRED` along with:
 - Pre-calculated meta-work ratio
 - Inbox item count
-- List of recent log filenames (last 2 days)
+- List of recent CoS log filenames (last 2 days)
 
-You must fetch calendar via MCP and read the log files yourself.
+You must fetch calendar via MCP and read project data yourself (more flexible, allows context).
 
 **Consider Auto-Sync** - If projects may have changed since last sync, offer to sync or proceed based on user's initial request.
 
@@ -328,10 +356,17 @@ Recognize check-in intent from natural language and offer to capture appropriate
 - Response: Offer to do evening check-in or proceed directly
 
 **Thoughts** - Triggered by:
-- "Random thought" / "Quick note" / "Here's a link" / sharing a quote or article
-- User pastes a URL or shares something brief and standalone
+- "Random thought" / "Quick note" / sharing a quote or personal idea
+- Anything that sparked an idea, relates to current projects, or could become content
 - Response: Capture as a thought or confirm: "Sounds like a thought. Want me to save this?"
 - **Filename convention:** Use descriptive filenames that will be searchable and distinguishable later (e.g., `20260114-maven-ai-product-sense-vibe-code-personal-os.md` not `20260114-maven-course.md`). Include enough detail to differentiate from similar items.
+
+**Links** - When user shares a URL:
+- Assess the content type and propose the right destination:
+  - **Thoughts** - Ideas, inspiration, content seeds, things related to active projects
+  - **Resources** - Reference materials, guides, documentation, how-to articles for later use
+- Propose destination with brief rationale and ask for confirmation
+- Example: "This looks like a reference guide for CLAUDE.md structure - I'd put it in Resources/Claude Code/. Sound right?"
 
 **Journal entries** - Triggered by:
 - Extended personal reflection / "I've been thinking about..." / life musings
