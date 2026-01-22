@@ -38,6 +38,24 @@ Your FIRST response MUST be a strategic briefing. A good Chief of Staff surfaces
 **Step 4: Read inbox**
 - Read `cos-inbox.md`, extract items under "## Pending"
 
+**Step 4b: Check recent meetings**
+
+Run the meeting review script in status mode to check for unprocessed meetings:
+
+```bash
+echo '{"mode": "status", "processed_meetings_path": "/Users/jtnt/.claude/data/processed-meetings.json"}' | python3 ~/.claude/scripts/meeting-review.py
+```
+
+**Part A: Recently processed meetings (last 24h)**
+- From the script output `recently_processed` array
+- For each: show 1-line summary and any open follow-ups
+- Skip this section if empty
+
+**Part B: Unprocessed meetings (last 7 days)**
+- From the script output `unprocessed` array
+- If any exist, note count and suggest running `/meeting-review`
+- Skip this section if empty
+
 **Step 5: Format strategic briefing**
 
 ```
@@ -67,6 +85,16 @@ Last P0 content: N days ago - "[Title]" ([Project])
 1. [First pending item]
 2. [Second pending item]
 
+## Recent Meetings
+**Yesterday:**
+• "[Meeting title]" - [one-line summary]
+  ↳ Follow-up: [action item if any]
+
+📋 **Unprocessed:** N meetings without summaries
+- [Date]: "[Title]" (has transcript)
+- [Date]: "[Title]"
+💡 Run `/meeting-review` to process
+
 ---
 📊 Meta-work at X% this week (target: 20%)
 ↳ [Specific suggestion based on what needs attention]
@@ -86,6 +114,9 @@ What would you like to focus on?
 - Empty inbox: Show "Inbox clear"
 - Meta-work ≤30%: Omit the meta-work footnote entirely
 - All projects active and healthy: Keep it brief, focus on what's next
+- No recent meetings processed AND no unprocessed: Omit "Recent Meetings" section entirely
+- Only unprocessed meetings (no recent processed): Show only the "Unprocessed" part
+- Only recently processed (no unprocessed): Show only the summary with follow-ups
 
 ### Quick References
 For deeper context when needed:
@@ -381,6 +412,7 @@ Explicit commands are also available:
 - `/thought` - Quick thought capture
 - `/journal` - Personal journal entry
 - `/review-checkins` - Analyze check-ins for patterns and insights
+- `/meeting-review` - Review recent meetings, match with Granola transcripts, capture briefings
 
 ### Project Routing (Bidirectional Flow)
 

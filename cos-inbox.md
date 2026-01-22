@@ -6,6 +6,15 @@ Items for attention at session start.
 
 ## Pending
 
+### Follow-up: Nicholas & Ken intro call
+**Added:** 2026-01-22
+**Meeting date:** 2026-01-21
+
+- [ ] Exchange cell numbers and pet pictures with Ken
+- [ ] Schedule follow-up call (meeting ended abruptly)
+
+---
+
 ### Submit Claude Code Bug Report
 **Added:** 2026-01-22
 
