@@ -6,12 +6,15 @@ Items for attention at session start.
 
 ## Pending
 
-### Follow-up: Nicholas & Ken intro call
-**Added:** 2026-01-22
+### 2026-01-22 - Follow-ups from "Nicholas & Ken - intro + trade war stories"
+**Source:** Meeting review
 **Meeting date:** 2026-01-21
+**Attendees:** Nicholas Tolson, Ken (Meet Sona)
+**Context:** Introductory call with Ken from Meet Sona to explore AI sales enablement collaboration
 
-- [ ] Exchange cell numbers and pet pictures with Ken
-- [ ] Schedule follow-up call (meeting ended abruptly)
+- [ ] Ken to share Meet Sona platform demo/overview
+- [ ] Nicholas to share Razzo sprint framework details with Ken
+- [ ] Explore potential partnership models with Meet Sona (referral, integration, co-selling)
 
 ---
 
