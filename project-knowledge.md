@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-21 06:12 PM EST
+**Last Updated:** 2026-01-21 09:45 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -93,6 +93,18 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-21: Global CLAUDE.md Optimization
+
+Optimized global CLAUDE.md file from 275 lines to 90 lines (67% reduction) based on official best practices research. Applied progressive disclosure strategy: moved detailed workflows to `~/.claude/workflows/session-workflow.md` while preserving all essential behaviors in main file. Added "IMPORTANT:" emphasis to critical rules.
+
+**Key insight from research:** Frontier LLMs can follow ~150-200 instructions reliably. Claude Code's system prompt uses ~50, leaving limited budget for CLAUDE.md content. The 275-line file likely contained 100+ distinct instructions which could degrade instruction following.
+
+**Files created:**
+- `~/.claude/CLAUDE.md.backup-20260121` (backup)
+- `~/.claude/workflows/session-workflow.md` (detailed procedures)
+
+All CoS-related content stayed in global file since it's used by other projects (inbox check, /log and /save commands, session.md workflow, project-knowledge.md pattern).
 
 ### 2026-01-21: Claude Code Feature Analysis
 

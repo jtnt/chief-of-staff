@@ -311,6 +311,49 @@ V1 MVP is functional with two working document types:
 
 ---
 
+### Chatbot Linebreaker
+**Status:** Active - Personal Tool
+**What it is:** Chrome extension that swaps Enter/Shift+Enter behavior in AI chatbot interfaces to prevent accidental message submission
+**Source:** `/Users/jtnt/Documents/Projects/chatbot-linebreaker`
+**GitHub:** https://github.com/jtnt/chatbot-linebreaker
+**Last synced:** 2026-01-21 (initial build - Phases 1-3 complete)
+
+**Purpose:** Solve the "half-finished message submission" problem on Claude.ai, ChatGPT, and Gemini. Enter inserts newline (instead of submitting), Shift+Enter submits (instead of adding newline). Built with GSD workflow from scratch.
+
+**Current State:**
+- Manifest V3 Chrome extension working on all three platforms (claude.ai, chatgpt.com, gemini.google.com)
+- Keyboard swap functionality complete using universal shiftKey flip strategy
+- User controls: popup toggle UI with persistent state (chrome.storage.local)
+- Real-time toggle response without page refresh (storage.onChanged events)
+- Complete git history (42 commits) pushed to GitHub
+
+**Technical Implementation:**
+- **Keyboard interception:** Capture phase event handling with stopImmediatePropagation (required for ProseMirror)
+- **Platform detection:** Works identically across all three sites with zero platform-specific code
+- **Toggle architecture:** Storage-based synchronization (not message passing) with service worker initialization
+- **Key finding:** shiftKey flip strategy proved universal across contenteditable and textarea elements
+
+**Phases Completed (GSD workflow):**
+1. **Phase 1: Foundation** - Single-site proof of concept (skipped execution but functionality exists)
+2. **Phase 2: Multi-Site Core** - Extended to ChatGPT and Gemini (user verified all platforms)
+3. **Phase 3: State & Toggle** - User controls and persistence (user verified complete toggle flow)
+
+**Phase 4 Remaining:**
+- Badge indicator on extension icon showing ON/OFF status
+- Will use chrome.action.setBadgeText API
+- Simple visual feedback for user awareness
+
+**Recent Work:**
+- 2026-01-21: **Initial build session** - Completed project initialization through Phase 3 execution. Built complete extension with keyboard swap, multi-site support, and toggle controls. All work committed (42 commits) and pushed to GitHub. Session log documents full build process with decisions, technical findings, and performance metrics.
+
+**Open Items:**
+- Execute Phase 4 (badge indicator) to complete v1 roadmap
+- Run milestone audit to verify cross-phase integration
+- Optional: Verify Phase 1 requirements or mark complete based on working implementation
+- Consider: Chrome Web Store listing (currently out of scope)
+
+---
+
 ### SalesIntel
 **Status:** Active - Client Project
 **What it is:** AI training and consulting engagement with SalesIntel (B2B sales intelligence platform)
