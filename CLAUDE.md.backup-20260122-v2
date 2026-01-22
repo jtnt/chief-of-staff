@@ -8,70 +8,42 @@ This is a personal Chief of Staff system - a knowledge management and strategic 
 
 ## Session Start
 
-### CRITICAL: Morning Briefing
+### CRITICAL: First Response Behavior
 
-**When you see `BRIEFING_REQUIRED` in session context:**
+**When you see `GREETING_REQUIRED` in session context:**
 
-Your FIRST response MUST be a morning briefing. Execute these steps:
+Your FIRST response to the user MUST include:
 
-**Step 1: Fetch calendar**
-- Call `mcp__google-calendar__list-events` for BOTH `primary` and `nicholas@razzohq.com`
-- Time range: today 00:00 to 23:59, timezone America/New_York
+1. **Greeting** - "Good morning/afternoon/evening!"
+2. **Meta-work alert** - If meta-work >30%, show: "⚠️ META-WORK: X/Y sessions (Z%) — Target: 20%"
+3. **Pending items** - If inbox has items, list them briefly
+4. **Offer** - "Would you like to check on projects, do a morning check-in, or something else?"
 
-**Step 2: Read recent logs**
-- Read the files listed in "Recent logs:" from hook output (they're in `./logs/`)
-- Extract "What Was Done" section (summarize to 1-2 sentences per day)
-- Collect "Open Items" as follow-ups
+This is NOT optional. The hook pre-calculated the stats for you - just present them.
 
-**Step 3: Read inbox**
-- Read `cos-inbox.md`, extract items under "## Pending"
-
-**Step 4: Format and present briefing**
-
+**Example response:**
 ```
-Good morning/afternoon/evening!
+Good morning!
 
-## Today's Calendar
-- [time] - [event summary]
-- [time] - [event summary]
+⚠️ META-WORK: 46/51 sessions (90%) — Target: 20%
+Consider focusing on Razzo or CPF revenue work today.
 
-## Recent Work
-**Yesterday:** [1-2 sentence summary from log]
-**[Date]:** [1-2 sentence summary from log]
+📬 2 pending items:
+  • Submit Claude Code Bug Report
+  • Create Mythos/More Vang Post-Training Survey
 
-## Follow-Ups
-- [Open item from recent logs]
-- [Open item from recent logs]
-
-## Inbox (N items)
-1. [First pending item]
-2. [Second pending item]
-
----
-📊 Meta-work at X% (target: 20%)
-
-What would you like to focus on?
+Would you like to check on projects, do a morning check-in, or something else?
 ```
-
-**Edge cases:**
-- No calendar events today: Show "No events scheduled"
-- No recent logs found: Show "No recent sessions logged"
-- Empty inbox: Show "Inbox clear"
-- Meta-work ≤30%: Omit the meta-work footnote entirely
 
 ### Quick References
-For deeper context when needed:
+Always read these files for context:
 - **`project-knowledge.md`** - CoS system state, recent work, decisions
 - **`project-index.md`** - All tracked projects (status, summaries)
+- **`logs/` folders** - Primary source for understanding what happened (not git history)
 
 ### Hook-Triggered Behaviors
 
-The SessionStart hook injects `BRIEFING_REQUIRED` along with:
-- Pre-calculated meta-work ratio
-- Inbox item count
-- List of recent log filenames (last 2 days)
-
-You must fetch calendar via MCP and read the log files yourself.
+The SessionStart hook injects `GREETING_REQUIRED` along with pre-calculated stats. You don't need to calculate anything - just present what's provided.
 
 **Consider Auto-Sync** - If projects may have changed since last sync, offer to sync or proceed based on user's initial request.
 

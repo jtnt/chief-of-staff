@@ -6,6 +6,16 @@ Items for attention at session start.
 
 ## Pending
 
+### Submit Claude Code Bug Report
+**Added:** 2026-01-22
+
+Activity indicator hangs after response completes - timer keeps running, 0 tokens, messages queue. Workaround: press Escape.
+
+**Full report:** `Resources/claude-code-bug-report-20260122.md`
+**Submit to:** https://github.com/anthropics/claude-code/issues/new
+
+---
+
 ### Create Mythos/More Vang Post-Training Survey
 **Added:** 2026-01-18 06:51 PM EST
 

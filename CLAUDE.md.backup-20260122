@@ -6,74 +6,67 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal Chief of Staff system - a knowledge management and strategic planning repository, not a codebase. The purpose is to help the user track work across multiple projects, synthesize information, analyze patterns, and make strategic decisions.
 
-## Session Start
+## At the Start of Each Session
 
-### CRITICAL: Morning Briefing
+Always read these two files first:
+1. **`project-knowledge.md`** - About Chief of Staff itself (system state, recent CoS work, key decisions)
+2. **`project-index.md`** - Summaries of all tracked projects (status, recent work, open items)
 
-**When you see `BRIEFING_REQUIRED` in session context:**
+Together these maintain context across sessions.
 
-Your FIRST response MUST be a morning briefing. Execute these steps:
+### Logs Are the Primary Source
 
-**Step 1: Fetch calendar**
-- Call `mcp__google-calendar__list-events` for BOTH `primary` and `nicholas@razzohq.com`
-- Time range: today 00:00 to 23:59, timezone America/New_York
+**When analyzing recent work across projects, read the `logs/` folders first - not git history.**
 
-**Step 2: Read recent logs**
-- Read the files listed in "Recent logs:" from hook output (they're in `./logs/`)
-- Extract "What Was Done" section (summarize to 1-2 sentences per day)
-- Collect "Open Items" as follow-ups
+Logs capture what git commits don't: decisions, rationale, context, open items. Git commits are terse; logs are narrative. The whole point of maintaining logs is to use them.
 
-**Step 3: Read inbox**
-- Read `cos-inbox.md`, extract items under "## Pending"
+- To understand what happened in a project: read its `logs/` folder
+- To understand cross-project patterns: read logs from multiple projects
+- Git history is a fallback, not the primary source
 
-**Step 4: Format and present briefing**
+### Meta-Work Balance Check
 
+After reading those files, check the meta-work ratio from recent logs:
+
+1. List files in `logs/` folder from the last 7 days
+2. Read each log's `Session Type` field (if present)
+3. Count: project-work, meta-work, mixed, planning sessions
+4. Calculate: meta-work sessions / total sessions
+
+**If meta-work ratio > 30%, display warning:**
 ```
-Good morning/afternoon/evening!
-
-## Today's Calendar
-- [time] - [event summary]
-- [time] - [event summary]
-
-## Recent Work
-**Yesterday:** [1-2 sentence summary from log]
-**[Date]:** [1-2 sentence summary from log]
-
-## Follow-Ups
-- [Open item from recent logs]
-- [Open item from recent logs]
-
-## Inbox (N items)
-1. [First pending item]
-2. [Second pending item]
-
 ---
-📊 Meta-work at X% (target: 20%)
+META-WORK ALERT
 
-What would you like to focus on?
+Last 7 days: X of Y sessions were meta-work (Z%)
+Target: 20% meta-work
+
+The Chief of Staff system is working. Consider focusing on Razzo or CPF revenue work today.
+---
 ```
 
-**Edge cases:**
-- No calendar events today: Show "No events scheduled"
-- No recent logs found: Show "No recent sessions logged"
-- Empty inbox: Show "Inbox clear"
-- Meta-work ≤30%: Omit the meta-work footnote entirely
+**Notes:**
+- Logs without Session Type field = skip (don't count either way)
+- Mixed sessions count as 0.5 meta-work
+- Planning sessions are neutral (don't count toward ratio)
+- This is informational, not blocking - user decides what to do
 
-### Quick References
-For deeper context when needed:
-- **`project-knowledge.md`** - CoS system state, recent work, decisions
-- **`project-index.md`** - All tracked projects (status, summaries)
+### Auto-Sync on Session Start
 
-### Hook-Triggered Behaviors
+When a Chief of Staff session starts, a SessionStart hook injects the `AUTORUN_SYNC_ALL` flag via additionalContext.
 
-The SessionStart hook injects `BRIEFING_REQUIRED` along with:
-- Pre-calculated meta-work ratio
-- Inbox item count
-- List of recent log filenames (last 2 days)
+**When you see this flag in the session context:**
+1. Immediately (without asking) run the project sync workflow
+2. Read `project-sources.md` to get tracked projects
+3. For each project:
+   - Read git log since last sync
+   - Read key files
+   - Create dated sync entry in project's `logs/` folder
+   - Update Chief of Staff's project-index.md with summary
+4. Update "Last synced" dates in project-sources.md
+5. Provide brief summary: "Synced [N] projects: [names]"
 
-You must fetch calendar via MCP and read the log files yourself.
-
-**Consider Auto-Sync** - If projects may have changed since last sync, offer to sync or proceed based on user's initial request.
+This happens automatically - no user confirmation needed.
 
 ## Proactive Knowledge Capture
 
@@ -359,7 +352,7 @@ When check-in content relates to a tracked project:
 3. ALSO create log in project: `[ProjectName]/logs/YYYYMMDD-checkin-note.md` (keeps record with project)
 
 **When the user opens that project:**
-- SessionStart hook checks for `cos-inbox.md` and injects `COS_INBOX` flag
+- Global `~/.claude/CLAUDE.md` instructs Claude to check for `cos-inbox.md` at session start
 - Claude notifies: "You have X item(s) from Chief of Staff" and lists them
 - User decides what to do (act on, archive, discuss)
 
