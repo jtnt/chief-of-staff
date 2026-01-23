@@ -4,6 +4,16 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
+### 2026-01-22 - Test Meeting Review v7
+**Source:** Meta-work session
+**Context:** Implemented Sonnet model change for quality extraction
+
+- [ ] Run `/meeting-review` with 2-3 meetings to verify changes work
+- [ ] Confirm Sonnet model produces quality summaries
+- [ ] Check follow-up extraction works correctly
+
+---
+
 ### 2026-01-22 - Check out Sallam from "DC Founders Panel"
 **Source:** Meeting review
 **Meeting date:** 2026-01-22
