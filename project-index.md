@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-21 06:12 PM EST
+**Last Updated:** 2026-01-24 04:50 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-20 (Octave competitive intel + strategic positioning)
+**Last synced:** 2026-01-24 (Four-layer implementation guide + Chris McConnell meeting)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -78,14 +78,21 @@ CPF is **context infrastructure for general chatbots** - users work in Claude/Ch
 The Context Infrastructure has four distinct layers:
 1. **Knowledge Layer** - Raw facts, atomic concepts
 2. **Ontological Layer** - Relationships, what connects to what
-3. **Reasoning Layer** - Purpose, the why behind connections
-4. **Precedent Layer** - Decision traces (the "what vs. why" gap)
+3. **Reasoning Layer** - Purpose, the why behind connections (the rationale)
+4. **Precedent Layer** - Decision traces showing HOW decisions were made (trigger → context → options → evaluation → choice)
+
+**Key Distinction (clarified 2026-01-24):** Reasoning Layer is the "why" behind a decision; Precedent Layer is the full decision trace showing the path of reasoning.
 
 **Key Insight:** Agents don't just consume context—they CREATE decision traces by doing work.
 
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-24: **Four-layer implementation guide + Chris McConnell meeting**
+  - Created `Framework/Four Layer Implementation.md` with concrete examples for implementing all four layers in document-based systems
+  - Clarified distinction between Reasoning Layer (rationale) and Precedent Layer (decision trace)
+  - Updated `project-knowledge.md` with detailed layer descriptions and implementation examples
+  - Processed Chris McConnell call - discussed CPF architecture, three challenges, and Chris's insight about structured data + flexible framework filters
 - 2026-01-20: **Octave competitive intel + strategic positioning**
   - Researched Octave (octavehq.com) as closest existing product to CPF vision
   - Company: Zach & Julian (founders), $7.9M raised, 2,500+ GTM teams, $399-999/mo pricing
@@ -98,6 +105,7 @@ The Context Infrastructure has four distinct layers:
   - **Strategic insight:** "The value isn't just in structure—it's in opinionated structure that compounds intelligently"
 
 **Open Items:**
+- Explore Chris's suggestion: structured data collection layer + flexible framework filters on output
 - Is general-purpose the right bet, or should we pick a domain?
 - What's the right price point for smaller businesses? ($399/mo may be too high for our ICP)
 - What's our equivalent of Octave's "holy shit moment"?
