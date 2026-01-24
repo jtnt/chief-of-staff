@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-24 04:50 PM EST
+**Last Updated:** 2026-01-24 05:28 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-24 (Four-layer implementation guide + Chris McConnell meeting)
+**Last synced:** 2026-01-24 (Fixed /save skill - removed background agents)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
