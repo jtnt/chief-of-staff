@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-21 09:45 PM EST
+**Last Updated:** 2026-01-24 07:53 AM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -93,6 +93,12 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-24: Link Capture System in Use
+
+Captured AI adoption article from AI Ready RVA into the Links system. WebFetch initially failed to retrieve full content, but after user provided article text, successfully processed and saved to `Links/Business/20260124-ai-adoption-success-ai-ready-rva.md` with comprehensive framework extraction and project tagging. Links system working as designed for business article capture.
+
+**User clarified expectation:** Link summaries should contain clean extraction of article content and key frameworks/steps, not strategic analysis or application insights. Adjusted capture format accordingly.
 
 ### 2026-01-21: Global CLAUDE.md Optimization
 
