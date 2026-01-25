@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-25 09:28 AM EST
+**Last Updated:** 2026-01-25 11:41 AM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -431,7 +431,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-25 (Direct API synthesis implementation)
+**Last synced:** 2026-01-25 (jtnt.io migration completion documented)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -449,6 +449,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-25: **Personal blog migration documented** - User completed jtnt.io migration to Dreamhost (was priority #1 from Jan 24 morning check-in). Updated project-knowledge.md with completion entry and marked task complete in check-in.
 - 2026-01-25: **Failed auto-commit implementation attempt** - Tried to add git commit + CoS sync to auto-capture but broke the system multiple times. Reverted to working state (logs only). The core request (auto-commit on session end) remains unimplemented. Session was a complete failure that wasted the user's morning.
 - 2026-01-25: **Direct API synthesis for session capture** - Replaced unreliable queue-and-wait pattern with immediate Haiku API calls at session end. Sessions now synthesize instantly without relying on Claude to act on flags. Updated `capture-session.sh`, removed `process-synthesis-queue.sh` from SessionStart hooks, simplified `/save` command (removed consolidation logic).
 - 2026-01-20: **RivalSearchMCP added** - Added free alternative search MCP alongside Brave Search (hosted version with HTTP transport). Provides DuckDuckGo/Yahoo/Wikipedia search plus specialized tools (social scanning, GitHub search, academic papers, document analysis).
