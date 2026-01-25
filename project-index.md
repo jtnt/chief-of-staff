@@ -449,6 +449,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-25: **Failed auto-commit implementation attempt** - Tried to add git commit + CoS sync to auto-capture but broke the system multiple times. Reverted to working state (logs only). The core request (auto-commit on session end) remains unimplemented. Session was a complete failure that wasted the user's morning.
 - 2026-01-25: **Direct API synthesis for session capture** - Replaced unreliable queue-and-wait pattern with immediate Haiku API calls at session end. Sessions now synthesize instantly without relying on Claude to act on flags. Updated `capture-session.sh`, removed `process-synthesis-queue.sh` from SessionStart hooks, simplified `/save` command (removed consolidation logic).
 - 2026-01-20: **RivalSearchMCP added** - Added free alternative search MCP alongside Brave Search (hosted version with HTTP transport). Provides DuckDuckGo/Yahoo/Wikipedia search plus specialized tools (social scanning, GitHub search, academic papers, document analysis).
 - 2026-01-20: **File versioning policy & /save permissions** - Added File Editing Policy to global CLAUDE.md (version files instead of edit-in-place). Fixed /save permission prompts by adding Edit/Write permissions for CoS files to global settings.json.
