@@ -132,48 +132,14 @@ The `Resources/` folder contains reference materials that inform strategic work 
 - Use descriptive filenames
 
 
-## Automatic Session Capture
-
-Sessions are automatically captured via the `SessionEnd` hook. When any Claude Code session ends:
-
-1. Hook fires with transcript path and project directory
-2. `capture-session.sh` calls Haiku API directly to synthesize transcript
-3. Log written immediately to `[Project]/logs/YYYYMMDD-HHmm-session.md`
-
-**Key behaviors:**
-- Runs automatically at session end - no waiting, no queue
-- Skips projects outside `~/Documents/Projects/`
-- Skips projects without a `logs/` folder (opt-in)
-- Skips if session was already saved via `/save` (avoids duplicates)
-- Skips trivial sessions (<5KB transcript)
-- Falls back to queue if API unavailable (rare)
-- Logs stay local (no git commit) - use `/save` for explicit commits
-
-**What gets extracted:**
-- Summary of work done
-- Key decisions and changes
-- Open items or next steps
-
-**The pull model:** `/evening` reads all today's logs from all tracked projects (including CoS) and synthesizes them. This makes auto-capture the foundation for daily reflection without manual `/save`.
-
-**Cost:** ~$0.001-0.004 per session (Haiku is very cheap)
-
 ## Workflow Commands
 
-Commands for saving work:
-
-- **`/log`** - Quick capture: creates a log entry in `./logs/` (no git, no sync). Use for mid-session checkpoints.
-- **`/save`** - Git workflow: creates log + git commit/push + syncs to Chief of Staff. Use when you want to commit work to git.
-
-**When to use what:**
-- Most sessions: let auto-capture handle logging, run `/evening` to synthesize
-- Need git commit: run `/save`
-- Mid-session checkpoint: run `/log`
+- **`/log`** - Quick capture: creates a log entry in `./logs/` (no git, no sync)
+- **`/save`** - Full workflow: log + git commit/push + syncs to Chief of Staff
 
 **Locations:**
 - `/Users/jtnt/.claude/commands/log.md`
 - `/Users/jtnt/.claude/commands/save.md`
-- `/Users/jtnt/.claude/scripts/capture-session.sh`
 
 ## Syncing Chief of Staff Itself
 
