@@ -137,23 +137,26 @@ The `Resources/` folder contains reference materials that inform strategic work 
 Sessions are automatically captured via the `SessionEnd` hook. When any Claude Code session ends:
 
 1. Hook fires with transcript path and project directory
-2. `capture-session.sh` calls Anthropic API to synthesize transcript
-3. Log written to `[Project]/logs/YYYYMMDD-HHmm-session.md`
+2. `capture-session.sh` calls Haiku API directly to synthesize transcript
+3. Log written immediately to `[Project]/logs/YYYYMMDD-HHmm-session.md`
 
 **Key behaviors:**
-- Runs automatically - no `/save` required for session logs
+- Runs automatically at session end - no waiting, no queue
 - Skips projects outside `~/Documents/Projects/`
-- Skips if a manual log already exists for today (avoids duplicates with `/save`)
+- Skips projects without a `logs/` folder (opt-in)
+- Skips if session was already saved via `/save` (avoids duplicates)
+- Skips trivial sessions (<5KB transcript)
+- Falls back to queue if API unavailable (rare)
 - Logs stay local (no git commit) - use `/save` for explicit commits
 
 **What gets extracted:**
 - Summary of work done
-- Decisions made
-- Insights or learnings
-- Blockers encountered
-- Next steps identified
+- Key decisions and changes
+- Open items or next steps
 
 **The pull model:** `/evening` reads all today's logs from all tracked projects (including CoS) and synthesizes them. This makes auto-capture the foundation for daily reflection without manual `/save`.
+
+**Cost:** ~$0.001-0.004 per session (Haiku is very cheap)
 
 ## Workflow Commands
 
