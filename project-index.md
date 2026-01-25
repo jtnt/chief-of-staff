@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-25 09:00 AM EST
+**Last Updated:** 2026-01-25 09:28 AM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -366,7 +366,7 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Client Project
 **What it is:** AI training and consulting engagement with SalesIntel (B2B sales intelligence platform)
 **Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
-**Last synced:** 2026-01-20 (email editing for Mike follow-up)
+**Last synced:** 2026-01-25 (engagement status documentation)
 
 Structured conversation library extracted from Claude.ai conversations documenting complete 2.5-month engagement (Nov 2025 - Jan 2026). 15 conversations (470 messages) organized into searchable markdown format with thematic synthesis documents.
 
@@ -376,10 +376,14 @@ Structured conversation library extracted from Claude.ai conversations documenti
 3. Pivot to use-case driven sprint model at CEO's direction
 4. SKO build sprint delivered (Jan 2026) - 3 teams built AI workflows in 10 days
 5. Successful SKO session - "everyone's minds racing" on additional AI applications
+6. Post-SKO continuation discussions (Jan 2026) - Mike engaged, Manoj silent
+
+**Current Status (Jan 25):**
+Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation (Tues/Wed week of Jan 27-29). Key pattern identified: value-first, single-recipient outreach (platform research included) worked; dual-recipient general continuation ask (to both Manoj & Mike) did not.
 
 **Key Stakeholders:**
-- **Manoj Ramnani (CEO):** Initial contact, relationship development, contract negotiation
-- **Mike Levy (CRO):** Primary sponsor, discovery calls, SKO participation
+- **Manoj Ramnani (CEO):** Initial contact, contract negotiation, silent since SKO
+- **Mike Levy (CRO):** Primary sponsor, platform evaluation lead, actively engaged
 - **GTM Team:** ~30-40 people (BDRs, AEs, AMs, CS reps)
 
 **Conversation Library Structure:**
@@ -389,22 +393,11 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - Reusable Python extraction script for future projects
 
 **Recent Work:**
+- 2026-01-25: **Engagement status documentation** - Updated CLAUDE.md with current status section (recent activity, key insights, next steps). Created project-knowledge.md following proper documentation model (business context, engagement history by phase, patterns/observations, open items).
 - 2026-01-20: **Email editing for Mike follow-up** - Tightened email checking in on AI work continuation and sharing platform research shortlist (Momentum.io, Sybill.ai, RevenueGrid)
 - 2026-01-20: **v3 final deliverable** - Clean standalone recommendation for Mike
-  - Removed validation meta-commentary, added Sybill to executive summary
-  - Final file: `CRO-Recommendation-Summary-v3.md`
 - 2026-01-20: **v2 validated recommendation** - Brave Search validation of all research
-  - **Critical Oliv.ai pricing error found:** Deal Driver is $199/mo (not $49) - removes from budget consideration
-  - Sybill corrected to $79/mo (not $90)
-  - Momentum Outreach integration reconfirmed as native
-  - Created v2 deliverables: `CRO-Recommendation-Summary-v2.md`, `Validation-Notes-v2.md`
-  - Added validation notes to all 6 research files
 - 2026-01-20: **CRO platform recommendation finalized** with validated data
-  - Top 3 platforms: Momentum.io (recommended), Sybill.ai (best conversational AI), RevenueGrid (Salesforce-native)
-  - Critical price correction: Momentum.io $7-17k (not $20-24k) - now well under budget
-  - Sybill.ai Outreach integration downgraded to "not found" (significant gap)
-  - Created Validation-Notes.md documenting all corrections and sources
-  - Deliverable: `Sales Intelligence Platform/CRO-Recommendation-Summary.md`
 - 2026-01-20: **CLAUDE.md created** - Project initialization for Claude Code
 - 2026-01-20: **Conversation library extraction** COMPLETED
 
@@ -414,11 +407,13 @@ Structured conversation library extracted from Claude.ai conversations documenti
 - "75% useful = success" design principle validated through sprint
 - Use-case driven learning (hands-on building) beats traditional training
 - Fast iteration competitive advantage: 14 days negotiation → delivery → expansion
+- Communication pattern: Single-recipient + value-add outreach > general continuation asks to multiple stakeholders
 
 **Open Items:**
-- Mike to demo Momentum.io (confirm Executive Briefs match CRO use case)
-- If Sybill interests Mike, need explicit vendor confirmation of Outreach capabilities
-- Continued engagement signals - follow-up scheduled for broader AI adoption roadmap
+- Awaiting Mike's time selection for call (available Tues/Wed before 3pm)
+- Call topics: AI work continuation + platform evaluation next steps
+- Manoj engagement unclear (CEO has not responded to Jan 15 outreach)
+- Platform evaluation most concrete opportunity; AI work scope needs Mike's direction
 
 ---
 
