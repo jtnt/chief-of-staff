@@ -132,19 +132,45 @@ The `Resources/` folder contains reference materials that inform strategic work 
 - Use descriptive filenames
 
 
+## Automatic Session Capture
+
+Sessions are automatically captured via the `SessionEnd` hook. When any Claude Code session ends:
+
+1. Hook fires with transcript path and project directory
+2. `capture-session.sh` calls Anthropic API to synthesize transcript
+3. Log written to `[Project]/logs/YYYYMMDD-HHmm-session.md`
+
+**Key behaviors:**
+- Runs automatically - no `/save` required for session logs
+- Skips projects outside `~/Documents/Projects/`
+- Skips if a manual log already exists for today (avoids duplicates with `/save`)
+- Logs stay local (no git commit) - use `/save` for explicit commits
+
+**What gets extracted:**
+- Summary of work done
+- Decisions made
+- Insights or learnings
+- Blockers encountered
+- Next steps identified
+
+**The pull model:** `/evening` reads all today's logs from all tracked projects (including CoS) and synthesizes them. This makes auto-capture the foundation for daily reflection without manual `/save`.
+
 ## Workflow Commands
 
-Two commands for saving work (simplified from the previous three-command system):
+Commands for saving work:
 
-- **`/log`** - Quick capture: creates a log entry in `./logs/` (no git, no sync). Use before context compaction or for mid-session checkpoints.
-- **`/save`** - Full workflow: creates log + git commit/push + syncs to Chief of Staff via `sync-to-cos.sh` script.
+- **`/log`** - Quick capture: creates a log entry in `./logs/` (no git, no sync). Use for mid-session checkpoints.
+- **`/save`** - Git workflow: creates log + git commit/push + syncs to Chief of Staff. Use when you want to commit work to git.
 
-**Key insight:** Logs are created by Claude (who has conversation context), while cross-repo sync operations are handled by the `sync-to-cos.sh` script.
+**When to use what:**
+- Most sessions: let auto-capture handle logging, run `/evening` to synthesize
+- Need git commit: run `/save`
+- Mid-session checkpoint: run `/log`
 
 **Locations:**
 - `/Users/jtnt/.claude/commands/log.md`
 - `/Users/jtnt/.claude/commands/save.md`
-- `/Users/jtnt/.claude/scripts/sync-to-cos.sh`
+- `/Users/jtnt/.claude/scripts/capture-session.sh`
 
 ## Syncing Chief of Staff Itself
 

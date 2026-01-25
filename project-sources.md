@@ -55,3 +55,9 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Key files:** `CLAUDE.md`, `logs/20260121-initial-build.md`
 - **GitHub:** https://github.com/jtnt/chatbot-linebreaker
 - **Last synced:** 2026-01-21 (newly added)
+
+## Chief of Staff
+- **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
+- **Key files:** `project-knowledge.md`, `project-index.md`, `CLAUDE.md`
+- **Last synced:** 2026-01-24
+- **Note:** This is the CoS system itself - tracked so `/evening` can pull CoS session logs
