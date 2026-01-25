@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-24 07:53 AM EST
+**Last Updated:** 2026-01-25 10:17 AM PST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -93,6 +93,18 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-01-25: Personal Blog Migration Completed
+
+Completed migration of jtnt.io personal blog to Dreamhost (was priority #1 from 2026-01-24 morning check-in). This is user's personal blog site, separate from tracked projects.
+
+### 2026-01-25: Session Saving References Captured
+
+Saved external references for future session saving improvements:
+- conversation-logger (sirkitree/conversation-logger.git + blog post)
+- cc-sessions (GWUDCAP/cc-sessions.git)
+
+User note: These are inspiration for possible ideas, not immediate changes to the working system. Documented in `Resources/Claude Code/session-saving-references.md`.
 
 ### 2026-01-24: Link Capture System in Use
 
