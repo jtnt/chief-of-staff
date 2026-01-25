@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-25 11:41 AM EST
+**Last Updated:** 2026-01-25 12:13 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -449,6 +449,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-25: **Removed auto-capture session logging** - Disabled SessionEnd hook and removed supporting files (archived script, deleted queue hook/marker file). Sessions now logged only via explicit `/save` command. Auto-capture was producing lower quality logs with broken duplicate detection.
 - 2026-01-25: **Personal blog migration documented** - User completed jtnt.io migration to Dreamhost (was priority #1 from Jan 24 morning check-in). Updated project-knowledge.md with completion entry and marked task complete in check-in.
 - 2026-01-25: **Failed auto-commit implementation attempt** - Tried to add git commit + CoS sync to auto-capture but broke the system multiple times. Reverted to working state (logs only). The core request (auto-commit on session end) remains unimplemented. Session was a complete failure that wasted the user's morning.
 - 2026-01-25: **Direct API synthesis for session capture** - Replaced unreliable queue-and-wait pattern with immediate Haiku API calls at session end. Sessions now synthesize instantly without relying on Claude to act on flags. Updated `capture-session.sh`, removed `process-synthesis-queue.sh` from SessionStart hooks, simplified `/save` command (removed consolidation logic).
