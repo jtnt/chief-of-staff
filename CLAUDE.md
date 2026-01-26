@@ -155,67 +155,32 @@ When running `/log` or `/save` while working IN the Chief of Staff repo:
 
 ## Check-In System
 
-The Chief of Staff includes a check-in system for daily reflections, planning, and thought capture. Four types:
+**See global CLAUDE.md** (`~/.claude/CLAUDE.md`) for check-in triggers, commands, and natural language detection.
 
-### Natural Language Detection
+### CoS-Specific: Folder Structure
 
-Recognize check-in intent from natural language and offer to capture appropriately:
+```
+Check-Ins/
+├── daily/           # Morning and evening check-ins
+├── thoughts/        # Quick captures (quotes, links, ideas)
+└── journal/         # Personal reflections (never routed)
+```
 
-**Morning check-ins** - Triggered by:
-- "Good morning" / "Starting my day" / "Here's what I want to do today"
-- Response: Offer to do morning check-in or proceed directly
+**Filename convention for thoughts:** Use descriptive, searchable filenames (e.g., `20260114-maven-ai-product-sense-vibe-code-personal-os.md` not `20260114-maven-course.md`).
 
-**Evening check-ins** - Triggered by:
-- "End of day" / "Wrapping up" / "Here's what I got done"
-- Response: Offer to do evening check-in or proceed directly
-
-**Thoughts** - Triggered by:
-- "Random thought" / "Quick note" / sharing a quote or personal idea
-- Anything that sparked an idea, relates to current projects, or could become content
-- Response: Capture as a thought or confirm: "Sounds like a thought. Want me to save this?"
-- **Filename convention:** Use descriptive filenames that will be searchable and distinguishable later (e.g., `20260114-maven-ai-product-sense-vibe-code-personal-os.md` not `20260114-maven-course.md`). Include enough detail to differentiate from similar items.
-
-**Links** - When user shares a URL:
-- Assess the content type and propose the right destination:
-  - **Thoughts** - Ideas, inspiration, content seeds, things related to active projects
-  - **Resources** - Reference materials, guides, documentation, how-to articles for later use
-- Propose destination with brief rationale and ask for confirmation
-- Example: "This looks like a reference guide for CLAUDE.md structure - I'd put it in Resources/Claude Code/. Sound right?"
-
-**Journal entries** - Triggered by:
-- Extended personal reflection / "I've been thinking about..." / life musings
-- Anything introspective about feelings, life, personal matters
-- Response: Offer to save as journal entry or confirm: "This sounds like a journal entry. Want me to save it?"
-
-### Slash Commands
-
-Explicit commands are also available:
-- `/morning` - Morning check-in with optional prompts
-- `/evening` - Evening check-in with optional prompts
-- `/thought` - Quick thought capture
-- `/journal` - Personal journal entry
-- `/review-checkins` - Analyze check-ins for patterns and insights
-- `/meeting-review` - Review recent meetings, match with Granola transcripts, capture briefings
-
-### Project Routing (Bidirectional Flow)
+### CoS-Specific: Project Routing
 
 When check-in content relates to a tracked project:
 
-**Push to project (bidirectional):**
 1. Ask user: "This mentions [Project]. Want me to add it to that project's inbox?"
-2. If yes, write to project's inbox: `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
-   - If file doesn't exist, create it with standard structure (Pending / Archive sections)
+2. If yes, write to: `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
+   - Create file if needed (Pending / Archive sections)
    - Add entry under "## Pending" with: date, source, context, content
-3. ALSO create log in project: `[ProjectName]/logs/YYYYMMDD-checkin-note.md` (keeps record with project)
+3. Also create project log: `[ProjectName]/logs/YYYYMMDD-checkin-note.md`
 
-**When the user opens that project:**
-- SessionStart hook checks for `cos-inbox.md` and injects `COS_INBOX` flag
-- Claude notifies: "You have X item(s) from Chief of Staff" and lists them
-- User decides what to do (act on, archive, discuss)
+**On project open:** SessionStart hook checks for `cos-inbox.md` → injects `COS_INBOX` flag → Claude notifies user.
 
-**Original check-in stays in Check-Ins/ folder** (single source of truth)
-
-**Journal entries are never routed** (always private)
+**Original check-in stays in Check-Ins/** (single source of truth). Journal entries never routed.
 
 ## Note: Cowork Mode Git Config Issue
 
