@@ -71,17 +71,19 @@ Each tracked project has its own `logs/` folder:
 ```
 Razzo/
 ├── logs/
-│   ├── 20260109-sync.md
-│   └── 20260111-storybrand-sync.md
+│   ├── 20260109-sprint-positioning-draft.md
+│   └── 20260111-storybrand-messaging-alignment.md
 ├── project-knowledge.md
 └── CLAUDE.md
 
 Context Profile Framework/
 ├── logs/
-│   └── 20260109-sync.md
+│   └── 20260109-schema-refactor.md
 ├── project-knowledge.md
 └── CLAUDE.md
 ```
+
+**Log filename convention:** `YYYYMMDD-[identifier].md` where identifier is 2-4 descriptive words. See `/log` command for examples of good vs bad identifiers.
 
 **Why:** Projects are portable. When you move/archive a project, its complete history travels with it. Chief of Staff is an index/dashboard, not a repository.
 
