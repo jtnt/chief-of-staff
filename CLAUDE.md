@@ -235,6 +235,21 @@ When checking calendar or asking "what's on my calendar":
 
 ## Current Projects
 
-- **Context Profile Framework** (Active): Framework + service for AI context libraries. Source tracked in `project-sources.md`.
-- **Razzo** (Active): AI training for sales/marketing teams. Sprint-first go-to-market strategy.
-- **Caregiver App** (Paused): Web app for caregiver communication. Early stage, not actively being worked on.
+See `project-sources.md` for full list with paths and sync dates. Summary:
+
+**Active:**
+- **Context Profile Framework** - Framework + service for AI context libraries
+- **Razzo** - AI training for sales/marketing teams
+- **Writing** - Content creation and publishing
+- **Job Search** - Active job search (PostHog, etc.)
+- **SalesIntel** - Client project
+- **JRAD** - Personal creative project
+
+**Tools/Utilities:**
+- **Context Profile Builder** - Web app for profile generation
+- **Chatbot Linebreaker** - Chrome extension for chat formatting
+- **LinkedIn My Posts Extractor** - LinkedIn content extraction
+- **LinkedIn Scraper Extension** - LinkedIn data scraping
+
+**Paused:**
+- **Caregiver App** - Web app for caregiver communication (early stage)
