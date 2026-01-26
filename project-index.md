@@ -449,6 +449,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-26: **USAGE-GUIDE.md created** - Comprehensive reference for using the entire CoS system. Covers workflows, file purposes, commands, and quick reference for daily/weekly rhythms.
 - 2026-01-26: **System cleanup Phase 4 (COMPLETE)** - Documentation phase. Created ~/.claude/hooks/README.md with full hook documentation. Added READMEs for Check-Ins/weekly/ (automated Monday synthesis) and Weekly Reviews/ (manual /review-checkins output). All 4 phases of system cleanup now complete.
 - 2026-01-26: **System cleanup Phase 3** - Added compounding intelligence. /log template now has Reasoning section (why X over Y, thinking evolution, extractable patterns). Created Patterns/ folder for cross-project insights. Enhanced /review-checkins with cross-project log analysis option.
 - 2026-01-26: **System cleanup Phase 2** - DRY'd commands and consolidated docs. /save now references /log for Step 1 (123→90 lines). Check-In System moved to global CLAUDE.md so all projects can discover it. CoS CLAUDE.md keeps only CoS-specific details.
