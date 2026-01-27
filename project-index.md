@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-26 09:30 PM EST
+**Last Updated:** 2026-01-26 09:51 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-24 (Fixed /save skill - removed background agents)
+**Last synced:** 2026-01-26 (LinkedIn research + extraction skill)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -88,6 +88,11 @@ The Context Infrastructure has four distinct layers:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-26: **LinkedIn research + extraction skill**
+  - Extracted Joe Rhew's LinkedIn posts (16 posts) for CPF research - analyzed context repo approach, 4-stage automation maturity
+  - Extracted user's own posts (18 posts) for writing style analysis
+  - Created `/extract-linkedin-posts` skill (proper skills format at `~/.claude/skills/`)
+  - Key learning: LinkedIn feed shows snippets not full text; own profile has different DOM due to analytics UI
 - 2026-01-24: **Four-layer implementation guide + Chris McConnell meeting**
   - Created `Framework/Four Layer Implementation.md` with concrete examples for implementing all four layers in document-based systems
   - Clarified distinction between Reasoning Layer (rationale) and Precedent Layer (decision trace)
