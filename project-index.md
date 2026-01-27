@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-26 06:43 PM EST
+**Last Updated:** 2026-01-26 09:30 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -431,7 +431,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-26 (Removed Patterns folder, improved log filename examples)
+**Last synced:** 2026-01-26 (cos-inbox notifications for all projects)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -440,6 +440,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - Two-way sync workflows: pull ("update [project]") and push (`/save`)
 - Check-in system operational (morning, evening, thought, journal)
 - Bidirectional flow: CoS can push items to project inboxes
+- **cos-inbox notifications across all projects** - SessionStart hook checks for pending inbox items
 - Logs live WITH projects in their `logs/` folders
 - Proactive knowledge capture via session-context.md (testing in CoS only)
 - **Transcription workflow optimized:** Using mlx-whisper with medium model for Mac Silicon
@@ -449,6 +450,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-26: **cos-inbox notifications for all projects** - Modified `cos-session-start.sh` to handle both CoS (full briefing) and other projects (inbox check). Added CLAUDE.md principles: "Check Docs Before Claude Code Changes" and "Present Options, Don't Assume" (use AskUserQuestion with multi-select when appropriate).
 - 2026-01-26: **Removed Patterns folder** - Deleted Patterns/ folder as premature infrastructure (no concrete use cases). Existing mechanisms (project-knowledge.md, log Reasoning sections) serve the purpose. Also improved CLAUDE.md log filename examples from generic (`sync.md`) to descriptive (`sprint-positioning-draft.md`).
 - 2026-01-26: **USAGE-GUIDE.md created** - Comprehensive reference for using the entire CoS system. Covers workflows, file purposes, commands, and quick reference for daily/weekly rhythms.
 - 2026-01-26: **System cleanup Phase 4 (COMPLETE)** - Documentation phase. Created ~/.claude/hooks/README.md with full hook documentation. Added READMEs for Check-Ins/weekly/ (automated Monday synthesis) and Weekly Reviews/ (manual /review-checkins output). All 4 phases of system cleanup now complete.
