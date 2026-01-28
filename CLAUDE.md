@@ -138,7 +138,7 @@ The `Resources/` folder contains reference materials that inform strategic work 
 
 Sessions are **automatically captured** when they end via SessionEnd hook. A background Claude process:
 1. Creates log entry in `./logs/YYYYMMDD-[identifier].md`
-2. Extracts learnings to `./session-learnings/` (when patterns emerge)
+2. Extracts patterns to `./session-patterns/` (when patterns emerge)
 3. Commits and pushes changes
 4. Syncs to Chief of Staff (updates project-index.md)
 
@@ -147,12 +147,12 @@ Sessions are **automatically captured** when they end via SessionEnd hook. A bac
 any-project/
 ├── logs/                              # Session logs (what happened)
 │   └── YYYYMMDD-[identifier].md
-├── session-learnings/                 # Patterns + CLAUDE.md suggestions
+├── session-patterns/                  # Patterns + CLAUDE.md suggestions
 │   └── YYYYMMDD-[identifier].md
 └── ...
 ```
 
-**LEARNINGS_PENDING flag:** When session-learnings files contain CLAUDE.md suggestions, SessionStart hook injects this flag. Use `/review-learnings` to review and apply suggestions.
+**PATTERNS_PENDING flag:** When session-patterns files contain CLAUDE.md suggestions, SessionStart hook injects this flag. Use `/review-patterns` to review and apply suggestions.
 
 ### Legacy Commands (Deprecated)
 
