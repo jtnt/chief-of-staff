@@ -443,7 +443,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-26 (cos-inbox notifications for all projects)
+**Last synced:** 2026-01-28 (auto-capture session system)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -462,6 +462,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-28: **Auto-capture session system implemented** - SessionEnd hook spawns background Claude to capture sessions automatically. Creates logs in `./logs/`, extracts patterns to `./session-patterns/` (with CLAUDE.md suggestions), commits/pushes, syncs to CoS. Handles tracked vs untracked locations. SessionStart shows PATTERNS_PENDING flag when suggestions await review. `/log` and `/save` deprecated but still functional for manual use.
 - 2026-01-26: **cos-inbox notifications for all projects** - Modified `cos-session-start.sh` to handle both CoS (full briefing) and other projects (inbox check). Added CLAUDE.md principles: "Check Docs Before Claude Code Changes" and "Present Options, Don't Assume" (use AskUserQuestion with multi-select when appropriate).
 - 2026-01-26: **Removed Patterns folder** - Deleted Patterns/ folder as premature infrastructure (no concrete use cases). Existing mechanisms (project-knowledge.md, log Reasoning sections) serve the purpose. Also improved CLAUDE.md log filename examples from generic (`sync.md`) to descriptive (`sprint-positioning-draft.md`).
 - 2026-01-26: **USAGE-GUIDE.md created** - Comprehensive reference for using the entire CoS system. Covers workflows, file purposes, commands, and quick reference for daily/weekly rhythms.
