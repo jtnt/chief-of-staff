@@ -4,6 +4,14 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
+### 2026-01-26 - Update terminology: commands → skills
+**Source:** Quick reminder
+**Context:** Claude Code terminology update needed
+
+- [ ] Update CLAUDE.md files to use "skills" instead of "commands" where appropriate
+
+---
+
 ### 2026-01-22 - Test Meeting Review v7
 **Source:** Meta-work session
 **Context:** Implemented Sonnet model change for quality extraction
