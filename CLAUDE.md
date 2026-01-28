@@ -134,26 +134,42 @@ The `Resources/` folder contains reference materials that inform strategic work 
 - Use descriptive filenames
 
 
-## Workflow Commands
+## Auto-Capture System
 
-- **`/log`** - Quick capture: creates a log entry in `./logs/` (no git, no sync)
-- **`/save`** - Full workflow: log + git commit/push + syncs to Chief of Staff
+Sessions are **automatically captured** when they end via SessionEnd hook. A background Claude process:
+1. Creates log entry in `./logs/YYYYMMDD-[identifier].md`
+2. Extracts learnings to `./session-learnings/` (when patterns emerge)
+3. Commits and pushes changes
+4. Syncs to Chief of Staff (updates project-index.md)
 
-**Locations:**
-- `/Users/jtnt/.claude/commands/log.md`
-- `/Users/jtnt/.claude/commands/save.md`
+**Folder structure per project:**
+```
+any-project/
+├── logs/                              # Session logs (what happened)
+│   └── YYYYMMDD-[identifier].md
+├── session-learnings/                 # Patterns + CLAUDE.md suggestions
+│   └── YYYYMMDD-[identifier].md
+└── ...
+```
+
+**LEARNINGS_PENDING flag:** When session-learnings files contain CLAUDE.md suggestions, SessionStart hook injects this flag. Use `/review-learnings` to review and apply suggestions.
+
+### Legacy Commands (Deprecated)
+
+These still work for manual mid-session use but are no longer needed at session end:
+- **`/log`** - Manual log entry (no git, no sync)
+- **`/save`** - Manual log + commit + push + sync
 
 ## Syncing Chief of Staff Itself
 
 **IMPORTANT:** Chief of Staff tracks its own work just like any other project.
 
-When running `/log` or `/save` while working IN the Chief of Staff repo:
+The auto-capture system handles this automatically at session end:
+1. Creates log entry in `logs/YYYYMMDD-[identifier].md`
+2. Commits and pushes to git
+3. Skips CoS sync step (we ARE CoS)
 
-1. Create log entry in `logs/YYYYMMDD-[identifier].md` documenting what was done
-2. Update `project-knowledge.md` as needed
-3. If `/save`: commit and push to git (but skip CoS sync - we ARE CoS)
-
-**Do NOT skip the log entry step.** Chief of Staff maintains its own activity log in `logs/` just like all other tracked projects.
+Chief of Staff maintains its own activity log in `logs/` just like all other tracked projects.
 
 ## Check-In System
 
