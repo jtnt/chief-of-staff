@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-26 09:51 PM EST
+**Last Updated:** 2026-01-28
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-26 (LinkedIn research + extraction skill)
+**Last synced:** 2026-01-28 (source mapping + verification protocol)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -88,6 +88,13 @@ The Context Infrastructure has four distinct layers:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-28: **Source mapping + verification protocol**
+  - Created `Business/source-mapping.md` - Maps every document input field to source (R/I/V/P categorization)
+  - Created `Business/intake-verification.md` - Verification protocol with checklists, templates, anti-patterns
+  - Updated `Business/business-knowledge.md` with verification learning and source mapping summary
+  - **Key insight:** Only Industry Profile (~90%) can be mostly completed through research alone; all others need substantial client input
+  - **Mythos case study learning codified:** Verification is cheap, rebuilding is expensive - 30 seconds of checking prevents hours of wasted work
+  - Awaiting Mythos URL to proceed with case study application
 - 2026-01-26: **LinkedIn research + extraction skill**
   - Extracted Joe Rhew's LinkedIn posts (16 posts) for CPF research - analyzed context repo approach, 4-stage automation maturity
   - Extracted user's own posts (18 posts) for writing style analysis
