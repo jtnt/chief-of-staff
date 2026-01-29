@@ -378,12 +378,13 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Client Project (New)
 **What it is:** CPF research engagement for Mythos (donor communications platform) / More Vang
 **Source:** `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang`
-**Last synced:** 2026-01-28 (CPF research session 2)
+**Last synced:** 2026-01-28 (comprehensive context profile build)
 
 **Company Background:**
-Mythos is a donor communications and reporting platform for advancement professionals in higher education and healthcare institutions. Founded ~2010 (website) or ~2012 (LinkedIn) by Jon Budington and Frank Strube. 41 employees, headquartered in Alexandria, VA. Modular SaaS platform with modules for dynamic sites, PDF publishing, content library, and team management. Customers include Brown University, Tulane, University of Rochester, Boston College, MaineHealth, and others.
+Mythos is a donor communications and stewardship platform for advancement professionals in higher education and healthcare institutions. CEO/Chief Storyteller is More Vang. 4 product modules: Dynamic Sites, Library, Publisher, Teams. Primary customers are higher education (13 institutions including MIT, Northwestern, Carnegie Mellon, Brown) with secondary healthcare market. Founded to help advancement teams transition from manual 70+ hour work weeks to sustainable operations.
 
 **Recent Work:**
+- 2026-01-28 (9pm): **Comprehensive context profile build** - Created complete company intelligence using cpf-company-researcher agent. Generated `mythos-company.yaml` (23.6KB) with detailed identity, products, customer analysis, and competitive landscape. Also created `mythos-cross-agent-notes.yaml` with structured insights for ICP analysis, competitive positioning, and brand messaging patterns. Primary ICP identified as higher education advancement teams.
 - 2026-01-28 (8pm): **CPF Company Research session 2** - Second run of cpf-company-researcher agent. Created additional output files in `context-profile/` directory alongside existing testrun directories.
 - 2026-01-28 (7pm): **CPF Company Research completed** - Ran cpf-company-researcher agent to create comprehensive company profile. Created `context-profile/research/company.yaml` (413 lines) with structured research including company identity, products/services, customers with case studies, leadership bios, origin story, business model, competitive landscape, and gaps requiring client verification.
 
