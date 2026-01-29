@@ -61,3 +61,8 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Key files:** `project-knowledge.md`, `project-index.md`, `CLAUDE.md`
 - **Last synced:** 2026-01-24
 - **Note:** This is the CoS system itself - tracked so `/evening` can pull CoS session logs
+
+## Mythos-More Vang
+- **Source:** `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang`
+- **Key files:** `context-profile/research/company.yaml`
+- **Last synced:** 2026-01-28 (newly added)
