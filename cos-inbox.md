@@ -4,6 +4,16 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
+### 2026-01-28 - Investigate SessionEnd script delay
+**Source:** Session observation
+**Context:** Performance issue in auto-capture system
+
+- [ ] SessionEnd script runs correctly but takes ~20 secs to exit after log file is created
+- [ ] Investigate what's causing the delay (likely sync to CoS or git operations)
+- [ ] Consider if blocking operations can be moved to background
+
+---
+
 ### 2026-01-26 - Update terminology: commands → skills
 **Source:** Quick reminder
 **Context:** Claude Code terminology update needed
