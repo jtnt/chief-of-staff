@@ -284,9 +284,12 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Side Project
 **What it is:** WordPress-to-static-site conversion for joerussosalmostdead.com (Joe Russo's Almost Dead band website)
 **Source:** `/Users/jtnt/Documents/Projects/JRAD`
-**Last synced:** 2026-01-18 (newly added)
+**Last synced:** 2026-01-30 (DNS troubleshooting session)
 
 **Goal:** Convert existing WordPress site into a simple static website.
+
+**Recent Work:**
+- 2026-01-30: **DNS troubleshooting session** - Diagnosed www subdomain resolution issue. The user discovered www.joerussosalmostdead.com was returning DNS_PROBE_FINISHED_NXDOMAIN errors. Used dig commands to identify that the root domain resolves correctly to two IPs (67.205.25.36 is correct), but www subdomain lacks DNS records. User needs to add CNAME record for www subdomain to DNS provider.
 
 **Current WordPress Site:**
 - One-page music theme ("Speaker" by WPWolf)
@@ -305,6 +308,7 @@ V1 MVP is functional with two working document types:
 - Complete static site conversion
 - Evaluate which jQuery dependencies are actually needed
 - Update http:// URLs to https://
+- **DNS configuration:** Add CNAME record for www subdomain to DNS provider
 
 ---
 
