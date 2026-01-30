@@ -4,6 +4,20 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
+### 2026-01-30 - Review automation ideas from recommendation session
+**Source:** Automation recommender session
+**Context:** Session start visibility problem + skills/hooks/MCP ideas
+
+Key decisions needed:
+- [ ] Session start visibility: Choose Option 1 (CLAUDE.md), 2 (notifications), or 3 (pre-script)
+- [ ] High-value skills: `/cross-project-synthesis`, `/strategic-decision`, `/content-repurpose`
+- [ ] Verify Linear/Slack MCP servers exist before adding
+- [ ] Block external edits hook (enforces read-only rule)
+
+**Details:** `Working/automation-ideas-to-implement.md`
+
+---
+
 ### 2026-01-30 - Review and implement automation recommendations
 **Source:** Automation analysis session
 **Context:** Full analysis of CoS automation stack identified 5 targeted improvements
