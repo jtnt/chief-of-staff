@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-29 (CPF researcher overhaul - built complete research pipeline)
+**Last synced:** 2026-01-29 (CPF agent research pipeline overhaul)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -88,6 +88,14 @@ The Context Infrastructure has four distinct layers:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-29 (late evening): **CPF agent research pipeline overhaul**
+  - Built complete research orchestrator with specialized agents (company, ICP, competitor, brand researchers)
+  - Implemented atomization principle: one source of truth per information type prevents overlap
+  - Created verifier agent that runs after each research agent (not just at end) for faster feedback loops
+  - Established strict agent boundaries with explicit exclusion lists to prevent scope creep
+  - Built cross-agent communication protocols for sharing incidental findings
+  - **Pattern extraction:** Agent boundary definition prevents scope creep; per-agent verification enables faster iteration
+  - Ready for testing - next step is full pipeline validation on Mythos case study
 - 2026-01-29 (evening): **Strategic monetization planning session**
   - User requested fresh perspective on business opportunity without prior anchoring
   - Comprehensive repository analysis synthesized all framework docs, business materials, research, and strategic learnings
