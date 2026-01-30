@@ -4,6 +4,19 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
+### 2026-01-30 - Review and implement automation recommendations
+**Source:** Automation analysis session
+**Context:** Full analysis of CoS automation stack identified 5 targeted improvements
+
+- [ ] Review recommendations: `Resources/Claude Code/20260130-automation-recommendations.md`
+- [ ] Implement #1: Notification hook (idle_prompt) - low effort
+- [ ] Implement #2: Block external edits hook - low effort
+- [ ] Implement #3: `/project-health` skill - medium effort
+- [ ] Implement #4: `/weekly-review` skill - medium effort
+- [ ] Implement #5: Cross-project synthesizer agent - medium effort
+
+---
+
 ### 2026-01-28 - Investigate SessionEnd script delay
 **Source:** Session observation
 **Context:** Performance issue in auto-capture system
