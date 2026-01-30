@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-28 (source mapping + verification protocol)
+**Last synced:** 2026-01-29 (north star principle embedded)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -88,6 +88,13 @@ The Context Infrastructure has four distinct layers:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-01-29: **North star principle embedded in agents**
+  - Analyzed verified vs unverified test output on Mythos - verification improved sources and data richness, but both missed the real goal
+  - **Core insight:** CPF research should capture what's useful for business AI (strategy, sales, marketing, customer comms, decisions), not aim for exhaustive completeness
+  - Embedded "north star test" into `cpf-system` skill, researcher agent, and verifier agent: "Would this help someone using AI for business purposes?"
+  - Applied filter to: section inclusion, depth decisions, gap identification, confidence effort, people to include, customer data patterns
+  - Created test analysis doc (`Working/cpf-verifier-test-analysis.md`)
+  - **Example:** Skip Junior Software Engineer (not useful for business AI), include VP of Customer Success (decision-maker, domain expert)
 - 2026-01-28: **Source mapping + verification protocol**
   - Created `Business/source-mapping.md` - Maps every document input field to source (R/I/V/P categorization)
   - Created `Business/intake-verification.md` - Verification protocol with checklists, templates, anti-patterns
