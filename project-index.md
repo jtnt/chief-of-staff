@@ -399,12 +399,13 @@ V1 MVP is functional with two working document types:
 **Status:** Active - Client Project (New)
 **What it is:** CPF research engagement for Mythos (donor communications platform) / More Vang
 **Source:** `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang`
-**Last synced:** 2026-01-29 (additional context profile research)
+**Last synced:** 2026-01-29 (plugin setup and learning session)
 
 **Company Background:**
 Mythos is a donor communications and stewardship platform for advancement professionals in higher education and healthcare institutions. CEO/Chief Storyteller is More Vang. 4 product modules: Dynamic Sites, Library, Publisher, Teams. Primary customers are higher education (13 institutions including MIT, Northwestern, Carnegie Mellon, Brown) with secondary healthcare market. Founded to help advancement teams transition from manual 70+ hour work weeks to sustainable operations.
 
 **Recent Work:**
+- 2026-01-29 (10:34 PM): **Plugin setup and learning session** - Extensive Claude Code meta-work session focused on plugin installation and understanding usage. Installed multiple plugins (playground, agent-sdk-dev, superpowers, context7, Notion, plugin-dev, claude-md-management, claude-code-setup, plus additional unnamed plugins). Added compound-engineering marketplace. Learned about output styles, plugin discovery methods, and invocation patterns. Session documented plugin restart requirements and how plugins expose functionality through skills, agents, MCP servers, and hooks.
 - 2026-01-29 (8:46 PM): **Additional context profile research** - Built comprehensive context profile for mythosplatform.com using CPF company researcher agent. Created structured company data (`./context-profile-20260129_2052/research/mythos-company.yaml`) and research methodology notes (`./context-profile-20260129_2052/mythos-cross-agent-notes.yaml`). Focused on website content analysis covering company identity, founding story (Jon Budington 2010), product breakdown (Dynamic Sites, PDF Publisher, four-stage workflow), customer success metrics from universities and nonprofits, and leadership structure.
 - 2026-01-28 (9pm): **Comprehensive context profile build** - Created complete company intelligence using cpf-company-researcher agent. Generated `mythos-company.yaml` (23.6KB) with detailed identity, products, customer analysis, and competitive landscape. Also created `mythos-cross-agent-notes.yaml` with structured insights for ICP analysis, competitive positioning, and brand messaging patterns. Primary ICP identified as higher education advancement teams.
 - 2026-01-28 (8pm): **CPF Company Research session 2** - Second run of cpf-company-researcher agent. Created additional output files in `context-profile/` directory alongside existing testrun directories.
