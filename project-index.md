@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-29 (strategic monetization planning)
+**Last synced:** 2026-01-29 (CPF researcher overhaul - built complete research pipeline)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -126,6 +126,12 @@ The Context Infrastructure has four distinct layers:
   - Key insight: Octave is adjacent (direct-use GTM system), not competitive (CPF layers onto chatbots)
   - Validates broader context infrastructure thesis without saturating our segment
   - Full analysis: `project-knowledge.md` "Market Validation: Octave" section
+- 2026-01-29: **CPF Researcher Overhaul COMPLETED** - Built complete research pipeline
+  - Created orchestrator skill (`cpf-research`) for deterministic agent chaining via Task tool
+  - Built shared system context (`cpf-system`) with north star filtering principles
+  - Redesigned company researcher with strict YAML output and research planning
+  - Added verification agent for quality control and gap detection
+  - Established isolation patterns to prevent context contamination in client work
 - 2026-01-17: **Writing folder migrated** - All CPF writing moved to central Writing project
 - 2026-01-15: **"Context is Everything" article finalized**
 - 2026-01-10: **ContextOS Analysis** - Full analysis of gtm-context-os-quickstart
