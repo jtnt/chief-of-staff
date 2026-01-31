@@ -60,7 +60,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-01-30 (Agent SDK exploration and Google Docs sync architecture)
+**Last synced:** 2026-01-31 (Working docs convention and /working skill)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -134,6 +134,12 @@ The Context Infrastructure has four distinct layers:
   - Key insight: Octave is adjacent (direct-use GTM system), not competitive (CPF layers onto chatbots)
   - Validates broader context infrastructure thesis without saturating our segment
   - Full analysis: `project-knowledge.md` "Market Validation: Octave" section
+- 2026-01-31: **Working docs convention + /working skill**
+  - Established cross-project frontmatter convention for working documents (status: active/paused/absorbed/dead + created date)
+  - Built `/working` skill for consistent saves — user invokes mid-conversation, skill synthesizes thinking into standalone doc with proper frontmatter
+  - Retrofitted 12 existing Working/ docs with frontmatter (4 active, 4 paused, 4 absorbed)
+  - Convention added to global `~/.claude/CLAUDE.md` (cross-project)
+  - Key insight: Skills (explicit user action) are more reliable than CLAUDE.md instructions for proactive behaviors
 - 2026-01-30: **Agent SDK exploration + Google Docs sync architecture**
   - Explored Anthropic Agent SDK potential for building better CPF UX (better interface than current CLI approach)
   - Analyzed ContextOS frontmatter approach - YAML metadata with WikiLinks creates document relationship navigation for AI
