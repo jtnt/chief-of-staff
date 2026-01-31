@@ -20,21 +20,4 @@ transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of
 
 ## CLAUDE.md Suggestions
 
-### For Global ~/.claude/CLAUDE.md
-
-```suggestion:global
-### Hook Development Best Practices
-
-When working with hooks that parse transcripts:
-
-1. **Always check Claude Code docs first** - Use claude-code-guide agent to understand actual CLI behavior
-2. **Consider command vs user message distinction** - /exit commands create structured output in transcripts
-3. **Filter system messages** - local-command-stdout, local-command-caveat are CLI responses, not user input
-4. **Test failure modes** - Plans from Plan Mode may not account for real-world edge cases
-5. **Examine transcripts directly** - When hooks don't work as expected, look at actual JSONL structure
-
-Example: When checking "last user message", grep for `"type":"user"` but also filter out:
-- `local-command-stdout` (command output)
-- `local-command-caveat` (command warnings)
-- Tool results (unless that's what you want)
-```
+_Suggestion dismissed 2026-01-31 — "Check docs first" already in global CLAUDE.md; transcript parsing details too specific._

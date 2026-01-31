@@ -16,26 +16,4 @@ transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of
 
 ## CLAUDE.md Suggestions
 
-### For Project CLAUDE.md
-
-```suggestion:project
-## Automation Assessment Process
-
-When recommending new Claude Code automations:
-
-1. **Inventory existing stack first** - Check hooks, skills, subagents, MCP servers, plugins
-2. **Identify sophistication level** - Basic vs intermediate vs advanced automation maturity
-3. **Focus on workflow friction** - Real pain points over theoretical improvements
-4. **Recommend synthesis over basics** - For mature stacks, focus on cross-cutting capabilities
-```
-
-### For Global ~/.claude/CLAUDE.md
-
-```suggestion:global
-## Meta-Work: Automation Development
-
-When working on Claude Code automation (hooks, skills, subagents):
-- **Discovery before development**: Always analyze existing capabilities first
-- **Sophistication matching**: Match recommendation complexity to current automation maturity
-- **Gap identification over feature addition**: Focus on what's missing, not what's possible
-```
+_All suggestions dismissed 2026-01-31 — one-time process, not recurring patterns._
