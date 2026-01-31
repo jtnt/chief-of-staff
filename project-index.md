@@ -512,7 +512,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
-**Last synced:** 2026-01-28 (auto-capture session system)
+**Last synced:** 2026-01-31 (disabled auto-capture, --continue bug investigation)
 
 **Purpose:** Track work across multiple projects, synthesize information, identify patterns, support strategic decision-making. Philosophy: keep it simple—markdown files in folders.
 
@@ -531,6 +531,7 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 - **RivalSearchMCP:** Free alternative search (DuckDuckGo/Yahoo/Wikipedia + social scanning, GitHub search, academic papers)
 
 **Recent Work:**
+- 2026-01-31: **Auto-capture disabled, --continue bug investigated** — Auto-capture broken since Jan 30 night (captures spawn but `claude --print` fails silently). Diagnostic logs were being deleted by a `find -delete` line in session-end.sh (removed). SessionEnd hook disabled to stop orphaned processes. `--continue` hang is a known Claude Code bug with large sessions (#21067). Reviewed and dismissed all 7 pending CLAUDE.md pattern suggestions. Manual `/log` is capture method until root cause found.
 - 2026-01-28: **Auto-capture session system implemented** - SessionEnd hook spawns background Claude to capture sessions automatically. Creates logs in `./logs/`, extracts patterns to `./session-patterns/` (with CLAUDE.md suggestions), commits/pushes, syncs to CoS. Handles tracked vs untracked locations. SessionStart shows PATTERNS_PENDING flag when suggestions await review. `/log` and `/save` deprecated but still functional for manual use.
 - 2026-01-26: **cos-inbox notifications for all projects** - Modified `cos-session-start.sh` to handle both CoS (full briefing) and other projects (inbox check). Added CLAUDE.md principles: "Check Docs Before Claude Code Changes" and "Present Options, Don't Assume" (use AskUserQuestion with multi-select when appropriate).
 - 2026-01-26: **Removed Patterns folder** - Deleted Patterns/ folder as premature infrastructure (no concrete use cases). Existing mechanisms (project-knowledge.md, log Reasoning sections) serve the purpose. Also improved CLAUDE.md log filename examples from generic (`sync.md`) to descriptive (`sprint-positioning-draft.md`).
