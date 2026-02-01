@@ -13,7 +13,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/Razzo`
-**Last synced:** 2026-01-21 (LinkedIn article save)
+**Last synced:** 2026-02-01 (Claude Code debug mode inquiry)
 
 **Current Strategic Direction:**
 The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
@@ -29,6 +29,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 - Context Profile Framework: landing page + waitlist for app (NEW)
 
 **Recent Work:**
+- 2026-02-01: **Claude Code debug mode inquiry** - Troubleshot user question about "Debug Mode" appearing in Claude Code UI when using `--dangerously-skip-permissions` flag. Investigated shell aliases, environment variables, config files. Determined that Claude Code intentionally labels sessions with `--dangerously-skip-permissions` as "Debug Mode" in the UI as a safety warning, not because `--debug` logging is active. Routine meta-work session with no code changes.
 - 2026-01-21: **LinkedIn article saved** - Added "Getting Started with AI: 3 Simple Steps for SMBs" article to Writing folder. Covers three foundational steps: picking a chatbot (ChatGPT/Claude/Gemini), training people, and building a Context Profile. Promotes Razzo's workflow sprints and CPF framework. Includes two social media image versions.
 - 2026-01-20: **GTM-focused post update** - Updated LinkedIn post about AI productivity-to-innovation cycle to include sales and customer success elements. Added parallel GTM track showing how AI insights feed sales intelligence (objection handling, discovery questions) and customer success (expansion opportunities, training gaps). Created image generation prompt for updated graphic.
 - 2026-01-15: **Context Profile Framework landing page** COMPLETED
