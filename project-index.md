@@ -61,7 +61,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-02-01 (Vercel AGENTS.md research analysis and CPF implications)
+**Last synced:** 2026-02-01 (Nico Druelle GTM infrastructure research and file organization)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -89,6 +89,7 @@ The Context Infrastructure has four distinct layers:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-02-01: **Nico Druelle GTM infrastructure research** - Captured "Infrastructure for Agentic GTM" article from The Signal newsletter with full text, 8 diagrams (saved as source images), and video transcript. Added The Revenue Architects (TRA) service model analysis to business-knowledge.md. Key validation: TRA's Phase 1 ("Decision Audit") is pure context creation work — ICP definition, persona mapping, documenting decision logic — exactly CPF's Company and Department Layers. They won't touch orchestration until context is documented. Their 90-day engagement structure, $50M+ influenced revenue, and 100% reference rate proves companies pay premium rates for context infrastructure work. Target market (Series B+ PLG companies) aligns with CPF ICP. GTM Engineers emerging as natural buyer persona. Also reorganized all Research files with YYYYMMDD_ prefixes for chronological sorting.
 - 2026-02-01: **Vercel AGENTS.md research analysis and CPF implications** - Analyzed Vercel's empirical findings showing passive context documents achieved 100% pass rate vs 53% baseline, providing strong validation for CPF's foundational bet on structured context over ad-hoc prompting. Extracted index-plus-retrieval pattern (8KB compressed index + on-demand file reads) as potential solution to CPF's insertion challenge. Created comprehensive test plan with fictional B2B SaaS company "Relay" for validation. Enhanced `/working` skill description for better natural language recognition. Added all active Working docs to cos-inbox.md for improved visibility.
 - 2026-01-31: **Context graphs follow-up analysis and research reorganization** - Added Gupta & Jaya's "Context Graphs One Month In" follow-up article with comprehensive analysis. Key insights: capture the "how" to infer the "why" without annotation, "glue functions" hold institutional context, enterprise graphs define legal moves vs optimal ones. Renamed research files for clarity (e.g., "Industry Thinking.md" → "AIs Trillion-Dollar Opportunity Context Graphs - Jaya Gupta and Ashu Garg.md") and updated all cross-references. Research collection now organized as: Core Foundation Capital thesis thread + deep dive transcripts + practitioner perspectives.
 - 2026-01-31: **User research planning for CPF validation**
