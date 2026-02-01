@@ -56,6 +56,12 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **GitHub:** https://github.com/jtnt/chatbot-linebreaker
 - **Last synced:** 2026-01-21 (newly added)
 
+## Feed Digest
+- **Source:** `/Users/jtnt/Documents/Projects/feed-digest`
+- **Key files:** `CLAUDE.md`, `config.py`, `main.py`
+- **GitHub:** https://github.com/jtnt/feed-digest.git
+- **Last synced:** 2026-02-01 (initial build)
+
 ## Chief of Staff
 - **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
 - **Key files:** `project-knowledge.md`, `project-index.md`, `CLAUDE.md`

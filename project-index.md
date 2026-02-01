@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-01-28
+**Last Updated:** 2026-02-01
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -427,6 +427,38 @@ V1 MVP is functional with two working document types:
 - Run milestone audit to verify cross-phase integration
 - Optional: Verify Phase 1 requirements or mark complete based on working implementation
 - Consider: Chrome Web Store listing (currently out of scope)
+
+---
+
+### Feed Digest
+**Status:** Active - Utility Tool
+**What it is:** Daily email digest with AI-generated summaries of articles from subscribed RSS feeds
+**Source:** `/Users/jtnt/Documents/Projects/feed-digest`
+**GitHub:** https://github.com/jtnt/feed-digest.git
+**Last synced:** 2026-02-01 (initial build)
+
+**Purpose:** Automated morning email that fetches RSS feeds, summarizes articles via Claude Haiku, and sends consolidated HTML digest via Gmail SMTP. Runs daily on GitHub Actions.
+
+**Architecture:**
+- Python script with modular components (feeds, summarizer, email builder, mailer)
+- Claude Haiku 4.5 for article summarization (~$0.005/article)
+- Gmail SMTP with App Password authentication
+- GitHub Actions cron (1pm UTC = 8am EST)
+- Stateless: filters by publication date (25h window), no state file needed
+
+**Current Feeds:**
+- One Useful Thing (Ethan Mollick)
+- Cannonball GTM
+- The Signal
+- Ben's Bites
+
+**Recent Work:**
+- 2026-02-01: **Initial build COMPLETED** - Built complete system from plan in single session. All 12 files created (src modules, templates, config, GitHub workflow). Fixed Claude model ID (Haiku 4.5), tightened summarization prompt to prevent markdown output. Successfully tested end-to-end (RSS fetch → summarize → HTML email). Committed and pushed to GitHub. Ready for daily automation once GitHub Actions secrets are configured.
+
+**Open Items:**
+- Add GitHub Actions secrets (ANTHROPIC_API_KEY, GMAIL_ADDRESS, GMAIL_APP_PASSWORD, DIGEST_RECIPIENT)
+- Test workflow with manual trigger
+- Monitor first automated run
 
 ---
 
