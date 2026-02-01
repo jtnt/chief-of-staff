@@ -181,7 +181,7 @@ The Context Infrastructure has four distinct layers:
 ### Context Profile Builder
 **Status:** Active - Potential Rebuild
 **What it is:** Web app for creating Context Profile Framework documents
-**Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
+**Source:** `/Users/jtnt/Documents/Projects/Code/context-profile-builder`
 **GitHub:** https://github.com/jtnt/context-profile-builder.git
 **Last synced:** 2026-01-16 (PRD export for rebuild)
 
@@ -230,7 +230,7 @@ V1 MVP is functional with two working document types:
 ### LinkedIn My Posts Extractor
 **Status:** Active - Utility Tool
 **What it is:** Chrome extension that scrapes your own LinkedIn posts from your profile activity page and stores them locally
-**Source:** `/Users/jtnt/Documents/Projects/linkedin-my-posts-extractor`
+**Source:** `/Users/jtnt/Documents/Projects/Code/linkedin-my-posts-extractor`
 **Last synced:** Never (newly added)
 
 **Purpose:** Extract and archive your own LinkedIn posts for analysis, backup, or content repurposing.
@@ -255,7 +255,7 @@ V1 MVP is functional with two working document types:
 ### LinkedIn Scraper Extension
 **Status:** Active - Utility Tool
 **What it is:** Chrome extension that scrapes LinkedIn saved posts and stores them locally
-**Source:** `/Users/jtnt/Documents/Projects/linkedin-scraper-extension`
+**Source:** `/Users/jtnt/Documents/Projects/Code/linkedin-scraper-extension`
 **Last synced:** Never (newly added)
 
 **Purpose:** Extract and organize saved LinkedIn posts for reference, content inspiration, or research.
@@ -390,7 +390,7 @@ V1 MVP is functional with two working document types:
 ### Chatbot Linebreaker
 **Status:** Active - Personal Tool
 **What it is:** Chrome extension that swaps Enter/Shift+Enter behavior in AI chatbot interfaces to prevent accidental message submission
-**Source:** `/Users/jtnt/Documents/Projects/chatbot-linebreaker`
+**Source:** `/Users/jtnt/Documents/Projects/Code/chatbot-linebreaker`
 **GitHub:** https://github.com/jtnt/chatbot-linebreaker
 **Last synced:** 2026-01-21 (initial build - Phases 1-3 complete)
 
@@ -433,7 +433,7 @@ V1 MVP is functional with two working document types:
 ### Feed Digest
 **Status:** Active - Utility Tool
 **What it is:** Daily email digest with AI-generated summaries of articles from subscribed RSS feeds
-**Source:** `/Users/jtnt/Documents/Projects/feed-digest`
+**Source:** `/Users/jtnt/Documents/Projects/Code/feed-digest`
 **GitHub:** https://github.com/jtnt/feed-digest.git
 **Last synced:** 2026-02-01 (initial build)
 

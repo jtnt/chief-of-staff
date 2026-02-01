@@ -15,17 +15,17 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Last synced:** 2026-01-20
 
 ## LinkedIn My Posts Extractor
-- **Source:** `/Users/jtnt/Documents/Projects/linkedin-my-posts-extractor`
+- **Source:** `/Users/jtnt/Documents/Projects/Code/linkedin-my-posts-extractor`
 - **Key files:** `CLAUDE.md`
 - **Last synced:** Never (newly added)
 
 ## LinkedIn Scraper Extension
-- **Source:** `/Users/jtnt/Documents/Projects/linkedin-scraper-extension`
+- **Source:** `/Users/jtnt/Documents/Projects/Code/linkedin-scraper-extension`
 - **Key files:** `CLAUDE.md`, `README.md`
 - **Last synced:** Never (newly added)
 
 ## Context Profile Builder
-- **Source:** `/Users/jtnt/Documents/Projects/context-profile-builder`
+- **Source:** `/Users/jtnt/Documents/Projects/Code/context-profile-builder`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `TODO.md`, `prd-export.md`
 - **GitHub:** https://github.com/jtnt/context-profile-builder.git
 - **Last synced:** 2026-01-16 (PRD export for rebuild)
@@ -51,13 +51,13 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Last synced:** 2026-01-20 (email editing for Mike follow-up)
 
 ## Chatbot Linebreaker
-- **Source:** `/Users/jtnt/Documents/Projects/chatbot-linebreaker`
+- **Source:** `/Users/jtnt/Documents/Projects/Code/chatbot-linebreaker`
 - **Key files:** `CLAUDE.md`, `logs/20260121-initial-build.md`
 - **GitHub:** https://github.com/jtnt/chatbot-linebreaker
 - **Last synced:** 2026-01-21 (newly added)
 
 ## Feed Digest
-- **Source:** `/Users/jtnt/Documents/Projects/feed-digest`
+- **Source:** `/Users/jtnt/Documents/Projects/Code/feed-digest`
 - **Key files:** `CLAUDE.md`, `config.py`, `main.py`
 - **GitHub:** https://github.com/jtnt/feed-digest.git
 - **Last synced:** 2026-02-01 (initial build)
