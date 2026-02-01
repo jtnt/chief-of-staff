@@ -4,6 +4,21 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
+### 2026-01-31 - Review Boris Cherny's Claude Code tips for actionable items
+**Source:** X/Twitter thread from @bcherny (Claude Code creator)
+**Context:** 10 tips from the Claude Code team, saved with applicability notes
+
+Quick wins to try:
+- [ ] Try voice dictation (fn fn on macOS) for longer prompts
+- [ ] Add "scrap this and implement the elegant solution" to prompting vocabulary
+- [ ] Build habit: "Update your CLAUDE.md so you don't make that mistake again" after corrections
+- [ ] Explore `/statusline` customization for context usage tracking
+- [ ] Consider building a `/learn` spaced-repetition skill
+
+**Details:** `Resources/Claude Code/20260131-boris-cherny-10-claude-code-tips.md`
+
+---
+
 ### 2026-01-30 - Review automation ideas from recommendation session
 **Source:** Automation recommender session
 **Context:** Session start visibility problem + skills/hooks/MCP ideas
