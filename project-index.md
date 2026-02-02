@@ -331,7 +331,6 @@ V1 MVP is functional with two working document types:
 - Complete static site conversion
 - Evaluate which jQuery dependencies are actually needed
 - Update http:// URLs to https://
-- **DNS configuration:** Add CNAME record for www subdomain to DNS provider
 
 ---
 
