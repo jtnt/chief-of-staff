@@ -72,3 +72,8 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang`
 - **Key files:** `context-profile/research/company.yaml`
 - **Last synced:** 2026-01-28 (newly added)
+
+## AirOps Cohort Feb 2026
+- **Source:** `/Users/jtnt/Documents/Projects/AirOps Cohort Feb 2026`
+- **Key files:** `CLAUDE.md`, `project-knowledge.md`
+- **Last synced:** 2026-02-02 (project created)

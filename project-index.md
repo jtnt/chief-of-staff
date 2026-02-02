@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-01
+**Last Updated:** 2026-02-02
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -615,6 +615,30 @@ Mike Levy (CRO) engaged on platform evaluation work. Awaiting call confirmation 
 **Open Items:**
 - Consider global rollout of session-context.md pattern
 - Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
+
+---
+
+### AirOps Cohort Feb 2026
+**Status:** Active - Learning/Professional Development
+**What it is:** Structured AI marketing training program through AirOps Learning platform
+**Source:** `/Users/jtnt/Documents/Projects/AirOps Cohort Feb 2026`
+**Last synced:** 2026-02-02 (project created)
+
+**Program Overview:**
+- **Cohort:** February 2026 AI Marketing Cohort
+- **Platform:** AirOps Learning (https://learning.airops.com)
+- **Focus:** AI-enabled marketing workflows and automation
+- **Incentive:** $100 AirOps credits for homework submissions
+
+**Current Status:**
+Session 1 completed on 2026-02-02. Topics covered: Brand Kit setup and Competitive Intelligence workflow.
+
+**Recent Work:**
+- 2026-02-02: **Project created** - Established folder structure (Homework/, Notes/, Workflows/) with CLAUDE.md and project-knowledge.md. Session 1 homework assignment captured.
+
+**Open Items:**
+- Complete Session 1 homework (Brand Kit update + workflow modification)
+- Submit homework for AirOps credit incentive
 
 ---
 
