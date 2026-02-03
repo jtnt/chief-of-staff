@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-02
+**Last Updated:** 2026-02-03
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -655,7 +655,35 @@ Initial client engagement with meeting materials and reference documentation cap
 - 2026-02-03: **Initial client meeting analysis** - Organized meeting materials (prep, transcript, notes) into structured folder. Completed comprehensive analysis revealing sales/business development as primary pain point (not AI adoption). Identified fractional Chief AI Officer opportunity and Context Profile Framework applicability for client-specific AI restrictions. Created engagement planning documentation.
 
 **Open Items:**
-- No specific open items identified yet
+- Send Gallup poll link and "Getting Started with AI" article as promised
+- Consider tactical support for Alex's Apollo call/CRM challenge
+- Develop formal CPF presentation for client-specific AI governance angle
+
+---
+
+### Party Rental
+**Status:** Active - Client Project (New)
+**What it is:** Party rental business exploring AI adoption for operations and customer experience
+**Source:** `/Users/jtnt/Documents/Projects/Clients/Party Rental`
+**Last synced:** 2026-02-03
+
+**Company Context:**
+Event rental company with team using Props and Mail Flow for communications. Leadership (Gary) and team members exploring AI but haven't found clear business implementation path yet.
+
+**Current AI Usage:**
+- **Individual adoption:** Team members using ChatGPT for emails, document analysis, writing
+- **Pain point addressed:** Mental work reduction (email composition, context switching)
+- **Key challenge:** No collective strategy, accuracy concerns for business-critical work
+- **Vision:** Gary wants end-to-end AI event planning (customer describes event → AI suggests products → builds cart → creates order)
+
+**Recent Work:**
+- 2026-02-03: **Team discussion analysis completed** - Transcribed and analyzed team meeting about AI usage. Key findings: (1) Bottom-up adoption working for individual productivity, (2) No clear business use case identified yet, (3) Gary has ambitious vision but unclear path from today to there, (4) Team is curious and open but cautious about accuracy. Created comprehensive analysis with engagement recommendations.
+
+**Open Items:**
+- Validate analysis with Gary/team
+- Identify quick win workflow (email or document processing)
+- Schedule discovery session to map processes and automation opportunities
+- Develop engagement proposal (likely AI Fluency Sprint or custom workflow development)
 
 ---
 

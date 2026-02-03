@@ -80,5 +80,10 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 
 ## Beekeeper Group
 - **Source:** `/Users/jtnt/Documents/Projects/Clients/Beekeeper Group`
-- **Key files:** No project files detected
+- **Key files:** `logs/20260203-client-onboarding.md`, `engagement-model-notes.md`, `reference-materials.md`, `20260203-Lets-Talk-AI-Meeting/meeting-analysis.md`
+- **Last synced:** 2026-02-03 (initial client meeting and engagement planning)
+
+## Party Rental
+- **Source:** `/Users/jtnt/Documents/Projects/Clients/Party Rental`
+- **Key files:** `_context/thoughts on AI from Gary and others.m4a` (audio file)
 - **Last synced:** Never (newly added)
