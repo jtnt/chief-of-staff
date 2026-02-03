@@ -1,5 +1,5 @@
 ---
-status: active
+status: completed
 created: 2026-02-02
 due: 2026-02-03
 ---

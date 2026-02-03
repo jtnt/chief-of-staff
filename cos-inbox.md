@@ -4,6 +4,14 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
+(Inbox clear - focus on project deliverables)
+
+---
+
+## Backlog (Meta-Work)
+
+Items worth revisiting when there's downtime or systems need improvement. Not surfaced in daily briefings.
+
 ### 2026-01-31 - Review Boris Cherny's Claude Code tips for actionable items
 **Source:** X/Twitter thread from @bcherny (Claude Code creator)
 **Context:** 10 tips from the Claude Code team, saved with applicability notes
@@ -19,62 +27,46 @@ Quick wins to try:
 
 ---
 
-### 2026-01-30 - Review automation ideas from recommendation session
-**Source:** Automation recommender session
-**Context:** Session start visibility problem + skills/hooks/MCP ideas
+### 2026-01-30 - Review and implement CoS automation recommendations
+**Source:** Two automation analysis sessions on 2026-01-30
+**Context:** Identified 5 targeted improvements for Chief of Staff automation stack
 
-Key decisions needed:
+**High priority (low effort):**
 - [ ] Session start visibility: Choose Option 1 (CLAUDE.md), 2 (notifications), or 3 (pre-script)
-- [ ] High-value skills: `/cross-project-synthesis`, `/strategic-decision`, `/content-repurpose`
+- [ ] Notification hook (idle_prompt) - macOS notifications for background work completion
+- [ ] Block external edits hook - enforce read-only rule for external project folders
+
+**Medium priority (skills):**
+- [ ] `/project-health` skill - on-demand dashboard
+- [ ] `/weekly-review` skill - automated weekly synthesis
+- [ ] `/cross-project-synthesis` skill - pattern identification across projects
+- [ ] `/strategic-decision` skill - formalize decision process
+- [ ] `/content-repurpose` skill - multi-platform publishing
+
+**Exploratory:**
 - [ ] Verify Linear/Slack MCP servers exist before adding
-- [ ] Block external edits hook (enforces read-only rule)
+- [ ] Cross-project synthesizer subagent - background pattern detection
 
 **Details:** `Working/automation-ideas-to-implement.md`
 
 ---
 
-### 2026-01-30 - Review and implement automation recommendations
-**Source:** Automation analysis session
-**Context:** Full analysis of CoS automation stack identified 5 targeted improvements
-
-- [ ] Review recommendations: `Resources/Claude Code/20260130-automation-recommendations.md`
-- [ ] Implement #1: Notification hook (idle_prompt) - low effort
-- [ ] Implement #2: Block external edits hook - low effort
-- [ ] Implement #3: `/project-health` skill - medium effort
-- [ ] Implement #4: `/weekly-review` skill - medium effort
-- [ ] Implement #5: Cross-project synthesizer agent - medium effort
-
----
-
-### 2026-01-28 - Investigate SessionEnd script delay
-**Source:** Session observation
-**Context:** Performance issue in auto-capture system
-
-- [ ] SessionEnd script runs correctly but takes ~20 secs to exit after log file is created
-- [ ] Investigate what's causing the delay (likely sync to CoS or git operations)
-- [ ] Consider if blocking operations can be moved to background
-
----
-
-### 2026-01-26 - Update terminology: commands → skills
-**Source:** Quick reminder
-**Context:** Claude Code terminology update needed
-
-- [ ] Update CLAUDE.md files to use "skills" instead of "commands" where appropriate
-
----
+## Archive
 
 ### 2026-01-22 - Test Meeting Review v7
 **Source:** Meta-work session
 **Context:** Implemented Sonnet model change for quality extraction
+**Archived:** 2026-02-03 - Meeting review system working as expected
 
-- [ ] Run `/meeting-review` with 2-3 meetings to verify changes work
-- [ ] Confirm Sonnet model produces quality summaries
-- [ ] Check follow-up extraction works correctly
+### 2026-01-26 - Update terminology: commands → skills
+**Source:** Quick reminder
+**Context:** Claude Code terminology update needed
+**Archived:** 2026-02-03 - Not applicable yet. 14 commands still actively in use alongside 12 skills. Both systems coexist. Terminology in CLAUDE.md is correct as-is.
 
----
-
-## Archive
+### 2026-01-28 - Investigate SessionEnd script delay
+**Source:** Session observation
+**Context:** Performance issue in auto-capture system
+**Archived:** 2026-02-03 - Investigation completed
 
 ### 2026-01-22 - Check out Sallam from "DC Founders Panel"
 **Source:** Meeting review
