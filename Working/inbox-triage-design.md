@@ -1,5 +1,5 @@
 ---
-status: active
+status: absorbed
 created: 2026-02-02
 ---
 

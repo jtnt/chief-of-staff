@@ -55,6 +55,9 @@ Chief of Staff/
 │   ├── Claude Code/                    # Claude Code documentation
 │   └── Donald Miller StoryBrand Framework.md  # Marketing reference
 │
+├── Tasks/                              # One-off actionable items
+│   └── YYYYMMDD-*.md                   # Standalone tasks not tied to projects
+│
 ├── Weekly Reviews/                     # Periodic synthesis documents
 │
 ├── CLAUDE.md                           # Instructions for Claude Code (this file)
@@ -132,6 +135,22 @@ The `Resources/` folder contains reference materials that inform strategic work 
 - Write clear summaries with examples
 - Keep materials project-agnostic (specific applications go in project folders)
 - Use descriptive filenames
+
+## Tasks Folder
+
+The `Tasks/` folder contains one-off actionable items that don't belong to a specific tracked project:
+
+- **Standalone tasks** - Things to do that aren't part of a larger project
+- **Time-bound actions** - Tasks with deadlines or specific completion targets
+- **Cross-cutting work** - Activities that span multiple contexts
+- **Personal to-dos** - Professional tasks not tied to project deliverables
+
+**When adding to Tasks:**
+- Use YAML frontmatter with `status` (active/paused/completed), `created` date, and optional `due` date
+- Use descriptive filenames: `YYYYMMDD-description.md`
+- Include clear task lists with checkboxes for subtasks
+- Archive or delete completed tasks to keep folder current
+- If a task grows into a larger project, migrate it to a tracked project folder
 
 
 ## Auto-Capture System
