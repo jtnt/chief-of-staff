@@ -30,6 +30,7 @@ This runs 1-3x daily (critical workflow). Full steps, edge cases, and format tem
 
 - **Never guess which project something belongs to.** If it's not clear, ask.
 - **Never edit files in external project folders.** Only read from them.
+- **When the user says "remind me" or "don't let me forget"**, always create a persistent artifact (task file, inbox item, or note). Never rely on conversational promises.
 
 ## Core Responsibilities
 
@@ -86,7 +87,7 @@ Context Profile Framework/
 └── CLAUDE.md
 ```
 
-**Log filename convention:** `YYYYMMDD-[identifier].md` where identifier is 2-4 descriptive words. See `/log` command for examples of good vs bad identifiers.
+**Log filename convention:** `YYYYMMDD-[identifier].md` where identifier is 2-4 descriptive words (e.g., `20260204-meeting-review-rewrite.md`, not `20260204-session.md`).
 
 **Why:** Projects are portable. When you move/archive a project, its complete history travels with it. Chief of Staff is an index/dashboard, not a repository.
 
@@ -173,11 +174,9 @@ any-project/
 
 **PATTERNS_PENDING flag:** When session-patterns files contain CLAUDE.md suggestions, SessionStart hook injects this flag. Use `/review-patterns` to review and apply suggestions.
 
-### Legacy Commands (Deprecated)
+### Manual Capture
 
-These still work for manual mid-session use but are no longer needed at session end:
-- **`/log`** - Manual log entry (no git, no sync)
-- **`/save`** - Manual log + commit + push + sync
+Use `/session-capture` for mid-session captures if needed. Auto-capture handles session end automatically.
 
 ## Syncing Chief of Staff Itself
 

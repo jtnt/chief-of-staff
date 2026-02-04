@@ -13,17 +13,3 @@ transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of
 **Diagnostic commands reveal truth.** System performance issues (fan noise, high load, memory pressure) have observable causes. Running diagnostics (`ps aux`, `top`, memory checks) shows exactly what's happening instead of guessing based on what "seems likely."
 
 **MCP servers can create process bloat.** The NotebookLM MCP server had spawned 22 processes throughout the day - 4 actively burning CPU, 18 idle orphans. Each Claude Code session/reconnection may spawn new instances without cleanup.
-
-## CLAUDE.md Suggestions
-
-### For Global ~/.claude/CLAUDE.md
-
-```suggestion:global
-### Investigate, Don't Speculate
-
-**When the user reports a system issue** (performance, errors, unexpected behavior), run diagnostic commands first. Don't theorize about causes before looking. Check processes, logs, and system state — then report what you find.
-```
-
-**Status:** ✅ Applied during session
-
-This principle was added to global CLAUDE.md under Core Principles, right after "Never Make Things Up" (since it's a related pattern about not fabricating explanations).
