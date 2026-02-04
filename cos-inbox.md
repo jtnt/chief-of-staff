@@ -4,7 +4,13 @@ Items pushed from Chief of Staff conversations and meeting reviews.
 
 ## Pending
 
-(Inbox clear - focus on project deliverables)
+### 2026-02-03 - Build client-facing envoy skills from Razzo worksheets
+**Source:** Evening session — envoy skill creation
+**Context:** Created `/envoy` skill based on "Prompts Are Conversations You're Not Present For" article. Next step: apply envoy framework to build client-facing skills from the AI Workflow Opportunity Worksheet and AI Workflow Planning Template.
+
+Key decision to make first: Claude Code skill vs standalone prompt clients paste into any AI.
+
+**Plan:** `Tasks/20260203-envoy-client-skills-plan.md`
 
 ---
 
