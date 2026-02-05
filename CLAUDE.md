@@ -159,8 +159,9 @@ The `Tasks/` folder contains one-off actionable items that don't belong to a spe
 Sessions are **automatically captured** when they end via SessionEnd hook. A background Claude process:
 1. Creates log entry in `./logs/YYYYMMDD-[identifier].md`
 2. Extracts patterns to `./session-patterns/` (when patterns emerge)
-3. Commits and pushes changes
-4. Syncs to Chief of Staff (updates project-index.md)
+3. Updates `project-knowledge.md` (when session contains strategic insights, decisions, or milestones)
+4. Commits and pushes changes
+5. Syncs to Chief of Staff (updates project-index.md)
 
 **Folder structure per project:**
 ```
