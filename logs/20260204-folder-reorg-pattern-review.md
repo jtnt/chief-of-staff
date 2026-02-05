@@ -9,7 +9,7 @@ working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
 
 ## What Was Done
 
-**Client folder consolidation:** Moved shared context materials from `Clients/Ω_context/` into `Razzo/Ω_context/` to enable cross-client access to Razzo methodology, training materials, and CAIO reference documents. Created CLAUDE.md files for Beekeeper Group, Mythos-More Vang, and Party Rental client folders, each pointing to the shared context in Razzo. Updated SalesIntel's CLAUDE.md to reference the new location. Fixed 6 path references across Beekeeper Group files.
+**Client folder consolidation:** Moved shared context materials from `Clients/z_context/` into `Razzo/z_context/` to enable cross-client access to Razzo methodology, training materials, and CAIO reference documents. Created CLAUDE.md files for Beekeeper Group, Mythos-More Vang, and Party Rental client folders, each pointing to the shared context in Razzo. Updated SalesIntel's CLAUDE.md to reference the new location. Fixed 6 path references across Beekeeper Group files.
 
 **Pattern review cleanup:** Processed 11 session pattern files containing 19 CLAUDE.md suggestions. Applied 4 valuable additions: (1) persistent capture principle when user says "remind me," (2) question quality filter for research (3 tests), (3) research file naming convention for CPF, (4) working document management for CPF. Dismissed 14 suggestions as either already in practice, too niche (plugin debugging), or too vague (organic structure). Stripped suggestion markers from all 11 files to prevent PATTERNS_PENDING flag.
 
@@ -21,7 +21,7 @@ working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
 
 **Pattern filtering strategy:** Applied only suggestions that would actually change behavior rather than documenting existing practices. Focused on persistent capture and quality filters while dismissing procedural documentation.
 
-**Ω_context naming preservation:** Kept the distinctive `Ω_context` name instead of normalizing to `Context` for consistency with existing client expectations.
+**z_context naming preservation:** Kept the distinctive `z_context` name instead of normalizing to `Context` for consistency with existing client expectations.
 
 ## Reasoning
 
@@ -37,12 +37,12 @@ working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
 - `Beekeeper Group/CLAUDE.md` - project overview + Razzo context reference
 - `Mythos-More Vang/CLAUDE.md` - project overview + Razzo context reference
 - `Party Rental/CLAUDE.md` - project overview + Razzo context reference
-- `Razzo/Ω_context/` directory structure with moved files
+- `Razzo/z_context/` directory structure with moved files
 
 **Files modified:**
 - `SalesIntel/CLAUDE.md` - added Razzo context reference
-- `Razzo/CLAUDE.md` - documented new Ω_context folder
-- 6 Beekeeper Group files with fixed path references (`Clients/Context/` → `Razzo/Ω_context/`)
+- `Razzo/CLAUDE.md` - documented new z_context folder
+- 6 Beekeeper Group files with fixed path references (`Clients/Context/` → `Razzo/z_context/`)
 - Chief of Staff `CLAUDE.md` - added persistent capture rule
 - CPF `CLAUDE.md` - added question filter, research naming, working doc management
 - Global `~/.claude/CLAUDE.md` - removed legacy command references

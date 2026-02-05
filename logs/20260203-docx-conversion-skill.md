@@ -9,7 +9,7 @@ working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
 
 ## What Was Done
 
-**Docx Conversion Task:** Converted 16 .docx files from client project (Mythos-More Vang/Ω_context) to properly formatted markdown using pandoc. Files included strategic planning documents (100-Day Plans, CAIO proposals, email drafts, meeting transcripts).
+**Docx Conversion Task:** Converted 16 .docx files from client project (Mythos-More Vang/z_context) to properly formatted markdown using pandoc. Files included strategic planning documents (100-Day Plans, CAIO proposals, email drafts, meeting transcripts).
 
 **Skill Development:** Created `/convert-docx` skill for future use:
 - Runs on haiku model (lightweight for file conversion)
@@ -18,7 +18,7 @@ working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
 - Defaults to creating `markdown/` subdirectory
 - Added `Bash(pandoc:*)` permission to settings.json
 
-**Files converted:** 16 documents including AI adoption plans, CAIO job descriptions, pitch emails, and meeting transcripts. Output stored in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/Ω_context/markdown/`.
+**Files converted:** 16 documents including AI adoption plans, CAIO job descriptions, pitch emails, and meeting transcripts. Output stored in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/z_context/markdown/`.
 
 ## Key Decisions
 
@@ -40,7 +40,7 @@ working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
 
 **Files created:**
 - `/Users/jtnt/.claude/skills/convert-docx/SKILL.md` - New skill for docx to markdown conversion
-- 16 markdown files in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/Ω_context/markdown/`
+- 16 markdown files in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/z_context/markdown/`
 
 **Configuration updated:**
 - `~/.claude/settings.json` - Added `Bash(pandoc:*)` permission for skill

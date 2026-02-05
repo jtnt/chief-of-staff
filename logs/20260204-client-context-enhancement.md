@@ -18,7 +18,7 @@ Enhanced client context materials from a Scaling AI webinar recording. User had 
 - Final version includes 5-step framework, objection handling, discovery questions, implementation timeline, and real client scenarios
 
 **Files processed:**
-- `/Users/jtnt/Documents/Projects/Clients/Ω_context/Scaling AI/` - webinar materials
+- `/Users/jtnt/Documents/Projects/Clients/z_context/Scaling AI/` - webinar materials
 - Enhanced notes file with client-focused content ready for proposal generation
 
 ## Key Decisions
@@ -63,7 +63,7 @@ Cross-reference git output with what you found in the transcript. List all files
 modified, created, or deleted with a brief description of each change.
 If git shows changes not evident from the transcript, include them anyway.
 
-No git changes were made during this session. Work was done entirely in the external client context folder (`/Users/jtnt/Documents/Projects/Clients/Ω_context/Scaling AI/`). The session focused on enhancing existing webinar materials for client proposal generation rather than modifying Chief of Staff system files.
+No git changes were made during this session. Work was done entirely in the external client context folder (`/Users/jtnt/Documents/Projects/Clients/z_context/Scaling AI/`). The session focused on enhancing existing webinar materials for client proposal generation rather than modifying Chief of Staff system files.
 
 **Files examined and enhanced (external to this repo):**
 - Scaling AI webinar notes - multiple iterations to optimize for client work
