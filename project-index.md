@@ -13,7 +13,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/Razzo`
-**Last synced:** 2026-02-01 (session capture meta-work)
+**Last synced:** 2026-02-05 (trivial config change - Opus 4.5)
 
 **Current Strategic Direction:**
 The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
@@ -29,6 +29,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 - Context Profile Framework: landing page + waitlist for app (NEW)
 
 **Recent Work:**
+- 2026-02-05: **Trivial config change** - User switched Claude Code model from default to Opus 4.5, then immediately exited. No substantive work performed.
 - 2026-02-01: **Session capture meta-work** - Processed a previous session about Claude Code debug mode troubleshooting using `/session-capture` skill. Key finding: User had used single dash (`-dangerously-skip-permissions`) instead of double dash, causing CLI to parse `-d` as `--debug`. Session capture ran interactively instead of background due to quick `--continue` after session exit.
 - 2026-01-21: **LinkedIn article saved** - Added "Getting Started with AI: 3 Simple Steps for SMBs" article to Writing folder. Covers three foundational steps: picking a chatbot (ChatGPT/Claude/Gemini), training people, and building a Context Profile. Promotes Razzo's workflow sprints and CPF framework. Includes two social media image versions.
 - 2026-01-20: **GTM-focused post update** - Updated LinkedIn post about AI productivity-to-innovation cycle to include sales and customer success elements. Added parallel GTM track showing how AI insights feed sales intelligence (objection handling, discovery questions) and customer success (expansion opportunities, training gaps). Created image generation prompt for updated graphic.
