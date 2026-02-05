@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-01-25 10:17 AM PST
+**Last Updated:** 2026-02-04
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -48,20 +48,45 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Current State
 
-- Initial structure operational (project-knowledge.md, project-index.md, project-sources.md, CLAUDE.md)
-- **Simplified workflow commands** - `/log` (quick capture) and `/save` (full workflow) replace the previous three-command system
-- Two-way sync workflows built: pull from Chief of Staff ("update [project]") and push from projects (`/save`)
-- Tracking 6 projects: Razzo, CPF, Context Profile Builder, LinkedIn My Posts Extractor, LinkedIn Scraper Extension, Caregiver App
-- **Three-layer documentation model established** across all projects
-- **Smart project status detection** - only checks/reports projects with actual changes
-- **Check-in system operational** - Four types for daily planning, reflection, and thought capture
-- **Bidirectional flow implemented** - CoS can now push items to project inboxes
-- **Proactive knowledge capture** - session-context.md for recovery, immediate p-k.md updates for significant decisions (Chief of Staff only, testing before global rollout)
-- **Log restructure complete** - Logs live WITH projects in `logs/` folders, not in Chief of Staff
-- **Claude.ai conversation extraction tool** - Complete toolset for extracting and organizing Claude.ai conversations from data exports (search, review, extract workflows)
-- **`/claude-web-extract` command** - User-friendly guided workflow wrapping the extraction tool (6-step process with validation, keyword guidance, manual review pause)
-- **Brave Search MCP** - Added to user-level MCP configuration for global web search capabilities across all projects
-- **RivalSearchMCP** - Added free alternative search MCP (hosted version) alongside Brave Search, providing DuckDuckGo/Yahoo/Wikipedia search plus specialized tools (social scanning, GitHub search, academic papers, document analysis)
+### Core Infrastructure
+- project-knowledge.md, project-index.md, project-sources.md, CLAUDE.md operational
+- Tracking 11 projects (6 active, 5 tools/utilities/paused)
+- Three-layer documentation model across all projects (session.md temporary, project-knowledge.md strategic, CLAUDE.md technical)
+- Logs live WITH projects in `logs/` folders, not in Chief of Staff
+- Bidirectional flow: CoS pushes items to project inboxes (`cos-inbox.md`)
+
+### Auto-Capture System (replaced /log and /save)
+- **SessionEnd hook** spawns background Claude to capture sessions automatically
+- `/session-capture` skill: reads transcript → creates log → extracts patterns → updates project-knowledge.md → commits/pushes → syncs to CoS
+- `/review-patterns` skill for reviewing CLAUDE.md suggestions from patterns
+- `PATTERNS_PENDING` flag surfaced at session start when suggestions exist
+- Plan files from `~/.claude/plans/` preserved verbatim in session logs
+- Trivial sessions (< 3 user messages or < 2KB) skipped automatically
+- `/log` and `/save` commands deprecated
+
+### Strategic Briefing
+- Runs 1-3x daily via `BRIEFING_REQUIRED` flag from SessionStart hook
+- Format: Calendar → Projects → Content → Inbox → Meetings
+- Three-tier inbox: Pending (priority) → Backlog (meta-work) → Archive
+- Bias toward project deliverables principle embedded in briefing template
+
+### Check-In System
+- Four skills: `/morning`, `/evening`, `/thought`, `/journal` (converted from commands)
+- Model-optimized: morning/evening/journal use Sonnet, thought uses Haiku
+- Interactive prompts via `AskUserQuestion` with structured options
+- Natural language detection via hooks still operational
+- Project routing: check-in content mentioning tracked projects can push to project inboxes
+
+### MCP & External Services
+- Google Calendar + Gmail MCP (project-scoped, OAuth via Cloud project `claude-code-484521`)
+- Brave Search MCP (user-level, global)
+- Notion MCP (project-scoped via `.mcp.json`)
+
+### Tools & Utilities
+- Claude.ai conversation extraction tool + `/claude-web-extract` command
+- `/humanize` command for AI pattern cleanup
+- `/export-session` for readable transcript exports
+- Inbox triage plugin built (`/Users/jtnt/Documents/Projects/Code/inbox-triage/`)
 
 ---
 
@@ -69,316 +94,82 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
-- **Logs live with projects** (2026-01-14): Each project has its own `logs/` folder. Chief of Staff is an index/dashboard, not a repository. When you move/archive a project, its complete history travels with it.
+- **Auto-capture replaces manual save** (2026-01-28): SessionEnd hook spawns background Claude to capture sessions. Replaced `/log` and `/save` commands. Accepts cross-project limitation (sessions log to cwd only). Trivial sessions auto-skipped.
 
-- **Simplified workflow commands** (2026-01-17): Replaced three commands (`/update-knowledge`, `/update-cos`, `/save-progress`) with two simpler ones: `/log` (quick capture) and `/save` (full workflow). Claude writes logs (has conversation context), script handles cross-repo sync (file operations only).
+- **Logs live with projects** (2026-01-14): Each project has its own `logs/` folder. Chief of Staff is an index/dashboard, not a repository. Portable history.
 
-- **Proactive knowledge capture** (2026-01-14): Hybrid approach - session-context.md for recovery after context compaction + immediate project-knowledge.md updates for significant decisions. Testing in Chief of Staff only before considering global rollout.
+- **Three-tier inbox** (2026-02-03): Pending (priority work) → Backlog (meta-work) → Archive. Prevents meta-work optimization from competing with revenue-generating work.
 
-- **File split** (2026-01-14): `project-knowledge.md` is about Chief of Staff itself. `project-index.md` contains summaries of tracked projects. Clean separation of concerns.
+- **Commands → Skills migration** (2026-01-31): Check-in commands converted to skills with explicit model selection. Skills support modern Claude Code features; commands are legacy.
 
-- **Three-layer documentation model** (2026-01-09): session.md (temporary working notes), project-knowledge.md (strategic context), CLAUDE.md (technical instructions). Git commits capture granular history.
+- **File split** (2026-01-14): `project-knowledge.md` is about Chief of Staff itself. `project-index.md` contains summaries of tracked projects.
 
-- **Conversation analysis is primary** (2026-01-09): Most valuable insights live in conversations, not file diffs. `/update-knowledge` explicitly extracts decisions, strategic shifts, patterns from conversation before checking other sources.
+- **Three-layer documentation model** (2026-01-09): session.md (temporary), project-knowledge.md (strategic context), CLAUDE.md (technical instructions).
+
+- **Conversation analysis is primary** (2026-01-09): Most valuable insights live in conversations, not file diffs.
 
 ### Technical Setup
 
-- `~/.claude/CLAUDE.md` contains documentation model and "Session Workflow" instruction
-- CLAUDE.md contains instructions for Chief of Staff workflows, project sync, and session file handling
-- `/log` command creates log entries in `./logs/` (Claude writes, no git/sync)
-- `/save` command does full workflow: log + git commit/push + CoS sync via `sync-to-cos.sh` script
-- `~/.claude/scripts/sync-to-cos.sh` handles cross-repo operations (updating project-sources.md, committing CoS changes)
+- `~/.claude/CLAUDE.md` contains documentation model and session workflow instructions
+- CLAUDE.md contains instructions for Chief of Staff workflows, project sync, session handling
+- Auto-capture via SessionEnd hook → `/session-capture` skill → log + patterns + project-knowledge + git + CoS sync
 - GitHub repo established for version control
 
 ---
 
 ## Recent Work
 
-### 2026-01-25: Personal Blog Migration Completed
+### 2026-02-04: Project Knowledge Backfill & Auto-Capture Fix
 
-Completed migration of jtnt.io personal blog to Dreamhost (was priority #1 from 2026-01-24 morning check-in). This is user's personal blog site, separate from tracked projects.
+Identified that project-knowledge.md files hadn't been updated in over a month across all projects. Root cause: when `/log` and `/save` were replaced by auto-capture, the project-knowledge.md update step was never added to the skill. Added Step 4 (Update Project Knowledge) to `/session-capture` skill. Backfilled all stale project-knowledge.md files.
 
-### 2026-01-25: Session Saving References Captured
+### 2026-02-04: Insights Report Applied
 
-Saved external references for future session saving improvements:
-- conversation-logger (sirkitree/conversation-logger.git + blog post)
-- cc-sessions (GWUDCAP/cc-sessions.git)
+Applied three priority suggestions from `/insights` usage report (2,142 sessions analyzed): global git workflow standards, file reorganization rules (auto-fix broken references), and autonomy defaults (act on clear tasks, save questions for ambiguous intent).
 
-User note: These are inspiration for possible ideas, not immediate changes to the working system. Documented in `Resources/Claude Code/session-saving-references.md`.
+### 2026-02-03: Inbox Prioritization System
 
-### 2026-01-24: Link Capture System in Use
+Restructured inbox to three tiers: Pending (priority) → Backlog (meta-work) → Archive. Updated briefing template. Added "Bias toward project deliverables" principle. Prevents meta-work from creating false urgency.
 
-Captured AI adoption article from AI Ready RVA into the Links system. WebFetch initially failed to retrieve full content, but after user provided article text, successfully processed and saved to `Links/Business/20260124-ai-adoption-success-ai-ready-rva.md` with comprehensive framework extraction and project tagging. Links system working as designed for business article capture.
+### 2026-02-02: Inbox Triage Plugin
 
-**User clarified expectation:** Link summaries should contain clean extraction of article content and key frameworks/steps, not strategic analysis or application insights. Adjusted capture format accordingly.
+Built Claude Code plugin for email triage using `plugin-dev:create-plugin` workflow. Gmail scanning, 6-bucket categorization, action suggestions. Location: `/Users/jtnt/Documents/Projects/Code/inbox-triage/`.
 
-### 2026-01-21: Global CLAUDE.md Optimization
+### 2026-02-02: Plugin Skill Naming Bug
 
-Optimized global CLAUDE.md file from 275 lines to 90 lines (67% reduction) based on official best practices research. Applied progressive disclosure strategy: moved detailed workflows to `~/.claude/workflows/session-workflow.md` while preserving all essential behaviors in main file. Added "IMPORTANT:" emphasis to critical rules.
+Fixed 8 skills across 2 official Claude Code plugins (plugin-dev, hookify) where spaces in skill names made them appear in autocomplete but fail to execute.
 
-**Key insight from research:** Frontier LLMs can follow ~150-200 instructions reliably. Claude Code's system prompt uses ~50, leaving limited budget for CLAUDE.md content. The 275-line file likely contained 100+ distinct instructions which could degrade instruction following.
+### 2026-01-31: Commands → Skills Conversion
 
-**Files created:**
-- `~/.claude/CLAUDE.md.backup-20260121` (backup)
-- `~/.claude/workflows/session-workflow.md` (detailed procedures)
+Converted 4 check-in commands to individual skills with explicit model selection (morning/evening/journal: sonnet, thought: haiku). Improved to use `AskUserQuestion` with structured options. Commands backed up to `.bak` files.
 
-All CoS-related content stayed in global file since it's used by other projects (inbox check, /log and /save commands, session.md workflow, project-knowledge.md pattern).
+### 2026-01-31: SessionEnd Hook Stabilized
 
-### 2026-01-21: Claude Code Feature Analysis
+Restored hooks to stable state after investigating auto-capture failures (Claude Code bug, not hooks). Added "Never Delete What You Can't Recover" principle to global CLAUDE.md. Removed broken git-haiku hook.
 
-Analyzed Claude Code feature usage to identify underutilized capabilities. Key findings:
-- SessionStart hook for auto-sync is described in CLAUDE.md but not implemented
-- Extended thinking (`Option+T`), plan mode (`Shift+Tab`), and session naming not being used
-- Path-specific rules (`~/.claude/rules/`) not configured
-- Custom agents folder was occupied by leftover GSD framework files (removed)
+### 2026-01-31: Global Config Cleanup
 
-Created reference document at `Resources/Claude Code/underused-features.md` with prioritized recommendations. User most interested in Extended Thinking for strategic analysis work.
+Removed GSD framework files (65 files, 17K lines), orphaned scripts. Hardened `.gitignore`. Repo from 97 → 54 tracked files.
 
-### 2026-01-21: Humanizer Integration
+### 2026-01-28: Auto-Capture System Implemented
 
-Integrated humanizer patterns into the writing system so they inform writing inline (not just as post-process cleanup):
+Replaced `/log` and `/save` with automatic SessionEnd capture. Background Claude reads transcript → creates log → extracts patterns → commits/pushes → syncs to CoS. Untracked sessions go to `~/.claude/untracked-sessions/`. `/review-patterns` skill for applying CLAUDE.md suggestions.
 
-1. **Replaced `dont-sound-like-ai.md`** with enhanced version (404 lines, up from 147) - Added "Personality and Soul" section, merged all 24 patterns from blader/humanizer (based on Wikipedia AI Cleanup), preserved unique LinkedIn-bro patterns
+### 2026-01-26: Four-Phase System Cleanup
 
-2. **Updated global CLAUDE.md writing section** - Added "The soul principle (most important)" with five key points: have opinions, vary rhythm, acknowledge complexity, use "I", be specific about feelings
+Consolidated settings.json (176 → 58 permissions), DRY'd commands, added Reasoning section to log template, created USAGE-GUIDE.md.
 
-3. **Created `/humanize` command** - Full standalone command for explicit post-draft cleanup when wanted
+### 2026-01-26: CoS Inbox Notifications Across Projects
 
-Key insight: Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as obvious as slop. Good writing has a human behind it.
-
-### 2026-01-20: MCP Configuration Consolidation
-
-Cleaned up MCP configuration for Chief of Staff project. The Notion MCP server was configured in `~/.claude.json` under project-specific settings, while google-calendar and gmail were in the project's `.mcp.json` file. Consolidated all three into `.mcp.json` for consistency - this is the cleaner approach since it lives with the project and is version-controlled. Removed the duplicate from `~/.claude.json` and removed notion from the `disabledMcpServers` array.
-
-### 2026-01-20: RivalSearchMCP Added
-
-Added RivalSearchMCP as a free alternative search MCP alongside Brave Search. User found the GitHub repo (damionrashford/RivalSearchMCP), which provides search via DuckDuckGo/Yahoo/Wikipedia with automatic fallbacks plus specialized tools (social media scanning, GitHub search, academic papers, document analysis). Used hosted version (`https://RivalSearchMCP.fastmcp.app/mcp`) with HTTP transport (SSE transport failed to connect). Both search providers now available - Brave for primary quality, Rival for additional specialized tools.
-
-### 2026-01-20: File Versioning Policy & /save Permissions
-
-1. **Added File Editing Policy to global CLAUDE.md** - New section specifying when revising markdown files, create new versions with version numbers (e.g., `document-v2.md`) rather than editing in place. Edit-in-place only when explicitly instructed.
-
-2. **Fixed /save permission prompts** - The `allowedTools` frontmatter in commands doesn't actually grant permissions - those must be in global `settings.json`. Added Edit permissions for Chief of Staff files (`project-index.md`, `project-sources.md`, `project-knowledge.md`) and Write permission for `logs/**` so `/save` from other projects can update CoS without prompting.
-
-### 2026-01-20: MCP Configuration & Brave Search
-
-Fixed fundamental misunderstanding of MCP configuration structure in Claude Code. Initially created incorrect `~/.claude/mcp.json` file (doesn't exist). Researched official documentation and learned ALL MCP config lives in `~/.claude.json` at three levels: user-level (global, all projects), local-level (per-project, private), and project-level (`.mcp.json` in project root, version controlled). Added Brave Search MCP to user-level configuration. Also fixed permission issues causing /save and /log to prompt - added patterns for `git -C:*` and `mkdir -p:*` instead of one-off permissions.
-
-Key learning: Gmail and Google Calendar belong in Chief of Staff's `.mcp.json` (project-specific OAuth credentials), but general tools like Brave Search belong at user-level.
-
-### 2026-01-20: `/claude-web-extract` Command
-
-Implemented user-friendly guided workflow command that wraps the claude-web-extractor tool. Provides 6-step process: environment validation, search criteria gathering (with keyword guidance), search execution, manual review pause (human judgment required), review verification and extraction, results summary. Key features include smart default output directory (`./Claude.ai Chats/`), extensive error handling, prominent "GOOD vs. BAD keywords" guidance (proper names/specific events work best), clear pause at manual review step, and reusability notes for confirmed_uuids.txt. Follows established patterns from `/export-session` and `/podcast-extract`.
-
-Created: `~/.claude/commands/claude-web-extract.md` (10.5 KB)
-
-### 2026-01-20: Claude.ai Conversation Extraction Tool
-
-Built complete toolset for extracting Claude.ai conversations from data exports into searchable markdown files. Three CLI tools (find, review, extract) with memory-efficient streaming for 100MB+ files, confidence scoring for keyword search, and comprehensive documentation. Addresses fundamental export limitation (no project-conversation mapping) with 80-95% automated discovery + manual review workflow that's 10x faster than copying UUIDs. Validated on SalesIntel data (15 conversations, 470 messages, zero failures).
-
-Location: `Tools/claude-web-extractor/`
-
-### 2026-01-20: Status Line Investigation + Permission Fixes
-
-**Part 3: Status line context percentage discrepancy**
-- User reported status line showing 79% while warnings said only 8% remaining
-- Investigated available fields: `used_percentage` (cumulative), `current_usage.input_tokens` (last call only), `total_input_tokens`
-- Discovered these measure fundamentally different things - no field matches compaction warnings
-- Reverted to `used_percentage` after testing alternatives (0% with current_usage, partial with total_input)
-- **Conclusion:** This is a Claude Code limitation, not fixable with available fields
-
-**Part 4: Added missing global permissions**
-- /log and /save commands were still prompting for mkdir, git, date commands
-- Added to `~/.claude/settings.json`: mkdir, pwd, date, git diff, git log, sync-to-cos.sh
-- Reviewed sync-to-cos.sh for safety (confirmed safe: just git operations scoped to CoS repo)
-
-### 2026-01-20: Settings Cleanup and Writing Standards
-
-**Part 1: Fixed malformed permission pattern**
-- `.claude/settings.local.json` had a malformed multi-line commit message that broke Claude Code startup
-- Cleaned up and reorganized: 125 entries → 68 entries
-- Removed all accumulated one-time commit permissions
-- Organized into logical groups: Web, Git, Bash, Skills, MCP tools
-- Added general `Bash(git -C *:*)` pattern for cross-repo operations
-
-**Part 2: Updated global Writing Style section**
-- User added writing standards at `/Users/jtnt/Documents/Projects/Writing/Standards/`
-- Three files: elements-of-style.md, write-like-you-talk.md, dont-sound-like-ai.md
-- Updated `~/.claude/CLAUDE.md` Writing Style section to apply to ALL writing tasks
-- Key rules embedded inline for quick reference
-
-### 2026-01-19: Fixed Project Tracking System
-
-**Problem:** The CoS tracking system was broken in three ways:
-1. `/save` didn't auto-track new projects (only `/log` did)
-2. Sync only updated timestamps, not actual project content
-3. CoS work itself wasn't tracked because "CoS doesn't sync to itself"
-
-**Solution:**
-- Added Step 0 to `/save` for auto-tracking new projects
-- Made sync conversation-driven: log entry → project-index.md content updates
-- Added CoS self-tracking: `/save` in CoS now updates project-knowledge.md
-- Simplified sync-to-cos.sh to just git operations (Claude handles content)
-- Added Job Search project to tracking
-
-**Key design insight:** The log entry IS the intelligence. Claude reads it to update tracking files with meaningful content rather than just timestamps.
-
-### 2026-01-17: Simplified Project Workflow System
-
-**Problem:** Three commands (`/update-knowledge`, `/update-cos`, `/save-progress`) tried to call each other, which didn't work because slash commands can't invoke other slash commands.
-
-**Solution:** Simplified to two commands with clear responsibilities:
-- `/log` - Quick capture: Claude analyzes conversation and writes log to `./logs/`. No git, no sync.
-- `/save` - Full workflow: creates log + git commit/push + syncs to Chief of Staff via script.
-
-**Key design decisions:**
-- Claude writes logs (needs conversation context for decisions, rationale)
-- Script (`sync-to-cos.sh`) handles cross-repo sync (just file operations)
-- Commands are independent - no trying to call each other
-
-**Files created:**
-- `~/.claude/commands/log.md`
-- `~/.claude/commands/save.md`
-- `~/.claude/scripts/sync-to-cos.sh`
-
-**Files deleted:**
-- `~/.claude/commands/update-knowledge.md`
-- `~/.claude/commands/update-cos.md`
-- `~/.claude/commands/save-progress.md`
-
-**Files updated:**
-- `~/.claude/CLAUDE.md` - Updated Session Workflow section, Git Commit Policy
-- `Chief of Staff/CLAUDE.md` - Updated workflow documentation throughout
-
-### 2026-01-17: Status Line Display Fix
-
-- Fixed status line breaking "Chief of Staff" across multiple lines
-- **Issue:** Status line used `basename` which caused directory name with spaces to wrap
-- **Solution:** Changed to display full path (`~/Documents/Projects/Chief of Staff`) instead of just basename
-- Modified `~/.claude/settings.json` statusLine command - removed `| xargs basename` pipe
-- Full paths render better in terminals than isolated words with spaces
-- User preference: No quotes around directory name in display
-
-### 2026-01-16 (evening): Command Automation Fix
-
-- Fixed recurring issue where `/update-knowledge` and `/update-cos` asked for confirmation in Chief of Staff
-- **Root cause:** Commands treated Chief of Staff like any other project, requiring manual confirmation
-- **Solution:**
-  - `/update-cos`: Added Step 0 to detect if we're IN Chief of Staff, skip sync logic, auto-commit/push
-  - `/update-knowledge`: Changed to automatically call `/update-cos` when in Chief of Staff (no asking)
-- **Result:** Both commands now fully automatic when run in Chief of Staff - no user confirmation needed
-- Updated command files: `~/.claude/commands/update-knowledge.md` and `~/.claude/commands/update-cos.md`
-
-### 2026-01-16 (late afternoon): Google Calendar & Gmail MCP Integration
-
-- Set up MCP (Model Context Protocol) servers for Google Calendar and Gmail
-- Project-scoped configuration (Chief of Staff only, not global)
-- **Google Calendar:** Using `@cocal/google-calendar-mcp` with full calendar access
-- **Gmail:** Using `@gongrzhe/server-gmail-autoauth-mcp` with modify + settings access
-- OAuth setup process:
-  - Created Google Cloud project (`claude-code-484521`)
-  - Enabled Calendar API and Gmail API
-  - Created web application OAuth client (Desktop app didn't support redirect URIs)
-  - Added multiple redirect URIs for different ports (3000, 3500, 3501)
-  - Configured OAuth consent screen (External, testing mode)
-  - Added user as test user in Audience section
-- Configuration stored in `.mcp.json` in project root
-- Credentials: `/Users/jtnt/Documents/Projects/Chief of Staff/.claude/gcp-oauth.keys.json`
-- Tokens stored globally: `~/.config/google-calendar-mcp/tokens.json` and `~/.gmail-mcp/credentials.json`
-- **User preference:** Check BOTH calendars when querying (primary + nicholas@razzohq.com)
-- **Known limitation:** Both services have broader permissions than initially desired (Calendar has edit, Gmail has send) but user accepted this trade-off
-
-### 2026-01-16 (afternoon): Context Window Optimization
-
-- Investigated why sessions start at 25% context usage
-- Discovered MCP servers (Notion, Playwright, Memory) were consuming ~12% of context with unused tool schemas
-- Disabled all three MCP servers → reduced starting context from 25% to 13%
-- Initially attempted to optimize CLAUDE.md files (moved writing style to reference file)
-- **Key insight:** MCP servers are the real context hogs, not documentation
-- Established pattern: Use `/mcp enable [server]` temporarily when needed, disable after
-
-### 2026-01-16 (morning): Transcription Workflow Optimization
-
-- Tested mlx-whisper performance on Mac Silicon across 5 model sizes
-- Compared accuracy on medical terminology and technical terms
-- **Updated `~/.claude/scripts/transcribe.py`** to use mlx-whisper with medium model as default
-- Key findings: Medium model = ~8min for 1hr podcasts, significantly better accuracy than base
-- Documented full comparison in `logs/20260116-transcription-optimization-sync.md`
-
-### 2026-01-15: Writing Style Preferences Expanded
-
-- Expanded writing style section in `~/.claude/CLAUDE.md` with additional guidance
-- Added: rhetorical questions, self-deprecating humor, thematic bookending
-- Added new **Structure & Format** subsection: parallel structure in lists, framework mapping
-- Added **Phrases to Avoid (AI-isms)** section with specific forbidden phrases
-- Captured thought on AI context requirements → linked to CPF "Context is Everything" post
-- Created `cos-inbox.md` for Context Profile Framework project (first use of inbox structure there)
-
-### 2026-01-14 (late night): Proactive Knowledge Capture + Log Restructure
-
-**Part 1: Proactive Knowledge Capture**
-- Added "Proactive Knowledge Capture" section to Chief of Staff CLAUDE.md
-- Created session-context.md mechanism for recovery after context compaction
-- Enabled immediate project-knowledge.md updates for significant decisions
-- Scope: Chief of Staff only (testing before global rollout)
-
-**Part 2: Log Restructure**
-- Moved all logs from `CoS/Projects/[Name]/` to each project's `logs/` folder
-- Projects migrated: Razzo (3 files), CPF (6 files), Context Profile Builder (5 files), Chief of Staff (26 files)
-- Deleted `CoS/Projects/` folder entirely
-- Chief of Staff is now an index/dashboard, not a repository
-
-**Part 3: Command Clarification**
-- Updated `/update-knowledge` to create logs in Step 3 (has conversation context)
-- Updated `/update-cos` to NOT create logs (only syncs summaries)
-- Clarified that `/save-progress` calls both in order
-
-**Part 4: File Split**
-- Split project-knowledge.md into two files
-- `project-knowledge.md` - About Chief of Staff itself
-- `project-index.md` - Summaries of all tracked projects
-- Updated `/update-cos` to write to `project-index.md`
-
-### 2026-01-12 (evening): Cowork Mode Discovery
-
-- Discovered Cowork mode vs CLI have different capabilities
-- Slash commands don't work in Cowork mode (CLI-only feature)
-- MCP connector availability varies between environments
-- Created workarounds using natural language triggers
-- Documented in CLAUDE.md with "Cowork Mode vs CLI Differences" section
-
-### 2026-01-10-11: Check-in System + Priority Tracking
-
-- Built four check-in types: /morning, /evening, /thought, /journal
-- Natural language detection for all types
-- Bidirectional flow: CoS can push items to project inboxes (cos-inbox.md)
-- Priority context established with P0 focus on revenue generation
-- Created /analyze-sessions and /export-session commands
-
-### 2026-01-09: Initial Setup
-
-- Created Chief of Staff structure
-- Built sync workflows (/update-cos, /update-knowledge, /save-progress)
-- Established three-layer documentation model
-- Added smart project status detection
-- Set up GitHub repo
+Extended SessionStart hook to inject `COS_INBOX` flag with item count when any project has pending `cos-inbox.md` items. Added global principles: "Check Docs Before Claude Code Changes", "Present Options, Don't Assume".
 
 ---
 
 ## Open Items
 
-- **Proactive capture not being followed** (2026-01-14): The proactive knowledge capture instructions exist in CLAUDE.md but weren't followed during the 2026-01-14 session - no session-context.md created, no proactive p-k.md updates during work. Need to be more disciplined about this in future CoS sessions.
-- Consider global rollout of session-context.md pattern if successful (currently CoS-only)
+- **SessionEnd exit delay** — Auto-capture adds ~20 second delay on session exit. Not blocking but worth investigating if it gets worse.
+- **Cross-project session limitation** — Sessions log to cwd only. If a session touches multiple projects, secondary projects don't get logs. User can manually point at transcript for relevant extraction.
 - Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
-
-### Design Note: No Separate Insights File
-
-The original inspiration (screenshot pattern) had three files: context.md, todos.md, insights.md. Our implementation maps these differently:
-- **context.md** → `session-context.md` (recovery file)
-- **todos.md** → TodoWrite tool (in-memory, ephemeral)
-- **insights.md** → Proactive updates to `project-knowledge.md` directly
-
-We chose NOT to have a separate insights file - insights go straight to p-k.md. The "Notes for Later" section in session-context.md can serve as a staging area if needed. This decision can be revisited if the current approach proves insufficient.
 
 ---
 
