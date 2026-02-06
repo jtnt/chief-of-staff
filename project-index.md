@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-05
+**Last Updated:** 2026-02-06
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -63,7 +63,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-02-05 (CPF articulation call capture)
+**Last synced:** 2026-02-06 (research collection for AI layer MVP planning)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers: Company, Department, Project, Individual). The product will help them build it.
 
@@ -91,6 +91,7 @@ The Context Infrastructure has four distinct layers:
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction that prevents applying what's learned.
 
 **Recent Work:**
+- 2026-02-06: **Research collection for AI layer MVP planning** - User provided 5 key external resources for building an AI layer product to compete with Qontext, all captured as structured research files. Materials cover three critical aspects: technical patterns (Vercel AGENTS.md evaluation showing 100% vs 53% baseline for passive context), development approach (Every.to agent-native trilogy on architecture/planning/compound engineering), and enterprise challenges (Asana shared memory insights from VentureBeat). Key convergence insight: all sources point to "when to retrieve" as harder problem than storage/organization. Vercel's sparse index worked for technical docs, but business context may need richer metadata and relevance mapping. Research organized in `Research/20260206_*` files ready for product planning sessions.
 - 2026-02-05: **CPF articulation call capture** - Processed and archived materials from January 23rd call with Chris McConnell (Razzo) where framework was articulated in detail. Created structured archive in `Research/20260123_CPF-Articulation-Call-Chris-McConnell/` with separated transcript, original notes, and comprehensive CPF-focused analysis. Key content captured: basic implementation (document corpus in Claude Projects), three main challenges (creation, maintenance, access), four-layer architecture (knowledge, ontological, reasoning, precedent layers), and data-first insight (collect structured data, then apply framework filters). Call predates major competitive analysis and shows native framework thinking before external validation.
 - 2026-02-05: **Qontext competitive analysis and strategic repositioning** - Major competitive intelligence gathering on Qontext.ai, a Berlin startup that raised $2.7M pre-seed to build "independent context layer for AI." Comprehensive analysis of their product architecture (Context Vaults with automated ingestion and graph structuring), team backgrounds (ex-VC CEO, technical CTO), funding sources (HV Capital + notable angels including n8n and neo4j founders), and market positioning. Key strategic insight: automated ingestion approach (connect existing tools, auto-structure into graph) has lower activation energy than framework-first approach (understand structure, then implement). Product-first vs. framework-first tension identified as critical positioning decision. Created comprehensive research assets in `Research/Qontext/` including full competitive analysis, complete API documentation, product UI screenshots, and PRD development materials (`Working/prd-session-prompt-v2.md`) for competitive response.
 - 2026-02-01: **Nico Druelle GTM infrastructure research** - Captured "Infrastructure for Agentic GTM" article from The Signal newsletter with full text, 8 diagrams (saved as source images), and video transcript. Added The Revenue Architects (TRA) service model analysis to business-knowledge.md. Key validation: TRA's Phase 1 ("Decision Audit") is pure context creation work — ICP definition, persona mapping, documenting decision logic — exactly CPF's Company and Department Layers. They won't touch orchestration until context is documented. Their 90-day engagement structure, $50M+ influenced revenue, and 100% reference rate proves companies pay premium rates for context infrastructure work. Target market (Series B+ PLG companies) aligns with CPF ICP. GTM Engineers emerging as natural buyer persona. Also reorganized all Research files with YYYYMMDD_ prefixes for chronological sorting.
