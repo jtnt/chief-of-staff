@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-04
+**Last Updated:** 2026-02-06
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -70,6 +70,12 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - Three-tier inbox: Pending (priority) → Backlog (meta-work) → Archive
 - Bias toward project deliverables principle embedded in briefing template
 
+### Session Context Loading
+- Global CLAUDE.md directive ensures `project-knowledge.md` is read at start of every project session
+- Provides automatic continuity without manual "catch me up" requests
+- Proactive loading before first response (not reactive/on-demand)
+- On-demand log search remains available via session workflow for deeper dives
+
 ### Check-In System
 - Four skills: `/morning`, `/evening`, `/thought`, `/journal` (converted from commands)
 - Model-optimized: morning/evening/journal use Sonnet, thought uses Haiku
@@ -118,6 +124,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-02-06: Session Context Loading
+
+Added directive to global CLAUDE.md to automatically read `project-knowledge.md` at session start for all projects. Closes gap where strategic context went unused unless explicitly requested. Considered reading recent logs but chose project-knowledge.md only to avoid context window bloat — strategic insights should already be synthesized there.
 
 ### 2026-02-04: Project Knowledge Backfill & Auto-Capture Fix
 
