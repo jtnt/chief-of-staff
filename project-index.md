@@ -13,7 +13,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/Razzo`
-**Last synced:** 2026-02-04 (AI adoption research and enablement framework)
+**Last synced:** 2026-02-06 (git repository structure discussion)
 
 **Current Strategic Direction:**
 The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows (not just learn skills). This creates natural pathways to other offerings (bootcamp, momentum program).
@@ -29,6 +29,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 - Context Profile Framework: landing page + waitlist for app (NEW)
 
 **Recent Work:**
+- 2026-02-06: **Git repository structure discussion** - Analyzed current repository structure (132 tracked files across website/, Planning/, Assets/, z_context/) and explored reorganization options. Current setup mixes deployable website code with private business documents in single repo. Discussed three approaches: keep monorepo, move git to website/ only, or selective .gitignore. Recommended separating deployment code (website/) from business docs (strategy, planning) for cleaner separation and better security boundaries. No changes implemented - session was planning/exploration only.
 - 2026-02-04: **AI adoption research and enablement framework** - Analyzed three Every.to articles on AI adoption (Claudie automation case study, Brooker Belcourt's enterprise patterns, Every's consulting model). Created comprehensive research synthesis (22.9KB) with core success factors, four maturity levels, concrete company examples (PE firm memo reduction: 3 weeks → 30 min, recruiting calendar automation: 10 champions → 30+ adopters). Built actionable enablement plan framework organized around plan design phases (Assess → Design → Deliver → Sustain) with Razzo offerings mapped to maturity levels. Key gap identified: Current bootcamps handle Level 1→2 progression, but no formal offering for Level 2→3 (basic AI use → systematic workflows) where organizational transformation happens. Competitive intel: Every charges $10-50K+ for contextualization consulting vs. Razzo's $3,500-$5,000 bootcamps.
 - 2026-02-01: **Session capture meta-work** - Processed a previous session about Claude Code debug mode troubleshooting using `/session-capture` skill. Key finding: User had used single dash (`-dangerously-skip-permissions`) instead of double dash, causing CLI to parse `-d` as `--debug`. Session capture ran interactively instead of background due to quick `--continue` after session exit.
 - 2026-01-21: **LinkedIn article saved** - Added "Getting Started with AI: 3 Simple Steps for SMBs" article to Writing folder. Covers three foundational steps: picking a chatbot (ChatGPT/Claude/Gemini), training people, and building a Context Profile. Promotes Razzo's workflow sprints and CPF framework. Includes two social media image versions.
