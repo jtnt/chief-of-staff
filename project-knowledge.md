@@ -125,6 +125,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-06: Session Capture Transcript Parsing Fix
+
+Fixed critical bug in `/session-capture` skill where jq commands failed to extract file changes and plan file references from transcripts. Root cause: jq paths looked for `.input.file_path` at top level, but tool calls are nested inside `.message.content[]`. Affected all sessions since auto-capture was implemented. Fixed three extraction points (Files Written/Edited, Files Read, Plan Files). Created pattern file documenting correct transcript parsing structure for future reference.
+
 ### 2026-02-06: Session Context Loading
 
 Added directive to global CLAUDE.md to automatically read `project-knowledge.md` at session start for all projects. Closes gap where strategic context went unused unless explicitly requested. Considered reading recent logs but chose project-knowledge.md only to avoid context window bloat — strategic insights should already be synthesized there.
