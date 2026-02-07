@@ -71,22 +71,6 @@ Chief of Staff/
 
 **Detailed logs live WITH their projects, not in Chief of Staff.**
 
-Each tracked project has its own `logs/` folder:
-```
-Razzo/
-├── logs/
-│   ├── 20260109-sprint-positioning-draft.md
-│   └── 20260111-storybrand-messaging-alignment.md
-├── project-knowledge.md
-└── CLAUDE.md
-
-Context Profile Framework/
-├── logs/
-│   └── 20260109-schema-refactor.md
-├── project-knowledge.md
-└── CLAUDE.md
-```
-
 **Log filename convention:** `YYYYMMDD-[identifier].md` where identifier is 2-4 descriptive words (e.g., `20260204-meeting-review-rewrite.md`, not `20260204-session.md`).
 
 **Why:** Projects are portable. When you move/archive a project, its complete history travels with it. Chief of Staff is an index/dashboard, not a repository.
@@ -113,23 +97,7 @@ Context Profile Framework/
 - Keep "Recent Work" section current with CoS system work
 - This is about Chief of Staff itself, not tracked projects
 
-## Document Types You May Receive
-
-- **Session summaries**: Like the Razzo Sprint positioning doc - extract strategic insights and open items
-- **Meeting transcripts**: Summarize key decisions and action items
-- **AI chat transcripts**: Pull out what was decided or built
-- **Strategy documents**: File in appropriate project folder, reference key points in project-knowledge.md
-- **Raw notes**: Help organize and clarify
-- **Podcast transcripts / Reference materials**: Extract insights and save to Resources/ folder
-
 ## Resources Folder
-
-The `Resources/` folder contains reference materials that inform strategic work across projects:
-
-- **Marketing frameworks** (e.g., Donald Miller's StoryBrand)
-- **Claude Code documentation** (hooks, commands, guides)
-- **Industry insights** (transcripts, articles with extracted key points)
-- **Methodologies and frameworks** (repeatable approaches)
 
 **When adding to Resources:**
 - Extract and synthesize - don't just dump raw content
@@ -139,56 +107,14 @@ The `Resources/` folder contains reference materials that inform strategic work 
 
 ## Tasks Folder
 
-The `Tasks/` folder contains one-off actionable items that don't belong to a specific tracked project:
-
-- **Standalone tasks** - Things to do that aren't part of a larger project
-- **Time-bound actions** - Tasks with deadlines or specific completion targets
-- **Cross-cutting work** - Activities that span multiple contexts
-- **Personal to-dos** - Professional tasks not tied to project deliverables
-
 **When adding to Tasks:**
-- Use YAML frontmatter with `status` (active/paused/completed), `created` date, and optional `due` date
 - Use descriptive filenames: `YYYYMMDD-description.md`
 - Include clear task lists with checkboxes for subtasks
 - Archive or delete completed tasks to keep folder current
 - If a task grows into a larger project, migrate it to a tracked project folder
 
 
-## Auto-Capture System
-
-Sessions are **automatically captured** when they end via SessionEnd hook. A background Claude process:
-1. Creates log entry in `./logs/YYYYMMDD-[identifier].md`
-2. Extracts patterns to `./session-patterns/` (when patterns emerge)
-3. Updates `project-knowledge.md` (when session contains strategic insights, decisions, or milestones)
-4. Commits and pushes changes
-5. Syncs to Chief of Staff (updates project-index.md)
-
-**Folder structure per project:**
-```
-any-project/
-├── logs/                              # Session logs (what happened)
-│   └── YYYYMMDD-[identifier].md
-├── session-patterns/                  # Patterns + CLAUDE.md suggestions
-│   └── YYYYMMDD-[identifier].md
-└── ...
-```
-
-**PATTERNS_PENDING flag:** When session-patterns files contain CLAUDE.md suggestions, SessionStart hook injects this flag. Use `/review-patterns` to review and apply suggestions.
-
-### Manual Capture
-
-Use `/session-capture` for mid-session captures if needed. Auto-capture handles session end automatically.
-
-## Syncing Chief of Staff Itself
-
-**IMPORTANT:** Chief of Staff tracks its own work just like any other project.
-
-The auto-capture system handles this automatically at session end:
-1. Creates log entry in `logs/YYYYMMDD-[identifier].md`
-2. Commits and pushes to git
-3. Skips CoS sync step (we ARE CoS)
-
-Chief of Staff maintains its own activity log in `logs/` just like all other tracked projects.
+**Note:** Auto-capture skips the CoS sync step for this repo (we ARE CoS).
 
 ## Check-In System
 
@@ -237,21 +163,4 @@ When checking calendar or asking "what's on my calendar":
 
 ## Current Projects
 
-See `project-sources.md` for full list with paths and sync dates. Summary:
-
-**Active:**
-- **Context Profile Framework** - Framework + service for AI context libraries
-- **Razzo** - AI training for sales/marketing teams
-- **Writing** - Content creation and publishing
-- **Job Search** - Active job search (PostHog, etc.)
-- **SalesIntel** - Client project
-- **JRAD** - Personal creative project
-
-**Tools/Utilities:**
-- **Context Profile Builder** - Web app for profile generation
-- **Chatbot Linebreaker** - Chrome extension for chat formatting
-- **LinkedIn My Posts Extractor** - LinkedIn content extraction
-- **LinkedIn Scraper Extension** - LinkedIn data scraping
-
-**Paused:**
-- **Caregiver App** - Web app for caregiver communication (early stage)
+See `project-sources.md` for full list with paths and sync dates.
