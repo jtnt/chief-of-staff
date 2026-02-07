@@ -87,3 +87,8 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/Clients/Party Rental`
 - **Key files:** `_context/thoughts on AI from Gary and others.m4a` (audio file)
 - **Last synced:** Never (newly added)
+
+## qontext-clone
+- **Source:** `/Users/jtnt/Documents/Projects/Code/qontext-clone`
+- **Key files:** None detected
+- **Last synced:** Never (newly added)
