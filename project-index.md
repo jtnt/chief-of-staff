@@ -698,18 +698,30 @@ Event rental company with team using Props and Mail Flow for communications. Lea
 ---
 
 ### qontext-clone
-**Status:** Active
-**What it is:** No description yet
+**Status:** Active - Exploration Phase
+**What it is:** Building a Qontext.ai clone (independent context layer for AI with knowledge graph architecture)
 **Source:** `/Users/jtnt/Documents/Projects/Code/qontext-clone`
-**Last synced:** 2026-02-06 (plugin duplicates resolution)
+**Last synced:** 2026-02-06 (work skill exploration)
 
-No description yet
+**Project Concept:**
+Qontext clone is a 3-stage pipeline (Ingest → Structure → Retrieve) for building context vaults (knowledge graphs) that integrate with AI tools. Core features include data source connectors, API ingestion, automated entity extraction, semantic retrieval with graph traversal, and MCP server integration for Claude.
+
+**Proposed Stack (not yet implemented):**
+- TypeScript monorepo (Turborepo + pnpm)
+- Fastify API + Next.js dashboard + BullMQ workers
+- PostgreSQL (pgvector) for app data + embeddings
+- Neo4j for knowledge graph
+- OpenAI embeddings, Claude Haiku entity extraction, Cohere reranking
 
 **Recent Work:**
+- 2026-02-06: **Work skill exploration** - Loaded `/workflows:work` skill with qontext product spec (`z_context/qontext-product-spec.md`). Discussed scope, architecture, and phasing (Phases 1-4: Foundation → Data Model → Ingestion → Retrieval). Session was exploratory only — no implementation began. User exited before work plan was finalized.
 - 2026-02-06: **Plugin duplicates resolution** - Investigated and resolved Claude Code plugin duplication issue. Found four plugins (agent-sdk-dev, code-review, hookify, plugin-dev) enabled from both claude-plugins-official and claude-code-plugins marketplaces. Analyzed git history and code quality to determine claude-plugins-official as canonical source. Updated ~/.claude/settings.json to consolidate to official marketplace versions. User needs to restart Claude Code session for changes to take effect.
 
 **Open Items:**
-- None identified yet
+- Decide if project should proceed (planning session only so far)
+- Create formal work plan if moving forward
+- Initialize git repository
+- Resolve scoping questions (SaaS vs single-user, deployment target, authentication timing)
 
 ---
 
