@@ -1,81 +1,35 @@
 # Chief of Staff Inbox
 
-Items pushed from Chief of Staff conversations and meeting reviews.
+Task list for Chief of Staff. Items arrive from sessions, meetings, check-ins, and manual entry.
 
-## Pending
+## Inbox
 
-### 2026-02-03 - Build client-facing envoy skills from Razzo worksheets
-**Source:** Evening session — envoy skill creation
-**Context:** Created `/envoy` skill based on "Prompts Are Conversations You're Not Present For" article. Next step: apply envoy framework to build client-facing skills from the AI Workflow Opportunity Worksheet and AI Workflow Planning Template.
+## Active
 
-Key decision to make first: Claude Code skill vs standalone prompt clients paste into any AI.
+- [ ] **Build client-facing envoy skills from Razzo worksheets** — Apply envoy framework to AI Workflow Opportunity Worksheet and Planning Template `#session` `2026-02-03` [[Tasks/20260203-envoy-client-skills-plan.md]]
+- [ ] **I-Corps mentor prep** — NSF program application via Glenn Hellman `#meeting` `2026-02-02` [[Tasks/20260203-icorps-mentor-prep.md]]
+  - [ ] Complete mentor interest form
+  - [ ] Take I-Corps prep course
+  - [ ] Schedule video interview with Glen
 
-**Plan:** `Tasks/20260203-envoy-client-skills-plan.md`
+## Backlog
 
----
+- [ ] **Review Boris Cherny's Claude Code tips** — 10 tips from Claude Code creator `#link` `2026-01-31`
+  - [ ] Try voice dictation (fn fn) for longer prompts
+  - [ ] Add "scrap this and implement the elegant solution" to prompting vocabulary
+  - [ ] Build habit: "Update your CLAUDE.md" after corrections
+  - [ ] Explore `/statusline` customization
+  - [ ] Consider building a `/learn` spaced-repetition skill
+- [ ] **Review and implement CoS automation recommendations** — 5 targeted improvements from analysis sessions `#session` `2026-01-30`
+  - [ ] Session start visibility improvements
+  - [ ] Notification hook for background work completion
+  - [ ] Block external edits hook
+  - [ ] Build `/project-health`, `/weekly-review`, `/cross-project-synthesis` skills
+- [ ] **Explore insights report suggestions** — Workflow automation ideas from Claude Code Insights report `#session` `2026-02-04` [[Tasks/20260204-insights-suggestions-followup.md]]
 
-## Backlog (Meta-Work)
+## Done
 
-Items worth revisiting when there's downtime or systems need improvement. Not surfaced in daily briefings.
-
-### 2026-01-31 - Review Boris Cherny's Claude Code tips for actionable items
-**Source:** X/Twitter thread from @bcherny (Claude Code creator)
-**Context:** 10 tips from the Claude Code team, saved with applicability notes
-
-Quick wins to try:
-- [ ] Try voice dictation (fn fn on macOS) for longer prompts
-- [ ] Add "scrap this and implement the elegant solution" to prompting vocabulary
-- [ ] Build habit: "Update your CLAUDE.md so you don't make that mistake again" after corrections
-- [ ] Explore `/statusline` customization for context usage tracking
-- [ ] Consider building a `/learn` spaced-repetition skill
-
-**Details:** `Resources/Claude Code/20260131-boris-cherny-10-claude-code-tips.md`
-
----
-
-### 2026-01-30 - Review and implement CoS automation recommendations
-**Source:** Two automation analysis sessions on 2026-01-30
-**Context:** Identified 5 targeted improvements for Chief of Staff automation stack
-
-**High priority (low effort):**
-- [ ] Session start visibility: Choose Option 1 (CLAUDE.md), 2 (notifications), or 3 (pre-script)
-- [ ] Notification hook (idle_prompt) - macOS notifications for background work completion
-- [ ] Block external edits hook - enforce read-only rule for external project folders
-
-**Medium priority (skills):**
-- [ ] `/project-health` skill - on-demand dashboard
-- [ ] `/weekly-review` skill - automated weekly synthesis
-- [ ] `/cross-project-synthesis` skill - pattern identification across projects
-- [ ] `/strategic-decision` skill - formalize decision process
-- [ ] `/content-repurpose` skill - multi-platform publishing
-
-**Exploratory:**
-- [ ] Verify Linear/Slack MCP servers exist before adding
-- [ ] Cross-project synthesizer subagent - background pattern detection
-
-**Details:** `Working/automation-ideas-to-implement.md`
-
----
-
-## Archive
-
-### 2026-01-22 - Test Meeting Review v7
-**Source:** Meta-work session
-**Context:** Implemented Sonnet model change for quality extraction
-**Archived:** 2026-02-03 - Meeting review system working as expected
-
-### 2026-01-26 - Update terminology: commands → skills
-**Source:** Quick reminder
-**Context:** Claude Code terminology update needed
-**Archived:** 2026-02-03 - Not applicable yet. 14 commands still actively in use alongside 12 skills. Both systems coexist. Terminology in CLAUDE.md is correct as-is.
-
-### 2026-01-28 - Investigate SessionEnd script delay
-**Source:** Session observation
-**Context:** Performance issue in auto-capture system
-**Archived:** 2026-02-03 - Investigation completed
-
-### 2026-01-22 - Check out Sallam from "DC Founders Panel"
-**Source:** Meeting review
-**Meeting date:** 2026-01-22
-**Context:** Met founder at DC AI panel - educational game teaching empathy, inspired by his mother
-**Archived:** 2026-01-26 - Searched but couldn't find online; name may be spelled differently
+- [x] **Test Meeting Review v7** — Implemented Sonnet model change for quality extraction `#session` `2026-01-22` done:2026-02-03
+- [x] **Update terminology: commands → skills** — Not applicable yet; both systems coexist `#manual` `2026-01-26` done:2026-02-03
+- [x] **Investigate SessionEnd script delay** — Performance issue in auto-capture system `#session` `2026-01-28` done:2026-02-03
+- [x] **Check out Sallam from DC Founders Panel** — Searched but couldn't find online `#meeting` `2026-01-22` done:2026-01-26

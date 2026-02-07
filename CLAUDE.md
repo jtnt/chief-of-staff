@@ -56,8 +56,8 @@ Chief of Staff/
 │   ├── Claude Code/                    # Claude Code documentation
 │   └── Donald Miller StoryBrand Framework.md  # Marketing reference
 │
-├── Tasks/                              # One-off actionable items
-│   └── YYYYMMDD-*.md                   # Standalone tasks not tied to projects
+├── Tasks/                              # Detailed specs for complex tasks (linked from cos-inbox.md)
+│   └── YYYYMMDD-*.md                   # Task specs with checklists and context
 │
 ├── Weekly Reviews/                     # Periodic synthesis documents
 │
@@ -105,14 +105,33 @@ Chief of Staff/
 - Keep materials project-agnostic (specific applications go in project folders)
 - Use descriptive filenames
 
-## Tasks Folder
+## Inbox & Tasks
 
-**When adding to Tasks:**
+**`cos-inbox.md`** is the central task list. Uses Obsidian-native checkboxes (`- [ ]` / `- [x]`).
+
+**Sections:** Inbox (untriaged) → Active (this week) → Backlog (later) → Done (completed)
+
+**Task line format:**
+```
+- [ ] **Title** — one-line context `#source` `2026-02-07` [[optional Tasks/link]]
+```
+
+- `#source` tags: `#meeting`, `#session`, `#thought`, `#link`, `#manual`
+- Sub-tasks indent under parent (max 3; use Tasks/ file + wikilink for more)
+- New items go to `## Inbox` (newest at top). User triages to Active or Backlog.
+- Completed items: `- [x]` with `done:YYYY-MM-DD` appended
+
+**Tasks/ folder** holds detailed specs for complex tasks, linked from inbox via `[[wikilinks]]`.
+
+**When adding to Tasks/:**
 - Use descriptive filenames: `YYYYMMDD-description.md`
-- Include clear task lists with checkboxes for subtasks
-- Archive or delete completed tasks to keep folder current
+- Include YAML frontmatter with `status: active` and `created:` date
 - If a task grows into a larger project, migrate it to a tracked project folder
 
+**When routing to a project inbox:** Add a checkbox line under `## Pending` (external projects keep Pending/Archive sections):
+```
+- [ ] **Title** — context `#source` `YYYY-MM-DD`
+```
 
 **Note:** Auto-capture skips the CoS sync step for this repo (we ARE CoS).
 
@@ -138,7 +157,10 @@ When check-in content relates to a tracked project:
 1. Ask user: "This mentions [Project]. Want me to add it to that project's inbox?"
 2. If yes, write to: `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
    - Create file if needed (Pending / Archive sections)
-   - Add entry under "## Pending" with: date, source, context, content
+   - Add checkbox line under `## Pending` (newest at top):
+     ```
+     - [ ] **Title** — context `#source` `YYYY-MM-DD`
+     ```
 3. Also create project log: `[ProjectName]/logs/YYYYMMDD-checkin-note.md`
 
 **On project open:** SessionStart hook checks for `cos-inbox.md` → injects `COS_INBOX` flag → Claude notifies user.
