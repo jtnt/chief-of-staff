@@ -513,14 +513,26 @@ function parseSubtaskLine(text, checked, lineNumber, rawLine) {
 
 // ─── Toggle Checkbox in Inbox ────────────────────────
 
-async function toggleInboxCheckbox(filePath, lineNumber, newChecked) {
+async function toggleInboxCheckbox(filePath, lineNumber, newChecked, expectedLine) {
   const pathParts = filePath.split('/');
   const content = await readFile(state.rootHandle, ...pathParts);
   if (!content) return false;
 
   const lines = content.split('\n');
-  const idx = lineNumber - 1;
+  let idx = lineNumber - 1;
   if (idx < 0 || idx >= lines.length) return false;
+
+  // Validate line content matches what was displayed — guards against
+  // external edits (Obsidian, Claude Code) shifting line numbers.
+  if (expectedLine && lines[idx] !== expectedLine) {
+    const newIdx = lines.indexOf(expectedLine);
+    if (newIdx >= 0) {
+      idx = newIdx;
+    } else {
+      console.error('toggleInboxCheckbox: line shifted and content not found:', expectedLine);
+      return false;
+    }
+  }
 
   const isTopLevel = /^- \[[ x]\]/.test(lines[idx]);
   const hasDescLine = isTopLevel && idx + 1 < lines.length && /^\t- (?!\[[ x]\])/.test(lines[idx + 1]);
