@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chief of Staff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main class="main" id="main-content">
+      <div class="page-header">
+        <h2>Home</h2>
+        <div class="subtitle">Inbox, stats, and recent activity</div>
+      </div>
+
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-pending">-</div>
+          <div class="stat-label">Pending Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-active-projects">-</div>
+          <div class="stat-label">Active Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-recent-logs">-</div>
+          <div class="stat-label">Recent Sessions</div>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <div class="inbox-column" id="inbox-column">
+          <div class="loading">Loading inbox...</div>
+        </div>
+        <div class="activity-column" id="activity-column">
+          <div class="loading">Loading activity...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Task Detail Slide-over -->
+  <div class="slide-over-backdrop" id="slide-over-backdrop">
+    <div class="slide-over">
+      <div class="slide-over-header">
+        <h3>Task</h3>
+        <button class="slide-over-close" id="slide-over-close">&times;</button>
+      </div>
+      <div class="slide-over-meta"></div>
+      <div class="slide-over-body"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    // ─── Home Page Logic ─────────────────────────────
+
+    const COS_INBOX_PATH = 'Chief of Staff/cos-inbox.md';
+
+    async function onConnected() {
+      await loadHomePage();
+    }
+
+    async function loadHomePage() {
+      await Promise.all([
+        loadInbox(),
+        loadRecentActivity(),
+      ]);
+      updateStats();
+    }
+
+    // ─── Inbox ─────────────────────────────────────
+
+    async function loadInbox() {
+      const column = document.getElementById('inbox-column');
+      column.textContent = '';
+
+      const content = await readFile(state.rootHandle, 'Chief of Staff', 'cos-inbox.md');
+      if (!content) {
+        const err = document.createElement('div');
+        err.className = 'error-message';
+        err.textContent = 'Could not read cos-inbox.md';
+        column.appendChild(err);
+        return;
+      }
+
+      const inbox = parseInbox(content);
+      state.cosInbox = inbox;
+
+      // Render each section
+      for (const section of inbox.sections) {
+        const sectionEl = document.createElement('div');
+        sectionEl.className = 'section';
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'section-header';
+
+        const h3 = document.createElement('h3');
+        h3.textContent = section.name;
+
+        const badge = document.createElement('span');
+        badge.className = 'count-badge';
+        badge.textContent = section.items.length;
+        h3.appendChild(document.createTextNode(' '));
+        h3.appendChild(badge);
+        header.appendChild(h3);
+
+        // Collapse toggle for Done section
+        if (section.name === 'Done') {
+          const toggle = document.createElement('button');
+          toggle.className = 'section-toggle';
+          toggle.textContent = 'Hide';
+          toggle.addEventListener('click', () => {
+            const body = sectionEl.querySelector('.section-body');
+            if (body.style.display === 'none') {
+              body.style.display = '';
+              toggle.textContent = 'Hide';
+            } else {
+              body.style.display = 'none';
+              toggle.textContent = 'Show';
+            }
+          });
+          header.appendChild(toggle);
+        }
+
+        sectionEl.appendChild(header);
+
+        // Body
+        const body = document.createElement('div');
+        body.className = 'section-body';
+
+        if (section.items.length === 0) {
+          const empty = document.createElement('div');
+          empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
+          empty.textContent = 'No items';
+          body.appendChild(empty);
+        } else {
+          for (const item of section.items) {
+            body.appendChild(createTaskItemEl(item, COS_INBOX_PATH, section.name));
+          }
+        }
+
+        // Add task input for Inbox and Active sections
+        if (section.name === 'Inbox' || section.name === 'Active') {
+          const addRow = document.createElement('div');
+          addRow.className = 'add-task-row';
+
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.placeholder = 'Add task... (Title — context)';
+          input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && input.value.trim()) {
+              addNewTask(section.name, input.value.trim());
+              input.value = '';
+            }
+          });
+          addRow.appendChild(input);
+          body.appendChild(addRow);
+        }
+
+        // Default: collapse Done section
+        if (section.name === 'Done') {
+          body.style.display = 'none';
+          const toggle = header.querySelector('.section-toggle');
+          if (toggle) toggle.textContent = 'Show';
+        }
+
+        sectionEl.appendChild(body);
+        column.appendChild(sectionEl);
+      }
+    }
+
+    async function addNewTask(sectionName, text) {
+      const content = await readFile(state.rootHandle, 'Chief of Staff', 'cos-inbox.md');
+      if (!content) return;
+
+      const today = new Date().toISOString().split('T')[0];
+      const newLine = '- [ ] **' + text + '** `#manual` `' + today + '`';
+
+      const lines = content.split('\n');
+      let insertIdx = -1;
+
+      // Find the section header and insert after it
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].match(new RegExp('^## ' + escapeRegex(sectionName) + '$'))) {
+          insertIdx = i + 1;
+          // Skip any blank lines right after header
+          while (insertIdx < lines.length && lines[insertIdx].trim() === '') {
+            insertIdx++;
+          }
+          break;
+        }
+      }
+
+      if (insertIdx === -1) return;
+
+      lines.splice(insertIdx, 0, newLine);
+      const success = await writeFile(state.rootHandle, ['Chief of Staff', 'cos-inbox.md'], lines.join('\n'));
+      if (success) {
+        await loadInbox();
+        updateStats();
+      }
+    }
+
+    // ─── Recent Activity ───────────────────────────
+
+    async function loadRecentActivity() {
+      const column = document.getElementById('activity-column');
+      column.textContent = '';
+
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Recent Activity';
+      header.appendChild(h3);
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      const loadingEl = document.createElement('div');
+      loadingEl.className = 'loading';
+      loadingEl.textContent = 'Loading logs...';
+      body.appendChild(loadingEl);
+      section.appendChild(body);
+      column.appendChild(section);
+
+      // Load logs
+      const logs = await loadAllRecentLogs(20);
+
+      body.textContent = '';
+
+      if (logs.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 12px 0;';
+        empty.textContent = 'No recent sessions found';
+        body.appendChild(empty);
+        return;
+      }
+
+      // Update stats
+      document.getElementById('stat-recent-logs').textContent = logs.length;
+
+      for (const log of logs) {
+        const item = document.createElement('div');
+        item.className = 'activity-item';
+        item.addEventListener('click', () => {
+          window.location.href = 'project.html?project=' + log.projectSlug;
+        });
+
+        const headerRow = document.createElement('div');
+        headerRow.className = 'activity-header';
+
+        const pill = document.createElement('span');
+        pill.className = 'activity-project-pill';
+        pill.textContent = log.projectName;
+        headerRow.appendChild(pill);
+
+        const dateEl = document.createElement('span');
+        dateEl.className = 'activity-date';
+        dateEl.textContent = log.date;
+        headerRow.appendChild(dateEl);
+
+        item.appendChild(headerRow);
+
+        const titleEl = document.createElement('div');
+        titleEl.className = 'activity-title';
+        titleEl.textContent = log.title;
+        item.appendChild(titleEl);
+
+        if (log.preview) {
+          const previewEl = document.createElement('div');
+          previewEl.className = 'activity-preview';
+          previewEl.textContent = log.preview;
+          item.appendChild(previewEl);
+        }
+
+        body.appendChild(item);
+      }
+    }
+
+    // ─── Stats ─────────────────────────────────────
+
+    function updateStats() {
+      // Pending tasks
+      let pending = 0;
+      if (state.cosInbox) {
+        for (const section of state.cosInbox.sections) {
+          if (section.name !== 'Done') {
+            pending += section.items.filter(i => !i.checked).length;
+            for (const item of section.items) {
+              if (item.subtasks) {
+                pending += item.subtasks.filter(st => !st.checked).length;
+              }
+            }
+          }
+        }
+      }
+      document.getElementById('stat-pending').textContent = pending;
+
+      // Active projects
+      const active = state.projects.filter(p => p.category !== 'paused').length;
+      document.getElementById('stat-active-projects').textContent = active;
+    }
+
+    // ─── Slide-over close ──────────────────────────
+
+    document.getElementById('slide-over-close').addEventListener('click', closeSlideOver);
+    document.getElementById('slide-over-backdrop').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeSlideOver();
+    });
+
+    // ─── Boot ──────────────────────────────────────
+
+    (async function boot() {
+      const connected = await initApp();
+      if (connected) {
+        buildSidebar('');
+        await loadHomePage();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — Chief of Staff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main class="main" id="main-content">
+      <div class="project-header" id="project-header">
+        <h2 id="project-name">Loading...</h2>
+      </div>
+
+      <div class="project-sections" id="project-sections">
+        <div class="loading">Loading project data...</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Task Detail Slide-over -->
+  <div class="slide-over-backdrop" id="slide-over-backdrop">
+    <div class="slide-over">
+      <div class="slide-over-header">
+        <h3>Task</h3>
+        <button class="slide-over-close" id="slide-over-close">&times;</button>
+      </div>
+      <div class="slide-over-meta"></div>
+      <div class="slide-over-body"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    /* ─── Project Page Logic ──────────────────────────
+       SECURITY NOTE: All innerHTML usage in this file renders content
+       exclusively from the user's own local filesystem (markdown files
+       in ~/Documents/Projects/). There is no server, no external data
+       input, and no untrusted content. This is a personal offline tool.
+       ──────────────────────────────────────────────── */
+
+    let currentProject = null;
+
+    async function onConnected() {
+      await loadProjectPage();
+    }
+
+    async function loadProjectPage() {
+      const slug = getCurrentSlug();
+      if (!slug) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      currentProject = state.projects.find(p => p.slug === slug);
+      if (!currentProject) {
+        const sections = document.getElementById('project-sections');
+        sections.textContent = '';
+        const err = document.createElement('div');
+        err.className = 'error-message';
+        err.textContent = 'Project not found: ' + slug;
+        sections.appendChild(err);
+        return;
+      }
+
+      // Update page title
+      document.title = currentProject.name + ' \u2014 Chief of Staff';
+
+      // Header
+      const header = document.getElementById('project-header');
+      header.textContent = '';
+
+      const h2 = document.createElement('h2');
+      h2.textContent = currentProject.name;
+      header.appendChild(h2);
+
+      const badge = document.createElement('span');
+      badge.className = 'status-badge status-' + currentProject.status.toLowerCase().replace(/[^a-z]/g, '');
+      badge.textContent = currentProject.status;
+      header.appendChild(badge);
+
+      const pathEl = document.createElement('div');
+      pathEl.className = 'project-path';
+      pathEl.textContent = currentProject.relPath;
+      header.appendChild(pathEl);
+
+      // Load sections
+      const container = document.getElementById('project-sections');
+      container.textContent = '';
+
+      // Load all data in parallel
+      const [inboxContent, knowledgeContent, indexContent, logs] = await Promise.all([
+        readFile(state.rootHandle, ...currentProject.relPath.split('/'), 'cos-inbox.md'),
+        readFile(state.rootHandle, ...currentProject.relPath.split('/'), 'project-knowledge.md'),
+        readFile(state.rootHandle, 'Chief of Staff', 'project-index.md'),
+        loadProjectLogs(currentProject.relPath),
+      ]);
+
+      // Section A: Project Inbox
+      renderProjectInbox(container, inboxContent);
+
+      // Section B: Project Knowledge
+      renderProjectKnowledge(container, knowledgeContent, indexContent);
+
+      // Section C: Session Logs
+      renderProjectLogs(container, logs);
+
+      // Section D: Open Items
+      renderOpenItems(container, indexContent);
+    }
+
+    // ─── Section A: Project Inbox ──────────────────
+
+    function renderProjectInbox(container, inboxContent) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Project Inbox';
+      header.appendChild(h3);
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      if (!inboxContent) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+
+        const p = document.createElement('p');
+        p.textContent = 'No inbox file found for this project.';
+        empty.appendChild(p);
+
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-ghost btn-sm';
+        btn.textContent = 'Create cos-inbox.md';
+        btn.addEventListener('click', () => createProjectInbox());
+        empty.appendChild(btn);
+
+        body.appendChild(empty);
+      } else {
+        const inbox = parseInbox(inboxContent);
+        const filePath = currentProject.relPath + '/cos-inbox.md';
+
+        for (const sec of inbox.sections) {
+          if (sec.items.length === 0) continue;
+
+          const subHeader = document.createElement('div');
+          subHeader.style.cssText = 'font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 12px 0 6px; padding-top: 8px; border-top: 1px solid var(--border);';
+          subHeader.textContent = sec.name + ' (' + sec.items.length + ')';
+          body.appendChild(subHeader);
+
+          for (const item of sec.items) {
+            body.appendChild(createTaskItemEl(item, filePath, sec.name));
+          }
+        }
+
+        // Add task input
+        const addRow = document.createElement('div');
+        addRow.className = 'add-task-row';
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Add item... (Title \u2014 context)';
+        input.addEventListener('keydown', async (e) => {
+          if (e.key === 'Enter' && input.value.trim()) {
+            await addProjectTask(input.value.trim());
+            input.value = '';
+          }
+        });
+        addRow.appendChild(input);
+        body.appendChild(addRow);
+
+        // Update header badge
+        const pendingCount = inbox.sections.reduce((sum, s) => {
+          if (s.name === 'Archive' || s.name === 'Done') return sum;
+          return sum + s.items.filter(i => !i.checked).length;
+        }, 0);
+        if (pendingCount > 0) {
+          const countBadge = document.createElement('span');
+          countBadge.className = 'count-badge';
+          countBadge.textContent = pendingCount;
+          h3.appendChild(document.createTextNode(' '));
+          h3.appendChild(countBadge);
+        }
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    async function createProjectInbox() {
+      const content = '# Project Inbox\n\n## Pending\n\n## Archive\n';
+      try {
+        let dir = state.rootHandle;
+        const parts = currentProject.relPath.split('/');
+        for (const part of parts) {
+          dir = await dir.getDirectoryHandle(part);
+        }
+        const fileHandle = await dir.getFileHandle('cos-inbox.md', { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(content);
+        await writable.close();
+        await loadProjectPage();
+      } catch (e) {
+        alert('Failed to create inbox: ' + e.message);
+      }
+    }
+
+    async function addProjectTask(text) {
+      const pathParts = currentProject.relPath.split('/').concat('cos-inbox.md');
+      const content = await readFile(state.rootHandle, ...pathParts);
+      if (!content) return;
+
+      const today = new Date().toISOString().split('T')[0];
+      const newLine = '- [ ] **' + text + '** `#manual` `' + today + '`';
+
+      const lines = content.split('\n');
+      let insertIdx = -1;
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].match(/^## /)) {
+          insertIdx = i + 1;
+          while (insertIdx < lines.length && lines[insertIdx].trim() === '') {
+            insertIdx++;
+          }
+          break;
+        }
+      }
+
+      if (insertIdx === -1) return;
+
+      lines.splice(insertIdx, 0, newLine);
+      const success = await writeFile(state.rootHandle, pathParts, lines.join('\n'));
+      if (success) {
+        await loadProjectPage();
+      }
+    }
+
+    // ─── Section B: Project Knowledge ──────────────
+
+    function renderProjectKnowledge(container, knowledgeContent, indexContent) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Project Knowledge';
+      header.appendChild(h3);
+
+      const toggle = document.createElement('button');
+      toggle.className = 'section-toggle';
+      toggle.textContent = 'Collapse';
+      toggle.addEventListener('click', () => {
+        const body = section.querySelector('.section-body');
+        if (body.style.display === 'none') {
+          body.style.display = '';
+          toggle.textContent = 'Collapse';
+        } else {
+          body.style.display = 'none';
+          toggle.textContent = 'Expand';
+        }
+      });
+      header.appendChild(toggle);
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      let contentToRender = knowledgeContent;
+      if (!contentToRender && indexContent) {
+        const headingPattern = new RegExp('### ' + escapeRegex(currentProject.name) + '([\\s\\S]*?)(?=\\n---\\n|\\n### |$)', 'i');
+        const match = indexContent.match(headingPattern);
+        if (match) {
+          contentToRender = '# ' + currentProject.name + '\n' + match[1];
+        }
+      }
+
+      if (contentToRender) {
+        const mdDiv = document.createElement('div');
+        mdDiv.className = 'markdown-body';
+        // renderMarkdown processes user's own local files only
+        mdDiv.innerHTML = renderMarkdown(contentToRender);
+        body.appendChild(mdDiv);
+      } else {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
+        empty.textContent = 'No project-knowledge.md found';
+        body.appendChild(empty);
+      }
+
+      // Auto-collapse long content
+      if (contentToRender && contentToRender.length > 3000) {
+        body.style.display = 'none';
+        toggle.textContent = 'Expand';
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    // ─── Section C: Session Logs ───────────────────
+
+    function renderProjectLogs(container, logs) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Session Logs';
+
+      const badge = document.createElement('span');
+      badge.className = 'count-badge';
+      badge.textContent = logs.length;
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(badge);
+      header.appendChild(h3);
+
+      if (logs.length > 0) {
+        const toggleAll = document.createElement('button');
+        toggleAll.className = 'section-toggle';
+        toggleAll.textContent = 'Expand all';
+        toggleAll.addEventListener('click', () => {
+          const entries = section.querySelectorAll('.log-entry');
+          const allExpanded = Array.from(entries).every(e => e.classList.contains('expanded'));
+          entries.forEach(e => {
+            if (allExpanded) {
+              e.classList.remove('expanded');
+            } else {
+              e.classList.add('expanded');
+            }
+          });
+          toggleAll.textContent = allExpanded ? 'Expand all' : 'Collapse all';
+        });
+        header.appendChild(toggleAll);
+      }
+
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      // Search
+      if (logs.length > 3) {
+        const searchBar = document.createElement('div');
+        searchBar.className = 'search-bar';
+
+        const searchIcon = document.createElement('span');
+        searchIcon.className = 'search-icon';
+        searchIcon.textContent = '\uD83D\uDD0D';
+        searchBar.appendChild(searchIcon);
+
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Search logs... (press / to focus)';
+        searchInput.addEventListener('input', () => {
+          filterLogs(body, searchInput.value.toLowerCase());
+        });
+        searchBar.appendChild(searchInput);
+        body.appendChild(searchBar);
+      }
+
+      if (logs.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
+        empty.textContent = 'No session logs found';
+        body.appendChild(empty);
+      } else {
+        for (const log of logs) {
+          const entry = document.createElement('div');
+          entry.className = 'log-entry';
+          entry.dataset.title = log.title.toLowerCase();
+          entry.dataset.content = log.content.toLowerCase().slice(0, 500);
+
+          const entryHeader = document.createElement('div');
+          entryHeader.className = 'log-entry-header';
+
+          const entryBody = document.createElement('div');
+          entryBody.className = 'log-entry-body';
+
+          entryHeader.addEventListener('click', () => {
+            entry.classList.toggle('expanded');
+            // Lazy-render on first expand
+            if (entry.classList.contains('expanded') && !entry.dataset.rendered) {
+              const mdDiv = document.createElement('div');
+              mdDiv.className = 'markdown-body';
+              // renderMarkdown processes user's own local log files only
+              mdDiv.innerHTML = renderMarkdown(log.content);
+              entryBody.appendChild(mdDiv);
+              entry.dataset.rendered = 'true';
+            }
+          });
+
+          const chevron = document.createElement('span');
+          chevron.className = 'log-chevron';
+          chevron.textContent = '\u25B6';
+          entryHeader.appendChild(chevron);
+
+          const dateEl = document.createElement('span');
+          dateEl.className = 'log-entry-date';
+          dateEl.textContent = log.date;
+          entryHeader.appendChild(dateEl);
+
+          const titleEl = document.createElement('span');
+          titleEl.className = 'log-entry-title';
+          titleEl.textContent = log.title;
+          entryHeader.appendChild(titleEl);
+
+          entry.appendChild(entryHeader);
+          entry.appendChild(entryBody);
+          body.appendChild(entry);
+        }
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    function filterLogs(body, query) {
+      const entries = body.querySelectorAll('.log-entry');
+      for (const entry of entries) {
+        if (!query) {
+          entry.style.display = '';
+          continue;
+        }
+        const matchTitle = entry.dataset.title.includes(query);
+        const matchContent = entry.dataset.content.includes(query);
+        entry.style.display = (matchTitle || matchContent) ? '' : 'none';
+      }
+    }
+
+    // ─── Section D: Open Items ─────────────────────
+
+    function renderOpenItems(container, indexContent) {
+      if (!currentProject || !indexContent) return;
+
+      const items = parseOpenItems(indexContent, currentProject.name);
+      if (!items.length) return;
+
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Open Items';
+
+      const itemBadge = document.createElement('span');
+      itemBadge.className = 'count-badge';
+      itemBadge.textContent = items.length;
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(itemBadge);
+      header.appendChild(h3);
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      for (const item of items) {
+        const div = document.createElement('div');
+        div.style.cssText = 'padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; color: var(--text-secondary);';
+
+        // Parse bold and code in open items (from user's own project-index.md)
+        const parts = item.split(/(\*\*.*?\*\*|`[^`]+`)/g);
+        for (const part of parts) {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            const strong = document.createElement('strong');
+            strong.style.color = 'var(--text-primary)';
+            strong.textContent = part.slice(2, -2);
+            div.appendChild(strong);
+          } else if (part.startsWith('`') && part.endsWith('`')) {
+            const code = document.createElement('code');
+            code.textContent = part.slice(1, -1);
+            div.appendChild(code);
+          } else {
+            div.appendChild(document.createTextNode(part));
+          }
+        }
+
+        body.appendChild(div);
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    // ─── Slide-over close ──────────────────────────
+
+    document.getElementById('slide-over-close').addEventListener('click', closeSlideOver);
+    document.getElementById('slide-over-backdrop').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeSlideOver();
+    });
+
+    // ─── Boot ──────────────────────────────────────
+
+    (async function boot() {
+      const connected = await initApp();
+      if (connected) {
+        const slug = getCurrentSlug();
+        buildSidebar(slug);
+        await loadProjectPage();
+      }
+    })();
+  </script>
+</body>
+</html>
