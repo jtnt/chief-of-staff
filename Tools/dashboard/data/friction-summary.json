@@ -1,0 +1,53 @@
+{
+  "generated": "2026-02-07",
+  "sessions_analyzed": 52,
+  "total_friction": 68,
+  "zero_friction_sessions": 20,
+  "zero_friction_pct": 38,
+  "friction_types": {
+    "wrong_approach": 28,
+    "misunderstood_request": 21,
+    "excessive_changes": 7,
+    "buggy_code": 3,
+    "user_rejected_action": 3,
+    "tool_issues": 4
+  },
+  "outcomes": {
+    "fully_achieved": 24,
+    "mostly_achieved": 15,
+    "partially_achieved": 8
+  },
+  "friction_vs_outcome": {
+    "zero_friction_success_pct": 95,
+    "low_friction_success_pct": 84,
+    "high_friction_success_pct": 31
+  },
+  "top_examples": [
+    {
+      "type": "wrong_approach",
+      "description": "Over-mapped to four-layer architecture when two was intended; kept adding CoS concerns after user explicitly said drop them",
+      "lesson": "When user says 'drop X', it stays dropped. Propose simpler before complex."
+    },
+    {
+      "type": "wrong_approach",
+      "description": "Sugarcoated competitive analysis instead of being honest and tactical; user had to correct multiple times to stop being emotionally supportive",
+      "lesson": "In strategic/competitive contexts, be direct. User wants tactical clarity, not comfort."
+    },
+    {
+      "type": "misunderstood_request",
+      "description": "Framed takeaway as making people 'AI workflow builders' (tech-centric) when user's whole point was business-outcomes-over-tech",
+      "lesson": "Match the user's stated framing. If they say 'business outcomes', don't translate to tech."
+    },
+    {
+      "type": "excessive_changes",
+      "description": "Edited a thought skill file without being asked, triggering strong rebuke about unsolicited changes",
+      "lesson": "Never edit files unless explicitly requested. This is a hard boundary."
+    },
+    {
+      "type": "misunderstood_request",
+      "description": "Over-indexed on casual pricing observation, turning it into extensive analysis. User called out pattern of inflating passing thoughts.",
+      "lesson": "Preserve significance level. A passing remark stays a passing remark."
+    }
+  ],
+  "key_insight": "Zero-friction sessions achieve goals 95% of the time. Sessions with 2+ friction events drop to 31%. The #1 friction source (41%) is wrong approach — over-engineering and wrong framing."
+}

@@ -186,6 +186,8 @@
   },
   "active": "047ab574a9908142",
   "lastOpenFiles": [
+    "Tools/dashboard/data/friction-summary.json",
+    "Tools/dashboard/data",
     "logs/20260207-claude-desktop-uninstall.md",
     "Resources/claude-code-dashboard.html",
     "logs/20260207-patterns-page-implementation.md",
@@ -197,7 +199,6 @@
     "Tools/dashboard/css/style.css",
     "Tools/dashboard/js",
     "Tools/dashboard/css",
-    "Tools/dashboard",
     "session-patterns/20260207-inbox-checkbox-restructure.md",
     "logs/20260207-inbox-checkbox-restructure.md",
     "Tasks/20260203-envoy-client-skills-plan.md",
@@ -220,7 +221,6 @@
     "Links/Web-Dev/20260117-astro-web-framework.md",
     "Meetings/20260121-nicholas-ken-intro/summary.md",
     "logs/20260207-trivial-session.md",
-    "Meetings/20260113-tolson-wagner-ai-chat/transcript.md",
-    "Untitled.md"
+    "Meetings/20260113-tolson-wagner-ai-chat/transcript.md"
   ]
 }
