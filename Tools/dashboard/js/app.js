@@ -448,16 +448,28 @@ async function toggleInboxCheckbox(filePath, lineNumber, newChecked) {
   const idx = lineNumber - 1;
   if (idx < 0 || idx >= lines.length) return false;
 
+  const isTopLevel = /^- \[[ x]\]/.test(lines[idx]);
+  const hasDescLine = isTopLevel && idx + 1 < lines.length && /^\t- (?!\[[ x]\])/.test(lines[idx + 1]);
+
   if (newChecked) {
     lines[idx] = lines[idx].replace('[ ]', '[x]');
-    // Add done:date if completing a top-level task in Done section or subtask
-    if (!lines[idx].includes('done:')) {
-      const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split('T')[0];
+    if (hasDescLine) {
+      // Add done:date to description sub-bullet
+      if (!lines[idx + 1].includes('done:')) {
+        lines[idx + 1] = lines[idx + 1].trimEnd() + ` done:${today}`;
+      }
+    } else if (!lines[idx].includes('done:')) {
+      // Subtask or old format — append to same line
       lines[idx] = lines[idx].trimEnd() + ` done:${today}`;
     }
   } else {
     lines[idx] = lines[idx].replace('[x]', '[ ]');
-    // Remove done:date if unchecking
+    if (hasDescLine) {
+      // Remove done:date from description sub-bullet
+      lines[idx + 1] = lines[idx + 1].replace(/\s*done:\d{4}-\d{2}-\d{2}/, '');
+    }
+    // Also remove from title line (old format or accidental placement)
     lines[idx] = lines[idx].replace(/\s*done:\d{4}-\d{2}-\d{2}/, '');
   }
 
