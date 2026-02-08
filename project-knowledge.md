@@ -6,6 +6,8 @@
 
 ### Inbox
 
+- [ ] **Fix inconsistent timestamp display on dashboard**
+	- Dates shown in various formats across activity feed, log entries, and slide-over meta `#manual` `2026-02-08`
 
 ### Active
 
