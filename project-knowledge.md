@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-06
+**Last Updated:** 2026-02-07
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -67,7 +67,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ### Strategic Briefing
 - Runs 1-3x daily via `BRIEFING_REQUIRED` flag from SessionStart hook
 - Format: Calendar → Projects → Content → Inbox → Meetings
-- Three-tier inbox: Pending (priority) → Backlog (meta-work) → Archive
+- Four-section inbox: Inbox (untriaged) → Active (this week) → Backlog → Done
+- Obsidian-native checkbox format (`- [ ]` / `- [x]`) for interactive task management
 - Bias toward project deliverables principle embedded in briefing template
 
 ### Session Context Loading
@@ -104,7 +105,9 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 - **Logs live with projects** (2026-01-14): Each project has its own `logs/` folder. Chief of Staff is an index/dashboard, not a repository. Portable history.
 
-- **Three-tier inbox** (2026-02-03): Pending (priority work) → Backlog (meta-work) → Archive. Prevents meta-work optimization from competing with revenue-generating work.
+- **Checkbox-based task management** (2026-02-07): Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format. Four sections: Inbox (untriaged) → Active (this week) → Backlog → Done. Interactive checkboxes (`- [ ]`/`- [x]`), bold titles, source tags, wikilinks to Tasks/ detail files. Git-ignores `Tasks/` and `cos-inbox.md` (working state, not code).
+
+- **Three-tier inbox** (2026-02-03, superseded 2026-02-07): Pending (priority work) → Backlog (meta-work) → Archive. Evolved into four-section checkbox format.
 
 - **Commands → Skills migration** (2026-01-31): Check-in commands converted to skills with explicit model selection. Skills support modern Claude Code features; commands are legacy.
 
@@ -124,6 +127,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-02-07: Inbox Checkbox Restructure
+
+Completed major restructure of task management system. Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format with four sections (Inbox → Active → Backlog → Done). Updated 2 hook scripts, briefing template, and 4 producer skills to write/parse new format. Discovered and fixed latent `grep -c` bug (exit code 1 when count is 0). Migrated 3 external project inboxes. Added `Tasks/` and `cos-inbox.md` to `.gitignore`. Pattern file created documenting format migration workflow.
 
 ### 2026-02-06: Session Capture Transcript Parsing Fix
 
@@ -169,13 +176,6 @@ Removed GSD framework files (65 files, 17K lines), orphaned scripts. Hardened `.
 
 Replaced `/log` and `/save` with automatic SessionEnd capture. Background Claude reads transcript → creates log → extracts patterns → commits/pushes → syncs to CoS. Untracked sessions go to `~/.claude/untracked-sessions/`. `/review-patterns` skill for applying CLAUDE.md suggestions.
 
-### 2026-01-26: Four-Phase System Cleanup
-
-Consolidated settings.json (176 → 58 permissions), DRY'd commands, added Reasoning section to log template, created USAGE-GUIDE.md.
-
-### 2026-01-26: CoS Inbox Notifications Across Projects
-
-Extended SessionStart hook to inject `COS_INBOX` flag with item count when any project has pending `cos-inbox.md` items. Added global principles: "Check Docs Before Claude Code Changes", "Present Options, Don't Assume".
 
 ---
 

@@ -35,7 +35,7 @@ The AI Workflow Sprint has become the primary go-to-market focus, shifting Razzo
 - 2026-01-21: **LinkedIn article saved** - Added "Getting Started with AI: 3 Simple Steps for SMBs" article to Writing folder. Covers three foundational steps: picking a chatbot (ChatGPT/Claude/Gemini), training people, and building a Context Profile. Promotes Razzo's workflow sprints and CPF framework. Includes two social media image versions.
 - 2026-01-20: **GTM-focused post update** - Updated LinkedIn post about AI productivity-to-innovation cycle to include sales and customer success elements. Added parallel GTM track showing how AI insights feed sales intelligence (objection handling, discovery questions) and customer success (expansion opportunities, training gaps). Created image generation prompt for updated graphic.
 - 2026-01-15: **Context Profile Framework landing page** COMPLETED
-  - New page at `/context-profile-framework/` to introduce CPF and capture app waitlist signups
+  - New page at `/context-profile-framework/` to introduce CPF and capture app waitlist signups 
   - Headline: "Capture What AI Needs to Know About Your Business"
   - Sidebar layout with sticky waitlist CTA + framework graphic
   - Added "Context Profile Framework" as top-level nav item with vertical separators
