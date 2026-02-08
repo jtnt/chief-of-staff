@@ -23,21 +23,6 @@
 
       <div id="health-alert-strip"></div>
 
-      <div class="stats-row" id="stats-row">
-        <div class="stat-card">
-          <div class="stat-value" id="stat-pending">-</div>
-          <div class="stat-label">Pending Tasks</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="stat-active-projects">-</div>
-          <div class="stat-label">Active Projects</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="stat-recent-logs">-</div>
-          <div class="stat-label">Recent Sessions</div>
-        </div>
-      </div>
-
       <div class="home-grid">
         <div class="inbox-column" id="inbox-column">
           <div class="loading">Loading inbox...</div>
@@ -73,7 +58,7 @@
 
     // Reload tasks when a checkbox is toggled (item may have moved to Done)
     function onCheckboxToggled() {
-      loadCrossProjectTasks().then(() => updateStats());
+      loadCrossProjectTasks();
     }
 
     async function loadHomePage() {
@@ -81,7 +66,6 @@
         loadCrossProjectTasks(),
         loadRecentActivity(),
       ]);
-      updateStats();
       // Run health scan in background (non-blocking)
       scanHealthAlerts().then(() => {
         renderAlertStrip();
@@ -268,7 +252,6 @@
       const success = await writeFile(state.rootHandle, ['Chief of Staff', 'project-knowledge.md'], lines.join('\n'));
       if (success) {
         await loadCrossProjectTasks();
-        updateStats();
       }
     }
 
@@ -310,9 +293,6 @@
         body.appendChild(empty);
         return;
       }
-
-      // Update stats
-      document.getElementById('stat-recent-logs').textContent = logs.length;
 
       for (const log of logs) {
         const item = document.createElement('div');
@@ -357,17 +337,6 @@
 
         body.appendChild(item);
       }
-    }
-
-    // ─── Stats ─────────────────────────────────────
-
-    function updateStats() {
-      // Pending tasks (cross-project total)
-      document.getElementById('stat-pending').textContent = state.totalPendingCount || 0;
-
-      // Active projects
-      const active = state.projects.filter(p => p.category !== 'paused').length;
-      document.getElementById('stat-active-projects').textContent = active;
     }
 
     // ─── Slide-over close ──────────────────────────

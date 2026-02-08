@@ -1,6 +1,6 @@
-# Chief of Staff: Project Knowledge
+Mook client vision o#n away skills from active.  Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-07 11:39 PM EST
+**Last Updated:** 2026-02-08 11:07 AM EST
 
 ## Tasks
 
@@ -9,8 +9,6 @@
 
 ### Active
 
-- [ ] **Build client-facing envoy skills from Razzo worksheets**
-	- Apply envoy framework to AI Workflow Opportunity Worksheet and Planning Template `#session` `2026-02-03` [[Tasks/20260203-envoy-client-skills-plan.md]]
 - [ ] **I-Corps mentor prep**
 	- NSF program application via Glenn Hellman `#meeting` `2026-02-02` [[Tasks/20260203-icorps-mentor-prep.md]]
   - [ ] Complete mentor interest form `due:2026-02-09`
@@ -19,6 +17,8 @@
 
 ### Backlog
 
+- [ ] **Build client-facing envoy skills from Razzo worksheets**
+	- Apply envoy framework to AI Workflow Opportunity Worksheet and Planning Template `#session` `2026-02-03` [[Tasks/20260203-envoy-client-skills-plan.md]]
 - [ ] **Review Boris Cherny's Claude Code tips**
 	- 10 tips from Claude Code creator `#link` `2026-01-31`
   - [x] Try voice dictation (fn fn) for longer prompts
@@ -174,6 +174,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-08: Dashboard Cross-Project Tasks & UI Refinements
+
+Restructured dashboard to make home page a true cross-project command center. Added `loadAllTasks()` function that reads all project-knowledge.md files in parallel, aggregates tasks with metadata (project, priority, file path). Replaced CoS-only inbox with per-project collapsible sections — users expand/collapse projects to control info density. Removed stats row (pending tasks, active projects, recent sessions) as informational noise. Project pages now have two-column grid (tasks left, activity right) with logs as activity cards. Findings: flat lists with inline metadata don't scale; hierarchical grouping with collapse/expand works much better. Stats should drive action or be removed.
+
 ### 2026-02-07: Dashboard Health Monitoring & Inbox Archive
 
 Implemented comprehensive health monitoring in CoS dashboard. Created health.html with project cards (PK freshness, inbox counts, CLAUDE.md presence, z_context integrity, log stats, letter grades A/B/C/D) and friction snapshot (type breakdown, success rates, pattern examples from insights analysis). Added sidebar inbox count badges (color-coded by urgency), Health nav link with status dot, and home page alert strip for critical issues. Redesigned inbox format from single-line to two-line (title + tab-indented description) for better Obsidian preview readability. Added archive system: auto-move checked tasks to Done section, "Archive N" button moves completed items to cos-inbox-archive.md with date grouping. Fixed checkbox toggle bug (done: date was going to title instead of description line).
@@ -185,14 +189,6 @@ Added descriptive `title:` field to session-capture skill template. Updated all 
 ### 2026-02-07: Inbox Checkbox Restructure
 
 Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format with four sections (Inbox → Active → Backlog → Done). Updated 2 hook scripts, briefing template, and 4 producer skills. Fixed latent `grep -c` bug (exit code 1 when count is 0). Migrated 3 external project inboxes.
-
-### 2026-02-06: Session Capture Transcript Parsing Fix
-
-Fixed critical bug in `/session-capture` skill where jq commands failed to extract file changes and plan file references from transcripts. Root cause: jq paths looked for `.input.file_path` at top level, but tool calls are nested inside `.message.content[]`.
-
-### 2026-02-06: Session Context Loading
-
-Added directive to global CLAUDE.md to automatically read `project-knowledge.md` at session start for all projects. Closes gap where strategic context went unused unless explicitly requested.
 
 
 ---

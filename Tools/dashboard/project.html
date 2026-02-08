@@ -18,21 +18,6 @@
         <h2 id="project-name">Loading...</h2>
       </div>
 
-      <div class="stats-row" id="project-stats-row" style="display:none;">
-        <div class="stat-card">
-          <div class="stat-value" id="pstat-pending">-</div>
-          <div class="stat-label">Pending Tasks</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="pstat-logs">-</div>
-          <div class="stat-label">Total Logs</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="pstat-last-active">-</div>
-          <div class="stat-label">Last Active</div>
-        </div>
-      </div>
-
       <div class="project-sections" id="project-sections">
         <div class="loading">Loading project data...</div>
       </div>
@@ -125,9 +110,6 @@
         loadProjectPatterns(currentProject.relPath),
       ]);
 
-      // Update stats row
-      updateProjectStats(knowledgeContent, logs);
-
       // Two-column grid: Tasks (left) + Recent Activity (right)
       const grid = document.createElement('div');
       grid.className = 'project-grid';
@@ -155,35 +137,6 @@
 
       // Re-add quick-add bar (header was rebuilt)
       buildQuickAddBar();
-    }
-
-    function updateProjectStats(knowledgeContent, logs) {
-      const statsRow = document.getElementById('project-stats-row');
-      statsRow.style.display = '';
-
-      // Pending tasks
-      let pending = 0;
-      if (knowledgeContent) {
-        const tasksResult = extractTasksSection(knowledgeContent);
-        if (tasksResult) {
-          const parsed = parseInbox(tasksResult.text, tasksResult.lineOffset);
-          for (const sec of parsed.sections) {
-            if (sec.name === 'Done') continue;
-            pending += sec.items.filter(i => !i.checked).length;
-            for (const item of sec.items) {
-              if (item.subtasks) pending += item.subtasks.filter(st => !st.checked).length;
-            }
-          }
-        }
-      }
-      document.getElementById('pstat-pending').textContent = pending;
-
-      // Total logs
-      document.getElementById('pstat-logs').textContent = logs.length;
-
-      // Last active date
-      const lastDate = logs.length > 0 ? logs[0].date.split(' ')[0] : '\u2014';
-      document.getElementById('pstat-last-active').textContent = lastDate;
     }
 
     // ─── Activity Column (project mini-dashboard) ──
