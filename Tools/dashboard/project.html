@@ -18,6 +18,21 @@
         <h2 id="project-name">Loading...</h2>
       </div>
 
+      <div class="stats-row" id="project-stats-row" style="display:none;">
+        <div class="stat-card">
+          <div class="stat-value" id="pstat-pending">-</div>
+          <div class="stat-label">Pending Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="pstat-logs">-</div>
+          <div class="stat-label">Total Logs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="pstat-last-active">-</div>
+          <div class="stat-label">Last Active</div>
+        </div>
+      </div>
+
       <div class="project-sections" id="project-sections">
         <div class="loading">Loading project data...</div>
       </div>
@@ -49,6 +64,10 @@
 
     async function onConnected() {
       await loadProjectPage();
+    }
+
+    function onCheckboxToggled() {
+      loadProjectPage();
     }
 
     async function loadProjectPage() {
@@ -106,26 +125,139 @@
         loadProjectPatterns(currentProject.relPath),
       ]);
 
-      // Section A: Tasks (from ## Tasks in project-knowledge.md)
-      renderProjectTasks(container, knowledgeContent);
+      // Update stats row
+      updateProjectStats(knowledgeContent, logs);
 
-      // Section B: Project Knowledge
+      // Two-column grid: Tasks (left) + Recent Activity (right)
+      const grid = document.createElement('div');
+      grid.className = 'project-grid';
+
+      const leftCol = document.createElement('div');
+      leftCol.className = 'project-grid-left';
+      renderProjectTasks(leftCol, knowledgeContent);
+
+      const rightCol = document.createElement('div');
+      rightCol.className = 'project-grid-right';
+      renderProjectActivityColumn(rightCol, logs.slice(0, 10));
+
+      grid.appendChild(leftCol);
+      grid.appendChild(rightCol);
+      container.appendChild(grid);
+
+      // Below grid: Project Knowledge (collapsible)
       renderProjectKnowledge(container, knowledgeContent, indexContent);
 
-      // Section C: Session Logs
-      renderProjectLogs(container, logs);
-
-      // Section D: Session Patterns
+      // Below grid: Session Patterns (collapsible)
       renderProjectPatterns(container, patterns);
+
+      // Full session logs section (collapsed accordion for deep access)
+      renderProjectLogs(container, logs);
 
       // Re-add quick-add bar (header was rebuilt)
       buildQuickAddBar();
     }
 
+    function updateProjectStats(knowledgeContent, logs) {
+      const statsRow = document.getElementById('project-stats-row');
+      statsRow.style.display = '';
+
+      // Pending tasks
+      let pending = 0;
+      if (knowledgeContent) {
+        const tasksResult = extractTasksSection(knowledgeContent);
+        if (tasksResult) {
+          const parsed = parseInbox(tasksResult.text, tasksResult.lineOffset);
+          for (const sec of parsed.sections) {
+            if (sec.name === 'Done') continue;
+            pending += sec.items.filter(i => !i.checked).length;
+            for (const item of sec.items) {
+              if (item.subtasks) pending += item.subtasks.filter(st => !st.checked).length;
+            }
+          }
+        }
+      }
+      document.getElementById('pstat-pending').textContent = pending;
+
+      // Total logs
+      document.getElementById('pstat-logs').textContent = logs.length;
+
+      // Last active date
+      const lastDate = logs.length > 0 ? logs[0].date.split(' ')[0] : '\u2014';
+      document.getElementById('pstat-last-active').textContent = lastDate;
+    }
+
+    // ─── Activity Column (project mini-dashboard) ──
+
+    function renderProjectActivityColumn(container, logs) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Recent Activity';
+      const badge = document.createElement('span');
+      badge.className = 'count-badge';
+      badge.textContent = logs.length;
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(badge);
+      header.appendChild(h3);
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      if (logs.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
+        empty.textContent = 'No recent sessions found';
+        body.appendChild(empty);
+      } else {
+        for (const log of logs) {
+          const item = document.createElement('div');
+          item.className = 'activity-item';
+
+          const headerRow = document.createElement('div');
+          headerRow.className = 'activity-header';
+
+          const dateEl = document.createElement('span');
+          dateEl.className = 'activity-date';
+          dateEl.textContent = log.date;
+          headerRow.appendChild(dateEl);
+
+          item.appendChild(headerRow);
+
+          const titleEl = document.createElement('div');
+          titleEl.className = 'activity-title';
+          titleEl.textContent = log.title;
+          item.appendChild(titleEl);
+
+          if (log.preview) {
+            const previewEl = document.createElement('div');
+            previewEl.className = 'activity-preview';
+            previewEl.textContent = log.preview;
+            item.appendChild(previewEl);
+          }
+
+          if (log.sessionId) {
+            const resumeRow = document.createElement('div');
+            resumeRow.className = 'activity-resume';
+            resumeRow.appendChild(createResumeBtns(log.sessionId));
+            item.appendChild(resumeRow);
+          }
+
+          body.appendChild(item);
+        }
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
     // ─── Section A: Project Tasks ──────────────────
 
     function renderProjectTasks(container, knowledgeContent) {
-      const tasksContent = knowledgeContent ? extractTasksSection(knowledgeContent) : null;
+      const tasksResult = knowledgeContent ? extractTasksSection(knowledgeContent) : null;
 
       const section = document.createElement('div');
       section.className = 'section';
@@ -140,13 +272,13 @@
       const body = document.createElement('div');
       body.className = 'section-body';
 
-      if (!tasksContent) {
+      if (!tasksResult) {
         const empty = document.createElement('div');
         empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
         empty.textContent = 'No tasks found (add a ## Tasks section to project-knowledge.md)';
         body.appendChild(empty);
       } else {
-        const inbox = parseInbox(tasksContent);
+        const inbox = parseInbox(tasksResult.text, tasksResult.lineOffset);
         const filePath = currentProject.relPath + '/project-knowledge.md';
 
         for (const sec of inbox.sections) {
@@ -329,11 +461,9 @@
         body.appendChild(empty);
       }
 
-      // Auto-collapse long content
-      if (contentToRender && contentToRender.length > 3000) {
-        body.style.display = 'none';
-        toggle.textContent = 'Expand';
-      }
+      // Default collapsed (expand on demand)
+      body.style.display = 'none';
+      toggle.textContent = 'Expand';
 
       section.appendChild(body);
       container.appendChild(section);
@@ -349,7 +479,7 @@
       header.className = 'section-header';
 
       const h3 = document.createElement('h3');
-      h3.textContent = 'Session Logs';
+      h3.textContent = 'All Session Logs';
 
       const badge = document.createElement('span');
       badge.className = 'count-badge';
@@ -363,6 +493,12 @@
         toggleAll.className = 'section-toggle';
         toggleAll.textContent = 'Expand all';
         toggleAll.addEventListener('click', () => {
+          const body = section.querySelector('.section-body');
+          // If body is hidden, show it first
+          if (body.style.display === 'none') {
+            body.style.display = '';
+            sectionToggle.textContent = 'Collapse';
+          }
           const entries = section.querySelectorAll('.log-entry');
           const allExpanded = Array.from(entries).every(e => e.classList.contains('expanded'));
           entries.forEach(e => {
@@ -376,6 +512,22 @@
         });
         header.appendChild(toggleAll);
       }
+
+      // Section collapse toggle
+      const sectionToggle = document.createElement('button');
+      sectionToggle.className = 'section-toggle';
+      sectionToggle.textContent = 'Expand';
+      sectionToggle.addEventListener('click', () => {
+        const body = section.querySelector('.section-body');
+        if (body.style.display === 'none') {
+          body.style.display = '';
+          sectionToggle.textContent = 'Collapse';
+        } else {
+          body.style.display = 'none';
+          sectionToggle.textContent = 'Expand';
+        }
+      });
+      header.appendChild(sectionToggle);
 
       section.appendChild(header);
 
@@ -458,6 +610,9 @@
         }
       }
 
+      // Default collapsed — activity column shows top 10
+      body.style.display = 'none';
+
       section.appendChild(body);
       container.appendChild(section);
     }
@@ -499,6 +654,11 @@
         toggleAll.className = 'section-toggle';
         toggleAll.textContent = 'Expand all';
         toggleAll.addEventListener('click', () => {
+          const patBody = section.querySelector('.section-body');
+          if (patBody.style.display === 'none') {
+            patBody.style.display = '';
+            patSectionToggle.textContent = 'Collapse';
+          }
           const entries = section.querySelectorAll('.log-entry');
           const allExpanded = Array.from(entries).every(e => e.classList.contains('expanded'));
           entries.forEach(e => {
@@ -513,6 +673,22 @@
         });
         header.appendChild(toggleAll);
       }
+
+      // Section collapse toggle
+      const patSectionToggle = document.createElement('button');
+      patSectionToggle.className = 'section-toggle';
+      patSectionToggle.textContent = 'Expand';
+      patSectionToggle.addEventListener('click', () => {
+        const patBody = section.querySelector('.section-body');
+        if (patBody.style.display === 'none') {
+          patBody.style.display = '';
+          patSectionToggle.textContent = 'Collapse';
+        } else {
+          patBody.style.display = 'none';
+          patSectionToggle.textContent = 'Expand';
+        }
+      });
+      header.appendChild(patSectionToggle);
 
       section.appendChild(header);
 
@@ -591,6 +767,9 @@
         h3.appendChild(document.createTextNode(' '));
         h3.appendChild(sugBadge);
       }
+
+      // Default collapsed
+      body.style.display = 'none';
 
       section.appendChild(body);
       container.appendChild(section);

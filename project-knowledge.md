@@ -2,14 +2,10 @@
 
 **Last Updated:** 2026-02-07 11:39 PM EST
 
----
-
 ## Tasks
 
 ### Inbox
 
-- [ ] **Draft post: Claude Code as Hitchhiker's Guide text game**
-	- Terminal-based, addicting, can't stop playing — find screenshot of original game `#thought` `2026-02-07`
 
 ### Active
 

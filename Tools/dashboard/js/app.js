@@ -18,6 +18,8 @@ const state = {
   pendingSuggestionCount: 0, // Files with pending CLAUDE.md suggestions
   healthAlerts: [],       // [{project, issue}] — populated by scanHealthAlerts()
   healthDotLevel: 'green', // 'green' | 'amber' | 'red'
+  allTasks: [],           // Cross-project tasks [{item, filePath, projectName, projectSlug, sectionName, priority}]
+  totalPendingCount: 0,   // All unchecked items + subtasks across all projects
 };
 
 // ─── IndexedDB for directory handle persistence ──────
@@ -132,14 +134,14 @@ async function readFile(dirHandle, ...pathParts) {
   }
 }
 
-async function writeFile(dirHandle, pathParts, content) {
+async function writeFile(dirHandle, pathParts, content, createIfMissing) {
   try {
     let dir = dirHandle;
     const fileName = pathParts[pathParts.length - 1];
     for (let i = 0; i < pathParts.length - 1; i++) {
       dir = await dir.getDirectoryHandle(pathParts[i]);
     }
-    const fileHandle = await dir.getFileHandle(fileName);
+    const fileHandle = await dir.getFileHandle(fileName, createIfMissing ? { create: true } : undefined);
     const writable = await fileHandle.createWritable();
     await writable.write(content);
     await writable.close();
@@ -256,7 +258,7 @@ async function discoverProjects() {
     const content = await readFile(state.rootHandle, ...pathParts, 'project-knowledge.md');
     if (content) {
       const tasksSection = extractTasksSection(content);
-      p.inboxCount = tasksSection ? (tasksSection.match(/^- \[ \]/gm) || []).length : 0;
+      p.inboxCount = tasksSection ? (tasksSection.text.match(/^- \[ \]/gm) || []).length : 0;
     } else {
       p.inboxCount = 0;
     }
@@ -285,6 +287,8 @@ function escapeRegex(s) {
 }
 
 // Extract ## Tasks section from project-knowledge.md content
+// Returns { text, lineOffset } where lineOffset is the 0-based line number
+// of the ## Tasks heading within the full file content.
 function extractTasksSection(content) {
   if (!content) return null;
   const idx = content.indexOf('\n## Tasks\n');
@@ -293,11 +297,13 @@ function extractTasksSection(content) {
     if (!content.startsWith('## Tasks\n')) return null;
     const fromTasks = content;
     const nextHeading = fromTasks.search(/\n## (?!#)/);
-    return nextHeading === -1 ? fromTasks : fromTasks.substring(0, nextHeading);
+    return { text: nextHeading === -1 ? fromTasks : fromTasks.substring(0, nextHeading), lineOffset: 0 };
   }
   const fromTasks = content.substring(idx + 1); // skip the leading \n
   const nextHeading = fromTasks.search(/\n## (?!#)/);
-  return nextHeading === -1 ? fromTasks : fromTasks.substring(0, nextHeading);
+  const text = nextHeading === -1 ? fromTasks : fromTasks.substring(0, nextHeading);
+  const lineOffset = content.substring(0, idx + 1).split('\n').length - 1;
+  return { text, lineOffset };
 }
 
 // Extract a non-generic heading from markdown content
@@ -349,13 +355,14 @@ function groupProjects(projects) {
 
 // ─── Inbox Parser ────────────────────────────────────
 
-function parseInbox(content) {
+function parseInbox(content, lineOffset) {
   if (!content) return { sections: [], raw: '' };
+  const baseOffset = lineOffset || 0;
 
   const lines = content.split('\n');
   const sections = [];
   let currentSection = null;
-  let lineNumber = 0;
+  let lineNumber = baseOffset;
 
   for (const line of lines) {
     lineNumber++;
@@ -1135,14 +1142,19 @@ async function triageTask(item, fromFilePath, destination) {
     lines.splice(insertIdx, 0, ...taskLines);
     return await writeFile(state.rootHandle, fromParts, lines.join('\n'));
   } else {
-    // Moving to a different project
-    lines.splice(startIdx, endIdx - startIdx);
-    const writeSourceOk = await writeFile(state.rootHandle, fromParts, lines.join('\n'));
-    if (!writeSourceOk) return false;
+    // Moving to a different project — read target FIRST before modifying source
+    const toParts = destination.relPath.split('/').filter(Boolean).concat('project-knowledge.md');
+    let toContent = await readFile(state.rootHandle, ...toParts);
 
-    const toParts = destination.relPath.split('/').concat('project-knowledge.md');
-    const toContent = await readFile(state.rootHandle, ...toParts);
-    if (!toContent) return false;
+    // If project-knowledge.md doesn't exist yet, create it with a Tasks section
+    if (toContent === null) {
+      toContent = '# ' + destination.name + '\n\n## Tasks\n';
+      const createOk = await writeFile(state.rootHandle, toParts, toContent, true);
+      if (!createOk) {
+        console.error('triageTask: could not create project-knowledge.md at', toParts.join('/'));
+        return false;
+      }
+    }
 
     const toLines = toContent.split('\n');
     let insertIdx = -1;
@@ -1171,7 +1183,15 @@ async function triageTask(item, fromFilePath, destination) {
     }
 
     toLines.splice(insertIdx, 0, ...taskLines);
-    return await writeFile(state.rootHandle, toParts, toLines.join('\n'));
+    const writeTargetOk = await writeFile(state.rootHandle, toParts, toLines.join('\n'));
+    if (!writeTargetOk) {
+      console.error('triageTask: failed to write target', toParts.join('/'));
+      return false;
+    }
+
+    // Only remove from source AFTER target write succeeded
+    lines.splice(startIdx, endIdx - startIdx);
+    return await writeFile(state.rootHandle, fromParts, lines.join('\n'));
   }
 }
 
@@ -1233,7 +1253,7 @@ function makeResumeBtn(sessionId, yolo) {
 // ─── Render Task Item HTML ───────────────────────────
 // Returns a DocumentFragment (safe DOM construction)
 
-function createTaskItemEl(item, filePath, sectionName) {
+function createTaskItemEl(item, filePath, sectionName, projectName) {
   const frag = document.createDocumentFragment();
 
   // Main task
@@ -1295,6 +1315,13 @@ function createTaskItemEl(item, filePath, sectionName) {
     meta.appendChild(dd);
     hasMeta = true;
   }
+  if (projectName) {
+    const pill = document.createElement('span');
+    pill.className = 'activity-project-pill';
+    pill.textContent = projectName;
+    meta.appendChild(pill);
+    hasMeta = true;
+  }
 
   if (hasMeta) content.appendChild(meta);
   div.appendChild(content);
@@ -1354,7 +1381,14 @@ function createTaskItemEl(item, filePath, sectionName) {
 
       if (ok && typeof onCheckboxToggled === 'function') onCheckboxToggled();
       else if (ok) window.location.reload();
-      else { select.disabled = false; select.value = ''; }
+      else {
+        console.error('Triage failed for', item.title, 'to', val);
+        select.disabled = false;
+        select.value = '';
+        // Brief visual error feedback
+        select.style.outline = '2px solid #f87171';
+        setTimeout(() => { select.style.outline = ''; }, 2000);
+      }
     });
 
     div.appendChild(select);
@@ -1614,6 +1648,76 @@ async function loadAllRecentLogs(limit = 20) {
   // Sort by date descending and take limit
   allLogs.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
   return allLogs.slice(0, limit);
+}
+
+// ─── Aggregated Cross-Project Tasks ──────────────────
+
+async function loadAllTasks(limit = 20) {
+  const allTasks = [];
+  let totalPending = 0;
+
+  // Read all project-knowledge.md files in parallel
+  const results = await Promise.all(state.projects.map(async (project) => {
+    const pathParts = project.relPath.split('/').filter(Boolean);
+    const content = await readFile(state.rootHandle, ...pathParts, 'project-knowledge.md');
+    if (!content) return null;
+
+    const tasksResult = extractTasksSection(content);
+    if (!tasksResult) return null;
+
+    const parsed = parseInbox(tasksResult.text, tasksResult.lineOffset);
+    const filePath = project.relPath + '/project-knowledge.md';
+
+    return { project, parsed, filePath };
+  }));
+
+  for (const result of results) {
+    if (!result) continue;
+    const { project, parsed, filePath } = result;
+
+    for (const section of parsed.sections) {
+      // Determine priority: Active/Tasks (flat) = 1, Inbox = 2, Backlog = 3, Done = skip
+      let priority;
+      const sName = section.name;
+      if (sName === 'Done') continue;
+      if (sName === 'Active' || sName === 'Tasks') priority = 1;
+      else if (sName === 'Inbox') priority = 2;
+      else if (sName === 'Backlog') priority = 3;
+      else priority = 1; // default for unknown sections
+
+      for (const item of section.items) {
+        if (!item.checked) {
+          totalPending++;
+          allTasks.push({
+            item,
+            filePath,
+            projectName: project.name,
+            projectSlug: project.slug,
+            sectionName: sName,
+            priority,
+          });
+        }
+        // Count unchecked subtasks
+        if (item.subtasks) {
+          for (const st of item.subtasks) {
+            if (!st.checked) totalPending++;
+          }
+        }
+      }
+    }
+  }
+
+  // Sort: priority asc, then date desc (newest first within same priority)
+  allTasks.sort((a, b) => {
+    if (a.priority !== b.priority) return a.priority - b.priority;
+    const dateA = a.item.date || '';
+    const dateB = b.item.date || '';
+    return dateB.localeCompare(dateA);
+  });
+
+  state.allTasks = allTasks.slice(0, limit);
+  state.totalPendingCount = totalPending;
+  return state.allTasks;
 }
 
 // ─── Init ────────────────────────────────────────────

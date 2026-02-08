@@ -17,7 +17,7 @@
       <div class="page-header">
         <div>
           <h2>Home</h2>
-          <div class="subtitle">Inbox, stats, and recent activity</div>
+          <div class="subtitle">Cross-project tasks, stats, and recent activity</div>
         </div>
       </div>
 
@@ -71,14 +71,14 @@
       await loadHomePage();
     }
 
-    // Reload inbox when a checkbox is toggled (item may have moved to Done)
+    // Reload tasks when a checkbox is toggled (item may have moved to Done)
     function onCheckboxToggled() {
-      loadInbox().then(() => updateStats());
+      loadCrossProjectTasks().then(() => updateStats());
     }
 
     async function loadHomePage() {
       await Promise.all([
-        loadInbox(),
+        loadCrossProjectTasks(),
         loadRecentActivity(),
       ]);
       updateStats();
@@ -133,130 +133,104 @@
       container.appendChild(strip);
     }
 
-    // ─── Inbox ─────────────────────────────────────
+    // ─── Cross-Project Tasks ─────────────────────────
 
-    async function loadInbox() {
+    async function loadCrossProjectTasks() {
       const column = document.getElementById('inbox-column');
       column.textContent = '';
 
-      const rawContent = await readFile(state.rootHandle, 'Chief of Staff', 'project-knowledge.md');
-      if (!rawContent) {
-        const err = document.createElement('div');
-        err.className = 'error-message';
-        err.textContent = 'Could not read project-knowledge.md';
-        column.appendChild(err);
+      const tasks = await loadAllTasks(50);
+
+      if (tasks.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 12px 0;';
+        empty.textContent = 'No pending tasks found across projects';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'section';
+        const wrapperHeader = document.createElement('div');
+        wrapperHeader.className = 'section-header';
+        const wrapperH3 = document.createElement('h3');
+        wrapperH3.textContent = 'Tasks';
+        wrapperHeader.appendChild(wrapperH3);
+        wrapper.appendChild(wrapperHeader);
+        const wrapperBody = document.createElement('div');
+        wrapperBody.className = 'section-body';
+        wrapperBody.appendChild(empty);
+        wrapper.appendChild(wrapperBody);
+        column.appendChild(wrapper);
         return;
       }
 
-      const tasksContent = extractTasksSection(rawContent);
-      if (!tasksContent) {
-        const err = document.createElement('div');
-        err.className = 'error-message';
-        err.textContent = 'No Tasks section found in project-knowledge.md';
-        column.appendChild(err);
-        return;
+      // Group tasks by project
+      const byProject = new Map();
+      for (const task of tasks) {
+        if (!byProject.has(task.projectName)) {
+          byProject.set(task.projectName, []);
+        }
+        byProject.get(task.projectName).push(task);
       }
 
-      const inbox = parseInbox(tasksContent);
-      state.cosInbox = inbox;
+      // Render each project as a collapsible section
+      for (const [projectName, projectTasks] of byProject) {
+        const section = document.createElement('div');
+        section.className = 'section project-task-group';
 
-      // Render each section (skip empty ones)
-      for (const section of inbox.sections) {
-        if (section.items.length === 0) continue;
-
-        const sectionEl = document.createElement('div');
-        sectionEl.className = 'section';
-
-        // Header
         const header = document.createElement('div');
-        header.className = 'section-header';
+        header.className = 'section-header project-group-header';
+        header.style.cursor = 'pointer';
+
+        const chevron = document.createElement('span');
+        chevron.className = 'project-group-chevron';
+        chevron.textContent = '\u25BE';
+        header.appendChild(chevron);
 
         const h3 = document.createElement('h3');
-        h3.textContent = section.name;
+        h3.textContent = projectName;
+        header.appendChild(h3);
 
         const badge = document.createElement('span');
         badge.className = 'count-badge';
-        badge.textContent = section.items.length;
-        h3.appendChild(document.createTextNode(' '));
-        h3.appendChild(badge);
-        header.appendChild(h3);
+        badge.textContent = projectTasks.length;
+        header.appendChild(badge);
 
-        // Collapse toggle + Archive button for Done section
-        if (section.name === 'Done') {
-          const checkedCount = section.items.filter(i => i.checked).length;
-          if (checkedCount > 0) {
-            const archiveBtn = document.createElement('button');
-            archiveBtn.className = 'btn btn-ghost btn-sm';
-            archiveBtn.textContent = 'Archive ' + checkedCount;
-            archiveBtn.addEventListener('click', async () => {
-              archiveBtn.textContent = 'Archiving...';
-              archiveBtn.disabled = true;
-              const success = await archiveCompletedItems(COS_INBOX_PATH);
-              if (success) {
-                await loadInbox();
-                updateStats();
-              } else {
-                archiveBtn.textContent = 'Failed';
-                setTimeout(() => { archiveBtn.textContent = 'Archive ' + checkedCount; archiveBtn.disabled = false; }, 1500);
-              }
-            });
-            header.appendChild(archiveBtn);
-          }
+        section.appendChild(header);
 
-          const toggle = document.createElement('button');
-          toggle.className = 'section-toggle';
-          toggle.textContent = 'Hide';
-          toggle.addEventListener('click', () => {
-            const body = sectionEl.querySelector('.section-body');
-            if (body.style.display === 'none') {
-              body.style.display = '';
-              toggle.textContent = 'Hide';
-            } else {
-              body.style.display = 'none';
-              toggle.textContent = 'Show';
-            }
-          });
-          header.appendChild(toggle);
-        }
-
-        sectionEl.appendChild(header);
-
-        // Body
         const body = document.createElement('div');
-        body.className = 'section-body';
+        body.className = 'section-body project-group-body';
 
-        for (const item of section.items) {
-          body.appendChild(createTaskItemEl(item, COS_INBOX_PATH, section.name));
+        for (const task of projectTasks) {
+          body.appendChild(createTaskItemEl(task.item, task.filePath, task.sectionName));
         }
 
-        // Add task input for Inbox and Active sections
-        if (section.name === 'Inbox' || section.name === 'Active') {
-          const addRow = document.createElement('div');
-          addRow.className = 'add-task-row';
+        section.appendChild(body);
+        column.appendChild(section);
 
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.placeholder = 'Add task... (Title or Title — context)';
-          input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && input.value.trim()) {
-              addNewTask(section.name, input.value.trim());
-              input.value = '';
-            }
-          });
-          addRow.appendChild(input);
-          body.appendChild(addRow);
-        }
-
-        // Default: collapse Done section
-        if (section.name === 'Done') {
-          body.style.display = 'none';
-          const toggle = header.querySelector('.section-toggle');
-          if (toggle) toggle.textContent = 'Show';
-        }
-
-        sectionEl.appendChild(body);
-        column.appendChild(sectionEl);
+        // Collapse/expand on header click
+        header.addEventListener('click', () => {
+          section.classList.toggle('collapsed');
+        });
       }
+
+      // Quick-add input scoped to CoS Inbox
+      const addSection = document.createElement('div');
+      addSection.className = 'section';
+      const addBody = document.createElement('div');
+      addBody.className = 'section-body';
+      const addRow = document.createElement('div');
+      addRow.className = 'add-task-row';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Add task to CoS Inbox... (Title \u2014 context)';
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && input.value.trim()) {
+          addNewTask('Inbox', input.value.trim());
+          input.value = '';
+        }
+      });
+      addRow.appendChild(input);
+      addBody.appendChild(addRow);
+      addSection.appendChild(addBody);
+      column.appendChild(addSection);
     }
 
     async function addNewTask(sectionName, text) {
@@ -264,11 +238,9 @@
       if (!content) return;
 
       const today = new Date().toISOString().split('T')[0];
-      // New format: title on one line, description as indented sub-bullet
-      // If text contains " — ", split into title and context
       let title = text;
       let context = '';
-      const dashIdx = text.indexOf(' — ');
+      const dashIdx = text.indexOf(' \u2014 ');
       if (dashIdx > 0) {
         title = text.slice(0, dashIdx);
         context = text.slice(dashIdx + 3);
@@ -280,11 +252,9 @@
       const lines = content.split('\n');
       let insertIdx = -1;
 
-      // Find the section header (### for Tasks subsections) and insert after it
       for (let i = 0; i < lines.length; i++) {
         if (lines[i].match(new RegExp('^#{2,3} ' + escapeRegex(sectionName) + '$'))) {
           insertIdx = i + 1;
-          // Skip any blank lines right after header
           while (insertIdx < lines.length && lines[insertIdx].trim() === '') {
             insertIdx++;
           }
@@ -297,7 +267,7 @@
       lines.splice(insertIdx, 0, newLine);
       const success = await writeFile(state.rootHandle, ['Chief of Staff', 'project-knowledge.md'], lines.join('\n'));
       if (success) {
-        await loadInbox();
+        await loadCrossProjectTasks();
         updateStats();
       }
     }
@@ -392,21 +362,8 @@
     // ─── Stats ─────────────────────────────────────
 
     function updateStats() {
-      // Pending tasks
-      let pending = 0;
-      if (state.cosInbox) {
-        for (const section of state.cosInbox.sections) {
-          if (section.name !== 'Done') {
-            pending += section.items.filter(i => !i.checked).length;
-            for (const item of section.items) {
-              if (item.subtasks) {
-                pending += item.subtasks.filter(st => !st.checked).length;
-              }
-            }
-          }
-        }
-      }
-      document.getElementById('stat-pending').textContent = pending;
+      // Pending tasks (cross-project total)
+      document.getElementById('stat-pending').textContent = state.totalPendingCount || 0;
 
       // Active projects
       const active = state.projects.filter(p => p.category !== 'paused').length;
