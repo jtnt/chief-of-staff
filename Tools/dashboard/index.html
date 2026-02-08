@@ -311,7 +311,7 @@
 
         const dateEl = document.createElement('span');
         dateEl.className = 'activity-date';
-        dateEl.textContent = log.date;
+        dateEl.textContent = formatDisplayDate(log.date);
         headerRow.appendChild(dateEl);
 
         item.appendChild(headerRow);

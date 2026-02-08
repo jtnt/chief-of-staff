@@ -394,7 +394,8 @@ a:hover { color: var(--accent-hover); }
   cursor: pointer;
   transition: opacity 0.15s, color 0.15s, border-color 0.15s;
   flex-shrink: 0;
-  align-self: center;
+  align-self: flex-start;
+  margin-top: 3px;
 }
 
 .task-item:hover .task-copy-btn { opacity: 1; }
@@ -710,7 +711,7 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-primary);
 }
 
-/* --- Log Entry (Accordion) --- */
+/* --- Log Entry (clickable row → slide-over) --- */
 .log-entry {
   border-bottom: 1px solid var(--border);
 }
@@ -733,18 +734,6 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-sm);
 }
 
-.log-chevron {
-  width: 16px;
-  height: 16px;
-  color: var(--text-muted);
-  transition: transform var(--transition);
-  flex-shrink: 0;
-}
-
-.log-entry.expanded .log-chevron {
-  transform: rotate(90deg);
-}
-
 .log-entry-date {
   font-size: 0.72rem;
   color: var(--text-muted);
@@ -762,14 +751,8 @@ a:hover { color: var(--accent-hover); }
   white-space: nowrap;
 }
 
-.log-entry-body {
-  display: none;
-  padding: 0 0 16px 26px;
-}
-
-.log-entry.expanded .log-entry-body {
-  display: block;
-}
+/* NOTE: .log-chevron, .log-entry-body, .log-entry.expanded removed —
+   patterns now use slide-over instead of inline accordion */
 
 /* --- Search Bar --- */
 .search-bar {
@@ -999,23 +982,45 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: 16px;
 }
 
-/* --- Section Toggle --- */
-.section-toggle {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 0.72rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+/* --- Section Toggle & Chevron --- */
+.section-header.clickable {
   cursor: pointer;
-  padding: 0;
+  user-select: none;
 }
 
-.section-toggle:hover { color: var(--text-secondary); }
+.section-chevron {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: transform 150ms ease;
+  display: inline-block;
+}
+
+.section.expanded .section-chevron {
+  transform: rotate(90deg);
+}
+
+.section-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-header-actions .icon-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  line-height: 1;
+}
+
+.section-header-actions .icon-btn:hover {
+  color: var(--text-secondary);
+  border-color: var(--border-light);
+}
 
 /* --- Collapsible Sections (Knowledge) --- */
 .collapsible-section {

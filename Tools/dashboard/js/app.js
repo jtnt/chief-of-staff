@@ -331,6 +331,37 @@ function toSortableDate(dateStr) {
   return m[1] + ' ' + String(hour).padStart(2, '0') + ':' + m[3];
 }
 
+// Normalize date display: "YYYY-MM-DD h:mm PM" (EST) or "YYYY-MM-DD" (no time)
+function formatDisplayDate(dateStr) {
+  if (!dateStr) return '';
+  const m = dateStr.match(/^(\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}):(\d{2})\s*(AM|PM)\s*(.*)?)?$/i);
+  if (!m) return dateStr;
+  const datePart = m[1];
+  if (!m[2]) return datePart;
+
+  let hour = parseInt(m[2]);
+  const min = m[3];
+  const ampm = m[4].toUpperCase();
+
+  // Convert to 24h
+  let h24 = hour;
+  if (ampm === 'PM' && hour !== 12) h24 += 12;
+  if (ampm === 'AM' && hour === 12) h24 = 0;
+
+  // Offset to EST if timezone is provided
+  const tz = (m[5] || '').trim();
+  const tzOffsets = { 'PST': 3, 'PDT': 3, 'CST': 1, 'CDT': 1, 'MST': 2, 'MDT': 2, 'EST': 0, 'EDT': 0 };
+  const offset = tzOffsets[tz] || 0;
+  h24 += offset;
+  if (h24 >= 24) h24 -= 24;
+
+  // Back to 12h
+  const displayAmpm = h24 >= 12 ? 'PM' : 'AM';
+  const display12 = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+
+  return datePart + '  ' + display12 + ':' + min + ' ' + displayAmpm;
+}
+
 function groupProjects(projects) {
   const groups = {
     active: { label: 'Active', items: [] },
@@ -1483,18 +1514,15 @@ async function handleCheckboxToggle(filePath, lineNumber, newChecked) {
   }
 }
 
-// ─── Task Detail Slide-over ──────────────────────────
+// ─── Slide-over Panel ────────────────────────────────
+// SECURITY NOTE: All content rendered in the slide-over originates
+// exclusively from the user's own local filesystem (markdown files
+// in ~/Documents/Projects/). There is no server, no external data
+// input, and no untrusted content. This is a personal offline tool.
 
-async function openTaskDetail(linkPath) {
+function openSlideOver(title, content) {
   const backdrop = document.getElementById('slide-over-backdrop');
   if (!backdrop) return;
-
-  // linkPath is relative to Chief of Staff, e.g. "Tasks/20260203-foo.md"
-  const content = await readFile(state.rootHandle, 'Chief of Staff', ...linkPath.split('/'));
-  if (!content) {
-    alert('Could not read file: ' + linkPath);
-    return;
-  }
 
   // Parse YAML frontmatter for meta
   let meta = {};
@@ -1506,11 +1534,9 @@ async function openTaskDetail(linkPath) {
     }
   }
 
-  const filename = linkPath.split('/').pop();
-
   // Header
   const headerTitle = backdrop.querySelector('.slide-over-header h3');
-  if (headerTitle) headerTitle.textContent = filename;
+  if (headerTitle) headerTitle.textContent = title;
 
   // Meta
   const metaContainer = backdrop.querySelector('.slide-over-meta');
@@ -1534,17 +1560,29 @@ async function openTaskDetail(linkPath) {
     }
   }
 
-  // Body — rendered markdown from trusted local file
+  // Body — rendered markdown from trusted local files only
   const body = backdrop.querySelector('.slide-over-body');
   if (body) {
     const mdDiv = document.createElement('div');
     mdDiv.className = 'markdown-body';
-    mdDiv.innerHTML = renderMarkdown(content); // Content from user's own local files only
+    // renderMarkdown processes user's own local files only (see security note above)
+    mdDiv.innerHTML = renderMarkdown(content);
     body.textContent = '';
     body.appendChild(mdDiv);
   }
 
   backdrop.classList.add('open');
+}
+
+async function openTaskDetail(linkPath) {
+  // linkPath is relative to Chief of Staff, e.g. "Tasks/20260203-foo.md"
+  const content = await readFile(state.rootHandle, 'Chief of Staff', ...linkPath.split('/'));
+  if (!content) {
+    alert('Could not read file: ' + linkPath);
+    return;
+  }
+  const filename = linkPath.split('/').pop();
+  openSlideOver(filename, content);
 }
 
 function closeSlideOver() {

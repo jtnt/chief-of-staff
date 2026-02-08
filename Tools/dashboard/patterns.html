@@ -42,6 +42,18 @@
     </main>
   </div>
 
+  <!-- Slide-over Panel -->
+  <div class="slide-over-backdrop" id="slide-over-backdrop">
+    <div class="slide-over">
+      <div class="slide-over-header">
+        <h3>Pattern</h3>
+        <button class="slide-over-close" id="slide-over-close">&times;</button>
+      </div>
+      <div class="slide-over-meta"></div>
+      <div class="slide-over-body"></div>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
   <script>
     /* ─── Patterns Page Logic ─────────────────────────
@@ -221,25 +233,7 @@
       h3.appendChild(badge);
       header.appendChild(h3);
 
-      if (allPatterns.length > 0) {
-        const toggleAll = document.createElement('button');
-        toggleAll.className = 'section-toggle';
-        toggleAll.textContent = 'Expand all';
-        toggleAll.addEventListener('click', () => {
-          const entries = section.querySelectorAll('.log-entry');
-          const allExpanded = Array.from(entries).every(e => e.classList.contains('expanded'));
-          entries.forEach(e => {
-            if (allExpanded) {
-              e.classList.remove('expanded');
-            } else {
-              e.classList.add('expanded');
-              lazyRenderPatternBody(e);
-            }
-          });
-          toggleAll.textContent = allExpanded ? 'Expand all' : 'Collapse all';
-        });
-        header.appendChild(toggleAll);
-      }
+      /* No expand-all button — patterns open in slide-over */
 
       section.appendChild(header);
 
@@ -318,29 +312,17 @@
       entry.dataset.title = pattern.title.toLowerCase();
       entry.dataset.content = pattern.content.toLowerCase().slice(0, 500);
 
-      // Store content for lazy rendering
-      entry._patternContent = pattern.content;
-      entry._suggestions = pattern.suggestions;
-
       const entryHeader = document.createElement('div');
       entryHeader.className = 'log-entry-header';
 
-      const entryBody = document.createElement('div');
-      entryBody.className = 'log-entry-body';
-
+      // Click opens slide-over
       entryHeader.addEventListener('click', () => {
-        entry.classList.toggle('expanded');
-        lazyRenderPatternBody(entry);
+        openSlideOver(pattern.title, pattern.content);
       });
-
-      const chevron = document.createElement('span');
-      chevron.className = 'log-chevron';
-      chevron.textContent = '\u25B6';
-      entryHeader.appendChild(chevron);
 
       const dateEl = document.createElement('span');
       dateEl.className = 'log-entry-date';
-      dateEl.textContent = pattern.date;
+      dateEl.textContent = formatDisplayDate(pattern.date);
       entryHeader.appendChild(dateEl);
 
       const titleEl = document.createElement('span');
@@ -348,7 +330,7 @@
       titleEl.textContent = pattern.title;
       entryHeader.appendChild(titleEl);
 
-      // Suggestion badges in header
+      // Suggestion badges in header (visual indicator before clicking)
       if (pattern.hasSuggestions) {
         const badgeWrap = document.createElement('span');
         badgeWrap.className = 'pattern-entry-suggestions';
@@ -362,58 +344,14 @@
       }
 
       entry.appendChild(entryHeader);
-      entry.appendChild(entryBody);
-
-      // Auto-expand suggestions section if requested
-      if (showSuggestionsExpanded) {
-        entry.classList.add('expanded');
-        lazyRenderPatternBody(entry);
-      }
-
       return entry;
     }
 
-    function lazyRenderPatternBody(entry) {
-      if (entry.dataset.rendered) return;
-      const body = entry.querySelector('.log-entry-body');
-      if (!body) return;
-
-      const content = entry._patternContent;
-      const suggestions = entry._suggestions;
-
-      if (suggestions && suggestions.length > 0) {
-        // Render suggestions prominently first
-        for (const s of suggestions) {
-          const wrapper = document.createElement('div');
-          wrapper.style.marginBottom = '12px';
-
-          const typeBadge = document.createElement('span');
-          typeBadge.className = 'suggestion-type-badge type-' + s.type;
-          typeBadge.textContent = s.type;
-          wrapper.appendChild(typeBadge);
-
-          const block = document.createElement('div');
-          block.className = 'suggestion-block';
-          block.textContent = s.text;
-          wrapper.appendChild(block);
-
-          body.appendChild(wrapper);
-        }
-
-        // Separator before full content
-        const hr = document.createElement('hr');
-        hr.style.cssText = 'border: none; border-top: 1px solid var(--border); margin: 12px 0;';
-        body.appendChild(hr);
-      }
-
-      // Full rendered markdown (trusted local files only)
-      const mdDiv = document.createElement('div');
-      mdDiv.className = 'markdown-body';
-      mdDiv.innerHTML = renderMarkdown(content);
-      body.appendChild(mdDiv);
-
-      entry.dataset.rendered = 'true';
-    }
+    // ─── Slide-over close ──────────────────────────
+    document.getElementById('slide-over-close').addEventListener('click', closeSlideOver);
+    document.getElementById('slide-over-backdrop').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeSlideOver();
+    });
 
     // ─── Boot ─────────────────────────────────────────
 
