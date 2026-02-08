@@ -1154,7 +1154,18 @@ async function triageTask(item, fromFilePath, destination) {
   if (!content) return false;
 
   const lines = content.split('\n');
-  const startIdx = item.lineNumber - 1;
+  let startIdx = item.lineNumber - 1;
+
+  // Validate line content matches — guards against external edits shifting lines.
+  if (item.rawLine && (startIdx < 0 || startIdx >= lines.length || lines[startIdx] !== item.rawLine)) {
+    const newIdx = lines.indexOf(item.rawLine);
+    if (newIdx >= 0) {
+      startIdx = newIdx;
+    } else {
+      console.error('triageTask: line shifted and content not found:', item.rawLine);
+      return false;
+    }
+  }
 
   // Find extent of this task block (main line + indented continuation lines)
   let endIdx = startIdx + 1;
@@ -1306,7 +1317,7 @@ function createTaskItemEl(item, filePath, sectionName, projectName) {
   const cb = document.createElement('input');
   cb.type = 'checkbox';
   cb.checked = item.checked;
-  cb.addEventListener('change', () => handleCheckboxToggle(filePath, item.lineNumber, cb.checked));
+  cb.addEventListener('change', () => handleCheckboxToggle(filePath, item.lineNumber, cb.checked, item.rawLine));
   div.appendChild(cb);
 
   const content = document.createElement('div');
@@ -1475,7 +1486,7 @@ function createTaskItemEl(item, filePath, sectionName, projectName) {
       const stCb = document.createElement('input');
       stCb.type = 'checkbox';
       stCb.checked = st.checked;
-      stCb.addEventListener('change', () => handleCheckboxToggle(filePath, st.lineNumber, stCb.checked));
+      stCb.addEventListener('change', () => handleCheckboxToggle(filePath, st.lineNumber, stCb.checked, st.rawLine));
       stDiv.appendChild(stCb);
 
       const stContent = document.createElement('div');
@@ -1516,8 +1527,8 @@ function createTaskItemEl(item, filePath, sectionName, projectName) {
 
 // ─── Checkbox Toggle Handler ─────────────────────────
 
-async function handleCheckboxToggle(filePath, lineNumber, newChecked) {
-  const success = await toggleInboxCheckbox(filePath, lineNumber, newChecked);
+async function handleCheckboxToggle(filePath, lineNumber, newChecked, expectedLine) {
+  const success = await toggleInboxCheckbox(filePath, lineNumber, newChecked, expectedLine);
   if (success) {
     // Notify page-level callback (e.g., home page reloads inbox after move-to-Done)
     if (typeof onCheckboxToggled === 'function') onCheckboxToggled();
