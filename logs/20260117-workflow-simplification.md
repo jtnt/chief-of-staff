@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Workflow Simplification
+---
+
+# Chief of Staff: Workflow Simplification
 
 **Date:** 2026-01-17 08:23 AM EST
 **Session Type:** meta-work

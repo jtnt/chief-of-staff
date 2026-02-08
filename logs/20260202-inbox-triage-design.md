@@ -3,6 +3,7 @@ date: 2026-02-02 11:25 AM PST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/10995c8b-5ce5-4c8f-b8a7-112af09ce674.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Inbox Triage Plugin Design
 ---
 
 # Chief of Staff: Inbox Triage Plugin Design

@@ -3,6 +3,7 @@ date: 2026-02-07 10:30 AM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/6483422e-0f11-4691-813d-9f25cd3b4753.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: CLAUDE.md Optimization
 ---
 
 # Chief of Staff: CLAUDE.md Optimization

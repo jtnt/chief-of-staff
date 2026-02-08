@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Status Line Thinking Mode Attempt
+---
+
+# Chief of Staff: Status Line Thinking Mode Attempt
 
 **Date:** 2026-01-24 02:53 PM EST
 **Session Type:** meta-work

@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: Late Night Sync
+---
+
+# Chief of Staff: Late Night Sync
 
 **Date:** January 9, 2026 (late night)
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`

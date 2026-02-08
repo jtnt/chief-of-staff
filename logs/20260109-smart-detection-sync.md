@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: Smart Project Status Detection
+---
+
+# Chief of Staff: Smart Project Status Detection
 
 **Date:** January 9, 2026 (late night - continued)
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`

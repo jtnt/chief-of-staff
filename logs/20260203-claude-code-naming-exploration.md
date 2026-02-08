@@ -3,9 +3,10 @@ date: 2026-02-03 11:19 AM PST
 type: mixed
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/a1ff6683-a902-4d0a-bd00-213f57d804dc.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Claude Code Naming Exploration
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Claude Code Naming Exploration
 
 ## What Was Done
 

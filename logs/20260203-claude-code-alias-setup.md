@@ -3,6 +3,7 @@ date: 2026-02-03 02:51 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/eed1b0dc-9c2d-4b5a-8b0d-5b4f622b5da9.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Claude Code Alias Setup
 ---
 
 # Chief of Staff: Claude Code Alias Setup

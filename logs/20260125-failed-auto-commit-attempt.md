@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Failed Auto Commit Attempt
+---
+
+# Chief of Staff: Failed Auto Commit Attempt
 
 **Date:** 2026-01-25 09:54 AM EST
 **Session Type:** meta-work

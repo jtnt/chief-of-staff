@@ -3,6 +3,7 @@ date: 2026-02-02 09:25 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/bfdc0b8a-6780-4ce3-b99d-af590dee7053.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Plugin Skill Naming Bug Investigation and Fixes
 ---
 
 # Chief of Staff: Plugin Skill Naming Bug Investigation and Fixes

@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: Cowork Mode Discovery
+---
+
+# Chief of Staff: Cowork Mode Discovery
 
 **Date:** 2026-01-12
 **Session Type:** meta-work

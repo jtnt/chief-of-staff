@@ -3,9 +3,10 @@ date: 2026-02-02 03:51 PM EST
 type: mixed
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/06016047-2b45-4c4d-a5f3-dc2eda8627b6.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Morning Briefing Linkedin Tracking
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Morning Briefing Linkedin Tracking
 
 ## What Was Done
 

@@ -3,9 +3,10 @@ date: 2026-01-31 12:19 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/145f1d68-3cfc-447b-bed1-f3a34f9b9786.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Connectivity Test
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Connectivity Test
 
 ## What Was Done
 

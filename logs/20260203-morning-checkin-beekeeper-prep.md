@@ -3,9 +3,10 @@ date: 2026-02-03 11:42 AM PST
 type: mixed
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/ef077291-da66-4e37-b1c8-faaeb39df360.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Morning Checkin Beekeeper Prep
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Morning Checkin Beekeeper Prep
 
 ## What Was Done
 

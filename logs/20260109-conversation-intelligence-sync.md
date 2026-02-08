@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Conversation Intelligence Enhancement
+---
+title: Conversation Intelligence Enhancement
+---
+
+# Chief of Staff: Conversation Intelligence Enhancement
 
 **Date:** January 9, 2026 (night)
 **Type:** Workflow Enhancement

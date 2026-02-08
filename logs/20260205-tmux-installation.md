@@ -3,9 +3,10 @@ date: 2026-02-05 10:09 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/1de9c3cd-c726-4727-bed3-d8163d627439.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Tmux Installation
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Tmux Installation
 
 ## What Was Done
 

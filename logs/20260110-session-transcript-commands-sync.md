@@ -1,4 +1,8 @@
-# Chief of Staff Sync - January 10, 2026 (Session Transcript Commands)
+---
+title: Session Transcript Commands
+---
+
+# Chief of Staff: Session Transcript Commands
 
 **Session Type:** meta-work
 

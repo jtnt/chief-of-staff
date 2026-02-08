@@ -1,9 +1,10 @@
 ---
 date: 2026-01-31 08:16 PM EST
 type: meta-work
+title: Claude Code Config Audit
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Claude Code Config Audit
 
 ## What Was Done
 

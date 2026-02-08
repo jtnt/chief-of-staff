@@ -3,6 +3,7 @@ date: 2026-02-06 01:36 AM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/042c31a0-694d-4b25-878e-d671a679d7b8.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Trivial Session - Plugin Usage Questions
 ---
 
 # Chief of Staff: Trivial Session - Plugin Usage Questions

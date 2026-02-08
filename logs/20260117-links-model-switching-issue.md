@@ -1,4 +1,8 @@
-# Session Log: Links System - Model Switching Investigation
+---
+title: Links Model Switching Investigation
+---
+
+# Chief of Staff: Links Model Switching Investigation
 
 **Date:** 2026-01-17 03:59 PM EST
 **Session Type:** meta-work

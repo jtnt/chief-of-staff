@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Command Automation Fix
+---
+
+# Chief of Staff: Command Automation Fix
 
 **Date:** 2026-01-16 05:28 PM EST
 **Session Type:** meta-work

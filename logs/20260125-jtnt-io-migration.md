@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Jtnt Io Migration
+---
+
+# Chief of Staff: Jtnt Io Migration
 
 **Date:** 2026-01-25 11:41 AM EST
 **Session Type:** project-work

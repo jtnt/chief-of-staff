@@ -3,6 +3,7 @@ date: 2026-02-01 5:48 PM PST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/0def0d2c-94e4-4499-bb1d-ec2a89f1dbd4.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Feed Digest Implementation Session
 ---
 
 # Chief of Staff: Feed Digest Implementation Session

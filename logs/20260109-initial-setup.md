@@ -1,3 +1,7 @@
+---
+title: Initial Setup
+---
+
 # Chief of Staff: Initial Setup
 
 **Date:** January 9, 2026

@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Ai Adoption Link Capture
+---
+
+# Chief of Staff: Ai Adoption Link Capture
 
 **Date:** 2026-01-24 07:53 AM EST
 **Session Type:** meta-work

@@ -1,4 +1,8 @@
-# Chief of Staff System: Design, Research & Implementation
+---
+title: Chief of Staff System: Design, Research & Implementation
+---
+
+# Chief of Staff: Chief of Staff System: Design, Research & Implementation
 
 **Date:** 2026-01-24
 **Session Type:** meta-work (system design)

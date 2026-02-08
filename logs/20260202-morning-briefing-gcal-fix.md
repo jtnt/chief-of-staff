@@ -3,6 +3,7 @@ date: 2026-02-02 08:30 AM EST
 type: mixed
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/07ef73a3-a107-4f6c-a50a-bafbee2b0a85.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Morning Briefing & Calendar Fix
 ---
 
 # Chief of Staff: Morning Briefing & Calendar Fix

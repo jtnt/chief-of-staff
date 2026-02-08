@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: System Cleanup Phase3
+---
+
+# Chief of Staff: System Cleanup Phase3
 
 **Date:** 2026-01-26 05:43 PM EST
 **Session Type:** meta-work

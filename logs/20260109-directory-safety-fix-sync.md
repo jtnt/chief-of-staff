@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Directory Safety Fix for /update-cos
+---
+title: Directory Safety Fix
+---
+
+# Chief of Staff: Directory Safety Fix
 
 **Date:** January 9, 2026 (late night)
 **Type:** Bug Fix

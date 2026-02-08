@@ -1,4 +1,8 @@
-# Chief of Staff Sync - January 10, 2026 (Priority Tracking)
+---
+title: Priority Tracking Implementation
+---
+
+# Chief of Staff: Priority Tracking Implementation
 
 **Session Type:** meta-work
 

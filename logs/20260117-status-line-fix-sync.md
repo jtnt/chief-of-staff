@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Status Line Display Fix
+---
+
+# Chief of Staff: Status Line Display Fix
 
 **Date:** 2026-01-17 07:15 AM EST
 **Session Type:** meta-work

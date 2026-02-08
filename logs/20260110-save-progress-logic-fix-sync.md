@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Fix /save-progress Logic Order
+---
+title: Fix Save Progress Logic Order
+---
+
+# Chief of Staff: Fix Save Progress Logic Order
 
 **Date:** January 10, 2026 (early morning)
 **Type:** Critical Bug Fix

@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Mcp Configuration Brave Search
+---
+
+# Chief of Staff: Mcp Configuration Brave Search
 
 **Date:** 2026-01-20 04:49 PM EST
 **Session Type:** meta-work

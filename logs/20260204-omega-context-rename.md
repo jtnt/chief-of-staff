@@ -3,6 +3,7 @@ date: 2026-02-04 01:42 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/c5e2ba8c-5b9b-4537-bc81-52e416808289.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Ω_context to z_context Rename Session
 ---
 
 # Chief of Staff: Ω_context to z_context Rename Session

@@ -3,6 +3,7 @@ date: 2026-02-07 07:19 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/6e53e834-973c-4bb7-bf89-08212143f4d6.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Inbox Checkbox Restructure
 ---
 
 # Chief of Staff: Inbox Checkbox Restructure

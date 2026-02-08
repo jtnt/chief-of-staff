@@ -3,6 +3,7 @@ date: 2026-02-02 02:47 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/d759b26c-05a4-4398-b522-7fd0c4b64729.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: NotebookLM MCP Integration
 ---
 
 # Chief of Staff: NotebookLM MCP Integration

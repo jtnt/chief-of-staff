@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Enhanced Briefing
+---
+
+# Chief of Staff: Enhanced Briefing
 
 **Date:** 2026-01-22 08:53 AM EST
 **Session Type:** meta-work

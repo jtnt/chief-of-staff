@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Meta Work Warning System
+---
+
+# Chief of Staff: Meta Work Warning System
 
 **Date:** 2026-01-17 10:49 AM EST
 **Session Type:** meta-work

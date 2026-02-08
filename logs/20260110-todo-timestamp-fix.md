@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: TODO Timestamp Fix
+---
+
+# Chief of Staff: TODO Timestamp Fix
 
 **Date:** January 10, 2026
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`

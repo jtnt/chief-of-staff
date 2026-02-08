@@ -1,9 +1,10 @@
 ---
 date: 2026-01-31 06:29 PM EST
 type: meta-work
+title: Stabilize Hooks Cleanup
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Stabilize Hooks Cleanup
 
 ## What Was Done
 

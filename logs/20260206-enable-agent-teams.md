@@ -3,9 +3,10 @@ date: 2026-02-06 08:14 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/54b90ded-cc64-424f-b15a-b07c8eec639e.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Enable Agent Teams
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Enable Agent Teams
 
 ## What Was Done
 

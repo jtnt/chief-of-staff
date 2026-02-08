@@ -1,4 +1,8 @@
-# Session Log: 2026-01-26
+---
+title: Session Log: 2026-01-26
+---
+
+# Chief of Staff: Session Log: 2026-01-26
 
 **Date:** 2026-01-26 06:43 PM EST
 **Project:** Chief of Staff

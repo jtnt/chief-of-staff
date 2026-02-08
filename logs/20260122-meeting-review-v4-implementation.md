@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Meeting Review V4 Implementation
+---
+
+# Chief of Staff: Meeting Review V4 Implementation
 
 **Date:** 2026-01-22 04:04 PM EST
 **Session Type:** meta-work

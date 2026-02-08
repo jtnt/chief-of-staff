@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Claude Code — Friction + Knowledge Health</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: #12121a;
+      --border: #1e1e2e;
+      --text: #e2e2ef;
+      --muted: #6b6b8a;
+      --accent: #c084fc;
+      --accent2: #818cf8;
+      --accent3: #38bdf8;
+      --warm: #fb923c;
+      --green: #4ade80;
+      --red: #f87171;
+      --gold: #fbbf24;
+      --dim-red: rgba(248,113,113,0.12);
+      --dim-green: rgba(74,222,128,0.12);
+      --dim-gold: rgba(251,191,36,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .page { max-width: 960px; margin: 0 auto; padding: 48px 32px 80px; }
+
+    /* Nav tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+    .tab {
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Shared */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .mb-24 { margin-bottom: 24px; }
+    .mb-48 { margin-bottom: 48px; }
+    .mb-64 { margin-bottom: 64px; }
+
+    /* ═══════════ FRICTION PANEL ═══════════ */
+
+    /* Big friction stats */
+    .friction-hero {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    .friction-hero-big {
+      text-align: center;
+      padding: 32px 0;
+    }
+    .friction-hero-number {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -3px;
+      color: var(--warm);
+    }
+    .friction-hero-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .friction-hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+    .friction-hero-stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .friction-hero-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .friction-hero-text {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .friction-hero-text strong { color: var(--text); }
+
+    /* Breakdown bar */
+    .breakdown-bar {
+      display: flex;
+      height: 12px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .breakdown-seg {
+      transition: width 0.5s;
+    }
+    .breakdown-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    /* Session scatter */
+    .scatter-container {
+      position: relative;
+      height: 260px;
+      margin-bottom: 16px;
+    }
+    .scatter-grid {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .scatter-row {
+      flex: 1;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      position: relative;
+    }
+    .scatter-row-label {
+      position: absolute;
+      left: -36px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .scatter-dots {
+      position: absolute;
+      inset: 0;
+      left: 0;
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      padding: 0 4px 4px;
+    }
+    .scatter-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 2px;
+    }
+    .scatter-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      position: relative;
+      cursor: default;
+    }
+    .scatter-dot.clean { background: var(--green); opacity: 0.7; }
+    .scatter-dot.low { background: var(--gold); opacity: 0.8; }
+    .scatter-dot.medium { background: var(--warm); opacity: 0.85; }
+    .scatter-dot.high { background: var(--red); opacity: 0.9; }
+    .scatter-dot:hover { opacity: 1; transform: scale(1.3); }
+    .scatter-dot .tooltip {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a2e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 11px;
+      white-space: nowrap;
+      z-index: 10;
+      color: var(--text);
+      pointer-events: none;
+    }
+    .scatter-dot:hover .tooltip { display: block; }
+
+    /* Friction type cards */
+    .friction-type-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .ftc-count {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .ftc-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .ftc-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .ftc-bar {
+      height: 4px;
+      border-radius: 2px;
+      margin-top: 12px;
+      background: rgba(255,255,255,0.05);
+    }
+    .ftc-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    /* Outcome ring */
+    .outcome-section { text-align: center; }
+    .outcome-ring-container {
+      display: inline-block;
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 16px;
+    }
+    .outcome-ring-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .outcome-ring-pct {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1;
+    }
+    .outcome-ring-text {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Weekly activity */
+    .activity-weeks {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .week-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .week-label {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .week-logs {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .week-logs-label {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .week-projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      justify-content: center;
+    }
+    .week-proj-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      font-size: 8px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0,0,0,0.7);
+    }
+
+    /* ═══════════ HEALTH PANEL ═══════════ */
+
+    .health-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .health-stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .health-stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .health-stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Project health rows */
+    .project-row {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+    .pr-name {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .pr-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+    .badge-green { background: var(--dim-green); color: var(--green); }
+    .badge-red { background: var(--dim-red); color: var(--red); }
+    .badge-gold { background: var(--dim-gold); color: var(--gold); }
+    .badge-muted { background: rgba(107,107,138,0.15); color: var(--muted); }
+
+    .pr-score {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .score-good { background: var(--dim-green); color: var(--green); }
+    .score-warn { background: var(--dim-gold); color: var(--gold); }
+    .score-bad { background: var(--dim-red); color: var(--red); }
+
+    /* Issues list */
+    .issues-section { margin-top: 48px; }
+    .issue-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .issue-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .issue-project {
+      font-weight: 600;
+      color: var(--text);
+      min-width: 140px;
+    }
+    .issue-text { color: var(--muted); }
+    .issue-severity {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+
+    /* Timestamp */
+    .timestamp {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      opacity: 0.5;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 700px) {
+      .friction-hero { grid-template-columns: 1fr; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .health-summary { grid-template-columns: repeat(2, 1fr); }
+      .activity-weeks { grid-template-columns: repeat(2, 1fr); }
+      .project-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" data-panel="friction">Friction Analysis</div>
+    <div class="tab" data-panel="health">Knowledge System Health</div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!--         FRICTION PANEL             -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="panel active" id="friction">
+
+    <div class="section-label" style="color: var(--warm)">Friction Analysis</div>
+    <div class="section-title">Where sessions go sideways</div>
+
+    <!-- Hero stats -->
+    <div class="friction-hero mb-48">
+      <div class="friction-hero-big">
+        <div class="friction-hero-number">68</div>
+        <div class="friction-hero-label">friction events across<br>52 analyzed sessions</div>
+      </div>
+      <div class="friction-hero-right">
+        <div class="friction-hero-stat">
+          <div class="friction-hero-dot" style="background: var(--dim-green); color: var(--green);">20</div>
+          <div class="friction-hero-text"><strong>38%</strong> of sessions had zero friction</div>
+        </div>
+        <div class="friction-hero-stat">
+          <div class="friction-hero-dot" style="background: var(--dim-gold); color: var(--gold);">19</div>
+          <div class="friction-hero-text"><strong>37%</strong> had 1 friction event (manageable)</div>
+        </div>
+        <div class="friction-hero-stat">
+          <div class="friction-hero-dot" style="background: var(--dim-red); color: var(--red);">13</div>
+          <div class="friction-hero-text"><strong>25%</strong> had 2+ friction events (correction tax)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Friction type breakdown -->
+    <div class="section-label" style="color: var(--red)">Breakdown by Type</div>
+    <div class="section-title">What goes wrong</div>
+
+    <div class="card mb-24">
+      <div class="breakdown-bar">
+        <div class="breakdown-seg" style="width: 41.2%; background: var(--red);"></div>
+        <div class="breakdown-seg" style="width: 30.9%; background: var(--warm);"></div>
+        <div class="breakdown-seg" style="width: 10.3%; background: var(--gold);"></div>
+        <div class="breakdown-seg" style="width: 4.4%; background: var(--accent2);"></div>
+        <div class="breakdown-seg" style="width: 4.4%; background: var(--accent3);"></div>
+        <div class="breakdown-seg" style="width: 8.8%; background: var(--muted);"></div>
+      </div>
+      <div class="breakdown-legend">
+        <div class="legend-item"><div class="legend-dot" style="background: var(--red)"></div> Wrong Approach (28)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--warm)"></div> Misunderstood (21)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--gold)"></div> Excessive Changes (7)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--accent2)"></div> Buggy Code (3)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--accent3)"></div> Rejected Action (3)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--muted)"></div> Tool / Other (6)</div>
+      </div>
+    </div>
+
+    <div class="grid-3 mb-48">
+      <div class="friction-type-card">
+        <div class="ftc-count" style="color: var(--red)">28</div>
+        <div class="ftc-name" style="color: var(--red)">Wrong Approach</div>
+        <div class="ftc-desc">Over-engineering, fancy frameworks, tech-centric framing when business outcomes were asked for. This is 41% of all friction.</div>
+        <div class="ftc-bar"><div class="ftc-bar-fill" style="width: 100%; background: var(--red)"></div></div>
+      </div>
+      <div class="friction-type-card">
+        <div class="ftc-count" style="color: var(--warm)">21</div>
+        <div class="ftc-name" style="color: var(--warm)">Misunderstood Request</div>
+        <div class="ftc-desc">Misreading intent, evaluating style instead of applying it, confusing scope. 31% of friction.</div>
+        <div class="ftc-bar"><div class="ftc-bar-fill" style="width: 75%; background: var(--warm)"></div></div>
+      </div>
+      <div class="friction-type-card">
+        <div class="ftc-count" style="color: var(--gold)">7</div>
+        <div class="ftc-name" style="color: var(--gold)">Excessive Changes</div>
+        <div class="ftc-desc">Unsolicited file edits, changing things that weren't requested. Led to the "ask before changing" rule.</div>
+        <div class="ftc-bar"><div class="ftc-bar-fill" style="width: 25%; background: var(--gold)"></div></div>
+      </div>
+    </div>
+
+    <!-- Session outcome donut + scatter -->
+    <div class="grid-2 mb-48">
+      <div>
+        <div class="section-label" style="color: var(--green)">Outcomes</div>
+        <div class="section-title" style="font-size: 22px;">Goal achievement</div>
+        <div class="outcome-section">
+          <div class="outcome-ring-container">
+            <svg viewBox="0 0 200 200" width="200" height="200">
+              <!-- Background ring -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--border)" stroke-width="16"/>
+              <!-- Achieved: 51.1% = 184° -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--green)" stroke-width="16"
+                stroke-dasharray="256.5 502.7" stroke-dashoffset="0"
+                transform="rotate(-90 100 100)" stroke-linecap="round"/>
+              <!-- Mostly: 31.9% = 115° -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--gold)" stroke-width="16"
+                stroke-dasharray="160.3 502.7" stroke-dashoffset="-256.5"
+                transform="rotate(-90 100 100)" stroke-linecap="round"/>
+              <!-- Partial: 17% = 61° -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="var(--warm)" stroke-width="16"
+                stroke-dasharray="85.4 502.7" stroke-dashoffset="-416.8"
+                transform="rotate(-90 100 100)" stroke-linecap="round"/>
+            </svg>
+            <div class="outcome-ring-label">
+              <div class="outcome-ring-pct">83%</div>
+              <div class="outcome-ring-text">fully or mostly<br>achieved</div>
+            </div>
+          </div>
+          <div class="breakdown-legend" style="justify-content: center;">
+            <div class="legend-item"><div class="legend-dot" style="background: var(--green)"></div> Fully (24)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--gold)"></div> Mostly (15)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--warm)"></div> Partial (8)</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label" style="color: var(--accent)">Friction vs. Outcome</div>
+        <div class="section-title" style="font-size: 22px;">The pattern</div>
+        <div class="card" style="padding: 20px;">
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 12px; color: var(--muted);">0 friction events</span>
+              <span style="font-size: 12px; color: var(--green); font-weight: 700;">20 sessions</span>
+            </div>
+            <div style="display: flex; height: 24px; border-radius: 6px; overflow: hidden; gap: 2px;">
+              <div style="width: 70%; background: var(--green); border-radius: 4px;" title="14 fully achieved"></div>
+              <div style="width: 25%; background: var(--gold); border-radius: 4px;" title="5 mostly"></div>
+              <div style="width: 5%; background: var(--warm); border-radius: 4px;" title="1 partial"></div>
+            </div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 12px; color: var(--muted);">1 friction event</span>
+              <span style="font-size: 12px; color: var(--gold); font-weight: 700;">19 sessions</span>
+            </div>
+            <div style="display: flex; height: 24px; border-radius: 6px; overflow: hidden; gap: 2px;">
+              <div style="width: 53%; background: var(--green); border-radius: 4px;" title="10 fully achieved"></div>
+              <div style="width: 32%; background: var(--gold); border-radius: 4px;" title="6 mostly"></div>
+              <div style="width: 15%; background: var(--warm); border-radius: 4px;" title="3 partial"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 12px; color: var(--muted);">2+ friction events</span>
+              <span style="font-size: 12px; color: var(--red); font-weight: 700;">13 sessions</span>
+            </div>
+            <div style="display: flex; height: 24px; border-radius: 6px; overflow: hidden; gap: 2px;">
+              <div style="width: 0%; background: var(--green); border-radius: 4px;"></div>
+              <div style="width: 31%; background: var(--gold); border-radius: 4px;" title="4 mostly"></div>
+              <div style="width: 31%; background: var(--warm); border-radius: 4px;" title="4 partial"></div>
+              <div style="width: 38%; background: var(--muted); border-radius: 4px;" title="5 unclear"></div>
+            </div>
+          </div>
+          <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); text-align: center;">
+            Zero-friction sessions → <strong style="color: var(--green)">95% success</strong><br>
+            2+ friction sessions → <strong style="color: var(--red)">31% success</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekly activity from logs -->
+    <div class="section-label" style="color: var(--accent3)">Weekly Activity</div>
+    <div class="section-title">Session volume by week</div>
+
+    <div class="activity-weeks mb-48">
+      <div class="week-card">
+        <div class="week-label">Jan 5</div>
+        <div class="week-logs" style="color: var(--accent3)">30</div>
+        <div class="week-logs-label">session logs</div>
+        <div style="font-size: 11px; color: var(--muted);">3 days active</div>
+        <div style="font-size: 11px; color: var(--muted);">3 projects</div>
+      </div>
+      <div class="week-card">
+        <div class="week-label">Jan 12</div>
+        <div class="week-logs" style="color: var(--accent3)">47</div>
+        <div class="week-logs-label">session logs</div>
+        <div style="font-size: 11px; color: var(--muted);">7 days active</div>
+        <div style="font-size: 11px; color: var(--muted);">5 projects</div>
+      </div>
+      <div class="week-card" style="border-color: var(--warm);">
+        <div class="week-label">Jan 19</div>
+        <div class="week-logs" style="color: var(--warm)">74</div>
+        <div class="week-logs-label">session logs</div>
+        <div style="font-size: 11px; color: var(--muted);">7 days active</div>
+        <div style="font-size: 11px; color: var(--warm); font-weight: 600;">5 projects ★</div>
+      </div>
+      <div class="week-card">
+        <div class="week-label">Jan 26</div>
+        <div class="week-logs" style="color: var(--accent3)">54</div>
+        <div class="week-logs-label">session logs</div>
+        <div style="font-size: 11px; color: var(--muted);">7 days active</div>
+        <div style="font-size: 11px; color: var(--muted);">5 projects</div>
+      </div>
+      <div class="week-card">
+        <div class="week-label">Feb 2</div>
+        <div class="week-logs" style="color: var(--accent3)">68</div>
+        <div class="week-logs-label">session logs</div>
+        <div style="font-size: 11px; color: var(--muted);">6 days active</div>
+        <div style="font-size: 11px; color: var(--muted);">4 projects</div>
+      </div>
+    </div>
+
+    <!-- Takeaway -->
+    <div class="card" style="background: linear-gradient(135deg, rgba(248,113,113,0.06), rgba(251,191,36,0.06)); border-color: rgba(248,113,113,0.2);">
+      <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--warm);">The correction tax is real</div>
+      <div style="font-size: 14px; color: var(--muted); line-height: 1.7;">
+        Sessions with <strong style="color: var(--green)">zero friction</strong> achieve goals <strong style="color: var(--text)">95% of the time</strong>.
+        Sessions with <strong style="color: var(--red)">2+ friction events</strong> drop to <strong style="color: var(--text)">31%</strong>.
+        The #1 friction type — <strong style="color: var(--red)">wrong approach</strong> (over-engineering, wrong framing) — accounts for 41% of all events.
+        Every CLAUDE.md rule you've added is a bet that future sessions land in the green zone instead of the red.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!--         HEALTH PANEL               -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="panel" id="health">
+
+    <div class="section-label" style="color: var(--green)">Knowledge System Health</div>
+    <div class="section-title">Live scan of 11 tracked projects</div>
+    <div style="font-size: 12px; color: var(--muted); margin-bottom: 32px;">Scanned Feb 7, 2026 — checks project-knowledge.md freshness, z_context integrity, inbox load, and CLAUDE.md presence.</div>
+
+    <!-- Summary stats -->
+    <div class="health-summary">
+      <div class="health-stat">
+        <div class="health-stat-value" style="color: var(--green)">4</div>
+        <div class="health-stat-label">Healthy</div>
+      </div>
+      <div class="health-stat">
+        <div class="health-stat-value" style="color: var(--gold)">3</div>
+        <div class="health-stat-label">Warnings</div>
+      </div>
+      <div class="health-stat">
+        <div class="health-stat-value" style="color: var(--red)">4</div>
+        <div class="health-stat-label">Issues</div>
+      </div>
+      <div class="health-stat">
+        <div class="health-stat-value" style="color: var(--accent)">273</div>
+        <div class="health-stat-label">Total Logs</div>
+      </div>
+    </div>
+
+    <!-- Project rows -->
+    <div class="section-label" style="color: var(--accent2)">Project-by-Project</div>
+    <div class="section-title" style="font-size: 22px;">Individual health</div>
+
+    <!-- Healthy projects -->
+    <div class="project-row">
+      <div class="pr-name">Razzo</div>
+      <div class="pr-badges">
+        <div class="badge badge-green">PK fresh</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-green">z_context</div>
+        <div class="badge badge-gold">4 unindexed items</div>
+        <div class="badge badge-muted">21 logs</div>
+        <div class="badge badge-muted">9 inbox items</div>
+      </div>
+      <div class="pr-score score-warn">B+</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">Context Profile Framework</div>
+      <div class="pr-badges">
+        <div class="badge badge-green">PK fresh</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-muted">No z_context</div>
+        <div class="badge badge-muted">38 logs</div>
+        <div class="badge badge-muted">9 inbox items</div>
+      </div>
+      <div class="pr-score score-good">A</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">SalesIntel</div>
+      <div class="pr-badges">
+        <div class="badge badge-green">PK 3d ago</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-muted">7 logs</div>
+      </div>
+      <div class="pr-score score-good">A</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">AirOps Cohort</div>
+      <div class="pr-badges">
+        <div class="badge badge-green">PK 5d ago</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-muted">0 logs</div>
+      </div>
+      <div class="pr-score score-good">A-</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">Chief of Staff</div>
+      <div class="pr-badges">
+        <div class="badge badge-green">PK fresh</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-red">13 inbox items</div>
+        <div class="badge badge-muted">189 logs</div>
+      </div>
+      <div class="pr-score score-warn">B</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">Writing</div>
+      <div class="pr-badges">
+        <div class="badge badge-red">PK 21d stale</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-green">z_context</div>
+        <div class="badge badge-muted">0 logs</div>
+      </div>
+      <div class="pr-score score-warn">C+</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">Context Profile Builder</div>
+      <div class="pr-badges">
+        <div class="badge badge-red">PK 22d stale</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-muted">6 logs</div>
+      </div>
+      <div class="pr-score score-bad">C</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">Beekeeper Group</div>
+      <div class="pr-badges">
+        <div class="badge badge-red">No PK</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-red">11 inbox items</div>
+        <div class="badge badge-muted">2 logs</div>
+      </div>
+      <div class="pr-score score-bad">D+</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">JRAD</div>
+      <div class="pr-badges">
+        <div class="badge badge-red">No PK</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-muted">5 logs</div>
+      </div>
+      <div class="pr-score score-bad">D</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">Job Search</div>
+      <div class="pr-badges">
+        <div class="badge badge-red">No PK</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-muted">5 logs</div>
+      </div>
+      <div class="pr-score score-bad">D</div>
+    </div>
+
+    <div class="project-row">
+      <div class="pr-name">Feed Digest</div>
+      <div class="pr-badges">
+        <div class="badge badge-red">No PK</div>
+        <div class="badge badge-green">CLAUDE.md</div>
+        <div class="badge badge-muted">0 logs</div>
+      </div>
+      <div class="pr-score score-bad">D</div>
+    </div>
+
+    <!-- Issues list -->
+    <div class="issues-section">
+      <div class="section-label" style="color: var(--red)">Action Items</div>
+      <div class="section-title" style="font-size: 22px;">What needs attention</div>
+
+      <div class="issue-row">
+        <div class="issue-icon" style="background: var(--dim-red);">🔴</div>
+        <div class="issue-project">Beekeeper Group</div>
+        <div class="issue-text">No project-knowledge.md + 11 inbox items overloaded</div>
+        <div class="issue-severity badge badge-red">Critical</div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-icon" style="background: var(--dim-red);">🔴</div>
+        <div class="issue-project">Chief of Staff</div>
+        <div class="issue-text">13 open inbox items — needs triage</div>
+        <div class="issue-severity badge badge-red">High</div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-icon" style="background: var(--dim-red);">🔴</div>
+        <div class="issue-project">CPB / Writing</div>
+        <div class="issue-text">project-knowledge.md 21-22 days stale</div>
+        <div class="issue-severity badge badge-gold">Medium</div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-icon" style="background: var(--dim-gold);">🟡</div>
+        <div class="issue-project">JRAD / Job Search / Feed Digest</div>
+        <div class="issue-text">No project-knowledge.md — no persistent memory</div>
+        <div class="issue-severity badge badge-gold">Medium</div>
+      </div>
+      <div class="issue-row">
+        <div class="issue-icon" style="background: var(--dim-gold);">🟡</div>
+        <div class="issue-project">Razzo</div>
+        <div class="issue-text">4 files in z_context/ not listed in INDEX.md</div>
+        <div class="issue-severity badge badge-muted">Low</div>
+      </div>
+    </div>
+
+    <!-- System-wide -->
+    <div style="margin-top: 48px;">
+      <div class="section-label" style="color: var(--accent)">System-Wide</div>
+      <div class="section-title" style="font-size: 22px;">Coverage</div>
+
+      <div class="grid-3">
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 42px; font-weight: 900; color: var(--green);">100%</div>
+          <div style="font-size: 12px; color: var(--muted);">have CLAUDE.md</div>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 42px; font-weight: 900; color: var(--gold);">64%</div>
+          <div style="font-size: 12px; color: var(--muted);">have project-knowledge.md</div>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="font-size: 42px; font-weight: 900; color: var(--red);">18%</div>
+          <div style="font-size: 12px; color: var(--muted);">have z_context/</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="timestamp">Generated Feb 7, 2026 from 52 analyzed sessions + live project scans</div>
+
+</div>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

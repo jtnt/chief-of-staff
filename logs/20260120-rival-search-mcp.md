@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Rival Search Mcp
+---
+
+# Chief of Staff: Rival Search Mcp
 
 **Date:** 2026-01-20 05:50 PM EST
 **Session Type:** meta-work

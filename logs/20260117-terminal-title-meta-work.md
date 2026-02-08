@@ -1,5 +1,10 @@
-# Session Log: Terminal Title & Meta-Work Detection
-*Date: 2026-01-17*
+---
+title: Terminal Title Investigation
+---
+
+# Chief of Staff: Terminal Title Investigation
+
+**Date:** 2026-01-17
 
 ## What Was Done
 

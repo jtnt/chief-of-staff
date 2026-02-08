@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: StoryBrand Reference and Cleanup
+---
+
+# Chief of Staff: StoryBrand Reference and Cleanup
 
 **Date:** January 11, 2026
 **Session Type:** mixed

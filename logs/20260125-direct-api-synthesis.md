@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Direct Api Synthesis
+---
+
+# Chief of Staff: Direct Api Synthesis
 
 **Date:** 2026-01-25 09:00 AM EST
 **Session Type:** meta-work

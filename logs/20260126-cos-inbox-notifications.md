@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Cos Inbox Notifications
+---
+
+# Chief of Staff: Cos Inbox Notifications
 
 **Date:** 2026-01-26 09:26 PM EST
 **Session Type:** meta-work

@@ -3,9 +3,10 @@ date: 2026-02-07 09:15 AM EST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/c28888c6-9d88-41cf-b23e-4d8bec483adb.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Applied Ai Society Research
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Applied Ai Society Research
 
 ## What Was Done
 

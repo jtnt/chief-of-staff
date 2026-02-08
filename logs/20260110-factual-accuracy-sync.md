@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Factual Accuracy Policy
+---
+title: Factual Accuracy Policy
+---
+
+# Chief of Staff: Factual Accuracy Policy
 
 **Date:** 2026-01-10 (late night)
 **Session Type:** meta-work

@@ -3,9 +3,10 @@ date: 2026-02-03 04:58 PM EST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/ae349c8e-7bac-48bf-8b06-b55d835ef3af.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Substack Import Organization
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Substack Import Organization
 
 ## What Was Done
 

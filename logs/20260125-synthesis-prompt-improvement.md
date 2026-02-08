@@ -1,3 +1,7 @@
+---
+title: Synthesis Prompt Improvement
+---
+
 # Chief of Staff: Synthesis Prompt Improvement
 
 **Date:** 2026-01-25 06:53 AM EST

@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Old Command Cleanup
+---
+
+# Chief of Staff: Old Command Cleanup
 
 **Date:** 2026-01-17 09:16 AM EST
 **Session Type:** meta-work

@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Folder Structure Cleanup
+---
+title: Folder Structure Cleanup
+---
+
+# Chief of Staff: Folder Structure Cleanup
 
 **Date:** January 11, 2026
 **Session Type:** meta-work

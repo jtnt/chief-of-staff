@@ -1,4 +1,8 @@
-# Meeting Review v7 - Implementation Complete (Phase 1)
+---
+title: Meeting Review v7 - Implementation Complete
+---
+
+# Chief of Staff: Meeting Review v7 - Implementation Complete
 
 **Date:** 2026-01-22
 **Phase:** 1 - Bulk Export Improvements

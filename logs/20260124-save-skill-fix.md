@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Save Skill Fix
+---
+
+# Chief of Staff: Save Skill Fix
 
 **Date:** 2026-01-24 05:28 PM EST
 **Session Type:** meta-work

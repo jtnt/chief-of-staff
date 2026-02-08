@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Mcp Config Consolidation
+---
+
+# Chief of Staff: Mcp Config Consolidation
 
 **Date:** 2026-01-20 06:03 PM EST
 **Session Type:** meta-work

@@ -3,9 +3,10 @@ date: 2026-02-02 07:24 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/bdb48c10-58c9-4b5d-8665-354a18b870f9.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Airops Project Setup
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Airops Project Setup
 
 ## What Was Done
 

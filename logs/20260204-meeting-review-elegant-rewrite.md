@@ -4,9 +4,10 @@ type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/a4629f60-bf05-4d18-8e92-26b92d6bfc9f.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
 plan_file: /Users/jtnt/.claude/plans/declarative-juggling-stearns.md
+title: Meeting Review Elegant Rewrite
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Meeting Review Elegant Rewrite
 
 ## What Was Done
 

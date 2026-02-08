@@ -2,9 +2,10 @@
 date: 2026-01-28 05:25 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/9c813bbe-f5a2-4eed-b36f-e781e42d7fc6.jsonl
+title: Session Capture Implementation
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Session Capture Implementation
 
 ## What Was Done
 

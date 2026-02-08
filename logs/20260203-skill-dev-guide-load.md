@@ -3,9 +3,10 @@ date: 2026-02-03 01:59 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/afba8e57-9203-4b9e-a928-71274f3435f1.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Skill Dev Guide Load
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Skill Dev Guide Load
 
 ## What Was Done
 

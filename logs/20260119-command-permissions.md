@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Command Permissions
+---
+
+# Chief of Staff: Command Permissions
 
 **Date:** 2026-01-19 07:43 PM EST
 **Session Type:** mixed (60% meta-work, 40% project-work)

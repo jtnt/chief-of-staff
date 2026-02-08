@@ -3,9 +3,10 @@ date: 2026-02-07 08:16 AM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/6aa34744-328f-47ff-b61f-04976c81c4f9.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Trivial Session
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Trivial Session
 
 ## What Was Done
 

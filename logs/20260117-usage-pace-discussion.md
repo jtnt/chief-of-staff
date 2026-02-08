@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Usage Pace Discussion
+---
+
+# Chief of Staff: Usage Pace Discussion
 
 **Date:** 2026-01-17 04:51 PM EST
 **Session Type:** mixed

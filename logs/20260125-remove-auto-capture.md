@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Remove Auto Capture
+---
+
+# Chief of Staff: Remove Auto Capture
 
 **Date:** 2026-01-25 12:13 PM EST
 **Session Type:** meta-work

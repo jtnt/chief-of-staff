@@ -1,4 +1,8 @@
-# Session Log: --continue Bug Investigation and Auto-Capture Fix
+---
+title: Session Log: --continue Bug Investigation and Auto-Capture Fix
+---
+
+# Chief of Staff: Session Log: --continue Bug Investigation and Auto-Capture Fix
 
 **Date:** 2026-01-31 09:25 AM EST
 **Project:** Chief of Staff

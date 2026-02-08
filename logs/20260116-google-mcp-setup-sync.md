@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Google MCP Setup
+---
+
+# Chief of Staff: Google MCP Setup
 
 **Date:** 2026-01-16 05:25 PM EST
 **Session Type:** meta-work

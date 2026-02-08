@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Dc Founders Panel Research
+---
+
+# Chief of Staff: Dc Founders Panel Research
 
 **Date:** 2026-01-22 03:22 PM EST
 **Session Type:** project-work

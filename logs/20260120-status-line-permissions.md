@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Status Line Permissions
+---
+
+# Chief of Staff: Status Line Permissions
 
 **Date:** 2026-01-20 12:19 PM EST
 **Session Type:** meta-work

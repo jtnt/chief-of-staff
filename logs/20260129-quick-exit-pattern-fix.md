@@ -3,9 +3,10 @@ date: 2026-01-29 12:50 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/da526f73-1a99-4c96-8433-5ddd778c9e08.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Quick Exit Pattern Fix
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Quick Exit Pattern Fix
 
 ## What Was Done
 

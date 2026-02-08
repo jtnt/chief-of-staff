@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Dashboard Rebuild
+---
+
+# Chief of Staff: Dashboard Rebuild
 
 **Date:** 2026-01-18 08:48 PM EST
 **Session Type:** project-work

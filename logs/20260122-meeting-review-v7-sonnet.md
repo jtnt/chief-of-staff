@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Meeting Review V7 Sonnet
+---
+
+# Chief of Staff: Meeting Review V7 Sonnet
 
 **Date:** 2026-01-22 10:01 PM EST
 **Session Type:** meta-work

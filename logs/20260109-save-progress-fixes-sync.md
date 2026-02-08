@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Fix /save-progress Command
+---
+title: Fix Save Progress Command
+---
+
+# Chief of Staff: Fix Save Progress Command
 
 **Date:** January 9, 2026 (late night)
 **Type:** Bug Fix

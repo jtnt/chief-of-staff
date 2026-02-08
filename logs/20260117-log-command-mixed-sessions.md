@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Log Command Mixed Sessions
+---
+
+# Chief of Staff: Log Command Mixed Sessions
 
 **Date:** 2026-01-17 08:51 AM EST
 **Session Type:** meta-work

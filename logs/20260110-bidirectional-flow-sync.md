@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: Bidirectional Information Flow
+---
+
+# Chief of Staff: Bidirectional Information Flow
 
 **Date:** January 10, 2026 (evening)
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`

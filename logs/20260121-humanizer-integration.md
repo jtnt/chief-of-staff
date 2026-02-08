@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Humanizer Integration
+---
+
+# Chief of Staff: Humanizer Integration
 
 **Date:** 2026-01-21 05:41 PM EST
 **Session Type:** meta-work

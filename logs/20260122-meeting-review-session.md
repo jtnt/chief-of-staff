@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Meeting Review
+---
+
+# Chief of Staff: Meeting Review
 
 **Date:** 2026-01-22 04:00 PM EST
 **Session Type:** project-work

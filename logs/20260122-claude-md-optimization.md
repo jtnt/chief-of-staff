@@ -1,3 +1,7 @@
+---
+title: CLAUDE.md Optimization
+---
+
 # Chief of Staff: CLAUDE.md Optimization
 
 **Date:** 2026-01-22 09:59 PM EST

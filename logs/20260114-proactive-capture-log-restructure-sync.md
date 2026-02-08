@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Proactive Capture Log Restructure
+---
+
+# Chief of Staff: Proactive Capture Log Restructure
 
 **Date:** 2026-01-14 10:41 PM EST
 **Session Type:** meta-work

@@ -1,4 +1,8 @@
-# Session Log: Links System Refinements
+---
+title: Links System Refinements
+---
+
+# Chief of Staff: Links System Refinements
 
 **Date:** 2026-01-17 03:51 PM EST
 **Session Type:** meta-work

@@ -3,9 +3,10 @@ date: 2026-02-01 01:02 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/73d22c33-4b7d-4c23-982a-a4d618242b37.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Claude Code Project Switching
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Claude Code Project Switching
 
 ## What Was Done
 

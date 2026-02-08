@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: Git Config Fix for Cowork
+---
+
+# Chief of Staff: Git Config Fix for Cowork
 
 **Date:** 2026-01-12 (night)
 **Session Type:** meta-work

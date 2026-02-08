@@ -3,6 +3,7 @@ date: 2026-02-02 10:42 AM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/746acd87-1d1f-4fdb-9efc-8cce5738d9ef.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Meeting Recaps Capture
 ---
 
 # Chief of Staff: Meeting Recaps Capture

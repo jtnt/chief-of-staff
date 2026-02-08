@@ -3,6 +3,7 @@ date: 2026-02-06 08:52 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/88bb9c07-242d-49ae-8684-4ae8c3f8c336.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Session Context Loading
 ---
 
 # Chief of Staff: Session Context Loading

@@ -3,6 +3,7 @@ date: 2026-02-03 01:27 PM PST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/c4795afa-c6a6-4609-b478-d38afce7a048.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Two New Client Setup
 ---
 
 # Chief of Staff: Two New Client Setup

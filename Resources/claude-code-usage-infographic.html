@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Claude Code — 47 Days by the Numbers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: #12121a;
+      --border: #1e1e2e;
+      --text: #e2e2ef;
+      --muted: #6b6b8a;
+      --accent: #c084fc;
+      --accent2: #818cf8;
+      --accent3: #38bdf8;
+      --warm: #fb923c;
+      --green: #4ade80;
+      --red: #f87171;
+      --gold: #fbbf24;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 32px 80px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      text-align: center;
+      margin-bottom: 72px;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(192,132,252,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #e2e2ef 20%, #c084fc 50%, #818cf8 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .hero-sub span { color: var(--text); font-weight: 600; }
+    .hero-period {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+
+    /* ─── BIG NUMBER ROW ─── */
+    .big-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+    .big-stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .big-stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .big-stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+    }
+    .big-stat:nth-child(1) .big-stat-value { color: var(--accent); }
+    .big-stat:nth-child(2) .big-stat-value { color: var(--accent2); }
+    .big-stat:nth-child(3) .big-stat-value { color: var(--accent3); }
+    .big-stat:nth-child(4) .big-stat-value { color: var(--gold); }
+
+    /* ─── TIME COMPARISON ─── */
+    .time-section {
+      margin-bottom: 72px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+
+    .time-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .time-bar-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 80px;
+      align-items: center;
+      gap: 16px;
+    }
+    .time-bar-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-align: right;
+    }
+    .time-bar-track {
+      height: 40px;
+      background: var(--card);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+    .time-bar-fill {
+      height: 100%;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .time-bar-hours {
+      font-size: 15px;
+      font-weight: 700;
+      text-align: left;
+    }
+    .bar-claude { background: linear-gradient(90deg, #7c3aed, #c084fc); }
+    .bar-fulltime { background: linear-gradient(90deg, #1e40af, #3b82f6); }
+    .bar-sleep { background: linear-gradient(90deg, #065f46, #34d399); }
+    .bar-calendar { background: linear-gradient(90deg, #92400e, #fbbf24); }
+
+    .time-callout {
+      margin-top: 32px;
+      background: linear-gradient(135deg, rgba(192,132,252,0.08), rgba(129,140,248,0.08));
+      border: 1px solid rgba(192,132,252,0.2);
+      border-radius: 16px;
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .time-callout-big {
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--warm), var(--red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .time-callout-text {
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .time-callout-text strong {
+      color: var(--text);
+    }
+
+    /* ─── DAILY BREAKDOWN CLOCK ─── */
+    .daily-section {
+      margin-bottom: 72px;
+    }
+    .daily-viz {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .daily-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+    .daily-card-number {
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .daily-card-unit {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .daily-card-context {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .daily-card-context strong {
+      color: var(--text);
+    }
+
+    /* hour strip */
+    .hour-strip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+    .hour-strip-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+    .hour-blocks {
+      display: grid;
+      grid-template-columns: repeat(24, 1fr);
+      gap: 3px;
+      margin-bottom: 12px;
+    }
+    .hour-block {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      position: relative;
+    }
+    .hour-block.claude { background: var(--accent); opacity: 0.9; }
+    .hour-block.empty { background: var(--border); opacity: 0.4; }
+    .hour-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* ─── WHAT GOT BUILT ─── */
+    .built-section {
+      margin-bottom: 72px;
+    }
+    .built-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .built-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .built-card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .built-card-count {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .built-card-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* area breakdown */
+    .areas {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .area-row {
+      display: grid;
+      grid-template-columns: 1fr 60px 200px;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .area-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .area-sessions {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .area-bar-track {
+      height: 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .area-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ─── FRICTION ─── */
+    .friction-section {
+      margin-bottom: 72px;
+    }
+    .friction-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .friction-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .friction-count {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .friction-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .friction-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── OUTCOMES ─── */
+    .outcomes-section {
+      margin-bottom: 72px;
+    }
+    .outcomes-bar {
+      display: flex;
+      height: 48px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .outcome-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.7);
+    }
+    .seg-achieved { background: var(--green); }
+    .seg-mostly { background: var(--gold); }
+    .seg-partial { background: var(--warm); }
+    .seg-other { background: var(--muted); }
+    .outcomes-legend {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    /* ─── BOTTOM QUOTE ─── */
+    .bottom-quote {
+      text-align: center;
+      padding: 48px 32px;
+      border-top: 1px solid var(--border);
+    }
+    .bottom-quote-text {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 12px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .bottom-quote-text em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 700;
+    }
+    .bottom-quote-attr {
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.5;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 42px; }
+      .big-stats { grid-template-columns: repeat(2, 1fr); }
+      .time-bar-row { grid-template-columns: 100px 1fr 60px; }
+      .daily-viz { grid-template-columns: 1fr; }
+      .built-grid { grid-template-columns: 1fr; }
+      .friction-cards { grid-template-columns: 1fr; }
+      .area-row { grid-template-columns: 1fr 50px; }
+      .area-row .area-bar-track { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">Claude Code Usage Report</div>
+    <h1>565 Hours</h1>
+    <div class="hero-sub">
+      <span>292 sessions</span> across <span>47 days</span>
+    </div>
+    <div class="hero-period">Dec 23, 2025 — Feb 8, 2026</div>
+  </div>
+
+  <!-- BIG STATS -->
+  <div class="big-stats">
+    <div class="big-stat">
+      <div class="big-stat-value">292</div>
+      <div class="big-stat-label">Sessions</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-stat-value">2,667</div>
+      <div class="big-stat-label">Messages</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-stat-value">1,839</div>
+      <div class="big-stat-label">Markdown Files</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-stat-value">50</div>
+      <div class="big-stat-label">Commits</div>
+    </div>
+  </div>
+
+  <!-- TIME COMPARISON -->
+  <div class="time-section">
+    <div class="section-label">Time in Context</div>
+    <div class="section-title">How 565 hours stacks up</div>
+
+    <div class="time-bars">
+      <div class="time-bar-row">
+        <div class="time-bar-label">Claude Sessions</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill bar-claude" style="width: 50%"></div>
+        </div>
+        <div class="time-bar-hours" style="color: var(--accent)">565h</div>
+      </div>
+      <div class="time-bar-row">
+        <div class="time-bar-label">Hours sleeping</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill bar-sleep" style="width: 33%"></div>
+        </div>
+        <div class="time-bar-hours" style="color: #34d399">376h</div>
+      </div>
+      <div class="time-bar-row">
+        <div class="time-bar-label">Full-time job</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill bar-fulltime" style="width: 24%"></div>
+        </div>
+        <div class="time-bar-hours" style="color: #3b82f6">272h</div>
+      </div>
+      <div class="time-bar-row">
+        <div class="time-bar-label">Hours in 47 days</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill bar-calendar" style="width: 100%"></div>
+        </div>
+        <div class="time-bar-hours" style="color: var(--gold)">1,128h</div>
+      </div>
+    </div>
+
+    <div class="time-callout">
+      <div class="time-callout-big">2.08×</div>
+      <div class="time-callout-text">
+        More than <strong>double a full-time job</strong>. More hours in Claude than hours sleeping.
+      </div>
+    </div>
+  </div>
+
+  <!-- DAILY BREAKDOWN -->
+  <div class="daily-section">
+    <div class="section-label">Daily Average</div>
+    <div class="section-title">A typical day in the period</div>
+
+    <div class="daily-viz">
+      <div class="daily-card">
+        <div class="daily-card-number" style="color: var(--accent)">12</div>
+        <div class="daily-card-unit">hours / day</div>
+        <div class="daily-card-context">
+          Average daily Claude session time.<br>
+          That's <strong>50% of every hour</strong> in each 24h day.
+        </div>
+      </div>
+      <div class="daily-card">
+        <div class="daily-card-number" style="color: var(--accent2)">6.2</div>
+        <div class="daily-card-unit">sessions / day</div>
+        <div class="daily-card-context">
+          Averaging <strong>~9 messages per session</strong>.<br>
+          Short, purposeful bursts — not marathon chats.
+        </div>
+      </div>
+    </div>
+
+    <div class="hour-strip">
+      <div class="hour-strip-title">If 12 hours were a day — half your clock belongs to Claude</div>
+      <div class="hour-blocks">
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block claude"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+        <div class="hour-block empty"></div>
+      </div>
+      <div class="hour-labels">
+        <span>12am</span>
+        <span>6am</span>
+        <span>12pm</span>
+        <span>6pm</span>
+        <span>12am</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT GOT BUILT -->
+  <div class="built-section">
+    <div class="section-label">Output</div>
+    <div class="section-title">What 565 hours produced</div>
+
+    <div class="built-grid">
+      <div class="built-card">
+        <div class="built-card-icon">📄</div>
+        <div class="built-card-count">1,839</div>
+        <div class="built-card-label">Markdown Files</div>
+      </div>
+      <div class="built-card">
+        <div class="built-card-icon">⚡</div>
+        <div class="built-card-count">39</div>
+        <div class="built-card-label">TypeScript Files</div>
+      </div>
+      <div class="built-card">
+        <div class="built-card-icon">🐍</div>
+        <div class="built-card-count">31</div>
+        <div class="built-card-label">Python Files</div>
+      </div>
+    </div>
+
+    <div class="areas">
+      <div class="area-row">
+        <div class="area-name">Knowledge & Learning System Design</div>
+        <div class="area-sessions">12 sessions</div>
+        <div class="area-bar-track">
+          <div class="area-bar-fill" style="width: 100%; background: var(--accent);"></div>
+        </div>
+      </div>
+      <div class="area-row">
+        <div class="area-name">DevOps, Configuration & Tooling</div>
+        <div class="area-sessions">12 sessions</div>
+        <div class="area-bar-track">
+          <div class="area-bar-fill" style="width: 100%; background: var(--accent2);"></div>
+        </div>
+      </div>
+      <div class="area-row">
+        <div class="area-name">Research Capture & Analysis</div>
+        <div class="area-sessions">10 sessions</div>
+        <div class="area-bar-track">
+          <div class="area-bar-fill" style="width: 83%; background: var(--accent3);"></div>
+        </div>
+      </div>
+      <div class="area-row">
+        <div class="area-name">Project & Task Management</div>
+        <div class="area-sessions">7 sessions</div>
+        <div class="area-bar-track">
+          <div class="area-bar-fill" style="width: 58%; background: var(--warm);"></div>
+        </div>
+      </div>
+      <div class="area-row">
+        <div class="area-name">Product Development & Technical Builds</div>
+        <div class="area-sessions">6 sessions</div>
+        <div class="area-bar-track">
+          <div class="area-bar-fill" style="width: 50%; background: var(--green);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRICTION -->
+  <div class="friction-section">
+    <div class="section-label">Friction</div>
+    <div class="section-title">The correction tax</div>
+
+    <div class="friction-cards">
+      <div class="friction-card">
+        <div class="friction-count">28</div>
+        <div class="friction-label">Wrong Approach</div>
+        <div class="friction-desc">Over-engineering, fancy frameworks, tech-centric framing when business outcomes were asked for.</div>
+      </div>
+      <div class="friction-card">
+        <div class="friction-count">21</div>
+        <div class="friction-label">Misunderstood Request</div>
+        <div class="friction-desc">Misreading intent, evaluating style instead of applying a principle, scope confusion.</div>
+      </div>
+      <div class="friction-card">
+        <div class="friction-count">~10</div>
+        <div class="friction-label">Context Waste</div>
+        <div class="friction-desc">Reading too many files without a plan, stalling mid-operation, planning loops without executing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="outcomes-section">
+    <div class="section-label">Results</div>
+    <div class="section-title">Goal achievement across 47 analyzed sessions</div>
+
+    <div class="outcomes-bar">
+      <div class="outcome-seg seg-achieved" style="width: 51.1%">24</div>
+      <div class="outcome-seg seg-mostly" style="width: 31.9%">15</div>
+      <div class="outcome-seg seg-partial" style="width: 17%">8</div>
+    </div>
+    <div class="outcomes-legend">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--green)"></div> Fully achieved (51%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--gold)"></div> Mostly achieved (32%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--warm)"></div> Partially achieved (17%)</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom-quote">
+    <div class="bottom-quote-text">
+      Claude kept failing to use the <em>very knowledge system</em> it was helping to build — during the conversation about building it.
+    </div>
+    <div class="bottom-quote-attr">Most ironic moment from 292 sessions</div>
+  </div>
+
+</div>
+
+</body>
+</html>

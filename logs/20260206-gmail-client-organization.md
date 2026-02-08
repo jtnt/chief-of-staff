@@ -3,9 +3,10 @@ date: 2026-02-06 11:34 PM EST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/1b841127-34d0-4131-a965-b30af4f92fcc.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Gmail Client Organization
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Gmail Client Organization
 
 ## What Was Done
 

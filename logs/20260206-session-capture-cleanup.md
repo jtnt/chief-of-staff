@@ -3,9 +3,10 @@ date: 2026-02-06 01:07 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/56468db9-bb5f-4ad2-8b1a-ac65d622a2d2.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Session Capture Cleanup
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Session Capture Cleanup
 
 ## What Was Done
 

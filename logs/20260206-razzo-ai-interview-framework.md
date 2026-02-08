@@ -3,9 +3,10 @@ date: 2026-02-06 11:33 PM EST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/85e09bef-aa69-4b85-83e5-ebd4bff781e3.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Razzo Ai Interview Framework
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Razzo Ai Interview Framework
 
 ## What Was Done
 

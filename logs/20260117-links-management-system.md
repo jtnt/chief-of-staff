@@ -1,4 +1,8 @@
-# Session Log: Centralized Link Management System
+---
+title: Centralized Link Management System
+---
+
+# Chief of Staff: Centralized Link Management System
 
 **Date:** 2026-01-17 03:09 PM EST
 **Session Type:** meta-work

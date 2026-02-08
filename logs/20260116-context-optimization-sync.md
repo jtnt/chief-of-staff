@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Context Window Optimization
+---
+
+# Chief of Staff: Context Window Optimization
 
 **Date:** 2026-01-16 04:09 PM EST
 **Session Type:** meta-work

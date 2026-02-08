@@ -3,9 +3,10 @@ date: 2026-02-06 10:45 AM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/4ca655ba-17ac-47a5-b470-63c02df4e97b.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Ai Bot 403 Troubleshooting
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Ai Bot 403 Troubleshooting
 
 ## What Was Done
 

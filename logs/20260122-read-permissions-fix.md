@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Read Permissions Fix
+---
+
+# Chief of Staff: Read Permissions Fix
 
 **Date:** 2026-01-22 10:08 AM EST
 **Session Type:** meta-work

@@ -1,3 +1,7 @@
+---
+title: Compact Prompt Research
+---
+
 # Chief of Staff: Compact Prompt Research
 
 **Date:** 2026-01-25 07:13 AM EST

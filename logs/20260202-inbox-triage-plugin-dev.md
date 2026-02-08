@@ -3,6 +3,7 @@ date: 2026-02-02 05:30 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/4ed80d24-a8c4-41a1-b31e-a88b7725e63d.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Inbox Triage Plugin Development
 ---
 
 # Chief of Staff: Inbox Triage Plugin Development

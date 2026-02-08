@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Meeting Review V6 Export
+---
+
+# Chief of Staff: Meeting Review V6 Export
 
 **Date:** 2026-01-22 09:05 PM EST
 **Session Type:** meta-work

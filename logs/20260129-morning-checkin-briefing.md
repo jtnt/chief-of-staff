@@ -3,9 +3,10 @@ date: 2026-01-29 11:33 AM EST
 type: mixed
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/2af80ce3-5d98-4d95-8d2a-3c08b0cf806b.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Morning Checkin Briefing
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Morning Checkin Briefing
 
 ## What Was Done
 

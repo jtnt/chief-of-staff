@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: MCP Server Exploration
+---
+
+# Chief of Staff: MCP Server Exploration
 
 **Date:** 2026-01-11 11:32 AM EST
 **Session Type:** meta-work

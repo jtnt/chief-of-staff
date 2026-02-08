@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Cos Tracking Fix
+---
+
+# Chief of Staff: Cos Tracking Fix
 
 **Date:** 2026-01-19 09:49 PM EST (final 10:24 PM)
 **Session Type:** meta-work

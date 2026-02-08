@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Explicit Conversation Analysis Fix
+---
+title: Explicit Conversation Analysis Fix
+---
+
+# Chief of Staff: Explicit Conversation Analysis Fix
 
 **Date:** January 9, 2026 (late night)
 **Type:** Workflow Fix

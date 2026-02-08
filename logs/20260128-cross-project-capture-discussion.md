@@ -3,9 +3,10 @@ date: 2026-01-28 05:45 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/9c813bbe-f5a2-4eed-b36f-e781e42d7fc6.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Cross Project Capture Discussion
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Cross Project Capture Discussion
 
 ## What Was Done
 

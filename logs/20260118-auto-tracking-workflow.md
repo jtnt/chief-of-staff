@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Auto Tracking Workflow
+---
+
+# Chief of Staff: Auto Tracking Workflow
 
 **Date:** 2026-01-18 08:18 AM EST
 **Session Type:** meta-work

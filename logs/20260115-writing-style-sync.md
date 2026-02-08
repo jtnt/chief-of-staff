@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Writing Style Preferences
+---
+
+# Chief of Staff: Writing Style Preferences
 
 **Date:** 2026-01-15 04:51 PM EST
 **Session Type:** meta-work

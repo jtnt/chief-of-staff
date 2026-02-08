@@ -3,6 +3,7 @@ date: 2026-02-06 06:59 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/403ee64d-bcf2-4b03-b90b-b646ee69e54b.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Session Capture Bug Fix
 ---
 
 # Chief of Staff: Session Capture Bug Fix

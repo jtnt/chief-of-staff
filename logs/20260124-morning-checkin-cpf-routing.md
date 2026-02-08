@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Morning Checkin Cpf Routing
+---
+
+# Chief of Staff: Morning Checkin Cpf Routing
 
 **Date:** 2026-01-24 11:36 AM EST
 **Session Type:** meta-work

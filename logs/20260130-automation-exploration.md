@@ -3,9 +3,10 @@ date: 2026-01-30 07:24 AM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/02adae31-94ba-4656-ab89-7a3c24939d54.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Automation Exploration
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Automation Exploration
 
 ## What Was Done
 

@@ -1,4 +1,8 @@
-# Chief of Staff: Sync from Source
+---
+title: Check-In System Implementation
+---
+
+# Chief of Staff: Check-In System Implementation
 
 **Date:** January 10, 2026
 **Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`

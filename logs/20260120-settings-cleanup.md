@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Settings Cleanup
+---
+
+# Chief of Staff: Settings Cleanup
 
 **Date:** 2026-01-20 10:48 AM EST
 **Session Type:** meta-work

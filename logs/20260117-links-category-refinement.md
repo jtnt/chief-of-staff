@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Links Category Refinement
+---
+
+# Chief of Staff: Links Category Refinement
 
 **Date:** 2026-01-17 04:18 PM EST
 **Session Type:** meta-work

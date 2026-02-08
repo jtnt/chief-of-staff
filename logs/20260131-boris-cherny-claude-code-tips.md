@@ -3,9 +3,10 @@ date: 2026-01-31 11:47 AM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/0d8be08a-5cc1-4b0b-859b-f31e36501cf7.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Boris Cherny Claude Code Tips
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Boris Cherny Claude Code Tips
 
 ## What Was Done
 

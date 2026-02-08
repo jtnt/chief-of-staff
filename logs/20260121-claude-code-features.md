@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Claude Code Features
+---
+
+# Chief of Staff: Claude Code Features
 
 **Date:** 2026-01-21 06:12 PM EST
 **Session Type:** meta-work

@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Transcription Optimization Testing
+---
+
+# Chief of Staff: Transcription Optimization Testing
 
 **Date:** 2026-01-16 07:20 AM EST
 **Session Type:** mixed

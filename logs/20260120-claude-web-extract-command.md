@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Claude Web Extract Command
+---
+
+# Chief of Staff: Claude Web Extract Command
 
 **Date:** 2026-01-20 04:13 PM EST
 **Session Type:** meta-work

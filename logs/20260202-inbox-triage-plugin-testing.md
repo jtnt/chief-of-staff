@@ -3,9 +3,10 @@ date: 2026-02-02 11:10 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/26bac4ce-3d03-4610-ba58-dbc7932a32f1.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Inbox Triage Plugin Testing
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Inbox Triage Plugin Testing
 
 ## What Was Done
 

@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Strategic Briefing V6
+---
+
+# Chief of Staff: Strategic Briefing V6
 
 **Date:** 2026-01-22 09:36 AM EST
 **Session Type:** meta-work

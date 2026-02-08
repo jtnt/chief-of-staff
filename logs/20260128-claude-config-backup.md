@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Claude Config Backup
+---
+
+# Chief of Staff: Claude Config Backup
 
 **Date:** 2026-01-28 11:31 AM EST
 **Session Type:** meta-work

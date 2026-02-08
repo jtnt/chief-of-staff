@@ -3,9 +3,10 @@ date: 2026-02-06 11:07 PM PST
 type: project-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/329b79c4-32a8-4965-bc59-fd2fff239d8a.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Research Capture Taste Agents
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Research Capture Taste Agents
 
 ## What Was Done
 

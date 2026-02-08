@@ -3,9 +3,10 @@ date: 2026-01-28 08:45 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/dc1a5082-243f-4d16-9577-d1f1a3bfc595.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Cos Root Cleanup
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Cos Root Cleanup
 
 ## What Was Done
 

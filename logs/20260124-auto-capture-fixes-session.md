@@ -1,3 +1,7 @@
+---
+title: Auto-Capture System Debugging
+---
+
 # Chief of Staff: Auto-Capture System Debugging
 
 **Date:** 2026-01-24 10:57 PM EST

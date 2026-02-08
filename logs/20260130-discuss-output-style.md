@@ -3,9 +3,10 @@ date: 2026-01-30 05:05 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/e51fddb8-92f4-4a11-a70d-721d277db39c.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Discuss Output Style
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Discuss Output Style
 
 ## What Was Done
 

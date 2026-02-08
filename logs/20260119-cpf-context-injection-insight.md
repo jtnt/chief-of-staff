@@ -1,4 +1,8 @@
-# Session Log: CPF Context Injection Insight
+---
+title: Session Log: CPF Context Injection Insight
+---
+
+# Chief of Staff: Session Log: CPF Context Injection Insight
 
 **Date:** 2026-01-19
 **Session Type:** Mixed (research input + meta-work)

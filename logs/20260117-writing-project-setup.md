@@ -1,4 +1,8 @@
-# Session Log: Writing Project Setup
+---
+title: Writing Project Setup
+---
+
+# Chief of Staff: Writing Project Setup
 
 **Date:** 2026-01-17
 **Session Type:** meta-work

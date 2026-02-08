@@ -3,6 +3,7 @@ date: 2026-02-03 12:47 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/d1d478ee-4f82-4a9e-824d-0d9f46b437d6.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: I-Corps Mentor Setup
 ---
 
 # Chief of Staff: I-Corps Mentor Setup

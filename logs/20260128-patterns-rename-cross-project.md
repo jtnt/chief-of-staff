@@ -3,9 +3,10 @@ date: 2026-01-28 04:43 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/e9f8a242-7870-4364-a4b4-08d54e033692.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Patterns Rename Cross Project
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Patterns Rename Cross Project
 
 ## What Was Done
 

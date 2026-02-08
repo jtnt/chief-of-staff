@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Claude Md Optimization
+---
+
+# Chief of Staff: Claude Md Optimization
 
 **Date:** 2026-01-21 09:45 PM EST
 **Session Type:** meta-work

@@ -1,4 +1,8 @@
-# Session Log: Gap Analysis Implementation
+---
+title: Session Log: Gap Analysis Implementation
+---
+
+# Chief of Staff: Session Log: Gap Analysis Implementation
 
 **Date:** 2026-01-25 (early morning session)
 **Project:** Chief of Staff

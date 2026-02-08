@@ -3,9 +3,10 @@ date: 2026-02-03 06:36 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/c308efe6-cc1a-49c9-817f-1e733613a115.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Session Capture Plan Verbatim
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Session Capture Plan Verbatim
 
 ## What Was Done
 

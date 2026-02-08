@@ -3,6 +3,7 @@ date: 2026-01-31 11:57 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/56f93c53-920e-4a86-9259-a578c3821d7b.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Claude Code Plugin Investigation
 ---
 
 # Chief of Staff: Claude Code Plugin Investigation

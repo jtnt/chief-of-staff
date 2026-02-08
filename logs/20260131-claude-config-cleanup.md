@@ -3,9 +3,10 @@ date: 2026-01-31 07:05 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/f6f74313-5215-4f2e-9375-ac4fb5e33a6d.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Claude Config Cleanup
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Claude Config Cleanup
 
 ## What Was Done
 

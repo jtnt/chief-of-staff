@@ -3,9 +3,10 @@ date: 2026-01-31 09:50 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/47e695d9-2dd2-47a9-a7bc-257c26892681.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Check-In Commands → Skills Conversion
 ---
 
-# Chief of Staff: Check-In Commands → Skills Conversion (Move 2)
+# Chief of Staff: Check-In Commands → Skills Conversion
 
 ## What Was Done
 

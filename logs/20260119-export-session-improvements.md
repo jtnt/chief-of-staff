@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Export Improvements
+---
+
+# Chief of Staff: Export Improvements
 
 **Date:** 2026-01-19 08:19 PM EST
 **Session Type:** meta-work

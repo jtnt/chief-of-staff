@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Briefing Template Fix
+---
+
+# Chief of Staff: Briefing Template Fix
 
 **Date:** 2026-01-23 07:34 AM EST
 **Session Type:** meta-work

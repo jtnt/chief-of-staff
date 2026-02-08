@@ -3,9 +3,10 @@ date: 2026-01-28 09:49 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/c55ab2d0-2f7b-475a-b40a-6d7ac3a7a064.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Sessionend Delay Capture
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Sessionend Delay Capture
 
 ## What Was Done
 

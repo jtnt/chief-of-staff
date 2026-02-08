@@ -1,4 +1,8 @@
-# Session Log: Link Capture
+---
+title: Link Capture
+---
+
+# Chief of Staff: Link Capture
 
 **Date:** 2026-01-18 10:59 AM EST
 **Session Type:** Quick task

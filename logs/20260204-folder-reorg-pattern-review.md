@@ -3,6 +3,7 @@ date: 2026-02-04 09:12 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/c7268117-de18-41e4-8517-2bcd232f26f7.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Folder Reorganization and Pattern Review
 ---
 
 # Chief of Staff: Folder Reorganization and Pattern Review

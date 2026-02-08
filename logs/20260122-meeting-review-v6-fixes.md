@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Meeting Review V6 Fixes
+---
+
+# Chief of Staff: Meeting Review V6 Fixes
 
 **Date:** 2026-01-22 05:07 PM EST
 **Session Type:** meta-work

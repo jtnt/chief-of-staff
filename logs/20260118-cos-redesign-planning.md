@@ -1,4 +1,8 @@
-# Chief of Staff System Redesign Planning
+---
+title: System Redesign Planning
+---
+
+# Chief of Staff: System Redesign Planning
 
 **Date:** 2026-01-18
 **Session Type:** Meta-work / Planning

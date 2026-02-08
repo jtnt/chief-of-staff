@@ -184,13 +184,24 @@
       "bases:Create new base": false
     }
   },
-  "active": "a7cc095dd1b47ab5",
+  "active": "047ab574a9908142",
   "lastOpenFiles": [
+    "logs/20260207-claude-desktop-uninstall.md",
+    "Resources/claude-code-dashboard.html",
+    "logs/20260207-patterns-page-implementation.md",
+    "Tools/dashboard/patterns.html",
+    "Resources/claude-code-usage-infographic.html",
+    "Tools/dashboard/project.html",
+    "Tools/dashboard/index.html",
+    "Tools/dashboard/js/app.js",
+    "Tools/dashboard/css/style.css",
+    "Tools/dashboard/js",
+    "Tools/dashboard/css",
+    "Tools/dashboard",
     "session-patterns/20260207-inbox-checkbox-restructure.md",
     "logs/20260207-inbox-checkbox-restructure.md",
     "Tasks/20260203-envoy-client-skills-plan.md",
     "cos-inbox.md",
-    "cos-inbox.md.bak",
     "Resources/chief-of-staff-proactive-behaviors.md",
     "session-patterns/20260207-applied-ai-society-research.md",
     "project-index.md",
@@ -210,7 +221,6 @@
     "Meetings/20260121-nicholas-ken-intro/summary.md",
     "logs/20260207-trivial-session.md",
     "Meetings/20260113-tolson-wagner-ai-chat/transcript.md",
-    "Untitled.md",
-    "2026-02-07.md"
+    "Untitled.md"
   ]
 }

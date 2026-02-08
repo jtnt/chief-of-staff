@@ -3,9 +3,10 @@ date: 2026-01-31 10:25 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/d85580e9-4141-4d4d-ab6c-d711040cabe5.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Untracked Log Location
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Untracked Log Location
 
 ## What Was Done
 

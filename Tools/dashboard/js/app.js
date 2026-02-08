@@ -254,6 +254,31 @@ function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// Extract a non-generic heading from markdown content
+function extractHeadingTitle(content) {
+  const match = content.match(/^#\s+(.+)$/m);
+  if (!match) return null;
+  const heading = match[1];
+  // Skip generic headings
+  if (/^(session (log|patterns?))$/i.test(heading.replace(/^.+:\s*/, ''))) return null;
+  return heading;
+}
+
+// Strip "ProjectName: " or "ProjectName — " prefix from titles
+function stripProjectPrefix(title) {
+  return title.replace(/^[^:—]+[:\u2014]\s+/u, '');
+}
+
+// Convert "2026-02-07 07:19 PM EST" → "2026-02-07 19:19" for correct string sorting
+function toSortableDate(dateStr) {
+  const m = dateStr.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!m) return dateStr;
+  let hour = parseInt(m[2]);
+  if (m[4].toUpperCase() === 'PM' && hour !== 12) hour += 12;
+  if (m[4].toUpperCase() === 'AM' && hour === 12) hour = 0;
+  return m[1] + ' ' + String(hour).padStart(2, '0') + ':' + m[3];
+}
+
 function groupProjects(projects) {
   const groups = {
     active: { label: 'Active', items: [] },
@@ -426,22 +451,7 @@ async function loadProjectLogs(relPath) {
       titleSlug = dateMatch[4].replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
 
-    // Extract title: prefer heading, but fall back to filename slug if generic
-    const headingMatch = content.match(/^#\s+(.+)$/m);
-    let title = titleSlug;
-    if (headingMatch) {
-      const heading = headingMatch[1];
-      // Skip generic headings like "ProjectName: Session Log" or just "Session Log"
-      if (!/session log$/i.test(heading)) {
-        title = heading;
-      }
-    }
-
-    // Extract first non-heading, non-empty line as preview
-    const previewLines = content.split('\n').filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('---'));
-    const preview = previewLines[0] || '';
-
-    // Extract YAML frontmatter
+    // Extract YAML frontmatter first (needed for title)
     let frontmatter = {};
     const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
     if (fmMatch) {
@@ -451,6 +461,15 @@ async function loadProjectLogs(relPath) {
       }
     }
 
+    // Title priority: frontmatter title > non-generic heading > filename slug
+    const title = stripProjectPrefix(
+      frontmatter.title || extractHeadingTitle(content) || titleSlug
+    );
+
+    // Extract first non-heading, non-empty line as preview
+    const previewLines = content.split('\n').filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('---'));
+    const preview = previewLines[0] || '';
+
     // Extract session ID from transcript path (UUID before .jsonl)
     let sessionId = null;
     if (frontmatter.transcript) {
@@ -458,9 +477,11 @@ async function loadProjectLogs(relPath) {
       if (idMatch) sessionId = idMatch[1];
     }
 
+    const displayDate = frontmatter.date || date;
     logs.push({
       filename: entry.name,
-      date: frontmatter.date || date,
+      date: displayDate,
+      sortDate: toSortableDate(displayDate),
       title,
       preview: preview.slice(0, 120),
       content,
@@ -469,8 +490,8 @@ async function loadProjectLogs(relPath) {
     });
   }
 
-  // Sort newest first
-  logs.sort((a, b) => b.date.localeCompare(a.date));
+  // Sort newest first (using 24h-normalized date for correct ordering)
+  logs.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
   return logs;
 }
 
@@ -935,17 +956,7 @@ async function loadProjectPatterns(relPath) {
       titleSlug = dateMatch[4].replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
 
-    // Extract title: prefer heading, but fall back to filename slug if generic
-    const headingMatch = content.match(/^#\s+(.+)$/m);
-    let title = titleSlug;
-    if (headingMatch) {
-      const heading = headingMatch[1];
-      if (!/session patterns?$/i.test(heading)) {
-        title = heading;
-      }
-    }
-
-    // Extract YAML frontmatter
+    // Extract YAML frontmatter first (needed for title)
     let frontmatter = {};
     const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
     if (fmMatch) {
@@ -954,6 +965,11 @@ async function loadProjectPatterns(relPath) {
         if (kv) frontmatter[kv[1]] = kv[2].trim();
       }
     }
+
+    // Title priority: frontmatter title > non-generic heading > filename slug
+    const title = stripProjectPrefix(
+      frontmatter.title || extractHeadingTitle(content) || titleSlug
+    );
 
     // Check for suggestion blocks
     const hasSuggestions = /```suggestion:(project|global)/.test(content);
@@ -966,9 +982,11 @@ async function loadProjectPatterns(relPath) {
       suggestions.push({ type: match[1], text: match[2].trim() });
     }
 
+    const displayDate = frontmatter.date ? frontmatter.date.split(' ')[0] : date;
     patterns.push({
       filename: entry.name,
-      date: frontmatter.date ? frontmatter.date.split(' ')[0] : date,
+      date: displayDate,
+      sortDate: toSortableDate(frontmatter.date || date),
       title,
       content,
       hasSuggestions,
@@ -977,7 +995,7 @@ async function loadProjectPatterns(relPath) {
   }
 
   // Sort newest first
-  patterns.sort((a, b) => b.date.localeCompare(a.date));
+  patterns.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
   return patterns;
 }
 
@@ -991,7 +1009,7 @@ async function loadAllPatterns() {
     }
   }
 
-  allPatterns.sort((a, b) => b.date.localeCompare(a.date));
+  allPatterns.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
   return allPatterns;
 }
 
@@ -1008,7 +1026,7 @@ async function loadAllRecentLogs(limit = 20) {
   }
 
   // Sort by date descending and take limit
-  allLogs.sort((a, b) => b.date.localeCompare(a.date));
+  allLogs.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
   return allLogs.slice(0, limit);
 }
 

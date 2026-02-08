@@ -3,9 +3,10 @@ date: 2026-02-03 02:29 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/83450299-419a-4a87-847d-a8bf97a2d0b6.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Docx Conversion Skill
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Docx Conversion Skill
 
 ## What Was Done
 

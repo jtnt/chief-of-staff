@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Refactor /save-progress to Call Commands
+---
+title: Refactor Save Progress Command
+---
+
+# Chief of Staff: Refactor Save Progress Command
 
 **Date:** January 9, 2026 (late night)
 **Type:** Refactoring

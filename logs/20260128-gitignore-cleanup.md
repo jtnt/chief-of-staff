@@ -3,9 +3,10 @@ date: 2026-01-28 09:27 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/693f2951-bc14-4317-9114-1eb6b600d50c.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Gitignore Cleanup
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Gitignore Cleanup
 
 ## What Was Done
 

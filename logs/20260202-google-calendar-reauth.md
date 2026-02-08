@@ -3,9 +3,10 @@ date: 2026-02-02 03:28 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/26e5c244-6ca4-4b20-832b-10782511b0ef.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Google Calendar Reauth
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Google Calendar Reauth
 
 ## What Was Done
 

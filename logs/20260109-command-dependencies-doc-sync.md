@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Document Command Dependencies
+---
+title: Document Command Dependencies
+---
+
+# Chief of Staff: Document Command Dependencies
 
 **Date:** January 9, 2026 (late night)
 **Type:** Documentation

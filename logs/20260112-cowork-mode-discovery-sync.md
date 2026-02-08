@@ -1,4 +1,8 @@
-# Chief of Staff: Sync Entry
+---
+title: Cowork Mode vs CLI Differences
+---
+
+# Chief of Staff: Cowork Mode vs CLI Differences
 
 **Date:** 2026-01-12 (evening)
 **Session Type:** meta-work

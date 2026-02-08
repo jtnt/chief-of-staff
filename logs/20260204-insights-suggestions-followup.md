@@ -3,9 +3,10 @@ date: 2026-02-04 03:20 PM PST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/02f63d09-ae85-4c59-a809-349e82bea97f.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Insights Suggestions Followup
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Insights Suggestions Followup
 
 ## What Was Done
 

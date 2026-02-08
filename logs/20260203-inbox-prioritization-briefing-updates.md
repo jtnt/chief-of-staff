@@ -3,6 +3,7 @@ date: 2026-02-03 11:55 AM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/768a8352-d712-4651-934a-d797487b0b4b.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Morning Briefing Workflow and Inbox Prioritization
 ---
 
 # Chief of Staff: Morning Briefing Workflow and Inbox Prioritization

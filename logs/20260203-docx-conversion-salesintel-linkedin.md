@@ -3,9 +3,10 @@ date: 2026-02-03 10:11 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/b5baadc4-7048-4e6b-9250-7602116f80a7.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Docx Conversion Salesintel Linkedin
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Docx Conversion Salesintel Linkedin
 
 ## What Was Done
 

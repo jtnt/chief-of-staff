@@ -3,9 +3,10 @@ date: 2026-01-28 09:58 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/48130702-51e0-44f9-a24a-1ae9a2328ac5.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: Cross Project Git
 ---
 
-# Chief of Staff: Session Log
+# Chief of Staff: Cross Project Git
 
 ## What Was Done
 

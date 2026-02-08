@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: File Versioning Policy
+---
+
+# Chief of Staff: File Versioning Policy
 
 **Date:** 2026-01-20 05:07 PM EST
 **Session Type:** meta-work

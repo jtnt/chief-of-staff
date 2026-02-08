@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Save Consolidated
+---
+
+# Chief of Staff: Save Consolidated
 
 **Date:** 2026-01-25 07:05 AM EST
 **Session Type:** meta-work

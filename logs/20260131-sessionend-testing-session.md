@@ -3,6 +3,7 @@ date: 2026-01-31 09:57 PM EST
 type: meta-work
 transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-Chief-of-Staff/ef1fea52-3745-4331-9859-a5d6acfb8239.jsonl
 working_directory: /Users/jtnt/Documents/Projects/Chief of Staff
+title: SessionEnd Testing Session
 ---
 
 # Chief of Staff: SessionEnd Testing Session

@@ -1,4 +1,8 @@
-# Chief of Staff Sync: Remove Automatic session.md Deletion
+---
+title: Remove Automatic Session Deletion
+---
+
+# Chief of Staff: Remove Automatic Session Deletion
 
 **Date:** January 9, 2026 (late night)
 **Type:** Workflow Fix

@@ -1,4 +1,8 @@
-# Chief of Staff: Session Log
+---
+title: Meta Work Warning Backfill
+---
+
+# Chief of Staff: Meta Work Warning Backfill
 
 **Date:** 2026-01-17 04:10 PM EST
 **Session Type:** meta-work
