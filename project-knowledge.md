@@ -2,7 +2,55 @@
 
 **Last Updated:** 2026-02-07 11:39 PM EST
 
-This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
+---
+
+## Tasks
+
+### Inbox
+
+- [ ] **Draft post: Claude Code as Hitchhiker's Guide text game**
+	- Terminal-based, addicting, can't stop playing — find screenshot of original game `#thought` `2026-02-07`
+
+### Active
+
+- [ ] **Build client-facing envoy skills from Razzo worksheets**
+	- Apply envoy framework to AI Workflow Opportunity Worksheet and Planning Template `#session` `2026-02-03` [[Tasks/20260203-envoy-client-skills-plan.md]]
+- [ ] **I-Corps mentor prep**
+	- NSF program application via Glenn Hellman `#meeting` `2026-02-02` [[Tasks/20260203-icorps-mentor-prep.md]]
+  - [ ] Complete mentor interest form `due:2026-02-09`
+  - [ ] Take I-Corps prep course `due:2026-02-09`
+  - [ ] Schedule video interview with Glen `due:2026-02-09`
+
+### Backlog
+
+- [ ] **Review Boris Cherny's Claude Code tips**
+	- 10 tips from Claude Code creator `#link` `2026-01-31`
+  - [x] Try voice dictation (fn fn) for longer prompts
+  - [ ] Add "scrap this and implement the elegant solution" to prompting vocabulary
+  - [ ] Build habit: "Update your CLAUDE.md" after corrections
+  - [x] Explore `/statusline` customization
+  - [ ] Consider building a `/learn` spaced-repetition skill
+- [ ] **Review and implement CoS automation recommendations**
+	- 5 targeted improvements from analysis sessions `#session` `2026-01-30`
+  - [x] Session start visibility improvements
+  - [x] Notification hook for background work completion
+  - [ ] Block external edits hook
+  - [x] Build `/project-health`, `/weekly-review`, `/cross-project-synthesis` skills
+- [ ] **Explore insights report suggestions**
+	- Workflow automation ideas from Claude Code Insights report `#session` `2026-02-04` [[Tasks/20260204-insights-suggestions-followup.md]]
+
+### Done
+
+- [x] **Improve session-capture log titles**
+	- Many logs have generic names like "Beekeeper Group: Session Log" instead of describing what was done; update session-capture skill to generate descriptive titles and filenames `#session` `2026-02-07` done:2026-02-08
+- [x] **Test Meeting Review v7**
+	- Implemented Sonnet model change for quality extraction `#session` `2026-01-22` done:2026-02-03
+- [x] **Update terminology: commands → skills**
+	- Not applicable yet; both systems coexist `#manual` `2026-01-26` done:2026-02-03
+- [x] **Investigate SessionEnd script delay**
+	- Performance issue in auto-capture system `#session` `2026-01-28` done:2026-02-03
+- [x] **Check out Sallam from DC Founders Panel**
+	- Searched but couldn't find online `#meeting` `2026-01-22` done:2026-01-26
 
 ---
 
@@ -53,7 +101,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - Tracking 11 projects (6 active, 5 tools/utilities/paused)
 - Three-layer documentation model across all projects (session.md temporary, project-knowledge.md strategic, CLAUDE.md technical)
 - Logs live WITH projects in `logs/` folders, not in Chief of Staff
-- Bidirectional flow: CoS pushes items to project inboxes (`cos-inbox.md`)
+- Bidirectional flow: CoS pushes items to project `## Tasks` sections in `project-knowledge.md`
 
 ### Auto-Capture System (replaced /log and /save)
 - **SessionEnd hook** spawns background Claude to capture sessions automatically
@@ -105,9 +153,11 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 - **Logs live with projects** (2026-01-14): Each project has its own `logs/` folder. Chief of Staff is an index/dashboard, not a repository. Portable history.
 
-- **Checkbox-based task management** (2026-02-07): Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format. Four sections: Inbox (untriaged) → Active (this week) → Backlog → Done. Interactive checkboxes (`- [ ]`/`- [x]`), bold titles, source tags, wikilinks to Tasks/ detail files. Git-ignores `Tasks/` and `cos-inbox.md` (working state, not code).
+- **Tasks merged into project-knowledge.md** (2026-02-08): Eliminated standalone cos-inbox.md files. Tasks now live as `## Tasks` section at the top of each project's project-knowledge.md. CoS uses four subsections (Inbox/Active/Backlog/Done); external projects use flat list + Done. Same checkbox format, same source tags. One file per project instead of two.
 
-- **Three-tier inbox** (2026-02-03, superseded 2026-02-07): Pending (priority work) → Backlog (meta-work) → Archive. Evolved into four-section checkbox format.
+- **Checkbox-based task management** (2026-02-07): Obsidian-native checkbox format. Interactive checkboxes (`- [ ]`/`- [x]`), bold titles, source tags, wikilinks to Tasks/ detail files.
+
+- **Three-tier inbox** (2026-02-03, superseded 2026-02-07): Pending (priority work) → Backlog (meta-work) → Archive. Evolved into four-section checkbox format, then merged into project-knowledge.md.
 
 - **Commands → Skills migration** (2026-01-31): Check-in commands converted to skills with explicit model selection. Skills support modern Claude Code features; commands are legacy.
 

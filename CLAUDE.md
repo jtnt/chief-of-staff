@@ -56,7 +56,7 @@ Chief of Staff/
 │   ├── Claude Code/                    # Claude Code documentation
 │   └── Donald Miller StoryBrand Framework.md  # Marketing reference
 │
-├── Tasks/                              # Detailed specs for complex tasks (linked from cos-inbox.md)
+├── Tasks/                              # Detailed specs for complex tasks (linked from project-knowledge.md)
 │   └── YYYYMMDD-*.md                   # Task specs with checklists and context
 │
 ├── Weekly Reviews/                     # Periodic synthesis documents
@@ -105,33 +105,37 @@ Chief of Staff/
 - Keep materials project-agnostic (specific applications go in project folders)
 - Use descriptive filenames
 
-## Inbox & Tasks
+## Tasks
 
-**`cos-inbox.md`** is the central task list. Uses Obsidian-native checkboxes (`- [ ]` / `- [x]`).
+Tasks live in the `## Tasks` section at the **top** of each project's `project-knowledge.md` (right after the title/header). Uses Obsidian-native checkboxes (`- [ ]` / `- [x]`).
 
-**Sections:** Inbox (untriaged) → Active (this week) → Backlog (later) → Done (completed)
+**CoS project-knowledge.md** uses subsections: `### Inbox` (untriaged) → `### Active` (this week) → `### Backlog` (later) → `### Done` (completed)
+
+**External projects** use a flat list under `## Tasks` with a `### Done` subsection.
 
 **Task line format:**
 ```
 - [ ] **Title**
-	- Context description `#source` `2026-02-07` [[optional Tasks/link]]
+	- Context description `#source` `2026-02-08` [[optional Tasks/link]]
 ```
 
 - Title goes on the first line (checkbox + bold title only)
 - Description/context goes on an indented sub-bullet (tab + `- `)
 - `#source` tags: `#meeting`, `#session`, `#thought`, `#link`, `#manual`
 - Sub-tasks indent under parent as checkboxes (`- [ ]`); max 3, use Tasks/ file + wikilink for more
-- New items go to `## Inbox` (newest at top). User triages to Active or Backlog.
+- New items go to `### Inbox` in CoS, or top of `## Tasks` in external projects (newest at top). User triages to Active or Backlog.
 - Completed items: `- [x]` with `done:YYYY-MM-DD` appended
 
-**Tasks/ folder** holds detailed specs for complex tasks, linked from inbox via `[[wikilinks]]`.
+**Completed task archival:** The `### Done` section in `project-knowledge.md` keeps only the **last 5** completed items. When a new item completes and pushes past 5, move the oldest to the project's `completed-tasks.md` file (newest at top). Create the file if it doesn't exist. Tasks are always per-project — never aggregate completed items from multiple projects into one file.
+
+**Tasks/ folder** holds detailed specs for complex tasks, linked from Tasks section via `[[wikilinks]]`.
 
 **When adding to Tasks/:**
 - Use descriptive filenames: `YYYYMMDD-description.md`
 - Include YAML frontmatter with `status: active` and `created:` date
 - If a task grows into a larger project, migrate it to a tracked project folder
 
-**When routing to a project inbox:** Add under `## Pending` (external projects keep Pending/Archive sections):
+**When routing to a project's tasks:** Add to `## Tasks` section in that project's `project-knowledge.md`:
 ```
 - [ ] **Title**
 	- Context description `#source` `YYYY-MM-DD`
@@ -158,17 +162,16 @@ Check-Ins/
 
 When check-in content relates to a tracked project:
 
-1. Ask user: "This mentions [Project]. Want me to add it to that project's inbox?"
-2. If yes, write to: `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
-   - Create file if needed (Pending / Archive sections)
-   - Add under `## Pending` (newest at top):
+1. Ask user: "This mentions [Project]. Want me to add it to that project's tasks?"
+2. If yes, add to `## Tasks` section in that project's `project-knowledge.md` (newest at top):
      ```
      - [ ] **Title**
      	- Context description `#source` `YYYY-MM-DD`
      ```
+   If no `## Tasks` section exists, append one at the end of the file.
 3. Also create project log: `[ProjectName]/logs/YYYYMMDD-checkin-note.md`
 
-**On project open:** SessionStart hook checks for `cos-inbox.md` → injects `COS_INBOX` flag → Claude notifies user.
+**On project open:** SessionStart hook checks `project-knowledge.md` for pending tasks → injects `COS_INBOX` flag → Claude notifies user.
 
 **Original check-in stays in Check-Ins/** (single source of truth). Journal entries never routed.
 
