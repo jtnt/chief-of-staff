@@ -455,25 +455,185 @@ async function toggleInboxCheckbox(filePath, lineNumber, newChecked) {
     lines[idx] = lines[idx].replace('[ ]', '[x]');
     const today = new Date().toISOString().split('T')[0];
     if (hasDescLine) {
-      // Add done:date to description sub-bullet
       if (!lines[idx + 1].includes('done:')) {
         lines[idx + 1] = lines[idx + 1].trimEnd() + ` done:${today}`;
       }
     } else if (!lines[idx].includes('done:')) {
-      // Subtask or old format — append to same line
       lines[idx] = lines[idx].trimEnd() + ` done:${today}`;
+    }
+
+    // Auto-move top-level tasks to Done section (if not already there)
+    if (isTopLevel) {
+      const currentSection = findSectionForLine(lines, idx);
+      if (currentSection && currentSection !== 'Done') {
+        const blockEnd = findTaskBlockEnd(lines, idx);
+        const block = lines.splice(idx, blockEnd - idx);
+        // Find Done section header and insert after it
+        const doneIdx = lines.findIndex(l => /^## Done/.test(l));
+        if (doneIdx >= 0) {
+          // Insert after header (skip blank line if present)
+          let insertAt = doneIdx + 1;
+          if (insertAt < lines.length && lines[insertAt].trim() === '') insertAt++;
+          lines.splice(insertAt, 0, ...block);
+        }
+      }
     }
   } else {
     lines[idx] = lines[idx].replace('[x]', '[ ]');
     if (hasDescLine) {
-      // Remove done:date from description sub-bullet
       lines[idx + 1] = lines[idx + 1].replace(/\s*done:\d{4}-\d{2}-\d{2}/, '');
     }
-    // Also remove from title line (old format or accidental placement)
     lines[idx] = lines[idx].replace(/\s*done:\d{4}-\d{2}-\d{2}/, '');
   }
 
   return await writeFile(state.rootHandle, pathParts, lines.join('\n'));
+}
+
+// Find which ## section a line belongs to
+function findSectionForLine(lines, lineIdx) {
+  for (let i = lineIdx; i >= 0; i--) {
+    const m = lines[i].match(/^## (.+)$/);
+    if (m) return m[1].trim();
+  }
+  return null;
+}
+
+// Find the end of a task block (title + desc + subtasks)
+function findTaskBlockEnd(lines, startIdx) {
+  let i = startIdx + 1;
+  while (i < lines.length) {
+    // Stop at next top-level task, section header, or non-indented non-blank line
+    if (/^- \[[ x]\]/.test(lines[i])) break;
+    if (/^## /.test(lines[i])) break;
+    if (lines[i].trim() !== '' && !/^\s/.test(lines[i])) break;
+    // Stop at blank lines only if next non-blank is a new task or section
+    if (lines[i].trim() === '') {
+      let next = i + 1;
+      while (next < lines.length && lines[next].trim() === '') next++;
+      if (next >= lines.length || /^- \[[ x]\]/.test(lines[next]) || /^## /.test(lines[next])) break;
+    }
+    i++;
+  }
+  return i;
+}
+
+// ─── Archive Completed Items ─────────────────────────
+
+async function archiveCompletedItems(filePath) {
+  const pathParts = filePath.split('/');
+  const content = await readFile(state.rootHandle, ...pathParts);
+  if (!content) return false;
+
+  const lines = content.split('\n');
+  const today = new Date().toISOString().split('T')[0];
+
+  // Find Done section
+  const doneHeaderIdx = lines.findIndex(l => /^## Done/.test(l));
+  if (doneHeaderIdx < 0) return false;
+
+  // Find end of Done section (next ## or EOF)
+  let doneEndIdx = lines.length;
+  for (let i = doneHeaderIdx + 1; i < lines.length; i++) {
+    if (/^## /.test(lines[i])) { doneEndIdx = i; break; }
+  }
+
+  // Extract completed task blocks from Done section
+  const doneLines = lines.slice(doneHeaderIdx + 1, doneEndIdx);
+  const archiveBlocks = [];
+  let i = 0;
+  while (i < doneLines.length) {
+    if (/^- \[x\]/.test(doneLines[i])) {
+      const blockStart = i;
+      i++;
+      while (i < doneLines.length && !/^- \[[ x]\]/.test(doneLines[i]) && !/^## /.test(doneLines[i])) {
+        if (doneLines[i].trim() === '' && (i + 1 >= doneLines.length || /^- \[[ x]\]/.test(doneLines[i + 1]))) break;
+        i++;
+      }
+      const block = doneLines.slice(blockStart, i);
+      // Ensure done:date exists somewhere in the block
+      const hasDoneDate = block.some(l => /done:\d{4}-\d{2}-\d{2}/.test(l));
+      if (!hasDoneDate) {
+        // Add done:today as fallback (for items checked in Obsidian without a date)
+        if (block.length > 1 && /^\t- /.test(block[1])) {
+          block[1] = block[1].trimEnd() + ` done:${today}`;
+        } else {
+          block[0] = block[0].trimEnd() + ` done:${today}`;
+        }
+      }
+      archiveBlocks.push(block);
+    } else {
+      i++;
+    }
+  }
+
+  if (archiveBlocks.length === 0) return false;
+
+  // Build archive content
+  const archivePathParts = [...pathParts];
+  archivePathParts[archivePathParts.length - 1] = archivePathParts[archivePathParts.length - 1].replace('.md', '-archive.md');
+
+  let archiveContent = await readFile(state.rootHandle, ...archivePathParts);
+  if (!archiveContent) {
+    // Create new archive file
+    const inboxName = pathParts[pathParts.length - 1].replace('.md', '');
+    archiveContent = '# ' + inboxName + ' — Archive\n\nCompleted items archived from ' + pathParts.join('/') + '.\n';
+  }
+
+  // Append archived items with date header
+  const monthHeader = '\n## Archived ' + today + '\n';
+  const archivedText = archiveBlocks.map(b => b.join('\n')).join('\n');
+  archiveContent = archiveContent.trimEnd() + '\n' + monthHeader + '\n' + archivedText + '\n';
+
+  // Write archive (create if needed)
+  const dirParts = archivePathParts.slice(0, -1);
+  const archiveFileName = archivePathParts[archivePathParts.length - 1];
+  let dir = state.rootHandle;
+  for (const part of dirParts) {
+    dir = await dir.getDirectoryHandle(part);
+  }
+  try {
+    const fileHandle = await dir.getFileHandle(archiveFileName, { create: true });
+    const writable = await fileHandle.createWritable();
+    await writable.write(archiveContent);
+    await writable.close();
+  } catch (e) {
+    console.error('Archive write failed:', e);
+    return false;
+  }
+
+  // Remove archived items from Done section, keep header
+  const keptDoneLines = doneLines.filter((l, idx) => {
+    // Keep blank lines and unchecked items
+    for (const block of archiveBlocks) {
+      const blockStartLine = block[0];
+      if (l === blockStartLine && /^- \[x\]/.test(l)) return false;
+    }
+    return true;
+  });
+
+  // Simpler: rebuild by removing all [x] task blocks from Done
+  const newDoneLines = [];
+  let j = 0;
+  while (j < doneLines.length) {
+    if (/^- \[x\]/.test(doneLines[j])) {
+      // Skip this block
+      j++;
+      while (j < doneLines.length && !/^- \[[ x]\]/.test(doneLines[j]) && !/^## /.test(doneLines[j])) {
+        if (doneLines[j].trim() === '' && (j + 1 >= doneLines.length || /^- \[[ x]\]/.test(doneLines[j + 1]))) break;
+        j++;
+      }
+    } else {
+      newDoneLines.push(doneLines[j]);
+      j++;
+    }
+  }
+
+  // Rebuild file
+  const before = lines.slice(0, doneHeaderIdx + 1);
+  const after = lines.slice(doneEndIdx);
+  const rebuilt = [...before, ...newDoneLines, ...after];
+
+  return await writeFile(state.rootHandle, pathParts, rebuilt.join('\n'));
 }
 
 // ─── Log Parser ──────────────────────────────────────
@@ -949,7 +1109,10 @@ function createTaskItemEl(item, filePath, sectionName) {
 
 async function handleCheckboxToggle(filePath, lineNumber, newChecked) {
   const success = await toggleInboxCheckbox(filePath, lineNumber, newChecked);
-  if (!success) {
+  if (success) {
+    // Notify page-level callback (e.g., home page reloads inbox after move-to-Done)
+    if (typeof onCheckboxToggled === 'function') onCheckboxToggled();
+  } else {
     alert('Failed to save change. File may be read-only or the line format changed.');
   }
 }

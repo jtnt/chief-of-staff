@@ -69,6 +69,11 @@
       await loadHomePage();
     }
 
+    // Reload inbox when a checkbox is toggled (item may have moved to Done)
+    function onCheckboxToggled() {
+      loadInbox().then(() => updateStats());
+    }
+
     async function loadHomePage() {
       await Promise.all([
         loadInbox(),
@@ -163,8 +168,28 @@
         h3.appendChild(badge);
         header.appendChild(h3);
 
-        // Collapse toggle for Done section
+        // Collapse toggle + Archive button for Done section
         if (section.name === 'Done') {
+          const checkedCount = section.items.filter(i => i.checked).length;
+          if (checkedCount > 0) {
+            const archiveBtn = document.createElement('button');
+            archiveBtn.className = 'btn btn-ghost btn-sm';
+            archiveBtn.textContent = 'Archive ' + checkedCount;
+            archiveBtn.addEventListener('click', async () => {
+              archiveBtn.textContent = 'Archiving...';
+              archiveBtn.disabled = true;
+              const success = await archiveCompletedItems(COS_INBOX_PATH);
+              if (success) {
+                await loadInbox();
+                updateStats();
+              } else {
+                archiveBtn.textContent = 'Failed';
+                setTimeout(() => { archiveBtn.textContent = 'Archive ' + checkedCount; archiveBtn.disabled = false; }, 1500);
+              }
+            });
+            header.appendChild(archiveBtn);
+          }
+
           const toggle = document.createElement('button');
           toggle.className = 'section-toggle';
           toggle.textContent = 'Hide';
