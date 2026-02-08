@@ -181,6 +181,11 @@ a:hover { color: var(--accent-hover); }
   margin-left: var(--sidebar-w);
   padding: 32px 40px;
   max-width: calc(100vw - var(--sidebar-w));
+  transition: margin-right 200ms ease;
+}
+
+.main.slide-over-active {
+  margin-right: 520px;
 }
 
 .page-header {
@@ -858,7 +863,7 @@ a:hover { color: var(--accent-hover); }
 .slide-over-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: transparent;
   z-index: 200;
   opacity: 0;
   pointer-events: none;
@@ -867,6 +872,10 @@ a:hover { color: var(--accent-hover); }
 
 .slide-over-backdrop.open {
   opacity: 1;
+  pointer-events: none;
+}
+
+.slide-over-backdrop.open .slide-over {
   pointer-events: auto;
 }
 
@@ -893,7 +902,7 @@ a:hover { color: var(--accent-hover); }
 .slide-over-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   padding: 16px 20px;
   border-bottom: 1px solid var(--border);
 }
@@ -901,6 +910,15 @@ a:hover { color: var(--accent-hover); }
 .slide-over-header h3 {
   font-size: 0.95rem;
   font-weight: 600;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slide-over-header .resume-btns {
+  margin-left: 0;
 }
 
 .slide-over-close {

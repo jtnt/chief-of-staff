@@ -1543,7 +1543,7 @@ async function handleCheckboxToggle(filePath, lineNumber, newChecked, expectedLi
 // in ~/Documents/Projects/). There is no server, no external data
 // input, and no untrusted content. This is a personal offline tool.
 
-function openSlideOver(title, content) {
+function openSlideOver(title, content, sessionId) {
   const backdrop = document.getElementById('slide-over-backdrop');
   if (!backdrop) return;
 
@@ -1560,6 +1560,15 @@ function openSlideOver(title, content) {
   // Header
   const headerTitle = backdrop.querySelector('.slide-over-header h3');
   if (headerTitle) headerTitle.textContent = title;
+
+  // Resume buttons in header (between title and close button)
+  const header = backdrop.querySelector('.slide-over-header');
+  const oldBtns = header.querySelector('.resume-btns');
+  if (oldBtns) oldBtns.remove();
+  if (sessionId) {
+    const closeBtn = header.querySelector('.slide-over-close');
+    header.insertBefore(createResumeBtns(sessionId), closeBtn);
+  }
 
   // Meta
   const metaContainer = backdrop.querySelector('.slide-over-meta');
@@ -1595,6 +1604,10 @@ function openSlideOver(title, content) {
   }
 
   backdrop.classList.add('open');
+
+  // Push main content left
+  const main = document.querySelector('.main');
+  if (main) main.classList.add('slide-over-active');
 }
 
 async function openTaskDetail(linkPath) {
@@ -1611,6 +1624,8 @@ async function openTaskDetail(linkPath) {
 function closeSlideOver() {
   const backdrop = document.getElementById('slide-over-backdrop');
   if (backdrop) backdrop.classList.remove('open');
+  const main = document.querySelector('.main');
+  if (main) main.classList.remove('slide-over-active');
 }
 
 // ─── Pattern Loading ─────────────────────────────────
@@ -2005,6 +2020,18 @@ async function scanHealthAlerts() {
   state.healthDotLevel = hasRed ? 'red' : hasAmber ? 'amber' : 'green';
   return alerts;
 }
+
+// ─── Click-to-close on Slide-over ────────────────────
+
+document.addEventListener('click', (e) => {
+  const backdrop = document.getElementById('slide-over-backdrop');
+  if (!backdrop || !backdrop.classList.contains('open')) return;
+  const slideOver = backdrop.querySelector('.slide-over');
+  if (!slideOver || !slideOver.contains(e.target)) return;
+  // Don't close if clicking interactive elements
+  if (e.target.closest('a, button, input, select, textarea, .resume-btn')) return;
+  closeSlideOver();
+});
 
 // ─── Keyboard Shortcuts ──────────────────────────────
 

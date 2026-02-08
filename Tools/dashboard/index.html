@@ -297,8 +297,9 @@
       for (const log of logs) {
         const item = document.createElement('div');
         item.className = 'activity-item';
-        item.addEventListener('click', () => {
-          window.location.href = 'project.html?project=' + log.projectSlug;
+        item.addEventListener('click', (e) => {
+          if (e.target.closest('.resume-btn')) return;
+          openSlideOver(log.title, log.content, log.sessionId);
         });
 
         const headerRow = document.createElement('div');
@@ -342,9 +343,6 @@
     // ─── Slide-over close ──────────────────────────
 
     document.getElementById('slide-over-close').addEventListener('click', closeSlideOver);
-    document.getElementById('slide-over-backdrop').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeSlideOver();
-    });
 
     // ─── Boot ──────────────────────────────────────
 

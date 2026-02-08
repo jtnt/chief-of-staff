@@ -173,7 +173,7 @@
           // Click to open slide-over (but don't intercept resume button clicks)
           item.addEventListener('click', (e) => {
             if (e.target.closest('.resume-btn')) return;
-            openSlideOver(log.title, log.content);
+            openSlideOver(log.title, log.content, log.sessionId);
           });
 
           const headerRow = document.createElement('div');
@@ -503,7 +503,7 @@
           // Click opens slide-over (but don't intercept resume button clicks)
           entryHeader.addEventListener('click', (e) => {
             if (e.target.closest('.resume-btn')) return;
-            openSlideOver(log.title, log.content);
+            openSlideOver(log.title, log.content, log.sessionId);
           });
 
           const dateEl = document.createElement('span');
@@ -655,9 +655,6 @@
     // ─── Slide-over close ──────────────────────────
 
     document.getElementById('slide-over-close').addEventListener('click', closeSlideOver);
-    document.getElementById('slide-over-backdrop').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeSlideOver();
-    });
 
     // ─── Boot ──────────────────────────────────────
 
