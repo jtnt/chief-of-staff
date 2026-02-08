@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-08 12:32 PM EST
+**Last Updated:** 2026-02-08 12:59 PM EST
 
 ## Tasks
 
@@ -145,6 +145,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
+- **WikiLink standard for file references** (2026-02-08): All session logs and documentation use Obsidian-style WikiLinks (`[[path/to/file]]`) instead of backtick quotes or plain text. Enables backlink navigation and "what references this file?" queries. Session-capture skill enforces this. Retroactively converted 105 logs (436 links). Standard documented in both CLAUDE.md files. See [[logs/20260208-wikilink-documentation.md]].
+
 - **Dashboard write validation** (2026-02-08): All dashboard write operations validate line content before modifying. Prevents wrong-task modifications when external editors (Obsidian, Claude Code) shift line numbers. Falls back to content search when validation fails. See [[session-patterns/20260208-stale-line-number-fix.md]].
 
 - **Auto-capture replaces manual save** (2026-01-28): SessionEnd hook spawns background Claude to capture sessions. Replaced `/log` and `/save` commands. Accepts cross-project limitation (sessions log to cwd only). Trivial sessions auto-skipped.
@@ -176,6 +178,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-08: WikiLink Documentation Standard
+
+Established WikiLink format (`[[path/to/file]]`) for all file references in session logs and documentation. Updated session-capture skill to enforce this, added documentation to both CLAUDE.md files. Retroactively converted 105 existing logs across all tracked projects (436 WikiLinks created). Cleaned up redundant directives — standard lives in CLAUDE.md, skill references those locations.
+
 ### 2026-02-08: Dashboard Data Integrity Fix
 
 Fixed critical stale line number bug in dashboard task writes. When external editors (Obsidian, Claude Code) add/remove lines, dashboard's cached line numbers become stale. Previously could modify wrong task. All write paths now validate line content before modifying, fall back to content search when lines shift, fail safely if task deleted externally. See [[logs/20260208-stale-line-number-fix.md]].
@@ -187,10 +193,6 @@ Comprehensive system reorganization establishing task management conventions. Tr
 ### 2026-02-08: Dashboard Cross-Project Tasks & UI Refinements
 
 Restructured dashboard to make home page a true cross-project command center. Added `loadAllTasks()` function that reads all project-knowledge.md files in parallel, aggregates tasks with metadata (project, priority, file path). Replaced CoS-only inbox with per-project collapsible sections — users expand/collapse projects to control info density. Removed stats row (pending tasks, active projects, recent sessions) as informational noise. Project pages now have two-column grid (tasks left, activity right) with logs as activity cards. Findings: flat lists with inline metadata don't scale; hierarchical grouping with collapse/expand works much better. Stats should drive action or be removed.
-
-### 2026-02-07: Dashboard Health Monitoring & Inbox Archive
-
-Implemented comprehensive health monitoring in CoS dashboard. Created health.html with project cards (PK freshness, inbox counts, CLAUDE.md presence, z_context integrity, log stats, letter grades A/B/C/D) and friction snapshot (type breakdown, success rates, pattern examples from insights analysis). Added sidebar inbox count badges (color-coded by urgency), Health nav link with status dot, and home page alert strip for critical issues. Redesigned inbox format from single-line to two-line (title + tab-indented description) for better Obsidian preview readability. Added archive system: auto-move checked tasks to Done section, "Archive N" button moves completed items to cos-inbox-archive.md with date grouping. Fixed checkbox toggle bug (done: date was going to title instead of description line).
 
 ---
 
