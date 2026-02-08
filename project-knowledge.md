@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-07 11:20 PM EST
+**Last Updated:** 2026-02-07 11:39 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -128,33 +128,25 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-07: Dashboard Health Monitoring & Inbox Archive
+
+Implemented comprehensive health monitoring in CoS dashboard. Created health.html with project cards (PK freshness, inbox counts, CLAUDE.md presence, z_context integrity, log stats, letter grades A/B/C/D) and friction snapshot (type breakdown, success rates, pattern examples from insights analysis). Added sidebar inbox count badges (color-coded by urgency), Health nav link with status dot, and home page alert strip for critical issues. Redesigned inbox format from single-line to two-line (title + tab-indented description) for better Obsidian preview readability. Added archive system: auto-move checked tasks to Done section, "Archive N" button moves completed items to cos-inbox-archive.md with date grouping. Fixed checkbox toggle bug (done: date was going to title instead of description line).
+
 ### 2026-02-07: Session Log Titles Backfill
 
-Added descriptive `title:` field to session-capture skill template. Updated all 286 existing session logs across 11 projects with descriptive titles in both YAML frontmatter and H1 headers. Replaced generic "Session Log" headers with 2-6 word descriptive titles derived from filename identifiers and content. Used 5 parallel agents to process projects concurrently (6-minute wall-clock time vs. 30+ minutes serial). All future session logs will auto-generate descriptive titles.
+Added descriptive `title:` field to session-capture skill template. Updated all 286 existing session logs across 11 projects with descriptive titles in both YAML frontmatter and H1 headers. Used 5 parallel agents (6-minute wall-clock vs. 30+ serial).
 
 ### 2026-02-07: Inbox Checkbox Restructure
 
-Completed major restructure of task management system. Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format with four sections (Inbox → Active → Backlog → Done). Updated 2 hook scripts, briefing template, and 4 producer skills to write/parse new format. Discovered and fixed latent `grep -c` bug (exit code 1 when count is 0). Migrated 3 external project inboxes. Added `Tasks/` and `cos-inbox.md` to `.gitignore`. Pattern file created documenting format migration workflow.
+Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format with four sections (Inbox → Active → Backlog → Done). Updated 2 hook scripts, briefing template, and 4 producer skills. Fixed latent `grep -c` bug (exit code 1 when count is 0). Migrated 3 external project inboxes.
 
 ### 2026-02-06: Session Capture Transcript Parsing Fix
 
-Fixed critical bug in `/session-capture` skill where jq commands failed to extract file changes and plan file references from transcripts. Root cause: jq paths looked for `.input.file_path` at top level, but tool calls are nested inside `.message.content[]`. Affected all sessions since auto-capture was implemented. Fixed three extraction points (Files Written/Edited, Files Read, Plan Files). Created pattern file documenting correct transcript parsing structure for future reference.
+Fixed critical bug in `/session-capture` skill where jq commands failed to extract file changes and plan file references from transcripts. Root cause: jq paths looked for `.input.file_path` at top level, but tool calls are nested inside `.message.content[]`.
 
 ### 2026-02-06: Session Context Loading
 
-Added directive to global CLAUDE.md to automatically read `project-knowledge.md` at session start for all projects. Closes gap where strategic context went unused unless explicitly requested. Considered reading recent logs but chose project-knowledge.md only to avoid context window bloat — strategic insights should already be synthesized there.
-
-### 2026-02-04: Project Knowledge Backfill & Auto-Capture Fix
-
-Identified that project-knowledge.md files hadn't been updated in over a month across all projects. Root cause: when `/log` and `/save` were replaced by auto-capture, the project-knowledge.md update step was never added to the skill. Added Step 4 (Update Project Knowledge) to `/session-capture` skill. Backfilled all stale project-knowledge.md files.
-
-### 2026-02-04: Insights Report Applied
-
-Applied three priority suggestions from `/insights` usage report (2,142 sessions analyzed): global git workflow standards, file reorganization rules (auto-fix broken references), and autonomy defaults (act on clear tasks, save questions for ambiguous intent).
-
-### 2026-02-04: Project Knowledge Backfill & Auto-Capture Fix
-
-Identified that project-knowledge.md files hadn't been updated in over a month across all projects. Root cause: when `/log` and `/save` were replaced by auto-capture, the project-knowledge.md update step was never added to the skill. Added Step 4 (Update Project Knowledge) to `/session-capture` skill. Backfilled all stale project-knowledge.md files.
+Added directive to global CLAUDE.md to automatically read `project-knowledge.md` at session start for all projects. Closes gap where strategic context went unused unless explicitly requested.
 
 
 ---

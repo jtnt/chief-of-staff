@@ -186,6 +186,8 @@
   },
   "active": "047ab574a9908142",
   "lastOpenFiles": [
+    "logs/20260207-dashboard-health-inbox-archive.md",
+    "logs/20260207-dashboard-implementation.md",
     "logs/20260207-backfill-log-titles.md",
     "CLAUDE.md.bak",
     "Tools/dashboard/health.html",
@@ -219,8 +221,6 @@
     "Links/AI-Tools/20260118-zachery-glass-claude-code-config.md",
     "Links/AI-Tools/20260117-nano-banana-cli-image-generation.md",
     "Links/Web-Dev/20260117-astro-web-framework.md",
-    "Meetings/20260121-nicholas-ken-intro/summary.md",
-    "logs/20260207-trivial-session.md",
-    "Meetings/20260113-tolson-wagner-ai-chat/transcript.md"
+    "Meetings/20260121-nicholas-ken-intro/summary.md"
   ]
 }
