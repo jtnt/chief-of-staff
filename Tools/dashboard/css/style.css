@@ -184,6 +184,11 @@ a:hover { color: var(--accent-hover); }
 }
 
 .page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
   margin-bottom: 28px;
 }
 
@@ -198,6 +203,43 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-muted);
   margin-top: 4px;
 }
+
+.quick-add-bar {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  max-width: 480px;
+  margin-left: auto;
+}
+
+.quick-add-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-family: inherit;
+  padding: 5px 10px;
+  min-width: 0;
+}
+
+.quick-add-input:focus { border-color: var(--accent); outline: none; }
+.quick-add-input::placeholder { color: var(--text-muted); }
+
+.quick-add-project {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-family: inherit;
+  padding: 4px 6px;
+  cursor: pointer;
+  max-width: 140px;
+}
+
+.quick-add-project:focus { border-color: var(--accent); outline: none; }
 
 /* --- Stats Row --- */
 .stats-row {
@@ -358,6 +400,25 @@ a:hover { color: var(--accent-hover); }
 .task-item:hover .task-copy-btn { opacity: 1; }
 .task-copy-btn:hover { color: var(--accent); border-color: var(--accent); }
 .task-copy-btn.copied { color: var(--green); border-color: var(--green); opacity: 1; }
+
+.task-triage-select {
+  opacity: 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-family: inherit;
+  padding: 2px 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-self: center;
+  transition: opacity 0.15s;
+  max-width: 80px;
+}
+
+.task-item:hover .task-triage-select { opacity: 1; }
+.task-triage-select:focus { opacity: 1; border-color: var(--accent); outline: none; }
 
 .task-content {
   flex: 1;
@@ -545,7 +606,8 @@ a:hover { color: var(--accent-hover); }
 /* --- Project Dashboard --- */
 .project-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 28px;
   flex-wrap: wrap;

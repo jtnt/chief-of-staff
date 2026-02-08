@@ -113,7 +113,7 @@ When you open CoS (`cd ~/Documents/Projects/Chief\ of\ Staff && claude`), you ge
 | `logs/YYYYMMDD-*.md` | Session logs (from `/log` and `/save`) |
 | `project-knowledge.md` | Strategic context for THIS project |
 | `CLAUDE.md` | Instructions for Claude when working in this project |
-| `cos-inbox.md` | Items pushed from CoS (if any) |
+| `project-knowledge.md` `## Tasks` | Tasks pushed from CoS and local work |
 
 ---
 
@@ -139,8 +139,8 @@ This is what makes intelligence **compound** instead of just **archive**. Next t
 ## Bidirectional Flow (CoS ↔ Projects)
 
 **CoS → Project:**
-- Check-in mentions a project → offer to push to that project's `cos-inbox.md`
-- When you open that project, you'll see "You have X pending items from CoS"
+- Check-in mentions a project → offer to push to that project's `project-knowledge.md` `## Tasks`
+- When you open that project, you'll see "You have X pending tasks"
 
 **Project → CoS:**
 - `/save` pushes summary to `project-index.md`

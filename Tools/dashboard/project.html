@@ -76,83 +76,78 @@
       const header = document.getElementById('project-header');
       header.textContent = '';
 
+      const headerLeft = document.createElement('div');
+
       const h2 = document.createElement('h2');
       h2.textContent = currentProject.name;
-      header.appendChild(h2);
+      headerLeft.appendChild(h2);
 
       const badge = document.createElement('span');
       badge.className = 'status-badge status-' + currentProject.status.toLowerCase().replace(/[^a-z]/g, '');
       badge.textContent = currentProject.status;
-      header.appendChild(badge);
+      headerLeft.appendChild(badge);
 
       const pathEl = document.createElement('div');
       pathEl.className = 'project-path';
       pathEl.textContent = currentProject.relPath;
-      header.appendChild(pathEl);
+      headerLeft.appendChild(pathEl);
+
+      header.appendChild(headerLeft);
 
       // Load sections
       const container = document.getElementById('project-sections');
       container.textContent = '';
 
       // Load all data in parallel
-      const [inboxContent, knowledgeContent, indexContent, logs, patterns] = await Promise.all([
-        readFile(state.rootHandle, ...currentProject.relPath.split('/'), 'cos-inbox.md'),
+      const [knowledgeContent, indexContent, logs, patterns] = await Promise.all([
         readFile(state.rootHandle, ...currentProject.relPath.split('/'), 'project-knowledge.md'),
         readFile(state.rootHandle, 'Chief of Staff', 'project-index.md'),
         loadProjectLogs(currentProject.relPath),
         loadProjectPatterns(currentProject.relPath),
       ]);
 
-      // Section A: Open Items (top of page for visibility)
-      renderOpenItems(container, indexContent);
+      // Section A: Tasks (from ## Tasks in project-knowledge.md)
+      renderProjectTasks(container, knowledgeContent);
 
-      // Section B: Project Inbox
-      renderProjectInbox(container, inboxContent);
-
-      // Section C: Project Knowledge
+      // Section B: Project Knowledge
       renderProjectKnowledge(container, knowledgeContent, indexContent);
 
-      // Section D: Session Logs
+      // Section C: Session Logs
       renderProjectLogs(container, logs);
 
-      // Section E: Session Patterns
+      // Section D: Session Patterns
       renderProjectPatterns(container, patterns);
+
+      // Re-add quick-add bar (header was rebuilt)
+      buildQuickAddBar();
     }
 
-    // ─── Section A: Project Inbox ──────────────────
+    // ─── Section A: Project Tasks ──────────────────
 
-    function renderProjectInbox(container, inboxContent) {
+    function renderProjectTasks(container, knowledgeContent) {
+      const tasksContent = knowledgeContent ? extractTasksSection(knowledgeContent) : null;
+
       const section = document.createElement('div');
       section.className = 'section';
 
       const header = document.createElement('div');
       header.className = 'section-header';
       const h3 = document.createElement('h3');
-      h3.textContent = 'Project Inbox';
+      h3.textContent = 'Tasks';
       header.appendChild(h3);
       section.appendChild(header);
 
       const body = document.createElement('div');
       body.className = 'section-body';
 
-      if (!inboxContent) {
+      if (!tasksContent) {
         const empty = document.createElement('div');
-        empty.className = 'empty-state';
-
-        const p = document.createElement('p');
-        p.textContent = 'No inbox file found for this project.';
-        empty.appendChild(p);
-
-        const btn = document.createElement('button');
-        btn.className = 'btn btn-ghost btn-sm';
-        btn.textContent = 'Create cos-inbox.md';
-        btn.addEventListener('click', () => createProjectInbox());
-        empty.appendChild(btn);
-
+        empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
+        empty.textContent = 'No tasks found (add a ## Tasks section to project-knowledge.md)';
         body.appendChild(empty);
       } else {
-        const inbox = parseInbox(inboxContent);
-        const filePath = currentProject.relPath + '/cos-inbox.md';
+        const inbox = parseInbox(tasksContent);
+        const filePath = currentProject.relPath + '/project-knowledge.md';
 
         for (const sec of inbox.sections) {
           if (sec.items.length === 0) continue;
@@ -167,12 +162,36 @@
           }
         }
 
+        // Archive button for Done items
+        const doneSection = inbox.sections.find(s => s.name === 'Done');
+        if (doneSection) {
+          const checkedCount = doneSection.items.filter(i => i.checked).length;
+          if (checkedCount > 0) {
+            const archiveBtn = document.createElement('button');
+            archiveBtn.className = 'btn btn-ghost btn-sm';
+            archiveBtn.style.marginTop = '8px';
+            archiveBtn.textContent = 'Archive ' + checkedCount;
+            archiveBtn.addEventListener('click', async () => {
+              archiveBtn.textContent = 'Archiving...';
+              archiveBtn.disabled = true;
+              const success = await archiveCompletedItems(filePath);
+              if (success) {
+                await loadProjectPage();
+              } else {
+                archiveBtn.textContent = 'Failed';
+                setTimeout(() => { archiveBtn.textContent = 'Archive ' + checkedCount; archiveBtn.disabled = false; }, 1500);
+              }
+            });
+            body.appendChild(archiveBtn);
+          }
+        }
+
         // Add task input
         const addRow = document.createElement('div');
         addRow.className = 'add-task-row';
         const input = document.createElement('input');
         input.type = 'text';
-        input.placeholder = 'Add item... (Title \u2014 context)';
+        input.placeholder = 'Add task... (Title \u2014 context)';
         input.addEventListener('keydown', async (e) => {
           if (e.key === 'Enter' && input.value.trim()) {
             await addProjectTask(input.value.trim());
@@ -184,7 +203,7 @@
 
         // Update header badge
         const pendingCount = inbox.sections.reduce((sum, s) => {
-          if (s.name === 'Archive' || s.name === 'Done') return sum;
+          if (s.name === 'Done') return sum;
           return sum + s.items.filter(i => !i.checked).length;
         }, 0);
         if (pendingCount > 0) {
@@ -200,39 +219,44 @@
       container.appendChild(section);
     }
 
-    async function createProjectInbox() {
-      const content = '# Project Inbox\n\n## Pending\n\n## Archive\n';
-      try {
-        let dir = state.rootHandle;
-        const parts = currentProject.relPath.split('/');
-        for (const part of parts) {
-          dir = await dir.getDirectoryHandle(part);
-        }
-        const fileHandle = await dir.getFileHandle('cos-inbox.md', { create: true });
-        const writable = await fileHandle.createWritable();
-        await writable.write(content);
-        await writable.close();
-        await loadProjectPage();
-      } catch (e) {
-        alert('Failed to create inbox: ' + e.message);
-      }
-    }
-
     async function addProjectTask(text) {
-      const pathParts = currentProject.relPath.split('/').concat('cos-inbox.md');
+      const pathParts = currentProject.relPath.split('/').concat('project-knowledge.md');
       const content = await readFile(state.rootHandle, ...pathParts);
       if (!content) return;
 
       const today = new Date().toISOString().split('T')[0];
-      const newLine = '- [ ] **' + text + '** `#manual` `' + today + '`';
+      let title = text;
+      let context = '';
+      const dashIdx = text.indexOf(' \u2014 ');
+      if (dashIdx > 0) {
+        title = text.slice(0, dashIdx);
+        context = text.slice(dashIdx + 3);
+      }
+      const newLine = context
+        ? '- [ ] **' + title + '**\n\t- ' + context + ' `#manual` `' + today + '`'
+        : '- [ ] **' + title + '**\n\t- `#manual` `' + today + '`';
 
       const lines = content.split('\n');
       let insertIdx = -1;
+
+      // Find ## Tasks header and insert after it (or after ### Inbox if it exists)
       for (let i = 0; i < lines.length; i++) {
-        if (lines[i].match(/^## /)) {
-          insertIdx = i + 1;
-          while (insertIdx < lines.length && lines[insertIdx].trim() === '') {
-            insertIdx++;
+        if (/^## Tasks$/.test(lines[i])) {
+          // Look for ### Inbox first (CoS pattern)
+          let found = false;
+          for (let j = i + 1; j < lines.length; j++) {
+            if (/^### Inbox$/.test(lines[j])) {
+              insertIdx = j + 1;
+              while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
+              found = true;
+              break;
+            }
+            if (/^#{2,3} /.test(lines[j]) && !/^### Inbox/.test(lines[j])) break;
+          }
+          if (!found) {
+            // No subsections — insert right after ## Tasks
+            insertIdx = i + 1;
+            while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
           }
           break;
         }
@@ -279,7 +303,11 @@
       const body = document.createElement('div');
       body.className = 'section-body';
 
+      // Strip ## Tasks section from knowledge view (tasks rendered separately above)
       let contentToRender = knowledgeContent;
+      if (contentToRender) {
+        contentToRender = contentToRender.replace(/\n## Tasks\n[\s\S]*$/, '');
+      }
       if (!contentToRender && indexContent) {
         const headingPattern = new RegExp('### ' + escapeRegex(currentProject.name) + '([\\s\\S]*?)(?=\\n---\\n|\\n### |$)', 'i');
         const match = indexContent.match(headingPattern);
@@ -447,86 +475,7 @@
       }
     }
 
-    // ─── Section D: Open Items ─────────────────────
-
-    function renderOpenItems(container, indexContent) {
-      if (!currentProject || !indexContent) return;
-
-      const items = parseOpenItems(indexContent, currentProject.name);
-      if (!items.length) return;
-
-      const section = document.createElement('div');
-      section.className = 'section';
-
-      const header = document.createElement('div');
-      header.className = 'section-header';
-
-      const h3 = document.createElement('h3');
-      h3.textContent = 'Open Items';
-
-      const itemBadge = document.createElement('span');
-      itemBadge.className = 'count-badge';
-      itemBadge.textContent = items.length;
-      h3.appendChild(document.createTextNode(' '));
-      h3.appendChild(itemBadge);
-      header.appendChild(h3);
-      section.appendChild(header);
-
-      const body = document.createElement('div');
-      body.className = 'section-body';
-
-      for (const item of items) {
-        // Strip leading checkbox markdown if present
-        let text = item;
-        let checked = false;
-        const cbMatch = text.match(/^\[([ x])\]\s*/);
-        if (cbMatch) {
-          checked = cbMatch[1] === 'x';
-          text = text.slice(cbMatch[0].length);
-        }
-
-        const div = document.createElement('div');
-        div.className = 'task-item' + (checked ? ' checked' : '');
-
-        const cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.checked = checked;
-        cb.disabled = true; // read-only — source is project-index.md
-        div.appendChild(cb);
-
-        const content = document.createElement('div');
-        content.className = 'task-content';
-
-        const titleEl = document.createElement('div');
-        titleEl.className = 'task-title';
-
-        // Parse bold and code in open items (from user's own project-index.md)
-        const parts = text.split(/(\*\*.*?\*\*|`[^`]+`)/g);
-        for (const part of parts) {
-          if (part.startsWith('**') && part.endsWith('**')) {
-            const strong = document.createElement('strong');
-            strong.style.color = 'var(--text-primary)';
-            strong.textContent = part.slice(2, -2);
-            titleEl.appendChild(strong);
-          } else if (part.startsWith('`') && part.endsWith('`')) {
-            const code = document.createElement('code');
-            code.textContent = part.slice(1, -1);
-            titleEl.appendChild(code);
-          } else {
-            titleEl.appendChild(document.createTextNode(part));
-          }
-        }
-
-        content.appendChild(titleEl);
-        div.appendChild(content);
-        body.appendChild(div);
-      }
-
-      section.appendChild(body);
-      container.appendChild(section);
-    }
-
-    // ─── Section E: Session Patterns ────────────────
+    // ─── Section D: Session Patterns ────────────────
 
     function renderProjectPatterns(container, patterns) {
       const section = document.createElement('div');

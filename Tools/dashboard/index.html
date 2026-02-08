@@ -15,8 +15,10 @@
 
     <main class="main" id="main-content">
       <div class="page-header">
-        <h2>Home</h2>
-        <div class="subtitle">Inbox, stats, and recent activity</div>
+        <div>
+          <h2>Home</h2>
+          <div class="subtitle">Inbox, stats, and recent activity</div>
+        </div>
       </div>
 
       <div id="health-alert-strip"></div>
@@ -63,7 +65,7 @@
   <script>
     // ─── Home Page Logic ─────────────────────────────
 
-    const COS_INBOX_PATH = 'Chief of Staff/cos-inbox.md';
+    const COS_INBOX_PATH = 'Chief of Staff/project-knowledge.md';
 
     async function onConnected() {
       await loadHomePage();
@@ -137,20 +139,31 @@
       const column = document.getElementById('inbox-column');
       column.textContent = '';
 
-      const content = await readFile(state.rootHandle, 'Chief of Staff', 'cos-inbox.md');
-      if (!content) {
+      const rawContent = await readFile(state.rootHandle, 'Chief of Staff', 'project-knowledge.md');
+      if (!rawContent) {
         const err = document.createElement('div');
         err.className = 'error-message';
-        err.textContent = 'Could not read cos-inbox.md';
+        err.textContent = 'Could not read project-knowledge.md';
         column.appendChild(err);
         return;
       }
 
-      const inbox = parseInbox(content);
+      const tasksContent = extractTasksSection(rawContent);
+      if (!tasksContent) {
+        const err = document.createElement('div');
+        err.className = 'error-message';
+        err.textContent = 'No Tasks section found in project-knowledge.md';
+        column.appendChild(err);
+        return;
+      }
+
+      const inbox = parseInbox(tasksContent);
       state.cosInbox = inbox;
 
-      // Render each section
+      // Render each section (skip empty ones)
       for (const section of inbox.sections) {
+        if (section.items.length === 0) continue;
+
         const sectionEl = document.createElement('div');
         sectionEl.className = 'section';
 
@@ -212,15 +225,8 @@
         const body = document.createElement('div');
         body.className = 'section-body';
 
-        if (section.items.length === 0) {
-          const empty = document.createElement('div');
-          empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
-          empty.textContent = 'No items';
-          body.appendChild(empty);
-        } else {
-          for (const item of section.items) {
-            body.appendChild(createTaskItemEl(item, COS_INBOX_PATH, section.name));
-          }
+        for (const item of section.items) {
+          body.appendChild(createTaskItemEl(item, COS_INBOX_PATH, section.name));
         }
 
         // Add task input for Inbox and Active sections
@@ -254,7 +260,7 @@
     }
 
     async function addNewTask(sectionName, text) {
-      const content = await readFile(state.rootHandle, 'Chief of Staff', 'cos-inbox.md');
+      const content = await readFile(state.rootHandle, 'Chief of Staff', 'project-knowledge.md');
       if (!content) return;
 
       const today = new Date().toISOString().split('T')[0];
@@ -274,9 +280,9 @@
       const lines = content.split('\n');
       let insertIdx = -1;
 
-      // Find the section header and insert after it
+      // Find the section header (### for Tasks subsections) and insert after it
       for (let i = 0; i < lines.length; i++) {
-        if (lines[i].match(new RegExp('^## ' + escapeRegex(sectionName) + '$'))) {
+        if (lines[i].match(new RegExp('^#{2,3} ' + escapeRegex(sectionName) + '$'))) {
           insertIdx = i + 1;
           // Skip any blank lines right after header
           while (insertIdx < lines.length && lines[insertIdx].trim() === '') {
@@ -289,7 +295,7 @@
       if (insertIdx === -1) return;
 
       lines.splice(insertIdx, 0, newLine);
-      const success = await writeFile(state.rootHandle, ['Chief of Staff', 'cos-inbox.md'], lines.join('\n'));
+      const success = await writeFile(state.rootHandle, ['Chief of Staff', 'project-knowledge.md'], lines.join('\n'));
       if (success) {
         await loadInbox();
         updateStats();

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cos-inbox.md",
+                "file": "project-knowledge.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "cos-inbox"
+              "title": "project-knowledge"
             }
           }
         ]
@@ -184,8 +184,14 @@
       "bases:Create new base": false
     }
   },
-  "active": "047ab574a9908142",
+  "active": "a7cc095dd1b47ab5",
   "lastOpenFiles": [
+    "completed-tasks.md",
+    "completed-items.md.bak",
+    "project-index.md",
+    "completed-items.md",
+    "CLAUDE.md",
+    "project-knowledge.md",
     "logs/20260207-dashboard-copy-button.md",
     "Tasks/20260207-dashboard-project-task-management.md",
     "Check-Ins/thoughts/20260207-claude-code-hitchhikers-guide-text-game-post-idea.md",
@@ -203,24 +209,18 @@
     "Resources/claude-code-usage-infographic.html",
     "Tools/dashboard/project.html",
     "Tools/dashboard/index.html",
-    "Tools/dashboard/js/app.js",
     "session-patterns/20260207-inbox-checkbox-restructure.md",
     "logs/20260207-inbox-checkbox-restructure.md",
     "Tasks/20260203-envoy-client-skills-plan.md",
     "cos-inbox.md",
     "Resources/chief-of-staff-proactive-behaviors.md",
     "session-patterns/20260207-applied-ai-society-research.md",
-    "project-index.md",
-    "CLAUDE.md",
-    "completed-items.md",
     "x_archive/2026-01-cleanup/dashboard/node_modules/ms/license.md",
     "Resources/Claude Code/claude-code-hooks-reference.md",
     "x_archive/2026-01-cleanup/dashboard/node_modules/gray-matter/README.md",
     "Links/Business/20260124-ai-adoption-success-ai-ready-rva.md",
-    "project-knowledge.md",
     "Tasks/20260203-icorps-mentor-prep.md",
     "Tasks/20260203-envoy-client-skills-plan.md`.md",
-    "USAGE-GUIDE.md",
-    "Links/AI-Tools/20260118-zachery-glass-claude-code-config.md"
+    "USAGE-GUIDE.md"
   ]
 }

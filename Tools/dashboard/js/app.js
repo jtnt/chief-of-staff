@@ -13,7 +13,7 @@
 const state = {
   rootHandle: null,       // FileSystemDirectoryHandle for ~/Documents/Projects/
   projects: [],           // Discovered projects [{name, slug, path, status, category}]
-  cosInbox: null,         // Parsed cos-inbox.md
+  cosInbox: null,         // Parsed Tasks section from project-knowledge.md
   projectIndex: null,     // Raw project-index.md content
   pendingSuggestionCount: 0, // Files with pending CLAUDE.md suggestions
   healthAlerts: [],       // [{project, issue}] — populated by scanHealthAlerts()
@@ -248,14 +248,31 @@ async function discoverProjects() {
     return { name: p.name, slug, relPath, status, category };
   });
 
-  // Load inbox counts for each project (parallel)
+  // Load task counts + last activity date for each project (parallel)
   await Promise.all(enriched.map(async (p) => {
-    const content = await readFile(state.rootHandle, ...p.relPath.split('/').filter(Boolean), 'cos-inbox.md');
+    const pathParts = p.relPath.split('/').filter(Boolean);
+
+    // Task count from ## Tasks section in project-knowledge.md
+    const content = await readFile(state.rootHandle, ...pathParts, 'project-knowledge.md');
     if (content) {
-      const openCount = (content.match(/^- \[ \]/gm) || []).length;
-      p.inboxCount = openCount;
+      const tasksSection = extractTasksSection(content);
+      p.inboxCount = tasksSection ? (tasksSection.match(/^- \[ \]/gm) || []).length : 0;
     } else {
       p.inboxCount = 0;
+    }
+
+    // Last activity from most recent log filename (YYYYMMDD-*.md)
+    p.lastLogDate = '';
+    const logEntries = await listDir(state.rootHandle, ...pathParts, 'logs');
+    if (logEntries.length) {
+      const dated = logEntries
+        .filter(e => e.kind === 'file' && /^\d{8}-/.test(e.name))
+        .map(e => e.name.slice(0, 8))
+        .sort();
+      if (dated.length) {
+        const d = dated[dated.length - 1];
+        p.lastLogDate = d.slice(0, 4) + '-' + d.slice(4, 6) + '-' + d.slice(6, 8);
+      }
     }
   }));
 
@@ -265,6 +282,22 @@ async function discoverProjects() {
 
 function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Extract ## Tasks section from project-knowledge.md content
+function extractTasksSection(content) {
+  if (!content) return null;
+  const idx = content.indexOf('\n## Tasks\n');
+  if (idx === -1) {
+    // Check if file starts with ## Tasks
+    if (!content.startsWith('## Tasks\n')) return null;
+    const fromTasks = content;
+    const nextHeading = fromTasks.search(/\n## (?!#)/);
+    return nextHeading === -1 ? fromTasks : fromTasks.substring(0, nextHeading);
+  }
+  const fromTasks = content.substring(idx + 1); // skip the leading \n
+  const nextHeading = fromTasks.search(/\n## (?!#)/);
+  return nextHeading === -1 ? fromTasks : fromTasks.substring(0, nextHeading);
 }
 
 // Extract a non-generic heading from markdown content
@@ -304,9 +337,12 @@ function groupProjects(projects) {
     const key = groups[p.category] ? p.category : 'active';
     groups[key].items.push(p);
   }
-  // Sort each group alphabetically
+  // Sort each group: open tasks (desc), then last activity (desc)
   for (const g of Object.values(groups)) {
-    g.items.sort((a, b) => a.name.localeCompare(b.name));
+    g.items.sort((a, b) => {
+      if (b.inboxCount !== a.inboxCount) return b.inboxCount - a.inboxCount;
+      return (b.lastLogDate || '').localeCompare(a.lastLogDate || '');
+    });
   }
   return groups;
 }
@@ -324,8 +360,8 @@ function parseInbox(content) {
   for (const line of lines) {
     lineNumber++;
 
-    // Section headers
-    const sectionMatch = line.match(/^## (.+)$/);
+    // Section headers — match both ## and ### (Tasks uses ### for subsections)
+    const sectionMatch = line.match(/^#{2,3} (.+)$/);
     if (sectionMatch) {
       currentSection = { name: sectionMatch[1].trim(), items: [] };
       sections.push(currentSection);
@@ -469,7 +505,7 @@ async function toggleInboxCheckbox(filePath, lineNumber, newChecked) {
         const blockEnd = findTaskBlockEnd(lines, idx);
         const block = lines.splice(idx, blockEnd - idx);
         // Find Done section header and insert after it
-        const doneIdx = lines.findIndex(l => /^## Done/.test(l));
+        const doneIdx = lines.findIndex(l => /^#{2,3} Done/.test(l));
         if (doneIdx >= 0) {
           // Insert after header (skip blank line if present)
           let insertAt = doneIdx + 1;
@@ -489,10 +525,10 @@ async function toggleInboxCheckbox(filePath, lineNumber, newChecked) {
   return await writeFile(state.rootHandle, pathParts, lines.join('\n'));
 }
 
-// Find which ## section a line belongs to
+// Find which section (## or ###) a line belongs to
 function findSectionForLine(lines, lineIdx) {
   for (let i = lineIdx; i >= 0; i--) {
-    const m = lines[i].match(/^## (.+)$/);
+    const m = lines[i].match(/^#{2,3} (.+)$/);
     if (m) return m[1].trim();
   }
   return null;
@@ -504,13 +540,13 @@ function findTaskBlockEnd(lines, startIdx) {
   while (i < lines.length) {
     // Stop at next top-level task, section header, or non-indented non-blank line
     if (/^- \[[ x]\]/.test(lines[i])) break;
-    if (/^## /.test(lines[i])) break;
+    if (/^#{2,3} /.test(lines[i])) break;
     if (lines[i].trim() !== '' && !/^\s/.test(lines[i])) break;
     // Stop at blank lines only if next non-blank is a new task or section
     if (lines[i].trim() === '') {
       let next = i + 1;
       while (next < lines.length && lines[next].trim() === '') next++;
-      if (next >= lines.length || /^- \[[ x]\]/.test(lines[next]) || /^## /.test(lines[next])) break;
+      if (next >= lines.length || /^- \[[ x]\]/.test(lines[next]) || /^#{2,3} /.test(lines[next])) break;
     }
     i++;
   }
@@ -528,13 +564,13 @@ async function archiveCompletedItems(filePath) {
   const today = new Date().toISOString().split('T')[0];
 
   // Find Done section
-  const doneHeaderIdx = lines.findIndex(l => /^## Done/.test(l));
+  const doneHeaderIdx = lines.findIndex(l => /^#{2,3} Done/.test(l));
   if (doneHeaderIdx < 0) return false;
 
   // Find end of Done section (next ## or EOF)
   let doneEndIdx = lines.length;
   for (let i = doneHeaderIdx + 1; i < lines.length; i++) {
-    if (/^## /.test(lines[i])) { doneEndIdx = i; break; }
+    if (/^#{2,3} /.test(lines[i])) { doneEndIdx = i; break; }
   }
 
   // Extract completed task blocks from Done section
@@ -545,7 +581,7 @@ async function archiveCompletedItems(filePath) {
     if (/^- \[x\]/.test(doneLines[i])) {
       const blockStart = i;
       i++;
-      while (i < doneLines.length && !/^- \[[ x]\]/.test(doneLines[i]) && !/^## /.test(doneLines[i])) {
+      while (i < doneLines.length && !/^- \[[ x]\]/.test(doneLines[i]) && !/^#{2,3} /.test(doneLines[i])) {
         if (doneLines[i].trim() === '' && (i + 1 >= doneLines.length || /^- \[[ x]\]/.test(doneLines[i + 1]))) break;
         i++;
       }
@@ -618,7 +654,7 @@ async function archiveCompletedItems(filePath) {
     if (/^- \[x\]/.test(doneLines[j])) {
       // Skip this block
       j++;
-      while (j < doneLines.length && !/^- \[[ x]\]/.test(doneLines[j]) && !/^## /.test(doneLines[j])) {
+      while (j < doneLines.length && !/^- \[[ x]\]/.test(doneLines[j]) && !/^#{2,3} /.test(doneLines[j])) {
         if (doneLines[j].trim() === '' && (j + 1 >= doneLines.length || /^- \[[ x]\]/.test(doneLines[j + 1]))) break;
         j++;
       }
@@ -930,6 +966,213 @@ function buildSidebar(activeSlug) {
   footer.appendChild(statusDiv);
 
   sidebar.appendChild(footer);
+
+  // Build quick-add bar in page header (only once)
+  if (!document.querySelector('.quick-add-bar')) {
+    buildQuickAddBar();
+  }
+}
+
+// ─── Quick Add Task ──────────────────────────────────
+
+async function addQuickTask(text, project) {
+  if (!state.rootHandle || !text) return false;
+
+  const pathParts = project
+    ? project.relPath.split('/').filter(Boolean).concat('project-knowledge.md')
+    : ['Chief of Staff', 'project-knowledge.md'];
+
+  const content = await readFile(state.rootHandle, ...pathParts);
+  if (!content) return false;
+
+  const today = new Date().toISOString().split('T')[0];
+  let title = text;
+  let context = '';
+  const dashIdx = text.indexOf(' \u2014 ');
+  if (dashIdx > 0) {
+    title = text.slice(0, dashIdx);
+    context = text.slice(dashIdx + 3);
+  }
+  const newLine = context
+    ? '- [ ] **' + title + '**\n\t- ' + context + ' `#manual` `' + today + '`'
+    : '- [ ] **' + title + '**\n\t- `#manual` `' + today + '`';
+
+  const lines = content.split('\n');
+  let insertIdx = -1;
+
+  // Find ## Tasks, then ### Inbox if it exists, otherwise insert at top of Tasks
+  for (let i = 0; i < lines.length; i++) {
+    if (/^## Tasks$/.test(lines[i])) {
+      // Look for ### Inbox (CoS pattern)
+      for (let j = i + 1; j < lines.length; j++) {
+        if (/^### Inbox$/.test(lines[j])) {
+          insertIdx = j + 1;
+          while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
+          break;
+        }
+        if (/^#{2,3} /.test(lines[j]) && !/^### Inbox/.test(lines[j])) break;
+      }
+      if (insertIdx === -1) {
+        insertIdx = i + 1;
+        while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
+        // Insert before ### Done if it exists
+        for (let j = insertIdx; j < lines.length; j++) {
+          if (/^### Done$/.test(lines[j])) {
+            insertIdx = j;
+            while (insertIdx > i + 1 && lines[insertIdx - 1].trim() === '') insertIdx--;
+            break;
+          }
+          if (/^## (?!#)/.test(lines[j])) break;
+        }
+      }
+      break;
+    }
+  }
+
+  if (insertIdx === -1) {
+    // No ## Tasks section — append one
+    lines.push('', '## Tasks', '');
+    insertIdx = lines.length;
+  }
+
+  lines.splice(insertIdx, 0, newLine);
+  return await writeFile(state.rootHandle, pathParts, lines.join('\n'));
+}
+
+function buildQuickAddBar() {
+  const header = document.querySelector('.page-header') || document.querySelector('.project-header');
+  if (!header) return;
+
+  const bar = document.createElement('div');
+  bar.className = 'quick-add-bar';
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'quick-add-input';
+  input.placeholder = 'Add task... (Title \u2014 context)';
+
+  const select = document.createElement('select');
+  select.className = 'quick-add-project';
+
+  // CoS default
+  const cosOpt = document.createElement('option');
+  cosOpt.value = '';
+  cosOpt.textContent = 'CoS Inbox';
+  select.appendChild(cosOpt);
+
+  // All non-paused projects
+  const projects = state.projects.filter(p => p.name !== 'Chief of Staff' && p.category !== 'paused');
+  if (projects.length) {
+    for (const p of projects) {
+      const opt = document.createElement('option');
+      opt.value = p.slug;
+      opt.textContent = p.name;
+      select.appendChild(opt);
+    }
+  }
+
+  const submit = async () => {
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    input.disabled = true;
+    select.disabled = true;
+
+    const project = select.value ? state.projects.find(p => p.slug === select.value) : null;
+    const ok = await addQuickTask(text, project);
+
+    input.disabled = false;
+    select.disabled = false;
+    input.focus();
+    if (ok && typeof onCheckboxToggled === 'function') onCheckboxToggled();
+  };
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submit();
+  });
+
+  bar.appendChild(input);
+  bar.appendChild(select);
+  header.appendChild(bar);
+}
+
+// ─── Triage Task ─────────────────────────────────────
+
+async function triageTask(item, fromFilePath, destination) {
+  const fromParts = fromFilePath.split('/');
+  const content = await readFile(state.rootHandle, ...fromParts);
+  if (!content) return false;
+
+  const lines = content.split('\n');
+  const startIdx = item.lineNumber - 1;
+
+  // Find extent of this task block (main line + indented continuation lines)
+  let endIdx = startIdx + 1;
+  while (endIdx < lines.length) {
+    const line = lines[endIdx];
+    if (/^- \[[ x]\]/.test(line) || /^#{2,3} /.test(line)) break;
+    if (line.trim() === '') break;
+    if (!/^\s/.test(line)) break;
+    endIdx++;
+  }
+
+  const taskLines = lines.slice(startIdx, endIdx);
+
+  if (typeof destination === 'string') {
+    // Moving within same file (Inbox → Active or Backlog)
+    lines.splice(startIdx, endIdx - startIdx);
+
+    let insertIdx = -1;
+    for (let i = 0; i < lines.length; i++) {
+      if (new RegExp('^### ' + escapeRegex(destination) + '$').test(lines[i])) {
+        insertIdx = i + 1;
+        while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
+        break;
+      }
+    }
+    if (insertIdx === -1) return false;
+
+    lines.splice(insertIdx, 0, ...taskLines);
+    return await writeFile(state.rootHandle, fromParts, lines.join('\n'));
+  } else {
+    // Moving to a different project
+    lines.splice(startIdx, endIdx - startIdx);
+    const writeSourceOk = await writeFile(state.rootHandle, fromParts, lines.join('\n'));
+    if (!writeSourceOk) return false;
+
+    const toParts = destination.relPath.split('/').concat('project-knowledge.md');
+    const toContent = await readFile(state.rootHandle, ...toParts);
+    if (!toContent) return false;
+
+    const toLines = toContent.split('\n');
+    let insertIdx = -1;
+
+    for (let i = 0; i < toLines.length; i++) {
+      if (/^## Tasks$/.test(toLines[i])) {
+        insertIdx = i + 1;
+        while (insertIdx < toLines.length && toLines[insertIdx].trim() === '') insertIdx++;
+        // Insert before ### Done if it exists
+        for (let j = insertIdx; j < toLines.length; j++) {
+          if (/^### Done$/.test(toLines[j])) {
+            insertIdx = j;
+            while (insertIdx > i + 1 && toLines[insertIdx - 1].trim() === '') insertIdx--;
+            break;
+          }
+          if (/^## (?!#)/.test(toLines[j])) break;
+        }
+        break;
+      }
+    }
+
+    if (insertIdx === -1) {
+      // No ## Tasks section — append one
+      toLines.push('', '## Tasks', '');
+      insertIdx = toLines.length;
+    }
+
+    toLines.splice(insertIdx, 0, ...taskLines);
+    return await writeFile(state.rootHandle, toParts, toLines.join('\n'));
+  }
 }
 
 // ─── Reconnect FS ────────────────────────────────────
@@ -1055,6 +1298,67 @@ function createTaskItemEl(item, filePath, sectionName) {
 
   if (hasMeta) content.appendChild(meta);
   div.appendChild(content);
+
+  // Triage dropdown for Inbox items
+  if (sectionName === 'Inbox' && !item.checked) {
+    const select = document.createElement('select');
+    select.className = 'task-triage-select';
+    select.title = 'Move to...';
+
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Move \u25BE';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
+
+    // CoS internal moves
+    const cosGroup = document.createElement('optgroup');
+    cosGroup.label = 'Chief of Staff';
+    for (const dest of ['Active', 'Backlog']) {
+      const opt = document.createElement('option');
+      opt.value = 'cos:' + dest;
+      opt.textContent = dest;
+      cosGroup.appendChild(opt);
+    }
+    select.appendChild(cosGroup);
+
+    // External projects
+    const extProjects = state.projects.filter(p => p.name !== 'Chief of Staff' && p.category !== 'paused');
+    if (extProjects.length > 0) {
+      const projGroup = document.createElement('optgroup');
+      projGroup.label = 'Route to project';
+      for (const p of extProjects) {
+        const opt = document.createElement('option');
+        opt.value = 'project:' + p.slug;
+        opt.textContent = p.name;
+        projGroup.appendChild(opt);
+      }
+      select.appendChild(projGroup);
+    }
+
+    select.addEventListener('change', async () => {
+      const val = select.value;
+      if (!val) return;
+
+      select.disabled = true;
+      let ok = false;
+
+      if (val.startsWith('cos:')) {
+        ok = await triageTask(item, filePath, val.replace('cos:', ''));
+      } else if (val.startsWith('project:')) {
+        const slug = val.replace('project:', '');
+        const project = state.projects.find(p => p.slug === slug);
+        if (project) ok = await triageTask(item, filePath, project);
+      }
+
+      if (ok && typeof onCheckboxToggled === 'function') onCheckboxToggled();
+      else if (ok) window.location.reload();
+      else { select.disabled = false; select.value = ''; }
+    });
+
+    div.appendChild(select);
+  }
 
   // Copy prompt button (top-level tasks only, not in Done section)
   if (!item.checked || sectionName !== 'Done') {
@@ -1310,32 +1614,6 @@ async function loadAllRecentLogs(limit = 20) {
   // Sort by date descending and take limit
   allLogs.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
   return allLogs.slice(0, limit);
-}
-
-// ─── Parse project-index.md for open items ───────────
-
-function parseOpenItems(indexContent, projectName) {
-  if (!indexContent) return [];
-
-  // Find the project section
-  const headingPattern = new RegExp('### ' + escapeRegex(projectName) + '([\\s\\S]*?)(?=\\n---\\n|\\n### |$)', 'i');
-  const sectionMatch = indexContent.match(headingPattern);
-  if (!sectionMatch) return [];
-
-  const section = sectionMatch[1];
-
-  // Find Open Items subsection
-  const openMatch = section.match(/\*\*Open Items:\*\*([\s\S]*?)(?=\n\*\*|\n---|\n###|$)/);
-  if (!openMatch) return [];
-
-  const items = [];
-  for (const line of openMatch[1].split('\n')) {
-    const itemMatch = line.match(/^- (.+)$/);
-    if (itemMatch) {
-      items.push(itemMatch[1].trim());
-    }
-  }
-  return items;
 }
 
 // ─── Init ────────────────────────────────────────────
