@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health — Chief of Staff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main class="main" id="main-content">
+      <div class="page-header">
+        <h2>Health</h2>
+        <div class="subtitle">Project health checks and friction analysis</div>
+      </div>
+
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-healthy">-</div>
+          <div class="stat-label">Healthy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-warnings">-</div>
+          <div class="stat-label">Warnings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-critical">-</div>
+          <div class="stat-label">Critical</div>
+        </div>
+      </div>
+
+      <div id="health-content">
+        <div class="loading">Scanning projects...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    /* ─── Health Page Logic ───────────────────────────
+       SECURITY NOTE: All content rendered on this page comes
+       exclusively from the user's own local filesystem and a
+       local friction-summary.json file. No external data.
+       ──────────────────────────────────────────────── */
+
+    const FRICTION_COLORS = {
+      wrong_approach: '#f87171',
+      misunderstood_request: '#fbbf24',
+      excessive_changes: '#a78bfa',
+      buggy_code: '#60a5fa',
+      user_rejected_action: '#fb923c',
+      tool_issues: '#94a3b8',
+    };
+
+    const FRICTION_LABELS = {
+      wrong_approach: 'Wrong Approach',
+      misunderstood_request: 'Misunderstood',
+      excessive_changes: 'Excessive Changes',
+      buggy_code: 'Buggy Code',
+      user_rejected_action: 'Rejected Action',
+      tool_issues: 'Tool Issues',
+    };
+
+    async function onConnected() {
+      await loadHealthPage();
+    }
+
+    async function loadHealthPage() {
+      const container = document.getElementById('health-content');
+      container.textContent = '';
+
+      // Scan health and load friction data in parallel
+      const [healthResults, frictionData] = await Promise.all([
+        scanAllProjectHealth(),
+        loadFrictionData(),
+      ]);
+
+      // Stats
+      const healthy = healthResults.filter(h => h.grade === 'A').length;
+      const warnings = healthResults.filter(h => h.grade === 'B' || h.grade === 'C').length;
+      const critical = healthResults.filter(h => h.grade === 'D').length;
+
+      document.getElementById('stat-healthy').textContent = healthy;
+      document.getElementById('stat-warnings').textContent = warnings;
+      document.getElementById('stat-critical').textContent = critical;
+
+      // Update sidebar health dot
+      state.healthDotLevel = critical > 0 ? 'red' : warnings > 0 ? 'amber' : 'green';
+      buildSidebar('');
+
+      // Section 1: Project Health Cards
+      renderHealthCards(container, healthResults);
+
+      // Section 2: Friction Snapshot
+      if (frictionData) {
+        renderFrictionSection(container, frictionData);
+      }
+    }
+
+    async function loadFrictionData() {
+      try {
+        const content = await readFile(
+          state.rootHandle,
+          'Chief of Staff', 'Tools', 'dashboard', 'data', 'friction-summary.json'
+        );
+        if (content) return JSON.parse(content);
+      } catch (e) {
+        console.warn('Could not load friction data:', e);
+      }
+      return null;
+    }
+
+    // ─── Health Cards ──────────────────────────────────
+
+    function renderHealthCards(container, results) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Project Health';
+      const badge = document.createElement('span');
+      badge.className = 'count-badge';
+      badge.textContent = results.length;
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(badge);
+      header.appendChild(h3);
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      // Sort: worst grades first, then alphabetical
+      const gradeOrder = { D: 0, C: 1, B: 2, A: 3 };
+      results.sort((a, b) => {
+        const gDiff = gradeOrder[a.grade] - gradeOrder[b.grade];
+        if (gDiff !== 0) return gDiff;
+        return a.name.localeCompare(b.name);
+      });
+
+      const grid = document.createElement('div');
+      grid.className = 'health-grid';
+
+      for (const h of results) {
+        grid.appendChild(createHealthCard(h));
+      }
+
+      body.appendChild(grid);
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    function createHealthCard(h) {
+      const card = document.createElement('div');
+      card.className = 'health-card';
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        window.location.href = 'project.html?project=' + h.slug;
+      });
+
+      // Header: name + grade
+      const cardHeader = document.createElement('div');
+      cardHeader.className = 'health-card-header';
+
+      const name = document.createElement('h4');
+      name.textContent = h.name;
+      cardHeader.appendChild(name);
+
+      const grade = document.createElement('span');
+      grade.className = 'health-grade grade-' + h.grade.toLowerCase();
+      grade.textContent = h.grade;
+      cardHeader.appendChild(grade);
+      card.appendChild(cardHeader);
+
+      // Check rows
+      const checks = document.createElement('div');
+      checks.className = 'health-checks';
+
+      // PK freshness
+      checks.appendChild(createCheckRow(
+        'project-knowledge.md',
+        h.pkExists
+          ? (h.pkDaysOld + 'd ago')
+          : 'Missing',
+        h.pkExists
+          ? (h.pkDaysOld <= 7 ? 'green' : h.pkDaysOld <= 14 ? 'amber' : 'red')
+          : (h.category === 'paused' ? 'amber' : 'red')
+      ));
+
+      // Inbox
+      checks.appendChild(createCheckRow(
+        'Inbox items',
+        String(h.inboxCount),
+        h.inboxCount > 10 ? 'red' : h.inboxCount >= 6 ? 'amber' : 'green'
+      ));
+
+      // CLAUDE.md
+      checks.appendChild(createCheckRow(
+        'CLAUDE.md',
+        h.claudeMdExists ? 'Present' : 'Missing',
+        h.claudeMdExists ? 'green' : (h.category === 'paused' ? 'amber' : 'amber')
+      ));
+
+      // z_context
+      if (h.zContextExists) {
+        checks.appendChild(createCheckRow(
+          'z_context/',
+          h.zContextIndexExists ? 'Indexed' : 'No INDEX.md',
+          h.zContextIndexExists ? 'green' : 'amber'
+        ));
+      }
+
+      card.appendChild(checks);
+
+      // Footer: log count + latest date
+      const footer = document.createElement('div');
+      footer.className = 'health-card-footer';
+      footer.textContent = h.logCount + ' logs';
+      if (h.latestLogDate) {
+        footer.textContent += '  \u00B7  Latest: ' + h.latestLogDate;
+      }
+      card.appendChild(footer);
+
+      return card;
+    }
+
+    function createCheckRow(label, value, level) {
+      const row = document.createElement('div');
+      row.className = 'health-check-row';
+
+      const dot = document.createElement('span');
+      dot.className = 'health-dot-indicator ' + level;
+      row.appendChild(dot);
+
+      const labelEl = document.createElement('span');
+      labelEl.className = 'check-label';
+      labelEl.textContent = label;
+      row.appendChild(labelEl);
+
+      const valueEl = document.createElement('span');
+      valueEl.className = 'check-value ' + level;
+      valueEl.textContent = value;
+      row.appendChild(valueEl);
+
+      return row;
+    }
+
+    // ─── Friction Snapshot ─────────────────────────────
+
+    function renderFrictionSection(container, data) {
+      const section = document.createElement('div');
+      section.className = 'section friction-section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Friction Snapshot';
+      const badge = document.createElement('span');
+      badge.className = 'count-badge';
+      badge.textContent = data.sessions_analyzed + ' sessions';
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(badge);
+      header.appendChild(h3);
+
+      const dateTag = document.createElement('span');
+      dateTag.className = 'tag-date';
+      dateTag.textContent = 'Generated ' + data.generated;
+      header.appendChild(dateTag);
+
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      // Breakdown bar
+      const barLabel = document.createElement('div');
+      barLabel.style.cssText = 'font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 500;';
+      barLabel.textContent = 'Friction by type (' + data.total_friction + ' total events)';
+      body.appendChild(barLabel);
+
+      const bar = document.createElement('div');
+      bar.className = 'friction-breakdown';
+
+      for (const [type, count] of Object.entries(data.friction_types)) {
+        const pct = (count / data.total_friction * 100);
+        if (pct < 2) continue; // skip tiny segments
+        const seg = document.createElement('div');
+        seg.className = 'friction-bar-segment';
+        seg.style.width = pct + '%';
+        seg.style.background = FRICTION_COLORS[type] || '#666';
+        seg.title = (FRICTION_LABELS[type] || type) + ': ' + count + ' (' + Math.round(pct) + '%)';
+        if (pct > 8) seg.textContent = Math.round(pct) + '%';
+        bar.appendChild(seg);
+      }
+      body.appendChild(bar);
+
+      // Legend
+      const legend = document.createElement('div');
+      legend.className = 'friction-legend';
+      for (const [type, count] of Object.entries(data.friction_types)) {
+        const item = document.createElement('div');
+        item.className = 'friction-legend-item';
+
+        const swatch = document.createElement('span');
+        swatch.className = 'friction-legend-swatch';
+        swatch.style.background = FRICTION_COLORS[type] || '#666';
+        item.appendChild(swatch);
+
+        item.appendChild(document.createTextNode(
+          (FRICTION_LABELS[type] || type) + ' (' + count + ')'
+        ));
+        legend.appendChild(item);
+      }
+      body.appendChild(legend);
+
+      // Friction vs Outcome cards
+      const outcomeLabel = document.createElement('div');
+      outcomeLabel.style.cssText = 'font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 500;';
+      outcomeLabel.textContent = 'Goal achievement by friction level';
+      body.appendChild(outcomeLabel);
+
+      const outcomeGrid = document.createElement('div');
+      outcomeGrid.className = 'friction-outcome-grid';
+
+      outcomeGrid.appendChild(createOutcomeCard(
+        data.friction_vs_outcome.zero_friction_success_pct + '%',
+        'Zero friction',
+        'good'
+      ));
+      outcomeGrid.appendChild(createOutcomeCard(
+        data.friction_vs_outcome.low_friction_success_pct + '%',
+        '1 friction event',
+        'mid'
+      ));
+      outcomeGrid.appendChild(createOutcomeCard(
+        data.friction_vs_outcome.high_friction_success_pct + '%',
+        '2+ friction events',
+        'bad'
+      ));
+      body.appendChild(outcomeGrid);
+
+      // Top friction examples
+      if (data.top_examples && data.top_examples.length > 0) {
+        const exLabel = document.createElement('div');
+        exLabel.style.cssText = 'font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 10px; font-weight: 500;';
+        exLabel.textContent = 'What to watch for';
+        body.appendChild(exLabel);
+
+        for (const ex of data.top_examples) {
+          body.appendChild(createFrictionExample(ex));
+        }
+      }
+
+      // Key insight box
+      if (data.key_insight) {
+        const insightBox = document.createElement('div');
+        insightBox.className = 'friction-insight-box';
+        insightBox.textContent = data.key_insight;
+        body.appendChild(insightBox);
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    function createOutcomeCard(pct, label, level) {
+      const card = document.createElement('div');
+      card.className = 'friction-outcome-card';
+
+      const pctEl = document.createElement('div');
+      pctEl.className = 'outcome-pct ' + level;
+      pctEl.textContent = pct;
+      card.appendChild(pctEl);
+
+      const labelEl = document.createElement('div');
+      labelEl.className = 'outcome-label';
+      labelEl.textContent = label;
+      card.appendChild(labelEl);
+
+      return card;
+    }
+
+    function createFrictionExample(ex) {
+      const div = document.createElement('div');
+      div.className = 'friction-example';
+
+      const typeBadge = document.createElement('span');
+      typeBadge.className = 'friction-example-type type-' + ex.type;
+      typeBadge.textContent = (FRICTION_LABELS[ex.type] || ex.type);
+      div.appendChild(typeBadge);
+
+      const desc = document.createElement('div');
+      desc.className = 'friction-example-desc';
+      desc.textContent = ex.description;
+      div.appendChild(desc);
+
+      if (ex.lesson) {
+        const lesson = document.createElement('div');
+        lesson.className = 'friction-example-lesson';
+        lesson.textContent = ex.lesson;
+        div.appendChild(lesson);
+      }
+
+      return div;
+    }
+
+    // ─── Boot ─────────────────────────────────────────
+
+    (async function boot() {
+      const connected = await initApp();
+      if (connected) {
+        buildSidebar('');
+        await loadHealthPage();
+      }
+    })();
+  </script>
+</body>
+</html>

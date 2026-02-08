@@ -19,6 +19,8 @@
         <div class="subtitle">Inbox, stats, and recent activity</div>
       </div>
 
+      <div id="health-alert-strip"></div>
+
       <div class="stats-row" id="stats-row">
         <div class="stat-card">
           <div class="stat-value" id="stat-pending">-</div>
@@ -73,6 +75,55 @@
         loadRecentActivity(),
       ]);
       updateStats();
+      // Run health scan in background (non-blocking)
+      scanHealthAlerts().then(() => {
+        renderAlertStrip();
+        buildSidebar('');
+      });
+    }
+
+    function renderAlertStrip() {
+      const container = document.getElementById('health-alert-strip');
+      if (!container) return;
+      container.textContent = '';
+
+      const alerts = state.healthAlerts;
+      if (!alerts || alerts.length === 0) return;
+
+      const strip = document.createElement('div');
+      strip.className = 'alert-strip' + (state.healthDotLevel === 'amber' ? ' warn-level' : '');
+
+      const text = document.createElement('div');
+      text.className = 'alert-strip-text';
+
+      const count = alerts.length;
+      const topIssues = alerts.slice(0, 2)
+        .map(a => a.project + ': ' + a.issues.join(', '))
+        .join('  \u00B7  ');
+
+      const link = document.createElement('a');
+      link.href = 'health.html';
+      link.textContent = count + ' project' + (count !== 1 ? 's' : '') + ' need attention';
+      text.appendChild(link);
+
+      const detail = document.createElement('span');
+      detail.style.cssText = 'margin-left: 8px; opacity: 0.8;';
+      detail.textContent = '\u2014 ' + topIssues;
+      text.appendChild(detail);
+
+      strip.appendChild(text);
+
+      const dismiss = document.createElement('button');
+      dismiss.className = 'alert-strip-dismiss';
+      dismiss.textContent = '\u00D7';
+      dismiss.title = 'Dismiss';
+      dismiss.addEventListener('click', (e) => {
+        e.preventDefault();
+        strip.remove();
+      });
+      strip.appendChild(dismiss);
+
+      container.appendChild(strip);
     }
 
     // ─── Inbox ─────────────────────────────────────
@@ -154,7 +205,7 @@
 
           const input = document.createElement('input');
           input.type = 'text';
-          input.placeholder = 'Add task... (Title — context)';
+          input.placeholder = 'Add task... (Title or Title — context)';
           input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
               addNewTask(section.name, input.value.trim());
@@ -182,7 +233,18 @@
       if (!content) return;
 
       const today = new Date().toISOString().split('T')[0];
-      const newLine = '- [ ] **' + text + '** `#manual` `' + today + '`';
+      // New format: title on one line, description as indented sub-bullet
+      // If text contains " — ", split into title and context
+      let title = text;
+      let context = '';
+      const dashIdx = text.indexOf(' — ');
+      if (dashIdx > 0) {
+        title = text.slice(0, dashIdx);
+        context = text.slice(dashIdx + 3);
+      }
+      const newLine = context
+        ? '- [ ] **' + title + '**\n\t- ' + context + ' `#manual` `' + today + '`'
+        : '- [ ] **' + title + '**\n\t- `#manual` `' + today + '`';
 
       const lines = content.split('\n');
       let insertIdx = -1;

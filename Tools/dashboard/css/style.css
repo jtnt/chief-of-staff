@@ -1131,3 +1131,324 @@ kbd {
   color: var(--text-muted);
   line-height: 1.4;
 }
+
+/* --- Sidebar Inbox Badges --- */
+.sidebar-inbox-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 10px;
+  margin-left: auto;
+  flex-shrink: 0;
+  background: var(--bg-hover);
+  color: var(--text-muted);
+}
+
+.sidebar-inbox-badge.warn {
+  background: var(--amber-subtle);
+  color: var(--amber);
+}
+
+.sidebar-inbox-badge.crit {
+  background: var(--red-subtle);
+  color: var(--red);
+}
+
+/* --- Sidebar Health Dot --- */
+.sidebar-health-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.sidebar-health-dot.dot-green { background: var(--green); }
+.sidebar-health-dot.dot-amber { background: var(--amber); }
+.sidebar-health-dot.dot-red { background: var(--red); }
+
+/* --- Alert Strip (Home) --- */
+.alert-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--red-subtle);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  font-size: 0.82rem;
+  color: var(--red);
+}
+
+.alert-strip.warn-level {
+  background: var(--amber-subtle);
+  border-color: rgba(251, 191, 36, 0.2);
+  color: var(--amber);
+}
+
+.alert-strip-text {
+  flex: 1;
+}
+
+.alert-strip-text a {
+  color: inherit;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.alert-strip-dismiss {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.alert-strip-dismiss:hover { opacity: 1; }
+
+/* --- Health Page --- */
+.health-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.health-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.health-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.health-card-header h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.health-grade {
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.health-grade.grade-a { background: var(--green-subtle); color: var(--green); }
+.health-grade.grade-b { background: var(--blue-subtle); color: var(--blue); }
+.health-grade.grade-c { background: var(--amber-subtle); color: var(--amber); }
+.health-grade.grade-d { background: var(--red-subtle); color: var(--red); }
+
+.health-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.health-check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.health-check-row .check-label {
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.health-check-row .check-value {
+  font-weight: 500;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 0.72rem;
+}
+
+.health-check-row .check-value.green { color: var(--green); }
+.health-check-row .check-value.amber { color: var(--amber); }
+.health-check-row .check-value.red { color: var(--red); }
+
+.health-dot-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.health-dot-indicator.green { background: var(--green); }
+.health-dot-indicator.amber { background: var(--amber); }
+.health-dot-indicator.red { background: var(--red); }
+
+.health-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* --- Friction Section --- */
+.friction-section {
+  margin-top: 12px;
+}
+
+.friction-breakdown {
+  display: flex;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.friction-bar-segment {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--bg-primary);
+  min-width: 24px;
+  transition: opacity 0.15s;
+  cursor: default;
+  position: relative;
+}
+
+.friction-bar-segment:hover { opacity: 0.85; }
+
+.friction-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.friction-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.friction-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.friction-outcome-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.friction-outcome-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+
+.friction-outcome-card .outcome-pct {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.friction-outcome-card .outcome-pct.good { color: var(--green); }
+.friction-outcome-card .outcome-pct.mid { color: var(--amber); }
+.friction-outcome-card .outcome-pct.bad { color: var(--red); }
+
+.friction-outcome-card .outcome-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+.friction-example {
+  background: var(--bg-primary);
+  border-left: 3px solid var(--border-light);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 10px;
+}
+
+.friction-example-type {
+  display: inline-flex;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.friction-example-type.type-wrong_approach {
+  background: var(--red-subtle);
+  color: var(--red);
+}
+
+.friction-example-type.type-misunderstood_request {
+  background: var(--amber-subtle);
+  color: var(--amber);
+}
+
+.friction-example-type.type-excessive_changes {
+  background: var(--purple-subtle);
+  color: var(--purple);
+}
+
+.friction-example-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+.friction-example-lesson {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.friction-insight-box {
+  background: var(--green-subtle);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 0.82rem;
+  color: var(--green);
+  line-height: 1.6;
+  margin-top: 16px;
+}

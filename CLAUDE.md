@@ -113,11 +113,14 @@ Chief of Staff/
 
 **Task line format:**
 ```
-- [ ] **Title** — one-line context `#source` `2026-02-07` [[optional Tasks/link]]
+- [ ] **Title**
+	- Context description `#source` `2026-02-07` [[optional Tasks/link]]
 ```
 
+- Title goes on the first line (checkbox + bold title only)
+- Description/context goes on an indented sub-bullet (tab + `- `)
 - `#source` tags: `#meeting`, `#session`, `#thought`, `#link`, `#manual`
-- Sub-tasks indent under parent (max 3; use Tasks/ file + wikilink for more)
+- Sub-tasks indent under parent as checkboxes (`- [ ]`); max 3, use Tasks/ file + wikilink for more
 - New items go to `## Inbox` (newest at top). User triages to Active or Backlog.
 - Completed items: `- [x]` with `done:YYYY-MM-DD` appended
 
@@ -128,9 +131,10 @@ Chief of Staff/
 - Include YAML frontmatter with `status: active` and `created:` date
 - If a task grows into a larger project, migrate it to a tracked project folder
 
-**When routing to a project inbox:** Add a checkbox line under `## Pending` (external projects keep Pending/Archive sections):
+**When routing to a project inbox:** Add under `## Pending` (external projects keep Pending/Archive sections):
 ```
-- [ ] **Title** — context `#source` `YYYY-MM-DD`
+- [ ] **Title**
+	- Context description `#source` `YYYY-MM-DD`
 ```
 
 **Note:** Auto-capture skips the CoS sync step for this repo (we ARE CoS).
@@ -157,9 +161,10 @@ When check-in content relates to a tracked project:
 1. Ask user: "This mentions [Project]. Want me to add it to that project's inbox?"
 2. If yes, write to: `/Users/jtnt/Documents/Projects/[ProjectName]/cos-inbox.md`
    - Create file if needed (Pending / Archive sections)
-   - Add checkbox line under `## Pending` (newest at top):
+   - Add under `## Pending` (newest at top):
      ```
-     - [ ] **Title** — context `#source` `YYYY-MM-DD`
+     - [ ] **Title**
+     	- Context description `#source` `YYYY-MM-DD`
      ```
 3. Also create project log: `[ProjectName]/logs/YYYYMMDD-checkin-note.md`
 

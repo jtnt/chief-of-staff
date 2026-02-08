@@ -16,6 +16,8 @@ const state = {
   cosInbox: null,         // Parsed cos-inbox.md
   projectIndex: null,     // Raw project-index.md content
   pendingSuggestionCount: 0, // Files with pending CLAUDE.md suggestions
+  healthAlerts: [],       // [{project, issue}] — populated by scanHealthAlerts()
+  healthDotLevel: 'green', // 'green' | 'amber' | 'red'
 };
 
 // ─── IndexedDB for directory handle persistence ──────
@@ -246,6 +248,17 @@ async function discoverProjects() {
     return { name: p.name, slug, relPath, status, category };
   });
 
+  // Load inbox counts for each project (parallel)
+  await Promise.all(enriched.map(async (p) => {
+    const content = await readFile(state.rootHandle, ...p.relPath.split('/').filter(Boolean), 'cos-inbox.md');
+    if (content) {
+      const openCount = (content.match(/^- \[ \]/gm) || []).length;
+      p.inboxCount = openCount;
+    } else {
+      p.inboxCount = 0;
+    }
+  }));
+
   state.projects = enriched;
   return enriched;
 }
@@ -339,6 +352,30 @@ function parseInbox(content) {
       const parent = currentSection.items[currentSection.items.length - 1];
       if (!parent.subtasks) parent.subtasks = [];
       parent.subtasks.push(parseSubtaskLine(rawText, checked, lineNumber, line));
+      continue;
+    }
+
+    // Description sub-bullet (indented dash, no checkbox) — new format
+    const descMatch = line.match(/^\s+- (?!\[[ x]\])(.+)$/);
+    if (descMatch && currentSection.items.length > 0) {
+      const parent = currentSection.items[currentSection.items.length - 1];
+      // Only treat as description if parent has no context yet
+      if (!parent.context) {
+        const descText = descMatch[1].trim();
+        // Extract source, date, link from the description line
+        const sourceMatch = descText.match(/`#(\w+)`/);
+        if (sourceMatch) parent.source = sourceMatch[1];
+        const dateMatch = descText.match(/`(\d{4}-\d{2}-\d{2})`/);
+        if (dateMatch) parent.date = dateMatch[1];
+        const linkMatch = descText.match(/\[\[(.+?)\]\]/);
+        if (linkMatch) parent.link = linkMatch[1];
+        // Context is the text minus tags and links
+        parent.context = descText
+          .replace(/`#\w+`/g, '')
+          .replace(/`\d{4}-\d{2}-\d{2}`/g, '')
+          .replace(/\[\[.+?\]\]/g, '')
+          .trim();
+      }
     }
   }
 
@@ -571,6 +608,7 @@ function buildSidebar(activeSlug) {
   const currentPage = window.location.pathname.split('/').pop();
   const isHome = currentPage === 'index.html' || currentPage === '' || currentPage === 'dashboard';
   const isPatterns = currentPage === 'patterns.html';
+  const isHealth = currentPage === 'health.html';
 
   // Build sidebar using DOM methods
   sidebar.textContent = ''; // Clear
@@ -616,6 +654,25 @@ function buildSidebar(activeSlug) {
   }
   homeSection.appendChild(patternsLink);
 
+  // Health link
+  const healthLink = document.createElement('a');
+  healthLink.className = 'sidebar-item' + (isHealth ? ' active' : '');
+  healthLink.href = 'health.html';
+  healthLink.title = 'Project Health';
+  const healthIcon = document.createElement('span');
+  healthIcon.className = 'icon';
+  healthIcon.textContent = '\u2764'; // heart
+  healthLink.appendChild(healthIcon);
+  healthLink.appendChild(document.createTextNode(' Health'));
+
+  // Health dot indicator
+  if (state.healthDotLevel && state.healthDotLevel !== 'green') {
+    const healthDot = document.createElement('span');
+    healthDot.className = 'sidebar-health-dot dot-' + state.healthDotLevel;
+    healthLink.appendChild(healthDot);
+  }
+  homeSection.appendChild(healthLink);
+
   // Chief of Staff pinned at top
   const cosProject = state.projects.find(p => p.name === 'Chief of Staff');
   if (cosProject) {
@@ -628,6 +685,17 @@ function buildSidebar(activeSlug) {
     cosIcon.textContent = '\u2699';
     cosLink.appendChild(cosIcon);
     cosLink.appendChild(document.createTextNode(' Chief of Staff'));
+
+    // CoS inbox badge
+    if (cosProject.inboxCount > 0) {
+      const cosBadge = document.createElement('span');
+      cosBadge.className = 'sidebar-inbox-badge';
+      if (cosProject.inboxCount >= 10) cosBadge.classList.add('crit');
+      else if (cosProject.inboxCount >= 6) cosBadge.classList.add('warn');
+      cosBadge.textContent = cosProject.inboxCount;
+      cosLink.appendChild(cosBadge);
+    }
+
     homeSection.appendChild(cosLink);
   }
 
@@ -662,6 +730,17 @@ function buildSidebar(activeSlug) {
       icon.textContent = iconMap[p.category] || '\u25CF';
       link.appendChild(icon);
       link.appendChild(document.createTextNode(' ' + p.name));
+
+      // Inbox count badge
+      if (p.inboxCount > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'sidebar-inbox-badge';
+        if (p.inboxCount >= 10) badge.classList.add('crit');
+        else if (p.inboxCount >= 6) badge.classList.add('warn');
+        badge.textContent = p.inboxCount;
+        link.appendChild(badge);
+      }
+
       section.appendChild(link);
     }
 
@@ -1118,6 +1197,167 @@ function showOnboarding() {
   container.appendChild(hint);
 
   app.appendChild(container);
+}
+
+// ─── Health Scanning ─────────────────────────────────
+
+async function scanProjectHealth(project) {
+  const pathParts = project.relPath.split('/').filter(Boolean);
+  const health = {
+    name: project.name,
+    slug: project.slug,
+    category: project.category,
+    inboxCount: project.inboxCount || 0,
+    pkExists: false,
+    pkDaysOld: null,
+    claudeMdExists: false,
+    zContextExists: false,
+    zContextIndexExists: false,
+    logCount: 0,
+    latestLogDate: null,
+    grade: 'D',
+    issues: [],
+  };
+
+  // Check project-knowledge.md
+  try {
+    const pkDir = await getSubDir(state.rootHandle, ...pathParts);
+    if (pkDir) {
+      try {
+        const pkHandle = await pkDir.getFileHandle('project-knowledge.md');
+        const pkFile = await pkHandle.getFile();
+        health.pkExists = true;
+        health.pkDaysOld = Math.floor((Date.now() - pkFile.lastModified) / 86400000);
+      } catch (e) { /* doesn't exist */ }
+
+      // CLAUDE.md
+      try {
+        await pkDir.getFileHandle('CLAUDE.md');
+        health.claudeMdExists = true;
+      } catch (e) { /* doesn't exist */ }
+
+      // z_context/
+      try {
+        const zDir = await pkDir.getDirectoryHandle('z_context');
+        health.zContextExists = true;
+        try {
+          await zDir.getFileHandle('INDEX.md');
+          health.zContextIndexExists = true;
+        } catch (e) { /* no INDEX.md */ }
+      } catch (e) { /* no z_context */ }
+    }
+  } catch (e) { /* project dir not accessible */ }
+
+  // Count logs
+  const logEntries = await listDir(state.rootHandle, ...pathParts, 'logs');
+  const logFiles = logEntries.filter(e => e.kind === 'file' && e.name.endsWith('.md'));
+  health.logCount = logFiles.length;
+
+  // Find latest log date
+  if (logFiles.length > 0) {
+    const dates = logFiles
+      .map(f => f.name.match(/^(\d{4})(\d{2})(\d{2})/))
+      .filter(Boolean)
+      .map(m => `${m[1]}-${m[2]}-${m[3]}`)
+      .sort()
+      .reverse();
+    if (dates.length > 0) health.latestLogDate = dates[0];
+  }
+
+  // Compute issues and grade
+  let reds = 0;
+  let ambers = 0;
+
+  // PK freshness
+  if (!health.pkExists) {
+    if (health.category !== 'paused') {
+      health.issues.push('No project-knowledge.md');
+      reds++;
+    }
+  } else if (health.pkDaysOld > 14) {
+    health.issues.push('project-knowledge.md is ' + health.pkDaysOld + 'd old');
+    reds++;
+  } else if (health.pkDaysOld > 7) {
+    health.issues.push('project-knowledge.md is ' + health.pkDaysOld + 'd old');
+    ambers++;
+  }
+
+  // Inbox overload
+  if (health.inboxCount > 10) {
+    health.issues.push(health.inboxCount + ' open inbox items');
+    reds++;
+  } else if (health.inboxCount >= 6) {
+    health.issues.push(health.inboxCount + ' open inbox items');
+    ambers++;
+  }
+
+  // CLAUDE.md
+  if (!health.claudeMdExists && health.category !== 'paused') {
+    health.issues.push('No CLAUDE.md');
+    ambers++;
+  }
+
+  // z_context integrity
+  if (health.zContextExists && !health.zContextIndexExists) {
+    health.issues.push('z_context/ missing INDEX.md');
+    ambers++;
+  }
+
+  // Grade
+  if (reds === 0 && ambers === 0) health.grade = 'A';
+  else if (reds === 0 && ambers >= 1) health.grade = 'B';
+  else if (reds === 1) health.grade = 'C';
+  else health.grade = 'D';
+
+  return health;
+}
+
+async function scanAllProjectHealth() {
+  const results = await Promise.all(state.projects.map(p => scanProjectHealth(p)));
+  return results;
+}
+
+// Quick scan for home page alerts (PK freshness + inbox only)
+async function scanHealthAlerts() {
+  const alerts = [];
+  let hasRed = false;
+  let hasAmber = false;
+
+  for (const p of state.projects) {
+    if (p.category === 'paused') continue;
+
+    const pathParts = p.relPath.split('/').filter(Boolean);
+    const issues = [];
+
+    // Check PK freshness
+    try {
+      const dir = await getSubDir(state.rootHandle, ...pathParts);
+      if (dir) {
+        try {
+          const pkHandle = await dir.getFileHandle('project-knowledge.md');
+          const pkFile = await pkHandle.getFile();
+          const daysOld = Math.floor((Date.now() - pkFile.lastModified) / 86400000);
+          if (daysOld > 14) { issues.push('PK ' + daysOld + 'd stale'); hasRed = true; }
+          else if (daysOld > 7) { issues.push('PK ' + daysOld + 'd old'); hasAmber = true; }
+        } catch (e) {
+          issues.push('no project-knowledge.md');
+          hasRed = true;
+        }
+      }
+    } catch (e) { /* skip */ }
+
+    // Inbox
+    if (p.inboxCount > 10) { issues.push(p.inboxCount + ' inbox items'); hasRed = true; }
+    else if (p.inboxCount >= 6) { issues.push(p.inboxCount + ' inbox items'); hasAmber = true; }
+
+    if (issues.length > 0) {
+      alerts.push({ project: p.name, issues });
+    }
+  }
+
+  state.healthAlerts = alerts;
+  state.healthDotLevel = hasRed ? 'red' : hasAmber ? 'amber' : 'green';
+  return alerts;
 }
 
 // ─── Keyboard Shortcuts ──────────────────────────────
