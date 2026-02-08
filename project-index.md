@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-08
+**Last Updated:** 2026-02-08 11:16 AM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -140,7 +140,9 @@ CPF research completed (company profile, context profiles, training materials in
 **Status:** Active - Client Project (Engagement Stalled)
 **What it is:** AI training and consulting engagement with SalesIntel (B2B sales intelligence platform)
 **Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
-**Last synced:** 2026-01-25
+**Last synced:** 2026-02-08
+
+**Recent:** Documentation cleanup - corrected engagement history (removed proposed work, kept only delivered work), migrated to minimal CLAUDE.md + detailed project-knowledge.md pattern, implemented WikiLinks across all file references for Obsidian backlinks.
 
 **Engagement Arc:** Lunch & learn → expanded proposal → pivot to use-case sprint → SKO build sprint delivered (3 teams built AI workflows in 10 days) → "everyone's minds racing" → post-SKO continuation stalled.
 
