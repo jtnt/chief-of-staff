@@ -8,23 +8,23 @@ Task list for Chief of Staff. Items arrive from sessions, meetings, check-ins, a
 
 - [ ] **Build client-facing envoy skills from Razzo worksheets** — Apply envoy framework to AI Workflow Opportunity Worksheet and Planning Template `#session` `2026-02-03` [[Tasks/20260203-envoy-client-skills-plan.md]]
 - [ ] **I-Corps mentor prep** — NSF program application via Glenn Hellman `#meeting` `2026-02-02` [[Tasks/20260203-icorps-mentor-prep.md]]
-  - [ ] Complete mentor interest form
-  - [ ] Take I-Corps prep course
-  - [ ] Schedule video interview with Glen
+  - [ ] Complete mentor interest form `due:2026-02-09`
+  - [ ] Take I-Corps prep course `due:2026-02-09`
+  - [ ] Schedule video interview with Glen `due:2026-02-09`
 
 ## Backlog
 
 - [ ] **Review Boris Cherny's Claude Code tips** — 10 tips from Claude Code creator `#link` `2026-01-31`
-  - [ ] Try voice dictation (fn fn) for longer prompts
+  - [x] Try voice dictation (fn fn) for longer prompts
   - [ ] Add "scrap this and implement the elegant solution" to prompting vocabulary
   - [ ] Build habit: "Update your CLAUDE.md" after corrections
-  - [ ] Explore `/statusline` customization
+  - [x] Explore `/statusline` customization
   - [ ] Consider building a `/learn` spaced-repetition skill
 - [ ] **Review and implement CoS automation recommendations** — 5 targeted improvements from analysis sessions `#session` `2026-01-30`
-  - [ ] Session start visibility improvements
-  - [ ] Notification hook for background work completion
+  - [x] Session start visibility improvements
+  - [x] Notification hook for background work completion
   - [ ] Block external edits hook
-  - [ ] Build `/project-health`, `/weekly-review`, `/cross-project-synthesis` skills
+  - [x] Build `/project-health`, `/weekly-review`, `/cross-project-synthesis` skills
 - [ ] **Explore insights report suggestions** — Workflow automation ideas from Claude Code Insights report `#session` `2026-02-04` [[Tasks/20260204-insights-suggestions-followup.md]]
 
 ## Done
