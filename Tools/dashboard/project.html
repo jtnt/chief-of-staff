@@ -416,6 +416,10 @@
           titleEl.textContent = log.title;
           entryHeader.appendChild(titleEl);
 
+          if (log.sessionId) {
+            entryHeader.appendChild(createResumeBtn(log.sessionId));
+          }
+
           entry.appendChild(entryHeader);
           entry.appendChild(entryBody);
           body.appendChild(entry);

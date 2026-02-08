@@ -285,6 +285,13 @@
           item.appendChild(previewEl);
         }
 
+        if (log.sessionId) {
+          const resumeRow = document.createElement('div');
+          resumeRow.className = 'activity-resume';
+          resumeRow.appendChild(createResumeBtn(log.sessionId));
+          item.appendChild(resumeRow);
+        }
+
         body.appendChild(item);
       }
     }

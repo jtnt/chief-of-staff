@@ -483,6 +483,33 @@ a:hover { color: var(--accent-hover); }
   white-space: nowrap;
 }
 
+/* --- Resume Button --- */
+.resume-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: color 0.15s, border-color 0.15s;
+}
+.resume-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.resume-btn.copied {
+  color: #4ade80;
+  border-color: #4ade80;
+}
+
+.activity-resume {
+  margin-top: 4px;
+}
+
 /* --- Project Dashboard --- */
 .project-header {
   display: flex;

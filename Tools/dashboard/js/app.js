@@ -443,6 +443,13 @@ async function loadProjectLogs(relPath) {
       }
     }
 
+    // Extract session ID from transcript path (UUID before .jsonl)
+    let sessionId = null;
+    if (frontmatter.transcript) {
+      const idMatch = frontmatter.transcript.match(/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\.jsonl$/);
+      if (idMatch) sessionId = idMatch[1];
+    }
+
     logs.push({
       filename: entry.name,
       date: frontmatter.date || date,
@@ -450,6 +457,7 @@ async function loadProjectLogs(relPath) {
       preview: preview.slice(0, 120),
       content,
       type: frontmatter.type || 'session',
+      sessionId,
     });
   }
 
@@ -645,6 +653,28 @@ async function reconnectFS() {
 function getCurrentSlug() {
   const params = new URLSearchParams(window.location.search);
   return params.get('project') || '';
+}
+
+// ─── Resume Session Button ──────────────────────────
+
+function createResumeBtn(sessionId) {
+  const btn = document.createElement('button');
+  btn.className = 'resume-btn';
+  btn.title = 'Copy resume command';
+  btn.textContent = '\u25B6 Resume';
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const cmd = 'claude --resume ' + sessionId;
+    navigator.clipboard.writeText(cmd).then(() => {
+      btn.textContent = '\u2713 Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '\u25B6 Resume';
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  });
+  return btn;
 }
 
 // ─── Render Task Item HTML ───────────────────────────
