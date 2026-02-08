@@ -1088,6 +1088,37 @@ a:hover { color: var(--accent-hover); }
   flex-shrink: 0;
 }
 
+/* --- Filter Pills --- */
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 0 16px;
+}
+
+.filter-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-pill:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.filter-pill.active {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* --- Keyboard Shortcut Hint --- */
 kbd {
   display: inline-block;

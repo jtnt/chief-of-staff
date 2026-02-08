@@ -87,6 +87,9 @@
         renderSuggestionsSection(container, withSuggestions);
       }
 
+      // Project filter pills
+      renderProjectFilterPills(container, allPatterns);
+
       // Section 2: All Patterns
       renderAllPatternsSection(container, allPatterns);
     }
@@ -140,6 +143,63 @@
 
       section.appendChild(body);
       container.appendChild(section);
+    }
+
+    // ─── Project Filter Pills ───────────────────────────
+
+    let activeProjectFilter = null; // null = show all
+
+    function renderProjectFilterPills(container, allPatterns) {
+      const projects = [...new Set(allPatterns.map(p => p.projectName))].sort();
+      if (projects.length < 2) return;
+
+      const row = document.createElement('div');
+      row.className = 'filter-pills';
+      row.id = 'project-filter-pills';
+
+      const allPill = document.createElement('button');
+      allPill.className = 'filter-pill active';
+      allPill.textContent = 'All';
+      allPill.addEventListener('click', () => setProjectFilter(null));
+      row.appendChild(allPill);
+
+      for (const name of projects) {
+        const count = allPatterns.filter(p => p.projectName === name).length;
+        const pill = document.createElement('button');
+        pill.className = 'filter-pill';
+        pill.dataset.project = name;
+        pill.textContent = name + ' (' + count + ')';
+        pill.addEventListener('click', () => setProjectFilter(name));
+        row.appendChild(pill);
+      }
+
+      container.appendChild(row);
+    }
+
+    function setProjectFilter(projectName) {
+      activeProjectFilter = projectName;
+
+      // Update pill active states
+      const pills = document.querySelectorAll('#project-filter-pills .filter-pill');
+      for (const pill of pills) {
+        if (projectName === null) {
+          pill.classList.toggle('active', !pill.dataset.project);
+        } else {
+          pill.classList.toggle('active', pill.dataset.project === projectName);
+        }
+      }
+
+      // Show/hide project groups
+      const groups = document.querySelectorAll('.patterns-project-group');
+      for (const group of groups) {
+        const header = group.querySelector('.patterns-project-group-header h4');
+        if (!header) continue;
+        if (projectName === null) {
+          group.style.display = '';
+        } else {
+          group.style.display = header.textContent === projectName ? '' : 'none';
+        }
+      }
     }
 
     // ─── All Patterns Section ─────────────────────────

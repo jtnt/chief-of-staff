@@ -103,17 +103,17 @@
         loadProjectPatterns(currentProject.relPath),
       ]);
 
-      // Section A: Project Inbox
+      // Section A: Open Items (top of page for visibility)
+      renderOpenItems(container, indexContent);
+
+      // Section B: Project Inbox
       renderProjectInbox(container, inboxContent);
 
-      // Section B: Project Knowledge
+      // Section C: Project Knowledge
       renderProjectKnowledge(container, knowledgeContent, indexContent);
 
-      // Section C: Session Logs
+      // Section D: Session Logs
       renderProjectLogs(container, logs);
-
-      // Section D: Open Items
-      renderOpenItems(container, indexContent);
 
       // Section E: Session Patterns
       renderProjectPatterns(container, patterns);

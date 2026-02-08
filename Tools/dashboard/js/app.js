@@ -423,12 +423,19 @@ async function loadProjectLogs(relPath) {
 
     if (dateMatch) {
       date = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`;
-      titleSlug = dateMatch[4].replace(/-/g, ' ');
+      titleSlug = dateMatch[4].replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
 
-    // Extract first heading as title
+    // Extract title: prefer heading, but fall back to filename slug if generic
     const headingMatch = content.match(/^#\s+(.+)$/m);
-    const title = headingMatch ? headingMatch[1] : titleSlug;
+    let title = titleSlug;
+    if (headingMatch) {
+      const heading = headingMatch[1];
+      // Skip generic headings like "ProjectName: Session Log" or just "Session Log"
+      if (!/session log$/i.test(heading)) {
+        title = heading;
+      }
+    }
 
     // Extract first non-heading, non-empty line as preview
     const previewLines = content.split('\n').filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('---'));
@@ -925,12 +932,18 @@ async function loadProjectPatterns(relPath) {
 
     if (dateMatch) {
       date = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`;
-      titleSlug = dateMatch[4].replace(/-/g, ' ');
+      titleSlug = dateMatch[4].replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
 
-    // Extract first heading as title
+    // Extract title: prefer heading, but fall back to filename slug if generic
     const headingMatch = content.match(/^#\s+(.+)$/m);
-    const title = headingMatch ? headingMatch[1] : titleSlug;
+    let title = titleSlug;
+    if (headingMatch) {
+      const heading = headingMatch[1];
+      if (!/session patterns?$/i.test(heading)) {
+        title = heading;
+      }
+    }
 
     // Extract YAML frontmatter
     let frontmatter = {};
