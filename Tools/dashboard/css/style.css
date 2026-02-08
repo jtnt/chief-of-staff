@@ -341,6 +341,24 @@ a:hover { color: var(--accent-hover); }
   transform: rotate(45deg);
 }
 
+.task-copy-btn {
+  opacity: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  padding: 2px 6px;
+  cursor: pointer;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.task-item:hover .task-copy-btn { opacity: 1; }
+.task-copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+.task-copy-btn.copied { color: var(--green); border-color: var(--green); opacity: 1; }
+
 .task-content {
   flex: 1;
   min-width: 0;

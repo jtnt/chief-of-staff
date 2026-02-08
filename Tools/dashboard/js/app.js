@@ -1055,6 +1055,34 @@ function createTaskItemEl(item, filePath, sectionName) {
 
   if (hasMeta) content.appendChild(meta);
   div.appendChild(content);
+
+  // Copy prompt button (top-level tasks only, not in Done section)
+  if (!item.checked || sectionName !== 'Done') {
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'task-copy-btn';
+    copyBtn.title = 'Copy prompt for Claude Code';
+    copyBtn.textContent = '\u2398'; // clipboard icon
+    copyBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      let prompt = item.title || '(untitled)';
+      if (item.context) prompt += '\n\nContext: ' + item.context;
+      if (item.subtasks && item.subtasks.length) {
+        const openSubs = item.subtasks.filter(s => !s.checked);
+        if (openSubs.length) {
+          prompt += '\n\nSub-tasks:\n' + openSubs.map(s => '- ' + s.text).join('\n');
+        }
+      }
+      if (item.link) {
+        prompt += '\n\nSee task spec: ' + item.link;
+      }
+      await navigator.clipboard.writeText(prompt);
+      copyBtn.textContent = '\u2713';
+      copyBtn.classList.add('copied');
+      setTimeout(() => { copyBtn.textContent = '\u2398'; copyBtn.classList.remove('copied'); }, 1500);
+    });
+    div.appendChild(copyBtn);
+  }
+
   frag.appendChild(div);
 
   // Subtasks
