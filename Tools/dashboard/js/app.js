@@ -15,6 +15,7 @@ const state = {
   projects: [],           // Discovered projects [{name, slug, path, status, category}]
   cosInbox: null,         // Parsed cos-inbox.md
   projectIndex: null,     // Raw project-index.md content
+  pendingSuggestionCount: 0, // Files with pending CLAUDE.md suggestions
 };
 
 // ─── IndexedDB for directory handle persistence ──────
@@ -541,6 +542,7 @@ function buildSidebar(activeSlug) {
   const groups = groupProjects(state.projects);
   const currentPage = window.location.pathname.split('/').pop();
   const isHome = currentPage === 'index.html' || currentPage === '' || currentPage === 'dashboard';
+  const isPatterns = currentPage === 'patterns.html';
 
   // Build sidebar using DOM methods
   sidebar.textContent = ''; // Clear
@@ -566,6 +568,25 @@ function buildSidebar(activeSlug) {
   homeLink.appendChild(homeIcon);
   homeLink.appendChild(document.createTextNode(' Home / Inbox'));
   homeSection.appendChild(homeLink);
+
+  // Patterns link
+  const patternsLink = document.createElement('a');
+  patternsLink.className = 'sidebar-item' + (isPatterns ? ' active' : '');
+  patternsLink.href = 'patterns.html';
+  patternsLink.title = 'Session Patterns';
+  const patternsIcon = document.createElement('span');
+  patternsIcon.className = 'icon';
+  patternsIcon.textContent = '\u25C6';
+  patternsLink.appendChild(patternsIcon);
+  patternsLink.appendChild(document.createTextNode(' Patterns'));
+
+  // Add amber dot if suggestions pending (stored on state by patterns page or preloaded)
+  if (state.pendingSuggestionCount > 0) {
+    const dot = document.createElement('span');
+    dot.className = 'sidebar-suggestion-dot';
+    patternsLink.appendChild(dot);
+  }
+  homeSection.appendChild(patternsLink);
 
   // Chief of Staff pinned at top
   const cosProject = state.projects.find(p => p.name === 'Chief of Staff');
@@ -655,21 +676,31 @@ function getCurrentSlug() {
   return params.get('project') || '';
 }
 
-// ─── Resume Session Button ──────────────────────────
+// ─── Resume Session Buttons ─────────────────────────
 
-function createResumeBtn(sessionId) {
+function createResumeBtns(sessionId) {
+  const wrap = document.createElement('span');
+  wrap.className = 'resume-btns';
+  wrap.appendChild(makeResumeBtn(sessionId, false));
+  wrap.appendChild(makeResumeBtn(sessionId, true));
+  return wrap;
+}
+
+function makeResumeBtn(sessionId, yolo) {
   const btn = document.createElement('button');
-  btn.className = 'resume-btn';
-  btn.title = 'Copy resume command';
-  btn.textContent = '\u25B6 Resume';
+  btn.className = yolo ? 'resume-btn resume-yolo' : 'resume-btn';
+  const label = yolo ? 'YOLO' : '\u25B6 Resume';
+  btn.title = yolo ? 'Copy resume command (--dangerously-skip-permissions)' : 'Copy resume command';
+  btn.textContent = label;
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
-    const cmd = 'claude --resume ' + sessionId;
+    let cmd = 'claude --resume ' + sessionId;
+    if (yolo) cmd += ' --dangerously-skip-permissions';
     navigator.clipboard.writeText(cmd).then(() => {
       btn.textContent = '\u2713 Copied';
       btn.classList.add('copied');
       setTimeout(() => {
-        btn.textContent = '\u25B6 Resume';
+        btn.textContent = label;
         btn.classList.remove('copied');
       }, 1500);
     });
@@ -871,6 +902,84 @@ async function openTaskDetail(linkPath) {
 function closeSlideOver() {
   const backdrop = document.getElementById('slide-over-backdrop');
   if (backdrop) backdrop.classList.remove('open');
+}
+
+// ─── Pattern Loading ─────────────────────────────────
+
+async function loadProjectPatterns(relPath) {
+  const pathParts = relPath.split('/').filter(Boolean);
+  const entries = await listDir(state.rootHandle, ...pathParts, 'session-patterns');
+  if (!entries.length) return [];
+
+  const patterns = [];
+  for (const entry of entries) {
+    if (entry.kind !== 'file' || !entry.name.endsWith('.md')) continue;
+
+    const content = await readFile(state.rootHandle, ...pathParts, 'session-patterns', entry.name);
+    if (!content) continue;
+
+    // Extract date from filename: YYYYMMDD-...
+    const dateMatch = entry.name.match(/^(\d{4})(\d{2})(\d{2})-(.+)\.md$/);
+    let date = '';
+    let titleSlug = entry.name.replace('.md', '');
+
+    if (dateMatch) {
+      date = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`;
+      titleSlug = dateMatch[4].replace(/-/g, ' ');
+    }
+
+    // Extract first heading as title
+    const headingMatch = content.match(/^#\s+(.+)$/m);
+    const title = headingMatch ? headingMatch[1] : titleSlug;
+
+    // Extract YAML frontmatter
+    let frontmatter = {};
+    const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    if (fmMatch) {
+      for (const line of fmMatch[1].split('\n')) {
+        const kv = line.match(/^([\w-]+):\s*(.+)$/);
+        if (kv) frontmatter[kv[1]] = kv[2].trim();
+      }
+    }
+
+    // Check for suggestion blocks
+    const hasSuggestions = /```suggestion:(project|global)/.test(content);
+
+    // Extract individual suggestion blocks
+    const suggestions = [];
+    const suggestionRegex = /```suggestion:(project|global)\n([\s\S]*?)```/g;
+    let match;
+    while ((match = suggestionRegex.exec(content)) !== null) {
+      suggestions.push({ type: match[1], text: match[2].trim() });
+    }
+
+    patterns.push({
+      filename: entry.name,
+      date: frontmatter.date ? frontmatter.date.split(' ')[0] : date,
+      title,
+      content,
+      hasSuggestions,
+      suggestions,
+    });
+  }
+
+  // Sort newest first
+  patterns.sort((a, b) => b.date.localeCompare(a.date));
+  return patterns;
+}
+
+async function loadAllPatterns() {
+  const allPatterns = [];
+
+  for (const project of state.projects) {
+    const patterns = await loadProjectPatterns(project.relPath);
+    for (const p of patterns) {
+      allPatterns.push({ ...p, projectName: project.name, projectSlug: project.slug });
+    }
+  }
+
+  allPatterns.sort((a, b) => b.date.localeCompare(a.date));
+  return allPatterns;
 }
 
 // ─── Aggregated Recent Logs ──────────────────────────

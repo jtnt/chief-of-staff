@@ -95,11 +95,12 @@
       container.textContent = '';
 
       // Load all data in parallel
-      const [inboxContent, knowledgeContent, indexContent, logs] = await Promise.all([
+      const [inboxContent, knowledgeContent, indexContent, logs, patterns] = await Promise.all([
         readFile(state.rootHandle, ...currentProject.relPath.split('/'), 'cos-inbox.md'),
         readFile(state.rootHandle, ...currentProject.relPath.split('/'), 'project-knowledge.md'),
         readFile(state.rootHandle, 'Chief of Staff', 'project-index.md'),
         loadProjectLogs(currentProject.relPath),
+        loadProjectPatterns(currentProject.relPath),
       ]);
 
       // Section A: Project Inbox
@@ -113,6 +114,9 @@
 
       // Section D: Open Items
       renderOpenItems(container, indexContent);
+
+      // Section E: Session Patterns
+      renderProjectPatterns(container, patterns);
     }
 
     // ─── Section A: Project Inbox ──────────────────
@@ -417,7 +421,7 @@
           entryHeader.appendChild(titleEl);
 
           if (log.sessionId) {
-            entryHeader.appendChild(createResumeBtn(log.sessionId));
+            entryHeader.appendChild(createResumeBtns(log.sessionId));
           }
 
           entry.appendChild(entryHeader);
@@ -497,6 +501,168 @@
 
       section.appendChild(body);
       container.appendChild(section);
+    }
+
+    // ─── Section E: Session Patterns ────────────────
+
+    function renderProjectPatterns(container, patterns) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Session Patterns';
+
+      const badge = document.createElement('span');
+      badge.className = 'count-badge';
+      badge.textContent = patterns.length;
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(badge);
+      header.appendChild(h3);
+
+      if (patterns.length > 0) {
+        const toggleAll = document.createElement('button');
+        toggleAll.className = 'section-toggle';
+        toggleAll.textContent = 'Expand all';
+        toggleAll.addEventListener('click', () => {
+          const entries = section.querySelectorAll('.log-entry');
+          const allExpanded = Array.from(entries).every(e => e.classList.contains('expanded'));
+          entries.forEach(e => {
+            if (allExpanded) {
+              e.classList.remove('expanded');
+            } else {
+              e.classList.add('expanded');
+              lazyRenderPatternBody(e);
+            }
+          });
+          toggleAll.textContent = allExpanded ? 'Expand all' : 'Collapse all';
+        });
+        header.appendChild(toggleAll);
+      }
+
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      if (patterns.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'color: var(--text-muted); font-size: 0.85rem; font-style: italic; padding: 8px 0;';
+        empty.textContent = 'No session patterns found';
+        body.appendChild(empty);
+      } else {
+        // Show patterns with suggestions first
+        const withSuggestions = patterns.filter(p => p.hasSuggestions);
+        const withoutSuggestions = patterns.filter(p => !p.hasSuggestions);
+        const sorted = [...withSuggestions, ...withoutSuggestions];
+
+        for (const pattern of sorted) {
+          const entry = document.createElement('div');
+          entry.className = 'log-entry';
+          entry._patternContent = pattern.content;
+          entry._suggestions = pattern.suggestions;
+
+          const entryHeader = document.createElement('div');
+          entryHeader.className = 'log-entry-header';
+
+          const entryBody = document.createElement('div');
+          entryBody.className = 'log-entry-body';
+
+          entryHeader.addEventListener('click', () => {
+            entry.classList.toggle('expanded');
+            lazyRenderPatternBody(entry);
+          });
+
+          const chevron = document.createElement('span');
+          chevron.className = 'log-chevron';
+          chevron.textContent = '\u25B6';
+          entryHeader.appendChild(chevron);
+
+          const dateEl = document.createElement('span');
+          dateEl.className = 'log-entry-date';
+          dateEl.textContent = pattern.date;
+          entryHeader.appendChild(dateEl);
+
+          const titleEl = document.createElement('span');
+          titleEl.className = 'log-entry-title';
+          titleEl.textContent = pattern.title;
+          entryHeader.appendChild(titleEl);
+
+          // Suggestion badges
+          if (pattern.hasSuggestions) {
+            const badgeWrap = document.createElement('span');
+            badgeWrap.className = 'pattern-entry-suggestions';
+            for (const s of pattern.suggestions) {
+              const typeBadge = document.createElement('span');
+              typeBadge.className = 'suggestion-type-badge type-' + s.type;
+              typeBadge.textContent = s.type;
+              badgeWrap.appendChild(typeBadge);
+            }
+            entryHeader.appendChild(badgeWrap);
+          }
+
+          entry.appendChild(entryHeader);
+          entry.appendChild(entryBody);
+          body.appendChild(entry);
+        }
+      }
+
+      // Suggestion count in header
+      const sugCount = patterns.filter(p => p.hasSuggestions).length;
+      if (sugCount > 0) {
+        const sugBadge = document.createElement('span');
+        sugBadge.className = 'pattern-suggestion-count';
+        sugBadge.textContent = sugCount + ' with suggestions';
+        sugBadge.style.marginLeft = '8px';
+        h3.appendChild(document.createTextNode(' '));
+        h3.appendChild(sugBadge);
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    function lazyRenderPatternBody(entry) {
+      if (entry.dataset.rendered) return;
+      const body = entry.querySelector('.log-entry-body');
+      if (!body) return;
+
+      const content = entry._patternContent;
+      const suggestions = entry._suggestions;
+
+      if (suggestions && suggestions.length > 0) {
+        for (const s of suggestions) {
+          const wrapper = document.createElement('div');
+          wrapper.style.marginBottom = '12px';
+
+          const typeBadge = document.createElement('span');
+          typeBadge.className = 'suggestion-type-badge type-' + s.type;
+          typeBadge.textContent = s.type;
+          wrapper.appendChild(typeBadge);
+
+          const block = document.createElement('div');
+          block.className = 'suggestion-block';
+          block.textContent = s.text;
+          wrapper.appendChild(block);
+
+          body.appendChild(wrapper);
+        }
+
+        const hr = document.createElement('hr');
+        hr.style.cssText = 'border: none; border-top: 1px solid var(--border); margin: 12px 0;';
+        body.appendChild(hr);
+      }
+
+      // Rendered markdown — content from user's own local files only
+      const mdDiv = document.createElement('div');
+      mdDiv.className = 'markdown-body';
+      // renderMarkdown processes user's own local files only (see app.js security note)
+      mdDiv.innerHTML = renderMarkdown(content);
+      body.appendChild(mdDiv);
+
+      entry.dataset.rendered = 'true';
     }
 
     // ─── Slide-over close ──────────────────────────

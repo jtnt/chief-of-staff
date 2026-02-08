@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patterns — Chief of Staff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main class="main" id="main-content">
+      <div class="page-header">
+        <h2>Patterns</h2>
+        <div class="subtitle">Session patterns and CLAUDE.md suggestions</div>
+      </div>
+
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-total-patterns">-</div>
+          <div class="stat-label">Total Patterns</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-with-suggestions">-</div>
+          <div class="stat-label">With Suggestions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-projects-with-patterns">-</div>
+          <div class="stat-label">Projects</div>
+        </div>
+      </div>
+
+      <div id="patterns-content">
+        <div class="loading">Loading patterns...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    /* ─── Patterns Page Logic ─────────────────────────
+       SECURITY NOTE: All content rendered on this page comes
+       exclusively from the user's own local filesystem (session-patterns
+       markdown files in ~/Documents/Projects/). There is no server,
+       no external data input, and no untrusted content. innerHTML usage
+       with renderMarkdown() processes only trusted local files.
+       ──────────────────────────────────────────────── */
+
+    async function onConnected() {
+      await loadPatternsPage();
+    }
+
+    async function loadPatternsPage() {
+      const container = document.getElementById('patterns-content');
+      container.textContent = '';
+
+      const allPatterns = await loadAllPatterns();
+
+      // Stats
+      const withSuggestions = allPatterns.filter(p => p.hasSuggestions);
+      const projectsSet = new Set(allPatterns.map(p => p.projectName));
+
+      document.getElementById('stat-total-patterns').textContent = allPatterns.length;
+      document.getElementById('stat-with-suggestions').textContent = withSuggestions.length;
+      document.getElementById('stat-projects-with-patterns').textContent = projectsSet.size;
+
+      // Update sidebar dot
+      state.pendingSuggestionCount = withSuggestions.length;
+      buildSidebar('');
+
+      if (allPatterns.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        const p = document.createElement('p');
+        p.textContent = 'No session patterns found across any projects.';
+        empty.appendChild(p);
+        container.appendChild(empty);
+        return;
+      }
+
+      // Section 1: Pending Suggestions
+      if (withSuggestions.length > 0) {
+        renderSuggestionsSection(container, withSuggestions);
+      }
+
+      // Section 2: All Patterns
+      renderAllPatternsSection(container, allPatterns);
+    }
+
+    // ─── Pending Suggestions Section ──────────────────
+
+    function renderSuggestionsSection(container, patternsWithSuggestions) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      const h3 = document.createElement('h3');
+      h3.textContent = 'Pending Suggestions';
+      const badge = document.createElement('span');
+      badge.className = 'pattern-suggestion-count';
+      badge.textContent = patternsWithSuggestions.length;
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(badge);
+      header.appendChild(h3);
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      // Group by project
+      const grouped = groupByProject(patternsWithSuggestions);
+
+      for (const [projectName, patterns] of Object.entries(grouped)) {
+        const group = document.createElement('div');
+        group.className = 'patterns-project-group';
+
+        const groupHeader = document.createElement('div');
+        groupHeader.className = 'patterns-project-group-header';
+        const h4 = document.createElement('h4');
+        h4.textContent = projectName;
+        groupHeader.appendChild(h4);
+        const countBadge = document.createElement('span');
+        countBadge.className = 'count-badge';
+        countBadge.textContent = patterns.length;
+        groupHeader.appendChild(countBadge);
+        group.appendChild(groupHeader);
+
+        for (const pattern of patterns) {
+          const entry = createPatternEntry(pattern, true);
+          group.appendChild(entry);
+        }
+
+        body.appendChild(group);
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    // ─── All Patterns Section ─────────────────────────
+
+    function renderAllPatternsSection(container, allPatterns) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('div');
+      header.className = 'section-header';
+      const h3 = document.createElement('h3');
+      h3.textContent = 'All Patterns';
+      const badge = document.createElement('span');
+      badge.className = 'count-badge';
+      badge.textContent = allPatterns.length;
+      h3.appendChild(document.createTextNode(' '));
+      h3.appendChild(badge);
+      header.appendChild(h3);
+
+      if (allPatterns.length > 0) {
+        const toggleAll = document.createElement('button');
+        toggleAll.className = 'section-toggle';
+        toggleAll.textContent = 'Expand all';
+        toggleAll.addEventListener('click', () => {
+          const entries = section.querySelectorAll('.log-entry');
+          const allExpanded = Array.from(entries).every(e => e.classList.contains('expanded'));
+          entries.forEach(e => {
+            if (allExpanded) {
+              e.classList.remove('expanded');
+            } else {
+              e.classList.add('expanded');
+              lazyRenderPatternBody(e);
+            }
+          });
+          toggleAll.textContent = allExpanded ? 'Expand all' : 'Collapse all';
+        });
+        header.appendChild(toggleAll);
+      }
+
+      section.appendChild(header);
+
+      const body = document.createElement('div');
+      body.className = 'section-body';
+
+      // Search
+      if (allPatterns.length > 3) {
+        const searchBar = document.createElement('div');
+        searchBar.className = 'search-bar';
+        const searchIcon = document.createElement('span');
+        searchIcon.className = 'search-icon';
+        searchIcon.textContent = '\uD83D\uDD0D';
+        searchBar.appendChild(searchIcon);
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Search patterns... (press / to focus)';
+        searchInput.addEventListener('input', () => {
+          const entries = body.querySelectorAll('.log-entry');
+          const query = searchInput.value.toLowerCase();
+          for (const entry of entries) {
+            if (!query) { entry.style.display = ''; continue; }
+            const matchTitle = (entry.dataset.title || '').includes(query);
+            const matchContent = (entry.dataset.content || '').includes(query);
+            entry.style.display = (matchTitle || matchContent) ? '' : 'none';
+          }
+        });
+        searchBar.appendChild(searchInput);
+        body.appendChild(searchBar);
+      }
+
+      // Group by project
+      const grouped = groupByProject(allPatterns);
+
+      for (const [projectName, patterns] of Object.entries(grouped)) {
+        const group = document.createElement('div');
+        group.className = 'patterns-project-group';
+
+        const groupHeader = document.createElement('div');
+        groupHeader.className = 'patterns-project-group-header';
+        const h4 = document.createElement('h4');
+        h4.textContent = projectName;
+        groupHeader.appendChild(h4);
+        const countBadge = document.createElement('span');
+        countBadge.className = 'count-badge';
+        countBadge.textContent = patterns.length;
+        groupHeader.appendChild(countBadge);
+        group.appendChild(groupHeader);
+
+        for (const pattern of patterns) {
+          const entry = createPatternEntry(pattern, false);
+          group.appendChild(entry);
+        }
+
+        body.appendChild(group);
+      }
+
+      section.appendChild(body);
+      container.appendChild(section);
+    }
+
+    // ─── Helpers ──────────────────────────────────────
+
+    function groupByProject(patterns) {
+      const groups = {};
+      for (const p of patterns) {
+        if (!groups[p.projectName]) groups[p.projectName] = [];
+        groups[p.projectName].push(p);
+      }
+      return groups;
+    }
+
+    function createPatternEntry(pattern, showSuggestionsExpanded) {
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      entry.dataset.title = pattern.title.toLowerCase();
+      entry.dataset.content = pattern.content.toLowerCase().slice(0, 500);
+
+      // Store content for lazy rendering
+      entry._patternContent = pattern.content;
+      entry._suggestions = pattern.suggestions;
+
+      const entryHeader = document.createElement('div');
+      entryHeader.className = 'log-entry-header';
+
+      const entryBody = document.createElement('div');
+      entryBody.className = 'log-entry-body';
+
+      entryHeader.addEventListener('click', () => {
+        entry.classList.toggle('expanded');
+        lazyRenderPatternBody(entry);
+      });
+
+      const chevron = document.createElement('span');
+      chevron.className = 'log-chevron';
+      chevron.textContent = '\u25B6';
+      entryHeader.appendChild(chevron);
+
+      const dateEl = document.createElement('span');
+      dateEl.className = 'log-entry-date';
+      dateEl.textContent = pattern.date;
+      entryHeader.appendChild(dateEl);
+
+      const titleEl = document.createElement('span');
+      titleEl.className = 'log-entry-title';
+      titleEl.textContent = pattern.title;
+      entryHeader.appendChild(titleEl);
+
+      // Suggestion badges in header
+      if (pattern.hasSuggestions) {
+        const badgeWrap = document.createElement('span');
+        badgeWrap.className = 'pattern-entry-suggestions';
+        for (const s of pattern.suggestions) {
+          const typeBadge = document.createElement('span');
+          typeBadge.className = 'suggestion-type-badge type-' + s.type;
+          typeBadge.textContent = s.type;
+          badgeWrap.appendChild(typeBadge);
+        }
+        entryHeader.appendChild(badgeWrap);
+      }
+
+      entry.appendChild(entryHeader);
+      entry.appendChild(entryBody);
+
+      // Auto-expand suggestions section if requested
+      if (showSuggestionsExpanded) {
+        entry.classList.add('expanded');
+        lazyRenderPatternBody(entry);
+      }
+
+      return entry;
+    }
+
+    function lazyRenderPatternBody(entry) {
+      if (entry.dataset.rendered) return;
+      const body = entry.querySelector('.log-entry-body');
+      if (!body) return;
+
+      const content = entry._patternContent;
+      const suggestions = entry._suggestions;
+
+      if (suggestions && suggestions.length > 0) {
+        // Render suggestions prominently first
+        for (const s of suggestions) {
+          const wrapper = document.createElement('div');
+          wrapper.style.marginBottom = '12px';
+
+          const typeBadge = document.createElement('span');
+          typeBadge.className = 'suggestion-type-badge type-' + s.type;
+          typeBadge.textContent = s.type;
+          wrapper.appendChild(typeBadge);
+
+          const block = document.createElement('div');
+          block.className = 'suggestion-block';
+          block.textContent = s.text;
+          wrapper.appendChild(block);
+
+          body.appendChild(wrapper);
+        }
+
+        // Separator before full content
+        const hr = document.createElement('hr');
+        hr.style.cssText = 'border: none; border-top: 1px solid var(--border); margin: 12px 0;';
+        body.appendChild(hr);
+      }
+
+      // Full rendered markdown (trusted local files only)
+      const mdDiv = document.createElement('div');
+      mdDiv.className = 'markdown-body';
+      mdDiv.innerHTML = renderMarkdown(content);
+      body.appendChild(mdDiv);
+
+      entry.dataset.rendered = 'true';
+    }
+
+    // ─── Boot ─────────────────────────────────────────
+
+    (async function boot() {
+      const connected = await initApp();
+      if (connected) {
+        buildSidebar('');
+        await loadPatternsPage();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -493,7 +493,6 @@ a:hover { color: var(--accent-hover); }
   border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
-  margin-left: auto;
   flex-shrink: 0;
   transition: color 0.15s, border-color 0.15s;
 }
@@ -504,6 +503,21 @@ a:hover { color: var(--accent-hover); }
 .resume-btn.copied {
   color: #4ade80;
   border-color: #4ade80;
+}
+.resume-btn.resume-yolo {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.4);
+}
+.resume-btn.resume-yolo:hover {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.resume-btns {
+  display: inline-flex;
+  gap: 6px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .activity-resume {
@@ -983,6 +997,95 @@ a:hover { color: var(--accent-hover); }
 .onboarding .connect-btn {
   padding: 12px 28px;
   font-size: 0.95rem;
+}
+
+/* --- Pattern & Suggestion Styles --- */
+.suggestion-block {
+  border-left: 3px solid var(--amber);
+  background: var(--amber-subtle);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 8px 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  color: var(--text-secondary);
+}
+
+.suggestion-type-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.suggestion-type-badge.type-global {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.suggestion-type-badge.type-project {
+  background: var(--amber-subtle);
+  color: var(--amber);
+}
+
+.pattern-suggestion-count {
+  background: var(--amber-subtle);
+  color: var(--amber);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.patterns-project-group {
+  margin-bottom: 24px;
+}
+
+.patterns-project-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.patterns-project-group-header h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.patterns-project-group-header .count-badge {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+.sidebar-suggestion-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.pattern-entry-suggestions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 /* --- Keyboard Shortcut Hint --- */
