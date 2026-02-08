@@ -10,7 +10,7 @@ title: Links Model Switching Investigation
 
 ## What Was Done
 
-1. **Saved another test link** - Claude Code + Obsidian integration article saved to Links/Technical
+1. **Saved another test link** - Claude Code + Obsidian integration article saved to [[Links/Technical]]
 
 2. **Investigated model switching** - Discovered that the `model` frontmatter in slash commands does NOT actually switch models when the user invokes the command directly. Status line remained on Opus during `/thought` execution despite `model: claude-haiku-4-5` in frontmatter.
 

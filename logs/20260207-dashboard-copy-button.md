@@ -15,7 +15,7 @@ Added a clipboard copy button to each task in the dashboard that generates a pro
 - Appears on hover (hidden on completed tasks in Done section)
 - Copies a prompt containing: task title, context line, open sub-tasks, and a reference to the linked task spec file if one exists
 - Shows visual feedback (checkmark for 1.5 seconds) after copying
-- Uses simple path references (`See task spec: Tasks/YYYYMMDD-...md`) instead of embedding full content, since Claude Code can read the file directly
+- Uses simple path references (`See task spec: [[Tasks/YYYYMMDD-...md]]`) instead of embedding full content, since Claude Code can read the file directly
 
 **Implementation details:**
 - CSS: `.copy-task` button styled with clipboard SVG icon, positioned absolute right, hover states
@@ -23,7 +23,7 @@ Added a clipboard copy button to each task in the dashboard that generates a pro
 - Template: Title → Context → Sub-tasks → Task spec reference (if linked)
 
 **Related improvements captured:**
-- Created comprehensive task spec at `Tasks/20260207-dashboard-project-task-management.md` documenting needed changes to make project pages fully interactive (sidebar badges, Done section, uncheck-restore behavior)
+- Created comprehensive task spec at [[Tasks/20260207-dashboard-project-task-management.md]] documenting needed changes to make project pages fully interactive (sidebar badges, Done section, uncheck-restore behavior)
 - Added thought to inbox: Claude Code as modern equivalent of Hitchhiker's Guide text adventure (Infocom, 1984)
 
 ## Key Decisions
@@ -50,16 +50,16 @@ Added a clipboard copy button to each task in the dashboard that generates a pro
 
 **Git status shows:**
 - Modified: `.obsidian/workspace.json` (Obsidian workspace state)
-- Modified: `Tools/dashboard/css/style.css` (copy button styles)
-- Modified: `Tools/dashboard/js/app.js` (copy prompt logic)
-- Created: `Check-Ins/thoughts/20260207-claude-code-hitchhikers-guide-text-game-post-idea.md`
+- Modified: [[Tools/dashboard/css/style.css]] (copy button styles)
+- Modified: [[Tools/dashboard/js/app.js]] (copy prompt logic)
+- Created: [[Check-Ins/thoughts/20260207-claude-code-hitchhikers-guide-text-game-post-idea.md]]
 
 **From transcript:**
-- `Check-Ins/thoughts/20260207-claude-code-hitchhikers-guide-text-game-post-idea.md` - Post idea about Claude Code as modern text adventure
+- [[Check-Ins/thoughts/20260207-claude-code-hitchhikers-guide-text-game-post-idea.md]] - Post idea about Claude Code as modern text adventure
 - `cos-inbox.md` - Added task items for dashboard improvements and Hitchhiker's Guide post
-- `Tasks/20260207-dashboard-project-task-management.md` - Comprehensive spec for project page task management
-- `Tools/dashboard/css/style.css` - Added `.copy-task` button styles
-- `Tools/dashboard/js/app.js` - Added `copyTaskPrompt()` function and button rendering
+- [[Tasks/20260207-dashboard-project-task-management.md]] - Comprehensive spec for project page task management
+- [[Tools/dashboard/css/style.css]] - Added `.copy-task` button styles
+- [[Tools/dashboard/js/app.js]] - Added `copyTaskPrompt()` function and button rendering
 
 ## Open Items
 

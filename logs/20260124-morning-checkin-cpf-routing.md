@@ -28,11 +28,11 @@ User noted Joe Rhew is technically a competitor (building context profiles for c
 ## Changes Made
 
 **New files:**
-- `Check-Ins/daily/20260124-morning.md` - Morning check-in with work plans and CPF discussion
+- [[Check-Ins/daily/20260124-morning.md]] - Morning check-in with work plans and CPF discussion
 
 **Modified files:**
 - `/Users/jtnt/Documents/Projects/Context Profile Framework/cos-inbox.md` - Added 3 pending items
-- `/Users/jtnt/Documents/Projects/Context Profile Framework/logs/20260124-morning-checkin-strategic-insights.md` - Created log entry
+- `/Users/jtnt/Documents/Projects/Context Profile Framework/[[logs/20260124-morning-checkin-strategic-insights.md]]` - Created log entry
 
 ## Open Items
 

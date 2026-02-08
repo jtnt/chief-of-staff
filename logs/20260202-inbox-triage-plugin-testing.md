@@ -39,7 +39,7 @@ title: Inbox Triage Plugin Testing
 **Files modified:**
 - `/Users/jtnt/Documents/Projects/Code/inbox-triage/skills/setup/SKILL.md` - removed `name: inbox-triage-setup` field
 - `/Users/jtnt/Documents/Projects/Code/inbox-triage/skills/triage/SKILL.md` - removed `name: inbox-triage` field, added calendar deduplication logic
-- `/Users/jtnt/Documents/Projects/Chief of Staff/Working/inbox-triage-dev-status.md` - cleaned up and updated with session findings
+- `/Users/jtnt/Documents/Projects/Chief of Staff/[[Working/inbox-triage-dev-status.md]]` - cleaned up and updated with session findings
 
 **Directory structure change:**
 - Renamed `/Users/jtnt/Documents/Projects/Code/inbox-triage/skills/inbox-triage/` to `skills/triage/`

@@ -87,14 +87,14 @@ git log --oneline --since="2 hours ago" --name-only 2>/dev/null
 ```
 
 **Files created:**
-- `Tools/dashboard/health.html` — Health page with project cards and friction snapshot
-- `Tools/dashboard/data/friction-summary.json` — Aggregated friction data (types, outcomes, examples)
+- [[Tools/dashboard/health.html]] — Health page with project cards and friction snapshot
+- [[Tools/dashboard/data/friction-summary.json]] — Aggregated friction data (types, outcomes, examples)
 
 **Files modified:**
-- `Tools/dashboard/css/style.css` — Added ~320 lines for sidebar badges, health dot, alert strip, health cards, grade badges, friction breakdown bar, outcome cards, example cards, insight box
-- `Tools/dashboard/js/app.js` — Added inbox counting in discovery, sidebar badge rendering, Health nav link with colored dot, `scanProjectHealth()`, `scanAllProjectHealth()`, `scanHealthAlerts()`, `moveTaskToSection()`, `archiveCompletedTasks()`, updated `handleCheckboxToggle` to accept callback for reload
-- `Tools/dashboard/index.html` — Added alert strip div and render function, override `handleCheckboxToggle` to reload after toggle, added archive button to Done section
-- `Tools/dashboard/project.html` — Updated open items rendering to show checkboxes (read-only/disabled since source is project-index.md)
+- [[Tools/dashboard/css/style.css]] — Added ~320 lines for sidebar badges, health dot, alert strip, health cards, grade badges, friction breakdown bar, outcome cards, example cards, insight box
+- [[Tools/dashboard/js/app.js]] — Added inbox counting in discovery, sidebar badge rendering, Health nav link with colored dot, `scanProjectHealth()`, `scanAllProjectHealth()`, `scanHealthAlerts()`, `moveTaskToSection()`, `archiveCompletedTasks()`, updated `handleCheckboxToggle` to accept callback for reload
+- [[Tools/dashboard/index.html]] — Added alert strip div and render function, override `handleCheckboxToggle` to reload after toggle, added archive button to Done section
+- [[Tools/dashboard/project.html]] — Updated open items rendering to show checkboxes (read-only/disabled since source is project-index.md)
 - `CLAUDE.md` — Updated all three inbox format templates to use two-line format (main inbox section, project routing section, check-in routing section)
 - `cos-inbox.md` — Converted all items to new two-line format, fixed misplaced `done:` date
 

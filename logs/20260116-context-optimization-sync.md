@@ -41,7 +41,7 @@ Investigated and resolved high context window usage at session start.
 **Files modified:**
 - Created: `~/.claude/resources/writing-style-preferences.md` (detailed writing preferences)
 - Updated: `~/.claude/CLAUDE.md` (replaced 40-line writing section with 3-line trigger)
-- Created: `/Users/jtnt/Documents/Projects/Chief of Staff/Check-Ins/thoughts/20260116-thought-1458.md` (captured thought about AI writing expertise)
+- Created: `/Users/jtnt/Documents/Projects/Chief of Staff/[[Check-Ins/thoughts/20260116-thought-1458.md]]` (captured thought about AI writing expertise)
 
 **MCP configuration:**
 - Disabled: Notion MCP server

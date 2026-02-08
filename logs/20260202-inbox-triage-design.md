@@ -13,7 +13,7 @@ title: Inbox Triage Plugin Design
 Designed a comprehensive inbox triage plugin for Claude Code based on a real user need: a friend's LinkedIn post requesting AI to "sort my email, surface what matters, and handle obvious actions" after nearly missing his child's basketball game due to a buried school email.
 
 **Key deliverables:**
-- Complete plugin specification saved to `Working/inbox-triage-design.md`
+- Complete plugin specification saved to [[Working/inbox-triage-design.md]]
 - Detailed skill logic with Gmail and Google Calendar MCP integration
 - User flow design with conservative "ask-first" approach
 - Email categorization framework (6 buckets: Calendar Events, Needs Reply, Action Required, FYI, Newsletters, Noise)
@@ -59,7 +59,7 @@ Designed a comprehensive inbox triage plugin for Claude Code based on a real use
 
 1. **Plugin Creation**
    - Run `/plugin-dev:create-plugin`
-   - Point to `Working/inbox-triage-design.md` as complete spec
+   - Point to [[Working/inbox-triage-design.md]] as complete spec
    - Core SKILL.md content is fully defined (lines 43-220 of design doc)
 
 2. **Permission Setup**
@@ -83,7 +83,7 @@ The design doc contains complete technical specifications, required permissions,
 ## Changes Made
 
 **Files created:**
-- `Working/inbox-triage-design.md` - Complete plugin specification with technical details, user flows, email categorization framework, Gmail/Calendar MCP integration patterns, and implementation notes
+- [[Working/inbox-triage-design.md]] - Complete plugin specification with technical details, user flows, email categorization framework, Gmail/Calendar MCP integration patterns, and implementation notes
 
 **Files examined:**
 - Explored existing skill patterns in `~/.claude/skills/` for frontmatter and structure conventions

@@ -21,11 +21,11 @@ Implemented 4 UI improvements to the Chief of Staff dashboard based on a pre-exi
 **4. Patterns Slide-Over Migration** — Converted pattern entries from inline accordion expansion to slide-over panel (matching logs behavior). Removed all accordion-related code: `.log-chevron`, `.log-entry-body`, `.log-entry.expanded`, `lazyRenderPatternBody()`, and the "Expand all" button. Applied to both `project.html` (patterns section) and `patterns.html` (dedicated patterns page). Added slide-over markup and close handlers to `patterns.html`. Suggestion badges remain visible on entry rows as indicators.
 
 **Files modified:**
-- `Tools/dashboard/css/style.css` — Added chevron styles, removed accordion styles
-- `Tools/dashboard/js/app.js` — Added `formatDisplayDate()` utility
-- `Tools/dashboard/project.html` — Updated all 3 sections, migrated patterns to slide-over, applied date formatting
-- `Tools/dashboard/patterns.html` — Migrated patterns to slide-over, added slide-over markup
-- `Tools/dashboard/index.html` — Applied date formatting to home page activity
+- [[Tools/dashboard/css/style.css]] — Added chevron styles, removed accordion styles
+- [[Tools/dashboard/js/app.js]] — Added `formatDisplayDate()` utility
+- [[Tools/dashboard/project.html]] — Updated all 3 sections, migrated patterns to slide-over, applied date formatting
+- [[Tools/dashboard/patterns.html]] — Migrated patterns to slide-over, added slide-over markup
+- [[Tools/dashboard/index.html]] — Applied date formatting to home page activity
 
 ## Key Decisions
 
@@ -48,11 +48,11 @@ git log --oneline --since="2 hours ago" --name-only
 ```
 
 **Files modified:**
-- `Tools/dashboard/css/style.css` — Chevron styles, removed accordion CSS
-- `Tools/dashboard/js/app.js` — Date formatting utility
-- `Tools/dashboard/project.html` — Header clicks, chevrons, date formatting, patterns slide-over
-- `Tools/dashboard/patterns.html` — Patterns slide-over, removed accordion code
-- `Tools/dashboard/index.html` — Date formatting
+- [[Tools/dashboard/css/style.css]] — Chevron styles, removed accordion CSS
+- [[Tools/dashboard/js/app.js]] — Date formatting utility
+- [[Tools/dashboard/project.html]] — Header clicks, chevrons, date formatting, patterns slide-over
+- [[Tools/dashboard/patterns.html]] — Patterns slide-over, removed accordion code
+- [[Tools/dashboard/index.html]] — Date formatting
 
 **Committed:** `3124e456` — "Dashboard UI: clickable headers, chevron icons, date normalization, patterns slide-over"
 

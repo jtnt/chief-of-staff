@@ -37,7 +37,7 @@ Integrated humanizer patterns into the writing system so they inform writing inl
 ## Changes Made
 
 Files modified (not in git repos):
-- `/Users/jtnt/Documents/Projects/Writing/Standards/dont-sound-like-ai.md` - replaced with enhanced content
+- `/Users/jtnt/Documents/Projects/[[Writing/Standards/dont-sound-like-ai.md]]` - replaced with enhanced content
 - `/Users/jtnt/.claude/CLAUDE.md` - updated writing section (lines 246-276)
 - `/Users/jtnt/.claude/commands/humanize.md` - new file
 

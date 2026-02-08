@@ -81,15 +81,15 @@ User identified three issues with the initial implementation:
 ## Changes Made
 
 **Files modified (committed in 0674ab42):**
-- `Tools/dashboard/js/app.js` — Added `loadAllTasks()` function, modified `createTaskItemEl()` signature
-- `Tools/dashboard/index.html` — Rewrote left column to call `loadCrossProjectTasks()`
-- `Tools/dashboard/project.html` — Added stats row, two-column grid, activity column
-- `Tools/dashboard/css/style.css` — Added `.project-grid`, `.task-group-label`, pill spacing
+- [[Tools/dashboard/js/app.js]] — Added `loadAllTasks()` function, modified `createTaskItemEl()` signature
+- [[Tools/dashboard/index.html]] — Rewrote left column to call `loadCrossProjectTasks()`
+- [[Tools/dashboard/project.html]] — Added stats row, two-column grid, activity column
+- [[Tools/dashboard/css/style.css]] — Added `.project-grid`, `.task-group-label`, pill spacing
 
 **Files modified (uncommitted refinements):**
-- `Tools/dashboard/index.html` — Replaced priority tier groups with per-project collapsible sections, removed stats row
-- `Tools/dashboard/project.html` — Removed stats row
-- `Tools/dashboard/css/style.css` — Replaced `.task-group-label` with `.project-group-header`, removed stats CSS
+- [[Tools/dashboard/index.html]] — Replaced priority tier groups with per-project collapsible sections, removed stats row
+- [[Tools/dashboard/project.html]] — Removed stats row
+- [[Tools/dashboard/css/style.css]] — Replaced `.task-group-label` with `.project-group-header`, removed stats CSS
 - `project-knowledge.md` — Updated (likely via manual edits during testing)
 
 ## Open Items

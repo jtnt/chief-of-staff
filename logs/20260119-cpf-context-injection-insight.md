@@ -45,20 +45,20 @@ The "Discovery ≠ Direction" addition came from user calling out that I keep sa
 ## Decisions Made
 
 1. **Discovery ≠ Direction** added to global CLAUDE.md - when user shares ideas, treat as input to explore, not direction to execute
-2. Created working note in CPF: `Working/dynamic-context-injection.md`
+2. Created working note in CPF: [[Working/dynamic-context-injection.md]]
 
 ---
 
 ## Files Changed
 
 **Chief of Staff:**
-- `logs/20260119-cpf-context-injection-insight.md` (this file)
+- [[logs/20260119-cpf-context-injection-insight.md]] (this file)
 
 **Global (~/.claude/):**
 - `CLAUDE.md` - reorganized, added Discovery ≠ Direction, added git -C guidance
 
 **Context Profile Framework:**
-- `Working/dynamic-context-injection.md` - new working note on dynamic context injection as access layer
+- [[Working/dynamic-context-injection.md]] - new working note on dynamic context injection as access layer
 
 ---
 

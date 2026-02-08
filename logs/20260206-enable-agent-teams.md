@@ -32,7 +32,7 @@ Routine session - no notable reasoning to capture.
 **Git status shows additional uncommitted changes:**
 - `.mcp.json` - Added `GMAIL_CREDENTIALS_PATH` environment variable (from previous session, not related to this session's work)
 - `Research/` - New untracked directory (from previous session)
-- `Working/domain-taste-vs-aesthetic-taste.md` - New untracked file (from previous session)
+- [[Working/domain-taste-vs-aesthetic-taste.md]] - New untracked file (from previous session)
 
 ## Open Items
 

@@ -41,7 +41,7 @@ Expanded the writing style preferences section in `~/.claude/CLAUDE.md` based on
   - Excessive em dashes
 
 **Thought capture:**
-- Saved thought about AI context requirements to `Check-Ins/thoughts/20260115-thought-1640.md`
+- Saved thought about AI context requirements to [[Check-Ins/thoughts/20260115-thought-1640.md]]
 - Linked to CPF "Context is Everything" post
 - Created `cos-inbox.md` for Context Profile Framework (empty - thought already in post)
 

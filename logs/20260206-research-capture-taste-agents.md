@@ -20,7 +20,7 @@ Captured two articles into the Research system and created a working document ex
 
 **2. Every "What Is Taste, Really?"** (partial, paywalled) - Jack Cheng distinguishing personal taste from tastefulness. Personal taste = accumulated preferences built through exposure and experience. Tastefulness = culturally validated "good taste." Key quote: taste is "a product of friction, earned through making and repeated discernment" (Van Lancker).
 
-**3. Working document created:** `Working/domain-taste-vs-aesthetic-taste.md` - Explores how domain expertise (knowing what good marketing looks like through 25 years of experience) is taste, not just aesthetic preference. Distinguishes professional judgment (earned through reps) from cultural validation (awards/consensus). Relevant to positioning in AI age where execution is commoditized but domain taste remains valuable.
+**3. Working document created:** [[Working/domain-taste-vs-aesthetic-taste.md]] - Explores how domain expertise (knowing what good marketing looks like through 25 years of experience) is taste, not just aesthetic preference. Distinguishes professional judgment (earned through reps) from cultural validation (awards/consensus). Relevant to positioning in AI age where execution is commoditized but domain taste remains valuable.
 
 ## Key Decisions
 
@@ -41,7 +41,7 @@ The user's question ("is domain expertise taste?") opened a thread about positio
 - `Research/20260123_agent-skill-framework-skillsmith/article.md` - Full article text with metadata
 - `Research/20260123_agent-skill-framework-skillsmith/analysis.md` - Project-contextual analysis connecting to CoS architecture
 - `Research/INDEX.md` - New research index
-- `Working/domain-taste-vs-aesthetic-taste.md` - Exploration of domain expertise as taste vs. aesthetic preference
+- [[Working/domain-taste-vs-aesthetic-taste.md]] - Exploration of domain expertise as taste vs. aesthetic preference
 
 **Note:** Files show Feb 6 18:19 timestamp (created during session) but were committed in a later auto-capture under the "enable-agent-teams" commit. This log captures the actual research work that happened.
 

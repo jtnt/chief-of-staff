@@ -11,7 +11,7 @@ title: Ai Adoption Link Capture
 
 Captured and processed a link to an AI adoption article from AI Ready RVA. Initial save attempted to fetch article content but WebFetch failed to retrieve full content. User provided the complete article text, which was then processed and saved to the Links system with comprehensive summary.
 
-Created structured link entry at `Links/Business/20260124-ai-adoption-success-ai-ready-rva.md` with:
+Created structured link entry at [[Links/Business/20260124-ai-adoption-success-ai-ready-rva.md]] with:
 - Full article text
 - 8-step AI adoption framework
 - Case studies (McKinsey "Lily", Bank of America)
@@ -25,7 +25,7 @@ User clarified expectations for link summaries: wants clean extraction of articl
 ## Changes Made
 
 **New files:**
-- `Links/Business/20260124-ai-adoption-success-ai-ready-rva.md` - AI adoption article with 8-step framework
+- [[Links/Business/20260124-ai-adoption-success-ai-ready-rva.md]] - AI adoption article with 8-step framework
 
 **Modified files:**
 - (None - new link file only)

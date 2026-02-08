@@ -22,7 +22,7 @@ Analysis revealed:
 **The fix:** Added content validation to all dashboard write operations (`toggleInboxCheckbox()`, `triageTask()`, and their call sites in `createTaskItemEl()`). Now before modifying, they compare the cached line content against what's actually at that line number. If they don't match (lines shifted), the code falls back to searching by content. If the task was deleted externally, it fails safely with a console error instead of corrupting data.
 
 Files modified:
-- `Tools/dashboard/js/app.js` — 5 changes across write validation and call sites
+- [[Tools/dashboard/js/app.js]] — 5 changes across write validation and call sites
 
 ## Key Decisions
 
@@ -51,7 +51,7 @@ git log --oneline --since="2 hours ago" --name-only
 ```
 
 **Modified files:**
-- `Tools/dashboard/js/app.js` (1 file, 5 logical changes):
+- [[Tools/dashboard/js/app.js]] (1 file, 5 logical changes):
   - `toggleInboxCheckbox()` — Added `expectedLine` parameter and validation logic with content-search fallback
   - `handleCheckboxToggle()` — Pass `expectedLine` through
   - `createTaskItemEl()` main task checkbox — Pass `item.rawLine` to handler
@@ -59,9 +59,9 @@ git log --oneline --since="2 hours ago" --name-only
   - `triageTask()` — Added same validation pattern
 
 **Files read for investigation:**
-- `Tools/dashboard/index.html` — To understand checkbox binding
-- `Tools/dashboard/project.html` — To check for duplicate checkbox handlers
-- `Tools/dashboard/js/app.js` — To trace all write operations
+- [[Tools/dashboard/index.html]] — To understand checkbox binding
+- [[Tools/dashboard/project.html]] — To check for duplicate checkbox handlers
+- [[Tools/dashboard/js/app.js]] — To trace all write operations
 
 ## Open Items
 

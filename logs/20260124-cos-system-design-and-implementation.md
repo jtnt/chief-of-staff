@@ -200,7 +200,7 @@ How it works:
 3. SessionEnd hook fires automatically
 4. Script receives transcript + project path
 5. Script calls Anthropic API to synthesize
-6. Writes log to `[Project]/logs/YYYYMMDD-HHmm-session.md`
+6. Writes log to `[Project]/[[logs/YYYYMMDD-HHmm-session.md]]`
 
 **You don't do anything.** Work is captured as side effect.
 
@@ -526,7 +526,7 @@ Not just markdown rendered in a browser.
 - This is a different model than our current approach (working in individual projects, syncing to CoS)
 - **NOT FULLY RESEARCHED** - This was requested but not deeply explored
 
-Located in `Resources/Claude Code/Chief of Staff Systems/`:
+Located in [[Resources/Claude Code/Chief of Staff Systems/]]:
 
 **Rachel Wolan - "Better Than a Second Brain"**
 - `rachel-wolan-cos-vid-transcript-01.txt` (46KB)
@@ -551,7 +551,7 @@ Located in `Resources/Claude Code/Chief of Staff Systems/`:
 
 ### Other Relevant Resources
 
-In `Resources/Claude Code/`:
+In [[Resources/Claude Code/]]:
 - `claude-code-hooks-reference.md` - Hook system documentation
 - `slash-commands.md` - Command/skill reference
 - `anthropic-claude-code-best-practices.txt` - Official best practices

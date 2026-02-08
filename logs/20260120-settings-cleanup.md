@@ -19,7 +19,7 @@ title: Settings Cleanup
    - Alphabetized entries within each group for easier maintenance
 
 3. **Updated global CLAUDE.md Writing Style section** to reference new writing standards:
-   - User added writing resources at `/Users/jtnt/Documents/Projects/Writing/Standards/`
+   - User added writing resources at `/Users/jtnt/Documents/Projects/[[Writing/Standards/]]`
    - Three standards files: elements-of-style.md, write-like-you-talk.md, dont-sound-like-ai.md
    - Updated Writing Style section to apply to ALL writing tasks (not just thought leadership)
    - Key rules now embedded inline for quick reference

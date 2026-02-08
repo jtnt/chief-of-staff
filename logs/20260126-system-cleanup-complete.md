@@ -29,7 +29,7 @@ Completed the full 4-phase system cleanup and created comprehensive documentatio
 
 **Phase 4: Documentation**
 - Created ~/.claude/hooks/README.md
-- Added READMEs for Check-Ins/weekly/ and Weekly Reviews/
+- Added READMEs for [[Check-Ins/weekly/]] and Weekly Reviews/
 - Clarified two distinct weekly synthesis paths
 
 **Final: USAGE-GUIDE.md**

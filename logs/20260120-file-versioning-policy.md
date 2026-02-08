@@ -11,7 +11,7 @@ title: File Versioning Policy
 
 1. **Added File Editing Policy to global CLAUDE.md** - New section specifying that when revising markdown files, Claude should create new versions with version numbers (e.g., `document-v2.md`) rather than editing in place. Edit-in-place only when explicitly instructed.
 
-2. **Fixed /save permission prompts** - Added Edit permissions to global `settings.json` for Chief of Staff files (`project-index.md`, `project-sources.md`, `project-knowledge.md`) and Write permission for `logs/**`. This allows `/save` from other projects to update CoS without prompting for permission.
+2. **Fixed /save permission prompts** - Added Edit permissions to global `settings.json` for Chief of Staff files (`project-index.md`, `project-sources.md`, `project-knowledge.md`) and Write permission for [[logs/**]]. This allows `/save` from other projects to update CoS without prompting for permission.
 
 ## Key Decisions
 

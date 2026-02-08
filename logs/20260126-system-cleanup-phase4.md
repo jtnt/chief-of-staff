@@ -32,8 +32,8 @@ This is intentional differentiation, not inconsistency.
 **3. Weekly synthesis documentation**
 
 Created READMEs for both weekly synthesis folders:
-- `Check-Ins/weekly/README.md` - Automated synthesis from Monday `/morning`
-- `Weekly Reviews/README.md` - Manual reviews from `/review-checkins`
+- [[Check-Ins/weekly/README.md]] - Automated synthesis from Monday `/morning`
+- [[Weekly Reviews/README.md]] - Manual reviews from `/review-checkins`
 
 Clarifies that these serve different purposes:
 - Automated = quick Monday synthesis from evening check-ins

@@ -99,7 +99,7 @@ Used parallel Task agents to read recent logs for each project and draft updates
 - `~/.claude/CLAUDE.md` — Updated auto-capture documentation
 - `/Users/jtnt/Documents/Projects/Razzo/project-knowledge.md` — Backfilled 20 days
 - `/Users/jtnt/Documents/Projects/Context Profile Framework/project-knowledge.md` — Backfilled 6 days
-- `/Users/jtnt/Documents/Projects/SalesIntel/project-knowledge.md` — Backfilled 10 days (not committed, not a git repo)
+- `/Users/jtnt/Documents/Projects/[[SalesIntel/project-knowledge.md]]` — Backfilled 10 days (not committed, not a git repo)
 
 **Git commits:**
 - **`~/.claude`**: "Add Step 4 to session-capture + update global CLAUDE.md"

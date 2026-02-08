@@ -11,7 +11,7 @@ title: Gitignore Cleanup
 ## What Was Done
 
 - Added `x_archive/` to `.gitignore`
-- Removed outdated bug report file (`Resources/claude-code-bug-report-20260122.md`)
+- Removed outdated bug report file ([[Resources/claude-code-bug-report-20260122.md]])
 
 ## Key Decisions
 
@@ -24,7 +24,7 @@ Routine session - no notable reasoning to capture.
 ## Changes Made
 
 - `.gitignore` - added x_archive/ to ignored folders
-- Deleted `Resources/claude-code-bug-report-20260122.md`
+- Deleted [[Resources/claude-code-bug-report-20260122.md]]
 - Two commits: `88eabc8d`, `0eb947dd`
 - Note: Commits not pushed (session ended before push)
 

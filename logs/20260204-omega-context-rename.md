@@ -57,16 +57,16 @@ title: Ω_context to z_context Rename Session
 - `Razzo/CLAUDE.md` - folder structure + description
 - `Beekeeper Group/CLAUDE.md` - shared context pointer
 - `Mythos-More Vang/CLAUDE.md` - local folder ref + shared context pointer
-- `SalesIntel/CLAUDE.md` - shared context pointer
+- [[SalesIntel/CLAUDE.md]] - shared context pointer
 - `Party Rental/CLAUDE.md` - shared context pointer
 - `Beekeeper Group/reference-materials.md` - file paths
 - `Beekeeper Group/2026-Proposal/engagement-model-notes.md` - source material paths
 - `Beekeeper Group/Meetings/.../engagement-model-notes.md` - source material paths
-- `Beekeeper Group/logs/20260203-client-onboarding.md` - context references
-- `Chief of Staff/Check-Ins/daily/20260130-morning.md` - historical references
-- `Chief of Staff/Check-Ins/thoughts/20260131-context-profile-framework-value.md` - historical references
-- `Chief of Staff/logs/20260201-cpf-auth-routing-fix.md` - historical references
-- `Chief of Staff/logs/20260203-client-onboarding.md` - historical references
+- `Beekeeper Group/[[logs/20260203-client-onboarding.md]]` - context references
+- `Chief of Staff/[[Check-Ins/daily/20260130-morning.md]]` - historical references
+- `Chief of Staff/[[Check-Ins/thoughts/20260131-context-profile-framework-value.md]]` - historical references
+- `Chief of Staff/[[logs/20260201-cpf-auth-routing-fix.md]]` - historical references
+- `Chief of Staff/[[logs/20260203-client-onboarding.md]]` - historical references
 
 **Verification performed:**
 - Checked disk state vs. references before changes

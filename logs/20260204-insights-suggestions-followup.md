@@ -47,7 +47,7 @@ Created followup task file for remaining suggestions (custom skills, hooks, head
 Cross-referenced git output with transcript analysis:
 
 **Git status shows:**
-- New file: `Tasks/20260204-insights-suggestions-followup.md` (created during session)
+- New file: [[Tasks/20260204-insights-suggestions-followup.md]] (created during session)
 
 **Files modified (not showing in git as they're external to this repo):**
 - `/Users/jtnt/.claude/CLAUDE.md` - Added three new sections:
@@ -56,11 +56,11 @@ Cross-referenced git output with transcript analysis:
   - Autonomy Defaults: Act on clear tasks without asking implementation details
 
 **Chief of Staff files created:**
-- `Tasks/20260204-insights-suggestions-followup.md` - Followup task file for remaining suggestions
+- [[Tasks/20260204-insights-suggestions-followup.md]] - Followup task file for remaining suggestions
 
 ## Open Items
 
-- Review and potentially implement remaining insights suggestions saved in `Tasks/20260204-insights-suggestions-followup.md`:
+- Review and potentially implement remaining insights suggestions saved in [[Tasks/20260204-insights-suggestions-followup.md]]:
   - Custom Skills for daily planning workflow
   - Hooks for automated path reference validation
   - Headless Mode for scripted recurring tasks

@@ -12,7 +12,7 @@ title: Links System Refinements
 
 Refined the Links management system implemented earlier today:
 
-1. **Added Culture category** - Created `Links/Culture/` for music, art, entertainment, sports, lifestyle content. Updated `/thought` command to include this category.
+1. **Added Culture category** - Created [[Links/Culture/]] for music, art, entertainment, sports, lifestyle content. Updated `/thought` command to include this category.
 
 2. **Fixed model switching for /thought** - Updated frontmatter from outdated `claude-3-5-haiku-20241022` to current `claude-haiku-4-5` alias. This ensures the command runs on Haiku for cost efficiency.
 
@@ -31,9 +31,9 @@ Refined the Links management system implemented earlier today:
 ## Files Changed
 
 - `~/.claude/commands/thought.md` - Added Culture category, fixed model ID
-- `Links/Culture/` - New category folder
-- `Links/Culture/20260117-bob-weir-grateful-dead-obituary.md` - Test link
-- `Links/Technical/20260117-astro-web-framework.md` - Test link
+- [[Links/Culture/]] - New category folder
+- [[Links/Culture/20260117-bob-weir-grateful-dead-obituary.md]] - Test link
+- [[Links/Technical/20260117-astro-web-framework.md]] - Test link
 - `Razzo/cos-inbox.md` - Created with Astro reference
 
 ## Open Items

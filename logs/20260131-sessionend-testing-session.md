@@ -10,7 +10,7 @@ title: SessionEnd Testing Session
 
 ## What Was Done
 
-This was a continuation session focused on restoring hooks and testing the auto-capture system after 24 hours of debugging. The substantive work was captured mid-session via `/log` at 6:29 PM EST in `logs/20260131-stabilize-hooks-cleanup.md`.
+This was a continuation session focused on restoring hooks and testing the auto-capture system after 24 hours of debugging. The substantive work was captured mid-session via `/log` at 6:29 PM EST in [[logs/20260131-stabilize-hooks-cleanup.md]].
 
 **Summary of work (detailed in the 6:29 PM log):**
 1. Investigated the SessionEnd debugging aftermath using Task/Explore agent

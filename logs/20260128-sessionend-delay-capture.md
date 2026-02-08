@@ -22,7 +22,7 @@ Routine correction - `/thought` is for quick captures (quotes, ideas, observatio
 
 ## Changes Made
 
-- Deleted incorrectly created thought file `Check-Ins/thoughts/20260128-sessionend-script-delay.md`
+- Deleted incorrectly created thought file [[Check-Ins/thoughts/20260128-sessionend-script-delay.md]]
 - Added follow-up item to `cos-inbox.md` under Pending
 
 ## Open Items

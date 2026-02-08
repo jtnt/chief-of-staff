@@ -54,8 +54,8 @@ Built a complete Claude Code plugin for email triage using the `plugin-dev:creat
 
 **Files created:**
 - `/Users/jtnt/Documents/Projects/Code/inbox-triage/` - Complete plugin directory structure
-- `./Working/inbox-triage-dev-status.md` - Development status tracking (active)
-- `./Working/inbox-triage-design.md` - Original design spec (status: absorbed)
+- `./[[Working/inbox-triage-dev-status.md]]` - Development status tracking (active)
+- `./[[Working/inbox-triage-design.md]]` - Original design spec (status: absorbed)
 
 **Files modified:**
 - `./CLAUDE.md` - Minor updates during development process

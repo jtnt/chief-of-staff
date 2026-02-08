@@ -41,7 +41,7 @@ title: Folder Reorganization and Pattern Review
 - `Razzo/z_context/` directory structure with moved files
 
 **Files modified:**
-- `SalesIntel/CLAUDE.md` - added Razzo context reference
+- [[SalesIntel/CLAUDE.md]] - added Razzo context reference
 - `Razzo/CLAUDE.md` - documented new z_context folder
 - 6 Beekeeper Group files with fixed path references (`Clients/Context/` → `Razzo/z_context/`)
 - Chief of Staff `CLAUDE.md` - added persistent capture rule

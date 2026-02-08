@@ -19,7 +19,7 @@ Key findings:
 
 Removed 11 GSD agent files from `~/.claude/agents/` (remnants from prior uninstall).
 
-Created `Resources/Claude Code/underused-features.md` with actionable recommendations.
+Created [[Resources/Claude Code/underused-features.md]] with actionable recommendations.
 
 ## Key Decisions
 
@@ -28,7 +28,7 @@ Created `Resources/Claude Code/underused-features.md` with actionable recommenda
 
 ## Changes Made
 
-- Created: `Resources/Claude Code/underused-features.md`
+- Created: [[Resources/Claude Code/underused-features.md]]
 - Deleted: 11 GSD agent files from `~/.claude/agents/`
 
 ## Open Items

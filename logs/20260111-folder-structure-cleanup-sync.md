@@ -13,7 +13,7 @@ title: Folder Structure Cleanup
 ## The Problem
 
 Project folders under `Projects/` had inconsistent structure:
-- **Razzo:** Had subfolders (reference/, session-logs/, strategy/) with one document in session-logs
+- **Razzo:** Had subfolders (reference/, session-[[logs/,]] strategy/) with one document in session-logs
 - **CPF:** Had a duplicate `project-knowledge.md` file that was outdated
 - **Standard violated:** Chief of Staff should only track projects via dated sync files, not store their content
 
@@ -26,7 +26,7 @@ Later, when running `/update-knowledge` in CPF, it created a knowledge file in t
 ## What Was Fixed
 
 1. **Converted Razzo session-logs content** to proper sync file:
-   - Read `/Projects/Razzo/session-logs/20260109-razzo-sprint-positioning.md`
+   - Read `/Projects/Razzo/session-[[logs/20260109-razzo-sprint-positioning.md]]`
    - Created `/Projects/Razzo/20260109-sprint-positioning-sync.md` with same insights
    - Deleted session-logs/ folder
 

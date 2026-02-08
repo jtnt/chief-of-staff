@@ -14,7 +14,7 @@ Major rebuild of the Chief of Staff Dashboard to transform it from a static summ
 **Key features implemented:**
 
 1. **Detail Views** - Full-page views for logs, thoughts, and projects
-   - `/logs/:filename` - Renders log markdown with proper formatting
+   - `/[[logs/:filename]]` - Renders log markdown with proper formatting
    - `/thoughts/:filename` - Renders thought markdown with tags
    - `/projects/:name` - Shows project knowledge, logs, and inbox
 
@@ -51,7 +51,7 @@ Major rebuild of the Chief of Staff Dashboard to transform it from a static summ
 **Modified:**
 - `dashboard/server.js` - Added detail routes, sidebar middleware
 - `dashboard/lib/parsers.js` - Added `getLog()`, `getThought()`, `getProjectDetail()`, `getCarriedOverItems()`, markdown rendering
-- `dashboard/views/activity.ejs` - Made logs/thoughts clickable
+- `dashboard/views/activity.ejs` - Made [[logs/thoughts]] clickable
 - `dashboard/views/projects.ejs` - Made project cards clickable
 - `dashboard/views/partials/sidebar.ejs` - Added sections and recent content
 - `dashboard/views/partials/daily-focus.ejs` - Added numbering, carried-over banner

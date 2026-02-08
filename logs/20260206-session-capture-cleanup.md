@@ -14,7 +14,7 @@ Cleaned up organizational mess in `~/.claude/` root directory caused by session-
 
 **Root cause identified:** Line 78 in `~/.claude/hooks/session-end.sh` was writing background capture process output to `~/.claude/session-capture-TIMESTAMP.log` for each session. These files contained stdout/debug info from the background `claude --print` process (shell profile sourcing, path info, capture summaries) — useful for debugging failed captures, but otherwise noise.
 
-**Key distinction:** These debug files were NOT the actual session logs. Real session logs are created by the capture skill in each project's `logs/` folder (e.g., `Context Profile Framework/logs/20260206-vercel-research-consolidation.md`). The 87 files were just the console output from the capture process itself.
+**Key distinction:** These debug files were NOT the actual session logs. Real session logs are created by the capture skill in each project's `logs/` folder (e.g., `Context Profile Framework/[[logs/20260206-vercel-research-consolidation.md]]`). The 87 files were just the console output from the capture process itself.
 
 **Actions taken:**
 1. Deleted 87 `session-capture-*.log` files from `~/.claude/` root

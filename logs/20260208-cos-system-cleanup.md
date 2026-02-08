@@ -106,7 +106,7 @@ Conducted a comprehensive cleanup and reorganization of the Chief of Staff syste
 - `Context Profile Framework/project-knowledge.md` — Tasks moved to top, fixed stray "done:" tag
 - `Clients/Beekeeper Group/project-knowledge.md` — Tasks moved to top, added Done subsection
 - `Clients/JRAD/project-knowledge.md` — created with DNS completion in Done section
-- `Writing/project-knowledge.md` — Tasks moved to top, removed copy-paste bug
+- [[Writing/project-knowledge.md]] — Tasks moved to top, removed copy-paste bug
 - Created minimal `project-knowledge.md` for 8 projects (listed above)
 
 **Global system files:**

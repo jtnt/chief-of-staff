@@ -24,7 +24,7 @@ title: Boris Cherny Claude Code Tips
 9. **Data analytics** - Use Claude with database CLIs for on-fly analysis
 10. **Learning systems** - Explanatory mode, HTML presentations, spaced-repetition skills
 
-**Saved comprehensive guide** to `Resources/Claude Code/20260131-boris-cherny-10-claude-code-tips.md` with specific applicability analysis for current workflow and immediate action items.
+**Saved comprehensive guide** to [[Resources/Claude Code/20260131-boris-cherny-10-claude-code-tips.md]] with specific applicability analysis for current workflow and immediate action items.
 
 ## Key Decisions
 
@@ -33,7 +33,7 @@ title: Boris Cherny Claude Code Tips
 2. "Scrap this and implement elegant solution" prompt pattern
 3. Post-correction CLAUDE.md updates as routine habit
 
-**Storage location:** Placed in existing Resources/Claude Code/ directory structure rather than creating new folder.
+**Storage location:** Placed in existing [[Resources/Claude]] Code/ directory structure rather than creating new folder.
 
 ## Reasoning
 
@@ -48,7 +48,7 @@ title: Boris Cherny Claude Code Tips
 ## Changes Made
 
 **Files created:**
-- `Resources/Claude Code/20260131-boris-cherny-10-claude-code-tips.md` - Complete analysis with 10 tips, applicability assessment, and action items
+- [[Resources/Claude Code/20260131-boris-cherny-10-claude-code-tips.md]] - Complete analysis with 10 tips, applicability assessment, and action items
 
 **Files modified:**
 - `cos-inbox.md` - Added reminder about quick-win action items for next session

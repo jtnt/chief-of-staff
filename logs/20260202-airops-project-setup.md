@@ -13,7 +13,7 @@ title: Airops Project Setup
 Created new project tracking for "AirOps Cohort Feb 2026" after user joined an AI marketing cohort and needed to track homework assignments. Full project setup completed:
 
 **Project Structure Created:**
-- `/Users/jtnt/Documents/Projects/AirOps Cohort Feb 2026/` with standard folders (logs/, session-patterns/, Homework/, Notes/, Workflows/)
+- `/Users/jtnt/Documents/Projects/AirOps Cohort Feb 2026/` with standard folders ([[logs/,]] session-patterns/, Homework/, Notes/, Workflows/)
 - `CLAUDE.md` with project context and AI marketing cohort guidelines
 - `project-knowledge.md` tracking Session 1 status and open items
 

@@ -19,7 +19,7 @@ title: Docx Conversion Skill
 - Defaults to creating `markdown/` subdirectory
 - Added `Bash(pandoc:*)` permission to settings.json
 
-**Files converted:** 16 documents including AI adoption plans, CAIO job descriptions, pitch emails, and meeting transcripts. Output stored in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/z_context/markdown/`.
+**Files converted:** 16 documents including AI adoption plans, CAIO job descriptions, pitch emails, and meeting transcripts. Output stored in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/[[z_context/markdown/]]`.
 
 ## Key Decisions
 
@@ -41,7 +41,7 @@ title: Docx Conversion Skill
 
 **Files created:**
 - `/Users/jtnt/.claude/skills/convert-docx/SKILL.md` - New skill for docx to markdown conversion
-- 16 markdown files in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/z_context/markdown/`
+- 16 markdown files in `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang/[[z_context/markdown/]]`
 
 **Configuration updated:**
 - `~/.claude/settings.json` - Added `Bash(pandoc:*)` permission for skill

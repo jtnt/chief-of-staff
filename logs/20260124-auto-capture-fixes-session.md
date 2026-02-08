@@ -25,8 +25,8 @@ What followed was a cascade of implementation failures, each revealing another p
 ### Phase 1: Initial Edits (Seemed Fine)
 
 Made the planned changes to `capture-session.sh`:
-- Added error logging infrastructure (`~/.claude/logs/capture-errors.log`)
-- Added success logging (`~/.claude/logs/capture-session.log`)
+- Added error logging infrastructure (`~/.claude/[[logs/capture-errors.log]]`)
+- Added success logging (`~/.claude/[[logs/capture-session.log]]`)
 - Replaced the broken date-based duplicate check with session-ID tracking
 - Updated `/save` command to write session marker (Step 1.5)
 
@@ -122,8 +122,8 @@ User pointed out the real problem:
 Despite the problems, these changes are in place and working:
 
 ### capture-session.sh
-- Error logging to `~/.claude/logs/capture-errors.log` with line numbers
-- Success logging to `~/.claude/logs/capture-session.log`
+- Error logging to `~/.claude/[[logs/capture-errors.log]]` with line numbers
+- Success logging to `~/.claude/[[logs/capture-session.log]]`
 - Session-ID based duplicate check (reads from `~/.claude/data/last-saved-session`)
 - Fixed transcript parsing for JSONL format
 - Sources `.env` from project directory for API key

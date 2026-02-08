@@ -17,7 +17,7 @@ Brief session to save a Claude Code reference link:
 
 ## Changes Made
 
-- Created `Links/AI-Tools/20260118-zachery-glass-claude-code-config.md`
+- Created [[Links/AI-Tools/20260118-zachery-glass-claude-code-config.md]]
 
 ## The Link
 

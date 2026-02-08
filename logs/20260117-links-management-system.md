@@ -16,7 +16,7 @@ Implemented a complete centralized link management system for Chief of Staff. Th
 
 **Folder structure:**
 - `Links/` with subdirectories: Technical, Marketing, Business, Industry, Other
-- `Links/index.md` - searchable index (initially empty)
+- [[Links/index.md]] - searchable index (initially empty)
 - `.links-sync-state.json` - tracks imported URLs to prevent duplicates
 
 **Commands (in `~/.claude/commands/`):**

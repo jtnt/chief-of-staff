@@ -19,7 +19,7 @@ title: I-Corps Mentor Setup
 - Program uses structured approach to help teams develop viable commercial ventures
 
 **Set up I-Corps mentor preparation workflow:**
-- Created `Tasks/20260203-icorps-mentor-prep.md` with complete checklist
+- Created [[Tasks/20260203-icorps-mentor-prep.md]] with complete checklist
 - 6 specific action items including forms, courses, and interview preparation
 - Interview questions identified: Name/Education, Why doing this, Best job ever, Something surprising
 
@@ -49,7 +49,7 @@ title: I-Corps Mentor Setup
 ## Changes Made
 
 **Files Created:**
-- `Tasks/20260203-icorps-mentor-prep.md` - Complete I-Corps mentor preparation checklist with 6 action items and interview questions
+- [[Tasks/20260203-icorps-mentor-prep.md]] - Complete I-Corps mentor preparation checklist with 6 action items and interview questions
 - Updated `CLAUDE.md` - Added Tasks folder documentation to project structure and usage guidelines
 
 **Files Modified:**

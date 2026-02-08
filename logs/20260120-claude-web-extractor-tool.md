@@ -22,7 +22,7 @@ Successfully validated all tools:
 - Fixed critical date parsing bug (timezone-aware vs naive datetime mismatch)
 - Confirmed memory-efficient streaming works for 143MB JSON files
 
-Tool location: `/Users/jtnt/Documents/Projects/Chief of Staff/Tools/claude-web-extractor/`
+Tool location: `/Users/jtnt/Documents/Projects/Chief of Staff/[[Tools/claude-web-extractor/]]`
 
 ## Key Decisions
 

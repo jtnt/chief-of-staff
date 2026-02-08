@@ -28,12 +28,12 @@ title: Morning Briefing Workflow and Inbox Prioritization
 - Added instruction to show updated pending list after user removes/archives items
 
 **Morning check-in completed:**
-- Created `/Users/jtnt/Documents/Projects/Chief of Staff/Check-Ins/daily/20260203-morning.md`
+- Created `/Users/jtnt/Documents/Projects/Chief of Staff/[[Check-Ins/daily/20260203-morning.md]]`
 - Intentions: Beekeeper Group meeting (3 PM), AirOps cohort homework, LinkedIn video, I-Corps mentor prep
 - Surfaced priority alignment question about LinkedIn video (strategic vs. "more content")
 
 **Completed task:**
-- Marked `Tasks/20260203-inbox-triage-label-naming.md` as completed (status: active → completed)
+- Marked [[Tasks/20260203-inbox-triage-label-naming.md]] as completed (status: active → completed)
 
 ## Key Decisions
 
@@ -99,10 +99,10 @@ title: Morning Briefing Workflow and Inbox Prioritization
    - Key principles: Added "Bias toward project deliverables" and "Backlog items are optional"
    - Step 4: Added instruction to show updated pending list after removals
 
-3. **`Tasks/20260203-inbox-triage-label-naming.md`**:
+3. **[[Tasks/20260203-inbox-triage-label-naming.md]]**:
    - Changed status from `active` to `completed`
 
-4. **`Check-Ins/daily/20260203-morning.md`**:
+4. **[[Check-Ins/daily/20260203-morning.md]]**:
    - New morning check-in with intentions, calendar, and priority alignment notes
 
 5. **Google Calendar MCP (external to repo)**:

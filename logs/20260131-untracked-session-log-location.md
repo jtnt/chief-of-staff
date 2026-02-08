@@ -24,7 +24,7 @@ Investigated where auto-capture saves logs for untracked sessions (sessions run 
 - SessionEnd hook spawned background capture at 22:15:41
 - Capture completed at 22:17:12
 - **Total time: ~1 min 31 seconds** from exit to log file creation
-- Log file: `~/Downloads/logs/20260131-session-capture-enhancement.md`
+- Log file: `~/Downloads/[[logs/20260131-session-capture-enhancement.md]]`
 
 **Design clarity:** Confirmed that using `./logs/` (local to working directory) is the correct approach:
 - Keeps logs near where work happened

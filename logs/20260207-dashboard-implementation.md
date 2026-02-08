@@ -42,12 +42,12 @@ Built a complete zero-dependency personal command center dashboard for the Chief
 9. Date sorting fix for 12-hour time formats
 
 **Files modified:**
-- `Tools/dashboard/css/style.css` — 1052 lines (design system, components)
-- `Tools/dashboard/js/app.js` — 1018 lines (FS API, parsers, sidebar, utilities)
-- `Tools/dashboard/index.html` — 334 lines (home view with inbox and activity feed)
-- `Tools/dashboard/project.html` — 517 lines (project dashboard with 4 sections)
-- `Tools/dashboard/patterns.html` — created (patterns view with project filters)
-- `Tools/dashboard/health.html` — created (health monitoring dashboard)
+- [[Tools/dashboard/css/style.css]] — 1052 lines (design system, components)
+- [[Tools/dashboard/js/app.js]] — 1018 lines (FS API, parsers, sidebar, utilities)
+- [[Tools/dashboard/index.html]] — 334 lines (home view with inbox and activity feed)
+- [[Tools/dashboard/project.html]] — 517 lines (project dashboard with 4 sections)
+- [[Tools/dashboard/patterns.html]] — created (patterns view with project filters)
+- [[Tools/dashboard/health.html]] — created (health monitoring dashboard)
 
 ## Key Decisions
 
@@ -122,18 +122,18 @@ Recent commits (last 2 hours):
 - `c73c9744` — Session patterns page creation
 
 **Uncommitted changes:**
-- `M Tools/dashboard/js/app.js` — Date sorting fix for 12-hour timestamps
+- `M [[Tools/dashboard/js/app.js]]` — Date sorting fix for 12-hour timestamps
 
 The bulk of dashboard work was committed earlier in the session. The final uncommitted change is the date sorting fix (converts 12-hour frontmatter dates to 24-hour for proper chronological sorting).
 
 **Key files created/modified across all commits:**
-- `Tools/dashboard/css/style.css` — Full dark design system
-- `Tools/dashboard/js/app.js` — Core shared module (FS API, parsers, renderers)
-- `Tools/dashboard/index.html` — Home view
-- `Tools/dashboard/project.html` — Project dashboard
-- `Tools/dashboard/patterns.html` — Patterns page with project filters
-- `Tools/dashboard/health.html` — Health monitoring page
-- `logs/*.md` — 189 log files updated with `title` frontmatter
+- [[Tools/dashboard/css/style.css]] — Full dark design system
+- [[Tools/dashboard/js/app.js]] — Core shared module (FS API, parsers, renderers)
+- [[Tools/dashboard/index.html]] — Home view
+- [[Tools/dashboard/project.html]] — Project dashboard
+- [[Tools/dashboard/patterns.html]] — Patterns page with project filters
+- [[Tools/dashboard/health.html]] — Health monitoring page
+- [[logs/*.md]] — 189 log files updated with `title` frontmatter
 
 ## Open Items
 

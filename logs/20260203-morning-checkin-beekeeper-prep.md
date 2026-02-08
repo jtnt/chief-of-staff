@@ -59,7 +59,7 @@ title: Morning Checkin Beekeeper Prep
 **Files created:**
 - `/Users/jtnt/Documents/Projects/Clients/Beekeeper Group/` (new directory)
 - `/Users/jtnt/Documents/Projects/Clients/Beekeeper Group/20260203-meeting-prep.md` (comprehensive preparation document)
-- `Check-Ins/daily/20260203-morning.md` (morning check-in record)
+- [[Check-Ins/daily/20260203-morning.md]] (morning check-in record)
 
 **Research artifacts:**
 - Beekeeper Group company analysis with leadership team mapping

@@ -108,10 +108,10 @@ Git shows 3 commits from this session:
 
 **Commit 3:** `12d3dd44 Stop tracking Tasks/ and cos-inbox.md in git`
 - .gitignore
-- Tasks/20260203-envoy-client-skills-plan.md (untracked)
-- Tasks/20260203-icorps-mentor-prep.md (untracked)
-- Tasks/20260203-inbox-triage-label-naming.md (untracked)
-- Tasks/20260204-insights-suggestions-followup.md (untracked)
+- [[Tasks/20260203-envoy-client-skills-plan.md]] (untracked)
+- [[Tasks/20260203-icorps-mentor-prep.md]] (untracked)
+- [[Tasks/20260203-inbox-triage-label-naming.md]] (untracked)
+- [[Tasks/20260204-insights-suggestions-followup.md]] (untracked)
 - cos-inbox.md (untracked)
 
 **Files modified outside this repo** (not in commits):

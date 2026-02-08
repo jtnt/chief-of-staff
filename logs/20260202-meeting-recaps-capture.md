@@ -35,7 +35,7 @@ Routine session - no notable reasoning to capture.
 **Cross-referenced with git - only one new file created:**
 
 **Chief of Staff files:**
-- `Check-Ins/thoughts/20260202-awarehouse-marketing-commitment.md` - Captured pro bono marketing commitment
+- [[Check-Ins/thoughts/20260202-awarehouse-marketing-commitment.md]] - Captured pro bono marketing commitment
 
 **External project files (read-only for CoS):**
 - Added Glen Hellman meeting opportunities to Razzo cos-inbox.md

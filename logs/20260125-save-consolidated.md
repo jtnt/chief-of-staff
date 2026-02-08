@@ -15,7 +15,7 @@ Redesigned and implemented the `/save` command to be **project-centric with mult
 1. **Identified the problem:** Current `/save` was session-centric - if you had 3 sessions open and ran /save in one, only that session was captured. Work in other sessions (even completed ones) was missed.
 
 2. **Designed the solution:** A log-based synthesis approach where:
-   - Each project tracks when the last /save ran via `logs/.save-state.json`
+   - Each project tracks when the last /save ran via [[logs/.save-state.json]]
    - On /save, find all auto-capture logs (`*-session.md`) created since last save
    - Synthesize those logs + current session into one merged narrative
    - Only capture completed sessions (via auto-capture) plus the current session
@@ -46,7 +46,7 @@ M  ~/.claude/commands/save.md     (implementation)
 ```
 
 Key changes to save.md:
-- Added state file reading/writing (`logs/.save-state.json`)
+- Added state file reading/writing ([[logs/.save-state.json]])
 - Added auto-capture log discovery and filtering by timestamp
 - Added multi-source synthesis logic
 - Added edge case handling

@@ -84,4 +84,4 @@ Writing/
 
 ## Open Items
 
-None identified. Archive import and organization complete. Original zip file preserved at `Writing/ai-instinct-writing-export-20260203.zip` for reference.
+None identified. Archive import and organization complete. Original zip file preserved at [[Writing/ai-instinct-writing-export-20260203.zip]] for reference.

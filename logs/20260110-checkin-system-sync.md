@@ -40,20 +40,20 @@ Built a comprehensive check-in system with four distinct types:
 **1. Morning Check-in (`/morning`)**
 - Capture day intentions and priorities
 - Optional prompts: "What do you want to accomplish today?", "What's your top priority?", "Anything on your mind?"
-- Creates: `Check-Ins/daily/YYYYMMDD-morning.md`
+- Creates: [[Check-Ins/daily/YYYYMMDD-morning.md]]
 - Supports project routing if work items mentioned
 
 **2. Evening Check-in (`/evening`)**
 - Track what got done, spillover items, tomorrow plans
 - Optional prompts: "What did you get done?", "What's carrying over?", "Anything noteworthy?"
-- Creates: `Check-Ins/daily/YYYYMMDD-evening.md`
+- Creates: [[Check-Ins/daily/YYYYMMDD-evening.md]]
 - Can cross-reference morning intentions
 - Supports project routing
 
 **3. Thought Capture (`/thought`)**
 - Quick captures: quotes, links, articles, random ideas
 - No prompts - just capture what's shared
-- Creates: `Check-Ins/thoughts/YYYYMMDD-thought-HHMM.md` (timestamped)
+- Creates: [[Check-Ins/thoughts/YYYYMMDD-thought-HHMM.md]] (timestamped)
 - Each thought gets its own file
 - Can fetch URL context automatically
 - Offers project routing when relevant
@@ -61,7 +61,7 @@ Built a comprehensive check-in system with four distinct types:
 **4. Journal Entry (`/journal`)**
 - Personal reflection, completely freeform
 - No prompts, no structure imposed
-- Creates/appends to: `Check-Ins/journal/YYYYMMDD-journal.md`
+- Creates/appends to: [[Check-Ins/journal/YYYYMMDD-journal.md]]
 - Multiple entries per day supported (timestamped headings)
 - Never routed to projects (always private)
 
@@ -89,7 +89,7 @@ Claude recognizes intent and either proceeds directly or confirms the check-in t
 - `/Users/jtnt/.claude/commands/thought.md` - Thought capture command
 - `/Users/jtnt/.claude/commands/journal.md` - Journal entry command
 - `/Users/jtnt/.claude/commands/review-checkins.md` - Pattern analysis command
-- `Check-Ins/daily/.gitkeep`, `Check-Ins/thoughts/.gitkeep`, `Check-Ins/journal/.gitkeep`
+- [[Check-Ins/daily/.gitkeep]], [[Check-Ins/thoughts/.gitkeep]], [[Check-Ins/journal/.gitkeep]]
 
 **Updated:**
 - `CLAUDE.md` - Added complete Check-In System section with natural language detection guidance

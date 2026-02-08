@@ -37,9 +37,9 @@ Refined the Links system categories to be smarter about technical content. The "
 - `~/.claude/commands/import-google-news.md` - Updated category list
 
 **Links folder:**
-- Created: `Links/AI-Tools/`, `Links/Web-Dev/`, `Links/Programming/`, `Links/DevOps/`
+- Created: [[Links/AI-Tools/]], [[Links/Web-Dev/]], [[Links/Programming/]], [[Links/DevOps/]]
 - Moved: 2 files from Technical to new categories
-- Deleted: `Links/Technical/` (empty after migration)
+- Deleted: [[Links/Technical/]] (empty after migration)
 - Updated: Front-matter in moved files with new category values
 
 ## Open Items

@@ -32,7 +32,7 @@ Work completed in this session:
 - User corrected: wanted pure reference extraction, no application
 - Rewrote as comprehensive reference capturing all Miller's insights
 
-**Result:** Created `Resources/Donald Miller StoryBrand Framework.md`
+**Result:** Created [[Resources/Donald Miller StoryBrand Framework.md]]
 - Complete framework documentation (PEACE soundbites)
 - All examples (aquarium company, Oura Ring, YNAB, Geico, real estate agent, dog trainer)
 - Quotes and key principles
@@ -44,7 +44,7 @@ Work completed in this session:
 
 **Problem Discovered:**
 User noticed inconsistencies in `Projects/` folder structure:
-- Razzo had subfolders (reference/, session-logs/, strategy/)
+- Razzo had subfolders (reference/, session-[[logs/,]] strategy/)
 - CPF had duplicate, outdated `project-knowledge.md` file
 - Violated principle: Chief of Staff only tracks projects, doesn't store their content
 

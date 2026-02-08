@@ -61,14 +61,14 @@ grep '"name":"ToolName"' file.jsonl | jq -r '.input.field_name'  # WRONG - missi
    - Line 105: Files Read extraction
    - Lines 110-111: Plan Files extraction (both display and variable)
 
-2. **`/Users/jtnt/Documents/Projects/Code/qontext-clone/logs/20260206-work-skill-exploration.md`** - Retroactive fix:
+2. **`/Users/jtnt/Documents/Projects/Code/qontext-clone/[[logs/20260206-work-skill-exploration.md]]`** - Retroactive fix:
    - Added `plan_file:` to YAML frontmatter
    - Added "Plan (Claude Code)" section with verbatim plan content from `luminous-tickling-castle.md`
 
 **Files read:**
 - `/Users/jtnt/.claude/skills/session-capture/SKILL.md` - To diagnose the bug
 - `/Users/jtnt/.claude/plans/luminous-tickling-castle.md` - To get plan content for retroactive fix
-- `/Users/jtnt/Documents/Projects/Code/qontext-clone/logs/20260206-work-skill-exploration.md` - To update with missing plan reference
+- `/Users/jtnt/Documents/Projects/Code/qontext-clone/[[logs/20260206-work-skill-exploration.md]]` - To update with missing plan reference
 
 **Git operations:**
 - Committed skill fix: `c794b3e`

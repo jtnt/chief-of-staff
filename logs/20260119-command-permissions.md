@@ -12,7 +12,7 @@ title: Command Permissions
 ### Project Work (CPF)
 - Received and analyzed LinkedIn post about CARL (Context Augmentation Reinforcement Layer)
 - Identified how dynamic context injection could augment CPF as an access/retrieval layer
-- Created working note: `Context Profile Framework/Working/dynamic-context-injection.md`
+- Created working note: `Context Profile Framework/[[Working/dynamic-context-injection.md]]`
 - Clarified the three frictions: creation, maintenance, access/retrieval (to AI, not people)
 
 ### Meta-Work
@@ -38,7 +38,7 @@ title: Command Permissions
 - `~/.claude/CLAUDE.md` - reorganized, added Discovery ≠ Direction, added git -C guidance
 - `~/.claude/commands/save.md` - added allowedTools for permission-free execution
 - `~/.claude/commands/log.md` - added allowedTools for permission-free execution
-- `logs/20260119-cpf-context-injection-insight.md` - earlier log entry (already committed)
+- [[logs/20260119-cpf-context-injection-insight.md]] - earlier log entry (already committed)
 
 ## Open Items
 

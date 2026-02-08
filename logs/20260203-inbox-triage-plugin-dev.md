@@ -31,8 +31,8 @@ title: Inbox Triage Plugin Dev
 - `skills/triage/references/output-format.md` - Tables replaced with narrative format
 - `skills/triage/references/categorization.md` - Trimmed and refocused on routing vs display
 - `skills/triage/references/calendar-extraction.md` - Simplified examples
-- `Working/inbox-triage-dev-status-v2.md` - Updated development status
-- `Tasks/20260203-inbox-triage-label-naming.md` - New task for label naming fix
+- [[Working/inbox-triage-dev-status-v2.md]] - Updated development status
+- [[Tasks/20260203-inbox-triage-label-naming.md]] - New task for label naming fix
 
 ## Key Decisions
 
@@ -73,11 +73,11 @@ title: Inbox Triage Plugin Dev
 Cross-referenced transcript analysis with git status - no changes to Chief of Staff repository itself during this session. All development work was in external inbox-triage plugin repository at `/Users/jtnt/Documents/Projects/Code/inbox-triage`.
 
 **Chief of Staff files reviewed/referenced:**
-- `Working/inbox-triage-dev-status.md` - Project status tracking
+- [[Working/inbox-triage-dev-status.md]] - Project status tracking
 - Various skill files for description pattern analysis
 
 **New CoS files created:**
-- `Tasks/20260203-inbox-triage-label-naming.md` - Todo for label naming fix
+- [[Tasks/20260203-inbox-triage-label-naming.md]] - Todo for label naming fix
 
 The session was primarily external plugin development with task tracking in CoS.
 

@@ -15,11 +15,11 @@ Phase 1 focused on immediate cleanup:
 
 1. **Consolidated settings.json** - Reduced from 248 lines/176 permissions to 130 lines/58 permissions. Replaced 30+ hardcoded git commit message approvals with a single `Bash(git:*)` glob pattern. Removed one-off script permissions (test-usage.sh, temp node scripts, etc.) and dangerous auto-approvals (sudo ln, crontab).
 
-2. **Updated Current Projects list** - The CoS CLAUDE.md listed only 3 projects when project-sources.md tracks 12. Updated to show all projects with proper categorization (Active, Tools/Utilities, Paused).
+2. **Updated Current Projects list** - The CoS CLAUDE.md listed only 3 projects when project-sources.md tracks 12. Updated to show all projects with proper categorization (Active, [[Tools/Utilities,]] Paused).
 
 3. **Deleted backup files** - Removed 2 orphaned CLAUDE.md.backup files from ~/.claude/.
 
-4. **Archived orphaned file** - Moved IMPLEMENTATION-NOTES-V7.md from root to logs/20260122-implementation-notes-v7.md.
+4. **Archived orphaned file** - Moved IMPLEMENTATION-NOTES-V7.md from root to [[logs/20260122-implementation-notes-v7.md.]]
 
 ## Key Decisions
 
@@ -32,7 +32,7 @@ Phase 1 focused on immediate cleanup:
 - `~/.claude/settings.json` - Consolidated from 176 to 58 permissions
 - `CLAUDE.md` - Updated Current Projects section (3 → 11 projects)
 - `IMPLEMENTATION-NOTES-V7.md` - Deleted (moved to logs/)
-- `logs/20260122-implementation-notes-v7.md` - Created (archived file)
+- [[logs/20260122-implementation-notes-v7.md]] - Created (archived file)
 - `~/.claude/CLAUDE.md.backup-20260121` - Deleted
 - `~/.claude/CLAUDE.md.backup-20260122` - Deleted
 

@@ -42,11 +42,11 @@ Routine implementation session - no notable reasoning to capture.
 ## Changes Made
 
 **Commit `c73c9744`:**
-- `Tools/dashboard/js/app.js` - Added pattern loading utilities and sidebar integration
-- `Tools/dashboard/patterns.html` - New dedicated patterns page
-- `Tools/dashboard/project.html` - Added Session Patterns section
-- `Tools/dashboard/css/style.css` - Added pattern-specific styles
-- `Tools/dashboard/index.html` - Minor fix (renaming function reference from prior work)
+- [[Tools/dashboard/js/app.js]] - Added pattern loading utilities and sidebar integration
+- [[Tools/dashboard/patterns.html]] - New dedicated patterns page
+- [[Tools/dashboard/project.html]] - Added Session Patterns section
+- [[Tools/dashboard/css/style.css]] - Added pattern-specific styles
+- [[Tools/dashboard/index.html]] - Minor fix (renaming function reference from prior work)
 
 ## Open Items
 

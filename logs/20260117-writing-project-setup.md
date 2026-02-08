@@ -21,7 +21,7 @@ Created a centralized Writing project to store all writing (LinkedIn posts, blog
 - Screenshot pending (file path provided didn't exist)
 
 ### CPF Migration
-- Moved 4 dated writing folders from CPF to `Writing/Published/`
+- Moved 4 dated writing folders from CPF to [[Writing/Published/]]
 - Added YAML front-matter to all migrated posts with `projects: ["Context Profile Framework"]`
 - Deleted CPF's `Writing/` folder
 - Created `writing-refs.md` in CPF pointing to migrated content
@@ -56,4 +56,4 @@ Created a centralized Writing project to store all writing (LinkedIn posts, blog
 
 ## Open Items
 
-- Add Netflix screenshot to `Writing/Published/20260117_netflix-movie-night-ai-project/` (user needs to provide correct path)
+- Add Netflix screenshot to [[Writing/Published/20260117_netflix-movie-night-ai-project/]] (user needs to provide correct path)

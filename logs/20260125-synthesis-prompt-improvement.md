@@ -56,8 +56,8 @@ On scope:
 ## Files Referenced
 
 - `~/.claude/scripts/capture-session.sh` (modified)
-- `/Users/jtnt/Documents/Projects/Chief of Staff/logs/20260124-cos-system-design-and-implementation.md` (610-line comprehensive log from overnight session)
-- `/Users/jtnt/Documents/Projects/Chief of Staff/logs/20260124-auto-capture-fixes-session.md`
+- `/Users/jtnt/Documents/Projects/Chief of Staff/[[logs/20260124-cos-system-design-and-implementation.md]]` (610-line comprehensive log from overnight session)
+- `/Users/jtnt/Documents/Projects/Chief of Staff/[[logs/20260124-auto-capture-fixes-session.md]]`
 
 ---
 *This session is a continuation of the overnight work. Main log is at `20260124-cos-system-design-and-implementation.md`*
