@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-07
+**Last Updated:** 2026-02-07 11:20 PM EST
 
 This file contains information about the Chief of Staff system itself. For summaries of tracked projects, see `project-index.md`.
 
@@ -128,6 +128,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-07: Session Log Titles Backfill
+
+Added descriptive `title:` field to session-capture skill template. Updated all 286 existing session logs across 11 projects with descriptive titles in both YAML frontmatter and H1 headers. Replaced generic "Session Log" headers with 2-6 word descriptive titles derived from filename identifiers and content. Used 5 parallel agents to process projects concurrently (6-minute wall-clock time vs. 30+ minutes serial). All future session logs will auto-generate descriptive titles.
+
 ### 2026-02-07: Inbox Checkbox Restructure
 
 Completed major restructure of task management system. Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format with four sections (Inbox → Active → Backlog → Done). Updated 2 hook scripts, briefing template, and 4 producer skills to write/parse new format. Discovered and fixed latent `grep -c` bug (exit code 1 when count is 0). Migrated 3 external project inboxes. Added `Tasks/` and `cos-inbox.md` to `.gitignore`. Pattern file created documenting format migration workflow.
@@ -148,33 +152,9 @@ Identified that project-knowledge.md files hadn't been updated in over a month a
 
 Applied three priority suggestions from `/insights` usage report (2,142 sessions analyzed): global git workflow standards, file reorganization rules (auto-fix broken references), and autonomy defaults (act on clear tasks, save questions for ambiguous intent).
 
-### 2026-02-03: Inbox Prioritization System
+### 2026-02-04: Project Knowledge Backfill & Auto-Capture Fix
 
-Restructured inbox to three tiers: Pending (priority) → Backlog (meta-work) → Archive. Updated briefing template. Added "Bias toward project deliverables" principle. Prevents meta-work from creating false urgency.
-
-### 2026-02-02: Inbox Triage Plugin
-
-Built Claude Code plugin for email triage using `plugin-dev:create-plugin` workflow. Gmail scanning, 6-bucket categorization, action suggestions. Location: `/Users/jtnt/Documents/Projects/Code/inbox-triage/`.
-
-### 2026-02-02: Plugin Skill Naming Bug
-
-Fixed 8 skills across 2 official Claude Code plugins (plugin-dev, hookify) where spaces in skill names made them appear in autocomplete but fail to execute.
-
-### 2026-01-31: Commands → Skills Conversion
-
-Converted 4 check-in commands to individual skills with explicit model selection (morning/evening/journal: sonnet, thought: haiku). Improved to use `AskUserQuestion` with structured options. Commands backed up to `.bak` files.
-
-### 2026-01-31: SessionEnd Hook Stabilized
-
-Restored hooks to stable state after investigating auto-capture failures (Claude Code bug, not hooks). Added "Never Delete What You Can't Recover" principle to global CLAUDE.md. Removed broken git-haiku hook.
-
-### 2026-01-31: Global Config Cleanup
-
-Removed GSD framework files (65 files, 17K lines), orphaned scripts. Hardened `.gitignore`. Repo from 97 → 54 tracked files.
-
-### 2026-01-28: Auto-Capture System Implemented
-
-Replaced `/log` and `/save` with automatic SessionEnd capture. Background Claude reads transcript → creates log → extracts patterns → commits/pushes → syncs to CoS. Untracked sessions go to `~/.claude/untracked-sessions/`. `/review-patterns` skill for applying CLAUDE.md suggestions.
+Identified that project-knowledge.md files hadn't been updated in over a month across all projects. Root cause: when `/log` and `/save` were replaced by auto-capture, the project-knowledge.md update step was never added to the skill. Added Step 4 (Update Project Knowledge) to `/session-capture` skill. Backfilled all stale project-knowledge.md files.
 
 
 ---
