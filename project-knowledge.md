@@ -1,6 +1,6 @@
-Mook client vision o#n away skills from active.  Chief of Staff: Project Knowledge
+# Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-08 11:07 AM EST
+**Last Updated:** 2026-02-08 12:30 PM PST
 
 ## Tasks
 
@@ -174,6 +174,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-08: CoS System Cleanup & Task Architecture
+
+Comprehensive system reorganization establishing task management conventions. Trimmed project-index.md (720→275 lines), archived AirOps, moved JRAD to Clients/. Established core principle: tasks are ALWAYS per-project. Moved ## Tasks to top of all project-knowledge.md files. Created completed-tasks.md archival system (last 5 in Done, overflow to archive). System audit fixed Writing PK bug, created 8 minimal PKs for missing projects, deleted deprecated files. Updated global CLAUDE.md with task conventions and .bak policy (git-tracked projects skip .bak). All changes committed/pushed.
+
 ### 2026-02-08: Dashboard Cross-Project Tasks & UI Refinements
 
 Restructured dashboard to make home page a true cross-project command center. Added `loadAllTasks()` function that reads all project-knowledge.md files in parallel, aggregates tasks with metadata (project, priority, file path). Replaced CoS-only inbox with per-project collapsible sections — users expand/collapse projects to control info density. Removed stats row (pending tasks, active projects, recent sessions) as informational noise. Project pages now have two-column grid (tasks left, activity right) with logs as activity cards. Findings: flat lists with inline metadata don't scale; hierarchical grouping with collapse/expand works much better. Stats should drive action or be removed.
@@ -185,11 +189,6 @@ Implemented comprehensive health monitoring in CoS dashboard. Created health.htm
 ### 2026-02-07: Session Log Titles Backfill
 
 Added descriptive `title:` field to session-capture skill template. Updated all 286 existing session logs across 11 projects with descriptive titles in both YAML frontmatter and H1 headers. Used 5 parallel agents (6-minute wall-clock vs. 30+ serial).
-
-### 2026-02-07: Inbox Checkbox Restructure
-
-Migrated cos-inbox.md from heading-based prose to Obsidian-native checkbox format with four sections (Inbox → Active → Backlog → Done). Updated 2 hook scripts, briefing template, and 4 producer skills. Fixed latent `grep -c` bug (exit code 1 when count is 0). Migrated 3 external project inboxes.
-
 
 ---
 
