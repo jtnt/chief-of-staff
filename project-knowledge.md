@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-08 12:30 PM PST
+**Last Updated:** 2026-02-08 12:32 PM EST
 
 ## Tasks
 
@@ -145,6 +145,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
+- **Dashboard write validation** (2026-02-08): All dashboard write operations validate line content before modifying. Prevents wrong-task modifications when external editors (Obsidian, Claude Code) shift line numbers. Falls back to content search when validation fails. See [[session-patterns/20260208-stale-line-number-fix.md]].
+
 - **Auto-capture replaces manual save** (2026-01-28): SessionEnd hook spawns background Claude to capture sessions. Replaced `/log` and `/save` commands. Accepts cross-project limitation (sessions log to cwd only). Trivial sessions auto-skipped.
 
 - **Logs live with projects** (2026-01-14): Each project has its own `logs/` folder. Chief of Staff is an index/dashboard, not a repository. Portable history.
@@ -174,6 +176,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-08: Dashboard Data Integrity Fix
+
+Fixed critical stale line number bug in dashboard task writes. When external editors (Obsidian, Claude Code) add/remove lines, dashboard's cached line numbers become stale. Previously could modify wrong task. All write paths now validate line content before modifying, fall back to content search when lines shift, fail safely if task deleted externally. See [[logs/20260208-stale-line-number-fix.md]].
+
 ### 2026-02-08: CoS System Cleanup & Task Architecture
 
 Comprehensive system reorganization establishing task management conventions. Trimmed project-index.md (720→275 lines), archived AirOps, moved JRAD to Clients/. Established core principle: tasks are ALWAYS per-project. Moved ## Tasks to top of all project-knowledge.md files. Created completed-tasks.md archival system (last 5 in Done, overflow to archive). System audit fixed Writing PK bug, created 8 minimal PKs for missing projects, deleted deprecated files. Updated global CLAUDE.md with task conventions and .bak policy (git-tracked projects skip .bak). All changes committed/pushed.
@@ -185,10 +191,6 @@ Restructured dashboard to make home page a true cross-project command center. Ad
 ### 2026-02-07: Dashboard Health Monitoring & Inbox Archive
 
 Implemented comprehensive health monitoring in CoS dashboard. Created health.html with project cards (PK freshness, inbox counts, CLAUDE.md presence, z_context integrity, log stats, letter grades A/B/C/D) and friction snapshot (type breakdown, success rates, pattern examples from insights analysis). Added sidebar inbox count badges (color-coded by urgency), Health nav link with status dot, and home page alert strip for critical issues. Redesigned inbox format from single-line to two-line (title + tab-indented description) for better Obsidian preview readability. Added archive system: auto-move checked tasks to Done section, "Archive N" button moves completed items to cos-inbox-archive.md with date grouping. Fixed checkbox toggle bug (done: date was going to title instead of description line).
-
-### 2026-02-07: Session Log Titles Backfill
-
-Added descriptive `title:` field to session-capture skill template. Updated all 286 existing session logs across 11 projects with descriptive titles in both YAML frontmatter and H1 headers. Used 5 parallel agents (6-minute wall-clock vs. 30+ serial).
 
 ---
 
