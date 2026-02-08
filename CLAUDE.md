@@ -97,6 +97,15 @@ Chief of Staff/
 - Keep "Recent Work" section current with CoS system work
 - This is about Chief of Staff itself, not tracked projects
 
+## Documentation Standards
+
+**WikiLinks:** Always use Obsidian-style WikiLinks (`[[filename]]` or `[[path/to/filename]]`) when referencing files in documentation and session logs. This creates backlinks in Obsidian for better cross-referencing. Examples:
+- File in same project: `[[project-knowledge.md]]`
+- File in subdirectory: `[[logs/20260208-session.md]]`
+- File in another project: `[[../Writing/standards/elements-of-style.md]]`
+
+Never use plain text file references or markdown links for internal files.
+
 ## Resources Folder
 
 **When adding to Resources:**
