@@ -13,9 +13,9 @@
 
 - [ ] **I-Corps mentor prep**
 	- NSF program application via Glenn Hellman `#meeting` `2026-02-02` [[Tasks/20260203-icorps-mentor-prep.md]]
-  - [ ] Complete mentor interest form `due:2026-02-09`
-  - [ ] Take I-Corps prep course `due:2026-02-09`
-  - [ ] Schedule video interview with Glen `due:2026-02-09`
+  - [ ] Complete mentor interest form `due:2026-02-10`
+  - [ ] Take I-Corps prep course `due:2026-02-10`
+  - [ ] Schedule video interview with Glen `due:2026-02-10`
 
 ### Backlog
 
