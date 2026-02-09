@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-08 11:16 AM EST
+**Last Updated:** 2026-02-09 06:12 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -119,6 +119,23 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 ---
 
 ## Client Projects
+
+### Clients
+**Status:** Active - Infrastructure
+**What it is:** Root folder for all client engagements with shared cross-client context
+**Source:** `/Users/jtnt/Documents/Projects/Clients`
+**Last synced:** 2026-02-09
+
+Central repository for client engagement folders. Contains `z_context/` with cross-client reference materials including engagement models, pricing frameworks, and strategic patterns. Key resource: Fractional CAIO engagement model ($6K/month structure).
+
+Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Rental) are tracked separately below.
+
+**Recent:** Implemented comprehensive redaction rules system-wide (global CLAUDE.md, client CLAUDE.md, meeting-review skill, meeting-processor agent) to protect third-party confidential information. Consolidated shared context into parent Clients/CLAUDE.md, removing duplication from 4 child project files.
+
+**Open Items:**
+- None identified
+
+---
 
 ### Mythos-More Vang
 **Status:** Active - Client Project

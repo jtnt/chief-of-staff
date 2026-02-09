@@ -87,3 +87,8 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Source:** `/Users/jtnt/Documents/Projects/Code/qontext-clone`
 - **Key files:** None detected
 - **Last synced:** Never (newly added)
+
+## Clients
+- **Source:** `/Users/jtnt/Documents/Projects/Clients`
+- **Key files:** `CLAUDE.md`, `z_context/fractional-caio-engagement-model.md`
+- **Last synced:** Never (newly added)
