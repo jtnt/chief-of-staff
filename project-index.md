@@ -130,7 +130,7 @@ Central repository for client engagement folders. Contains `z_context/` with cro
 
 Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Rental) are tracked separately below.
 
-**Recent:** Claude Code skills cleanup - removed 4 duplicate plugins from settings, installed 5 official Anthropic skills (docx, pptx, theme-factory, mcp-builder, web-artifacts-builder) with complete directory structures.
+**Recent:** Mythos-More Vang proposal refinement - evolved proposal through four versions from tactical session-focused to professional document format, added "Two Returns on Every Project" section highlighting compounding value of collaborative work and professional development.
 
 **Open Items:**
 - None identified
@@ -146,10 +146,10 @@ Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Ren
 Mythos is a donor communications and stewardship platform for advancement professionals (higher ed and healthcare). More Vang is a print services and marketing firm. Both companies owned by Jon Budington. 4-session AI training series completed Q4 2025-early 2026. Jon agreed Feb 9 to 3-month fractional CAIO retainer.
 
 **Recent work:**
-- 2026-02-09: Drafted 3-month retainer proposal materials (email + full proposal). $7,500/month, project-based work starting day one. Initial projects: estimating automation (Edmundo), EG lead gen (Nick), Mythos support (Andrea), voice agent for phones, old estimator replacement.
+- 2026-02-09: Refined proposal through four versions, shifting from tactical session details to professional proposal format. Added "Two Returns on Every Project" section articulating compounding value: projects deliver operational efficiency AND build team skills that transfer across their roles. Final version (v4) ready for review. $7,500/month, three active projects at a time.
 
 **Open Items:**
-- Nicholas to review and send proposal to Jon
+- Nicholas to review and send proposal v4 to Jon
 - Confirm start date and team member availability
 
 ---
