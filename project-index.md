@@ -42,7 +42,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-02-08 (task cleanup and retention policy)
+**Last synced:** 2026-02-09 (OneContext competitive analysis)
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers). The product will help them build it.
 
@@ -63,10 +63,10 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction.
 
 **Recent Highlights:**
+- OneContext competitive analysis: identified third source of context creation (observation - agent trajectories as byproduct) and synthesis timing as design dimension (2026-02-09)
 - Knowledge system built: thread-based manifest + `/learn` skill + active engagement protocol (2026-02-07)
 - Competitive landscape expanded: Qontext ($2.7M pre-seed, automated ingestion), Atlan ($750M, "context layer" from data governance), Octave ($7.9M, GTM system) (2026-02-05/06)
 - User research plan created with branching survey design (2026-01-31)
-- CPF researcher pipeline overhauled with orchestrator + verification agents (2026-01-29)
 
 **Open Questions:**
 - Is general-purpose the right bet, or should we pick a domain?
