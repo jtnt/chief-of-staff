@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-09 06:12 PM EST
+**Last Updated:** 2026-02-09 07:28 PM EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -139,17 +139,18 @@ Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Ren
 
 ### Mythos-More Vang
 **Status:** Active - Client Project
-**What it is:** CPF research engagement for Mythos (donor communications platform)
+**What it is:** Fractional AI officer engagement (3-month retainer proposal in progress)
 **Source:** `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang`
-**Last synced:** 2026-02-06
+**Last synced:** 2026-02-09
 
-Mythos is a donor communications and stewardship platform for advancement professionals (higher ed and healthcare). CEO/Chief Storyteller is More Vang. 4 product modules: Dynamic Sites, Library, Publisher, Teams. 13 institutions including MIT, Northwestern, Carnegie Mellon, Brown.
+Mythos is a donor communications and stewardship platform for advancement professionals (higher ed and healthcare). More Vang is a print services and marketing firm. Both companies owned by Jon Budington. 4-session AI training series completed Q4 2025-early 2026. Jon agreed Feb 9 to 3-month fractional CAIO retainer.
 
-CPF research completed (company profile, context profiles, training materials index created).
+**Recent work:**
+- 2026-02-09: Drafted 3-month retainer proposal materials (email + full proposal). $7,500/month, project-based work starting day one. Initial projects: estimating automation (Edmundo), EG lead gen (Nick), Mythos support (Andrea), voice agent for phones, old estimator replacement.
 
-**Open Questions:**
-- Founding year discrepancy (2010 vs 2012 vs 2016)
-- More Vang's relationship to Mythos (subsidiary, division, or separate entity?)
+**Open Items:**
+- Nicholas to review and send proposal to Jon
+- Confirm start date and team member availability
 
 ---
 
