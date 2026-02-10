@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-09 22:50 EST
+**Last Updated:** 2026-02-09 21:20 EST
 
 ## Tasks
 
@@ -8,8 +8,6 @@
 
 - [ ] **Implement PreCompact handover hook**
 	- Auto-generate handover summary before context auto-compaction. Complements SessionEnd auto-capture. Plan drafted in `~/.claude/plans/gentle-foraging-tiger.md` `#session` `2026-02-09`
-- [ ] **Fix inconsistent timestamp display on dashboard**
-	- Dates shown in various formats across activity feed, log entries, and slide-over meta `#manual` `2026-02-08`
 
 ### Active
 
@@ -41,6 +39,8 @@
 
 ### Done
 
+- [x] **Fix inconsistent timestamp display on dashboard**
+	- Dates shown in various formats across activity feed, log entries, and slide-over meta `#manual` `2026-02-08` done:2026-02-09
 - [x] **Improve session-capture log titles**
 	- Many logs have generic names like "Beekeeper Group: Session Log" instead of describing what was done; update session-capture skill to generate descriptive titles and filenames `#session` `2026-02-07` done:2026-02-08
 - [x] **Test Meeting Review v7**
@@ -181,6 +181,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-02-09: Dashboard Timestamp and Preview Fixes
+
+Fixed multiple display inconsistencies in CoS dashboard. Timestamps were showing in three different formats (12h/24h with mixed timezones) because formatting function only handled 12-hour format. Preview text was including YAML frontmatter and cutting off at 120 chars due to CSS constraints. Enhanced `formatDisplayDate()` to handle both time formats with timezone conversion, stripped frontmatter from preview extraction, expanded to 2-line previews with sentence boundaries. Also documented dashboard in CLAUDE.md for discoverability. See [[logs/20260209-dashboard-timestamp-preview-fixes.md]].
 
 ### 2026-02-09: PreCompact Handover System Planning
 
