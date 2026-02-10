@@ -332,34 +332,66 @@ function toSortableDate(dateStr) {
 }
 
 // Normalize date display: "YYYY-MM-DD h:mm PM" (EST) or "YYYY-MM-DD" (no time)
+// Handles both 12-hour (h:mm AM/PM) and 24-hour (HH:mm) formats with optional timezones
 function formatDisplayDate(dateStr) {
   if (!dateStr) return '';
-  const m = dateStr.match(/^(\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}):(\d{2})\s*(AM|PM)\s*(.*)?)?$/i);
-  if (!m) return dateStr;
-  const datePart = m[1];
-  if (!m[2]) return datePart;
 
-  let hour = parseInt(m[2]);
-  const min = m[3];
-  const ampm = m[4].toUpperCase();
+  // Try 12-hour format first: YYYY-MM-DD h:mm AM/PM [TZ]
+  let m = dateStr.match(/^(\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}):(\d{2})\s*(AM|PM)(?:\s+(.+))?)?$/i);
+  if (m) {
+    const datePart = m[1];
+    if (!m[2]) return datePart; // Date-only
 
-  // Convert to 24h
-  let h24 = hour;
-  if (ampm === 'PM' && hour !== 12) h24 += 12;
-  if (ampm === 'AM' && hour === 12) h24 = 0;
+    let hour = parseInt(m[2]);
+    const min = m[3];
+    const ampm = m[4].toUpperCase();
+    const tz = (m[5] || '').trim();
 
-  // Offset to EST if timezone is provided
-  const tz = (m[5] || '').trim();
-  const tzOffsets = { 'PST': 3, 'PDT': 3, 'CST': 1, 'CDT': 1, 'MST': 2, 'MDT': 2, 'EST': 0, 'EDT': 0 };
-  const offset = tzOffsets[tz] || 0;
-  h24 += offset;
-  if (h24 >= 24) h24 -= 24;
+    // Convert to 24h
+    let h24 = hour;
+    if (ampm === 'PM' && hour !== 12) h24 += 12;
+    if (ampm === 'AM' && hour === 12) h24 = 0;
 
-  // Back to 12h
-  const displayAmpm = h24 >= 12 ? 'PM' : 'AM';
-  const display12 = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+    // Apply timezone offset to EST
+    const tzOffsets = { 'PST': 3, 'PDT': 3, 'CST': 1, 'CDT': 1, 'MST': 2, 'MDT': 2, 'EST': 0, 'EDT': 0 };
+    const offset = tzOffsets[tz] || 0;
+    h24 += offset;
+    if (h24 >= 24) h24 -= 24;
+    if (h24 < 0) h24 += 24;
 
-  return datePart + '  ' + display12 + ':' + min + ' ' + displayAmpm;
+    // Convert back to 12h
+    const displayAmpm = h24 >= 12 ? 'PM' : 'AM';
+    const display12 = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+
+    return datePart + '  ' + display12 + ':' + min + ' ' + displayAmpm;
+  }
+
+  // Try 24-hour format: YYYY-MM-DD HH:mm [TZ]
+  m = dateStr.match(/^(\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}):(\d{2})(?:\s+(.+))?)?$/);
+  if (m) {
+    const datePart = m[1];
+    if (!m[2]) return datePart; // Date-only
+
+    let h24 = parseInt(m[2]);
+    const min = m[3];
+    const tz = (m[4] || '').trim();
+
+    // Apply timezone offset to EST
+    const tzOffsets = { 'PST': 3, 'PDT': 3, 'CST': 1, 'CDT': 1, 'MST': 2, 'MDT': 2, 'EST': 0, 'EDT': 0 };
+    const offset = tzOffsets[tz] || 0;
+    h24 += offset;
+    if (h24 >= 24) h24 -= 24;
+    if (h24 < 0) h24 += 24;
+
+    // Convert to 12h
+    const displayAmpm = h24 >= 12 ? 'PM' : 'AM';
+    const display12 = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+
+    return datePart + '  ' + display12 + ':' + min + ' ' + displayAmpm;
+  }
+
+  // Fallback: return as-is if no pattern matches
+  return dateStr;
 }
 
 function groupProjects(projects) {
@@ -1574,13 +1606,17 @@ function openSlideOver(title, content, sessionId) {
   const metaContainer = backdrop.querySelector('.slide-over-meta');
   if (metaContainer) {
     metaContainer.textContent = '';
-    if (Object.keys(meta).length === 0) {
+
+    // Filter out redundant fields (title and date are already shown in header/activity item)
+    const filteredMeta = Object.entries(meta).filter(([k]) => k !== 'title' && k !== 'date');
+
+    if (filteredMeta.length === 0) {
       const noMeta = document.createElement('div');
       noMeta.className = 'meta-item';
-      noMeta.textContent = 'No metadata';
+      noMeta.textContent = 'No additional metadata';
       metaContainer.appendChild(noMeta);
     } else {
-      for (const [k, v] of Object.entries(meta)) {
+      for (const [k, v] of filteredMeta) {
         const item = document.createElement('div');
         item.className = 'meta-item';
         const strong = document.createElement('strong');

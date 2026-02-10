@@ -59,6 +59,9 @@ Chief of Staff/
 ├── Tasks/                              # Detailed specs for complex tasks (linked from project-knowledge.md)
 │   └── YYYYMMDD-*.md                   # Task specs with checklists and context
 │
+├── Tools/                              # Interactive tools and utilities
+│   └── dashboard/                      # Web-based project dashboard (see Dashboard section)
+│
 ├── Weekly Reviews/                     # Periodic synthesis documents
 │
 ├── CLAUDE.md                           # Instructions for Claude Code (this file)
@@ -80,6 +83,25 @@ Chief of Staff/
 - Maintains `project-knowledge.md` for CoS system info (its own state, decisions, work)
 - Reads from project `logs/` folders when it needs detail
 - Has its own `logs/` folder for Chief of Staff system work
+
+## Dashboard
+
+**Location:** `Tools/dashboard/`
+
+A browser-based dashboard for visualizing and managing projects, tasks, and activity:
+- **Home**: Cross-project task inbox, recent activity feed, health alerts
+- **Project pages**: Per-project tasks, logs, patterns, and knowledge
+- **Patterns**: Session pattern analysis with CLAUDE.md suggestions
+- **Health**: Project health metrics (PK freshness, inbox load, documentation)
+
+**Key files:**
+- `index.html` - Home page with cross-project view
+- `project.html` - Individual project dashboard
+- `patterns.html` - Session patterns browser
+- `health.html` - Project health dashboard
+- `js/app.js` - Core application logic and date formatting
+
+**Opening:** Open `Tools/dashboard/index.html` in Chrome. Uses File System Access API for live file editing.
 
 ## When Updating project-index.md
 
