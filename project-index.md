@@ -131,11 +131,10 @@ Central repository for client engagement folders. Contains `z_context/` with cro
 
 Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Rental) are tracked separately below.
 
-**Recent:** Standardized proposal folder structure across Beekeeper and Mythos engagements. Both now use `202602_ai_advisory/` naming (YYYYMM_lowercase). Created `drafts/` subfolders for version history, renamed finals to remove version numbers. Updated razzo-docx skill to clean up generator scripts. Updated 6 session logs with corrected WikiLinks.
+**Recent:** Built `razzo-proposal` skill to automate proposal quality control. Prevents mechanical rework that consumed ~40% of revision time on recent proposals. Skill enforces third-person register, scans for and fixes em dashes/negation endings/engagement bait, always creates new versions rather than editing in place. Three components: SKILL.md instructions, reference proposals as assets (Mythos advisory-only, Beekeeper foundation+advisory).
 
 **Open Items:**
-- Consider implementing recommended proposal workflow improvements
-- Create proposal-specific writing checklist and hookify rules for style violations
+- Test `/razzo-proposal` skill when next opportunity arises
 
 ---
 
