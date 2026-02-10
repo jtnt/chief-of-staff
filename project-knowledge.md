@@ -1,25 +1,11 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-10 12:51 PST
+**Last Updated:** 2026-02-10 12:18 EST
 
 ## Tasks
 
 ### Inbox
 
-- [ ] **Update razzo-docx skill formatting**
-	- Multiple formatting issues with titles, horizontal lines, and footer. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]] `#manual` `2026-02-10`
-  - [ ] **Fix title/subtitle alignment**
-      - Title should be left-aligned (not centered), no line between title and subtitle. Sample has no subtitle convention so skill needs guidance. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
-  - [ ] **Fix horizontal lines implementation**
-      - Use regular horizontal lines instead of paragraphs with borders, as shown in example document. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
-  - [ ] **Fix horizontal lines placement**
-      - Currently adding lines between every section. Only add where they actually appear in the template. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
-  - [ ] **Add footer horizontal line**
-      - Missing divider line at top of footer (currently being left out). [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
-  - [x] **Anonymize sample proposal**
-      - Renamed to RAZZO-Proposal-Template.docx, all references updated in SKILL.md.
-- [ ] **Finalize and send Mythos MoreVang proposal to Jon Budington**
-	- Proposal ready for final review and delivery `#manual` `2026-02-10`
 - [ ] **Record Google Docs Auto Sync video**
 	- Short video demo on syncing Google Docs to Claude Projects `#manual` `2026-02-10`
 - [ ] **Create Beekeeper proposal**
@@ -59,6 +45,20 @@
 
 ### Done
 
+- [x] **Finalize and send Mythos MoreVang proposal to Jon Budington**
+	- Proposal ready for final review and delivery `#manual` `2026-02-10` done:2026-02-10
+- [x] **Update razzo-docx skill formatting**
+	- Multiple formatting issues with titles, horizontal lines, and footer. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]] `#manual` `2026-02-10` done:2026-02-10
+  - [x] **Fix title/subtitle alignment** done:2026-02-10
+      - Title should be left-aligned (not centered), no line between title and subtitle. Sample has no subtitle convention so skill needs guidance. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [x] **Fix horizontal lines implementation** done:2026-02-10
+      - Use regular horizontal lines instead of paragraphs with borders, as shown in example document. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [x] **Fix horizontal lines placement** done:2026-02-10
+      - Currently adding lines between every section. Only add where they actually appear in the template. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [x] **Add footer horizontal line** done:2026-02-10
+      - Missing divider line at top of footer (currently being left out). [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [x] **Anonymize sample proposal** done:2026-02-10
+      - Renamed to RAZZO-Proposal-Template.docx, all references updated in SKILL.md.
 - [x] **Fix dashboard subtask parsing and rendering** `done:2026-02-10`
 	- Implemented structured parsing, description routing, clean rendering, and context-aware copy buttons. [[logs/20260210-dashboard-subtask-improvements.md]]
 - [x] **Fix inconsistent timestamp display on dashboard**
@@ -199,6 +199,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-02-10: Razzo-docx Skill Formatting (Round 2)
+
+Implemented second round of fixes for persistent Word document formatting issues in razzo-docx skill. Added XML border clearing to remove Title style's built-in blue bottom border, replaced VML footer with dotted paragraph border matching template, strengthened markdown `---` handling rules (skip these markers entirely in Razzo docs), updated code examples to be more explicit. Changes committed to `~/.claude/skills/razzo-docx/SKILL.md` (commit ee17279). See [[logs/20260210-razzo-docx-skill-fix-round-2.md]].
 
 ### 2026-02-09: Dashboard Timestamp and Preview Fixes
 

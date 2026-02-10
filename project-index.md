@@ -130,7 +130,7 @@ Central repository for client engagement folders. Contains `z_context/` with cro
 
 Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Rental) are tracked separately below.
 
-**Recent:** Refined Mythos-More Vang proposal (v6→v7) with explicit remote support (2 hrs/week), enhanced ROI measurement framework, governance work capability, and improved professional tone. Generated final Razzo-branded Word document.
+**Recent:** Finalized Mythos-More Vang proposal (v7→v8) with professional dating (Feb 2026), streamlined project descriptions, and client-ready email draft. Fixed Razzo skill Lexend font issue and generated final branded Word document (v5). Proposal ready for delivery.
 
 **Open Items:**
 - None identified
