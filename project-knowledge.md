@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-10 05:40 PM EST
+**Last Updated:** 2026-02-10 06:43 PM EST
 
 ## Tasks
 
@@ -169,6 +169,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
+- **Thought/Link skill separation** (2026-02-10): `/thought` stripped of all URL-handling logic. Explicit redirect added: "If input contains URL, use `/link` instead." Clean boundary: `/thought` = non-URL content (quotes, ideas, observations), `/link` = any URL (saves to project research folders). Previous overlap caused routing ambiguity. See [[logs/20260210-thought-link-skill-separation.md]].
+
 - **WikiLink standard for file references** (2026-02-08): All session logs and documentation use Obsidian-style WikiLinks (`[[path/to/file]]`) instead of backtick quotes or plain text. Enables backlink navigation and "what references this file?" queries. Session-capture skill enforces this. Retroactively converted 105 logs (436 links). Standard documented in both CLAUDE.md files. See [[logs/20260208-wikilink-documentation.md]].
 
 - **Dashboard write validation** (2026-02-08): All dashboard write operations validate line content before modifying. Prevents wrong-task modifications when external editors (Obsidian, Claude Code) shift line numbers. Falls back to content search when validation fails. See [[session-patterns/20260208-stale-line-number-fix.md]].
@@ -202,6 +204,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-10: Thought/Link Skill Separation
+
+Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handling logic from `/thought`, added explicit redirect to `/link` for any URL input. Pattern documented: skill overlap creates friction when two skills can handle same input type. See [[logs/20260210-thought-link-skill-separation.md]], [[session-patterns/20260210-thought-link-skill-separation.md]].
+
 ### 2026-02-10: Razzo-docx Skill Formatting (Round 2)
 
 Implemented second round of fixes for persistent Word document formatting issues in razzo-docx skill. Added XML border clearing to remove Title style's built-in blue bottom border, replaced VML footer with dotted paragraph border matching template, strengthened markdown `---` handling rules (skip these markers entirely in Razzo docs), updated code examples to be more explicit. Changes committed to `~/.claude/skills/razzo-docx/SKILL.md` (commit ee17279). See [[logs/20260210-razzo-docx-skill-fix-round-2.md]].
@@ -217,14 +223,6 @@ Designed PreCompact hook system to auto-generate handover summaries before conte
 ### 2026-02-08: WikiLink Documentation Standard
 
 Established WikiLink format (`[[path/to/file]]`) for all file references in session logs and documentation. Updated session-capture skill to enforce this, added documentation to both CLAUDE.md files. Retroactively converted 105 existing logs across all tracked projects (436 WikiLinks created). Cleaned up redundant directives — standard lives in CLAUDE.md, skill references those locations.
-
-### 2026-02-08: Dashboard Data Integrity Fix
-
-Fixed critical stale line number bug in dashboard task writes. When external editors (Obsidian, Claude Code) add/remove lines, dashboard's cached line numbers become stale. Previously could modify wrong task. All write paths now validate line content before modifying, fall back to content search when lines shift, fail safely if task deleted externally. See [[logs/20260208-stale-line-number-fix.md]].
-
-### 2026-02-08: CoS System Cleanup & Task Architecture
-
-Comprehensive system reorganization establishing task management conventions. Trimmed project-index.md (720→275 lines), archived AirOps, moved JRAD to Clients/. Established core principle: tasks are ALWAYS per-project. Moved ## Tasks to top of all project-knowledge.md files. Created completed-tasks.md archival system (last 5 in Done, overflow to archive). System audit fixed Writing PK bug, created 8 minimal PKs for missing projects, deleted deprecated files. Updated global CLAUDE.md with task conventions and .bak policy (git-tracked projects skip .bak). All changes committed/pushed.
 
 ---
 
