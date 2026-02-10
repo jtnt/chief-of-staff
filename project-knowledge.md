@@ -1,11 +1,13 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-08 12:59 PM EST
+**Last Updated:** 2026-02-09 22:50 EST
 
 ## Tasks
 
 ### Inbox
 
+- [ ] **Implement PreCompact handover hook**
+	- Auto-generate handover summary before context auto-compaction. Complements SessionEnd auto-capture. Plan drafted in `~/.claude/plans/gentle-foraging-tiger.md` `#session` `2026-02-09`
 - [ ] **Fix inconsistent timestamp display on dashboard**
 	- Dates shown in various formats across activity feed, log entries, and slide-over meta `#manual` `2026-02-08`
 
@@ -179,6 +181,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ---
 
 ## Recent Work
+
+### 2026-02-09: PreCompact Handover System Planning
+
+Designed PreCompact hook system to auto-generate handover summaries before context auto-compaction. Complements SessionEnd auto-capture: SessionEnd handles normal session endings, PreCompact handles edge case of long sessions hitting memory limits. Complete implementation plan at `~/.claude/plans/gentle-foraging-tiger.md`. Key decisions: `auto` matcher only (manual compact is intentional), save to working directory (not auto-commit), non-blocking background execution. Task added to Inbox.
 
 ### 2026-02-08: WikiLink Documentation Standard
 

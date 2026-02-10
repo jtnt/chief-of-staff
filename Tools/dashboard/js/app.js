@@ -795,7 +795,13 @@ async function loadProjectLogs(relPath) {
 
     // Extract first non-heading, non-empty line as preview (strip frontmatter first)
     let contentWithoutFrontmatter = content.replace(/^---\n[\s\S]*?\n---\n?/, '');
-    const previewLines = contentWithoutFrontmatter.split('\n').filter(l => l.trim() && !l.startsWith('#'));
+    const previewLines = contentWithoutFrontmatter.split('\n').filter(l => {
+      const trimmed = l.trim();
+      if (!trimmed) return false;
+      if (trimmed.startsWith('#')) return false;
+      if (trimmed.startsWith('**Date:**')) return false; // Skip redundant date lines
+      return true;
+    });
     const preview = previewLines[0] || '';
 
     // Extract session ID from transcript path (UUID before .jsonl)
