@@ -425,6 +425,7 @@ function parseInbox(content, lineOffset) {
   const lines = content.split('\n');
   const sections = [];
   let currentSection = null;
+  let lastSubtask = null;
   let lineNumber = baseOffset;
 
   for (const line of lines) {
@@ -447,6 +448,7 @@ function parseInbox(content, lineOffset) {
       const rawText = taskMatch[2];
       const item = parseTaskLine(rawText, checked, lineNumber, line);
       currentSection.items.push(item);
+      lastSubtask = null;
       continue;
     }
 
@@ -457,17 +459,32 @@ function parseInbox(content, lineOffset) {
       const rawText = subMatch[2];
       const parent = currentSection.items[currentSection.items.length - 1];
       if (!parent.subtasks) parent.subtasks = [];
-      parent.subtasks.push(parseSubtaskLine(rawText, checked, lineNumber, line));
+      const subtask = parseSubtaskLine(rawText, checked, lineNumber, line);
+      parent.subtasks.push(subtask);
+      lastSubtask = subtask;
       continue;
     }
 
     // Description sub-bullet (indented dash, no checkbox) — new format
     const descMatch = line.match(/^\s+- (?!\[[ x]\])(.+)$/);
     if (descMatch && currentSection.items.length > 0) {
+      const descText = descMatch[1].trim();
+
+      // If we just parsed a subtask and it has no context yet, attach to subtask
+      if (lastSubtask && !lastSubtask.context) {
+        const linkMatch = descText.match(/\[\[(.+?)\]\]/);
+        if (linkMatch && !lastSubtask.link) lastSubtask.link = linkMatch[1];
+        lastSubtask.context = descText
+          .replace(/`#\w+`/g, '')
+          .replace(/`\d{4}-\d{2}-\d{2}`/g, '')
+          .replace(/\[\[.+?\]\]/g, '')
+          .trim();
+        continue;
+      }
+
       const parent = currentSection.items[currentSection.items.length - 1];
       // Only treat as description if parent has no context yet
       if (!parent.context) {
-        const descText = descMatch[1].trim();
         // Extract source, date, link from the description line
         const sourceMatch = descText.match(/`#(\w+)`/);
         if (sourceMatch) parent.source = sourceMatch[1];
@@ -525,10 +542,20 @@ function parseTaskLine(text, checked, lineNumber, rawLine) {
 }
 
 function parseSubtaskLine(text, checked, lineNumber, rawLine) {
-  // Simpler: just text with optional `due:date` or `done:date`
+  let title = '';
+  let context = '';
+  let link = '';
   let due = '';
   let done = '';
   let cleanText = text;
+
+  // Title: **text**
+  const titleMatch = text.match(/\*\*(.+?)\*\*/);
+  if (titleMatch) title = titleMatch[1];
+
+  // Wikilink: [[path]]
+  const linkMatch = text.match(/\[\[(.+?)\]\]/);
+  if (linkMatch) link = linkMatch[1];
 
   const dueMatch = text.match(/`due:(\d{4}-\d{2}-\d{2})`/);
   if (dueMatch) { due = dueMatch[1]; cleanText = cleanText.replace(dueMatch[0], '').trim(); }
@@ -540,7 +567,10 @@ function parseSubtaskLine(text, checked, lineNumber, rawLine) {
   const doneMatch2 = text.match(/done:(\d{4}-\d{2}-\d{2})/);
   if (!done && doneMatch2) { done = doneMatch2[1]; cleanText = cleanText.replace(doneMatch2[0], '').trim(); }
 
-  return { text: cleanText, checked, due, done, lineNumber, rawLine };
+  // Clean display text: remove ** markers and [[links]]
+  cleanText = cleanText.replace(/\*\*(.+?)\*\*/g, '$1').replace(/\[\[.+?\]\]/g, '').trim();
+
+  return { text: cleanText, title, context, link, checked, due, done, lineNumber, rawLine };
 }
 
 // ─── Toggle Checkbox in Inbox ────────────────────────
@@ -1513,7 +1543,10 @@ function createTaskItemEl(item, filePath, sectionName, projectName) {
       if (item.subtasks && item.subtasks.length) {
         const openSubs = item.subtasks.filter(s => !s.checked);
         if (openSubs.length) {
-          prompt += '\n\nSub-tasks:\n' + openSubs.map(s => '- ' + s.text).join('\n');
+          prompt += '\n\nSub-tasks:\n' + openSubs.map(s => {
+            const label = s.title || s.text;
+            return s.context ? '- **' + label + '**: ' + s.context : '- ' + label;
+          }).join('\n');
         }
       }
       if (item.link) {
@@ -1546,13 +1579,28 @@ function createTaskItemEl(item, filePath, sectionName, projectName) {
 
       const stTitle = document.createElement('div');
       stTitle.className = 'task-title';
-      stTitle.textContent = st.text;
+      stTitle.textContent = st.title || st.text;
       stContent.appendChild(stTitle);
+
+      if (st.context) {
+        const stDesc = document.createElement('div');
+        stDesc.className = 'task-context';
+        stDesc.textContent = st.context;
+        stContent.appendChild(stDesc);
+      }
 
       const stMeta = document.createElement('div');
       stMeta.className = 'task-meta';
       let hasStMeta = false;
 
+      if (st.link) {
+        const lk = document.createElement('span');
+        lk.className = 'tag-wikilink';
+        lk.textContent = '[[' + st.link.split('/').pop() + ']]';
+        lk.title = st.link;
+        stMeta.appendChild(lk);
+        hasStMeta = true;
+      }
       if (st.due) {
         const d = document.createElement('span');
         d.className = 'tag-due';
@@ -1570,6 +1618,26 @@ function createTaskItemEl(item, filePath, sectionName, projectName) {
 
       if (hasStMeta) stContent.appendChild(stMeta);
       stDiv.appendChild(stContent);
+
+      // Subtask copy button
+      if (!st.checked) {
+        const stCopyBtn = document.createElement('button');
+        stCopyBtn.className = 'task-copy-btn';
+        stCopyBtn.title = 'Copy subtask prompt';
+        stCopyBtn.textContent = '\u2398';
+        stCopyBtn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          let prompt = (item.title || '(untitled)') + ': ' + (st.title || st.text || '(untitled)');
+          if (st.context) prompt += '\n\n' + st.context;
+          if (item.link) prompt += '\n\nSee task spec: ' + item.link;
+          await navigator.clipboard.writeText(prompt);
+          stCopyBtn.textContent = '\u2713';
+          stCopyBtn.classList.add('copied');
+          setTimeout(() => { stCopyBtn.textContent = '\u2398'; stCopyBtn.classList.remove('copied'); }, 1500);
+        });
+        stDiv.appendChild(stCopyBtn);
+      }
+
       frag.appendChild(stDiv);
     }
   }

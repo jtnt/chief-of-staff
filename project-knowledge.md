@@ -1,12 +1,24 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-09 21:20 EST
+**Last Updated:** 2026-02-10 12:51 PST
 
 ## Tasks
 
 ### Inbox
 
-- [ ] **Finalize and send Mythos MoreVang proposal to John Bunnington**
+- [ ] **Update razzo-docx skill formatting**
+	- Multiple formatting issues with titles, horizontal lines, and footer. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]] `#manual` `2026-02-10`
+  - [ ] **Fix title/subtitle alignment**
+      - Title should be left-aligned (not centered), no line between title and subtitle. Sample has no subtitle convention so skill needs guidance. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [ ] **Fix horizontal lines implementation**
+      - Use regular horizontal lines instead of paragraphs with borders, as shown in example document. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [ ] **Fix horizontal lines placement**
+      - Currently adding lines between every section. Only add where they actually appear in the template. [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [ ] **Add footer horizontal line**
+      - Missing divider line at top of footer (currently being left out). [[~/.claude/skills/razzo-docx/SKILL.md]] [[~/.claude/skills/razzo-docx/assets/RAZZO-Proposal-Template.docx]]
+  - [x] **Anonymize sample proposal**
+      - Renamed to RAZZO-Proposal-Template.docx, all references updated in SKILL.md.
+- [ ] **Finalize and send Mythos MoreVang proposal to Jon Budington**
 	- Proposal ready for final review and delivery `#manual` `2026-02-10`
 - [ ] **Record Google Docs Auto Sync video**
 	- Short video demo on syncing Google Docs to Claude Projects `#manual` `2026-02-10`
@@ -47,6 +59,8 @@
 
 ### Done
 
+- [x] **Fix dashboard subtask parsing and rendering** `done:2026-02-10`
+	- Implemented structured parsing, description routing, clean rendering, and context-aware copy buttons. [[logs/20260210-dashboard-subtask-improvements.md]]
 - [x] **Fix inconsistent timestamp display on dashboard**
 	- Dates shown in various formats across activity feed, log entries, and slide-over meta `#manual` `2026-02-08` done:2026-02-09
 - [x] **Improve session-capture log titles**
@@ -55,10 +69,6 @@
 	- Implemented Sonnet model change for quality extraction `#session` `2026-01-22` done:2026-02-03
 - [x] **Update terminology: commands → skills**
 	- Not applicable yet; both systems coexist `#manual` `2026-01-26` done:2026-02-03
-- [x] **Investigate SessionEnd script delay**
-	- Performance issue in auto-capture system `#session` `2026-01-28` done:2026-02-03
-- [x] **Check out Sallam from DC Founders Panel**
-	- Searched but couldn't find online `#meeting` `2026-01-22` done:2026-01-26
 
 ---
 
