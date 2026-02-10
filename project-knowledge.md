@@ -25,6 +25,8 @@
 
 ### Backlog
 
+- [ ] **Evaluate Carl Vellotti's Personal OS patterns for CoS**
+	- GOALS.md (standalone priorities file), workflow folders with scoped CLAUDE.md, Knowledge/People/ (stakeholder tracking), _temp/ capture, CLAUDE.md "pointers over content" audit `#link` `2026-02-10` [[research/20260210_personal-os-claude-code-carl-vellotti/analysis.md]]
 - [ ] **Build client-facing envoy skills from Razzo worksheets**
 	- Apply envoy framework to AI Workflow Opportunity Worksheet and Planning Template `#session` `2026-02-03` [[Tasks/20260203-envoy-client-skills-plan.md]]
 - [ ] **Review Boris Cherny's Claude Code tips**
