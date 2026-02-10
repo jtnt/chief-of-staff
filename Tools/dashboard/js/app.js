@@ -793,8 +793,9 @@ async function loadProjectLogs(relPath) {
       frontmatter.title || extractHeadingTitle(content) || titleSlug
     );
 
-    // Extract first non-heading, non-empty line as preview
-    const previewLines = content.split('\n').filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('---'));
+    // Extract first non-heading, non-empty line as preview (strip frontmatter first)
+    let contentWithoutFrontmatter = content.replace(/^---\n[\s\S]*?\n---\n?/, '');
+    const previewLines = contentWithoutFrontmatter.split('\n').filter(l => l.trim() && !l.startsWith('#'));
     const preview = previewLines[0] || '';
 
     // Extract session ID from transcript path (UUID before .jsonl)
@@ -805,12 +806,25 @@ async function loadProjectLogs(relPath) {
     }
 
     const displayDate = frontmatter.date || date;
+
+    // Expand preview to capture full sentences (look for sentence endings)
+    let previewText = preview;
+    if (previewText.length > 200) {
+      // Try to cut at sentence boundary within 250 chars
+      const sentenceEnd = previewText.slice(0, 250).search(/[.!?]\s/);
+      if (sentenceEnd > 100) {
+        previewText = previewText.slice(0, sentenceEnd + 1);
+      } else {
+        previewText = previewText.slice(0, 200) + '...';
+      }
+    }
+
     logs.push({
       filename: entry.name,
       date: displayDate,
       sortDate: toSortableDate(displayDate),
       title,
-      preview: preview.slice(0, 120),
+      preview: previewText,
       content,
       type: frontmatter.type || 'session',
       sessionId,
