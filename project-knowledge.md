@@ -6,6 +6,14 @@
 
 ### Inbox
 
+- [ ] **Finalize and send Mythos MoreVang proposal to John Bunnington**
+	- Proposal ready for final review and delivery `#manual` `2026-02-10`
+- [ ] **Record Google Docs Auto Sync video**
+	- Short video demo on syncing Google Docs to Claude Projects `#manual` `2026-02-10`
+- [ ] **Create Beekeeper proposal**
+	- New proposal development `#manual` `2026-02-10`
+- [ ] **Start I-Corps Mentor prep work**
+	- Begin preparation for I-Corps mentor program (linked to Active task) `#manual` `2026-02-10`
 - [ ] **Implement PreCompact handover hook**
 	- Auto-generate handover summary before context auto-compaction. Complements SessionEnd auto-capture. Plan drafted in `~/.claude/plans/gentle-foraging-tiger.md` `#session` `2026-02-09`
 
