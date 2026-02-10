@@ -63,6 +63,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction.
 
 **Recent Highlights:**
+- Captured Brian Madden's GitHub gist with practical 6-area interview framework for AI second brain creation — validates interview-based articulation approach as solution to "knowledge in heads" problem (2026-02-10)
 - Captured Brian Madden's LinkedIn article on AI second brains — first external appearance of CPF layer terminology in mainstream context discussion (2026-02-10)
 - OneContext competitive analysis: identified third source of context creation (observation - agent trajectories as byproduct) and synthesis timing as design dimension (2026-02-09)
 - Knowledge system built: thread-based manifest + `/learn` skill + active engagement protocol (2026-02-07)
