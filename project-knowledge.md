@@ -224,10 +224,6 @@ Fixed critical stale line number bug in dashboard task writes. When external edi
 
 Comprehensive system reorganization establishing task management conventions. Trimmed project-index.md (720→275 lines), archived AirOps, moved JRAD to Clients/. Established core principle: tasks are ALWAYS per-project. Moved ## Tasks to top of all project-knowledge.md files. Created completed-tasks.md archival system (last 5 in Done, overflow to archive). System audit fixed Writing PK bug, created 8 minimal PKs for missing projects, deleted deprecated files. Updated global CLAUDE.md with task conventions and .bak policy (git-tracked projects skip .bak). All changes committed/pushed.
 
-### 2026-02-08: Dashboard Cross-Project Tasks & UI Refinements
-
-Restructured dashboard to make home page a true cross-project command center. Added `loadAllTasks()` function that reads all project-knowledge.md files in parallel, aggregates tasks with metadata (project, priority, file path). Replaced CoS-only inbox with per-project collapsible sections — users expand/collapse projects to control info density. Removed stats row (pending tasks, active projects, recent sessions) as informational noise. Project pages now have two-column grid (tasks left, activity right) with logs as activity cards. Findings: flat lists with inline metadata don't scale; hierarchical grouping with collapse/expand works much better. Stats should drive action or be removed.
-
 ---
 
 ## Open Items
