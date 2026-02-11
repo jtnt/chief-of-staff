@@ -1356,15 +1356,15 @@ function getCurrentSlug() {
 
 // ─── Resume Session Buttons ─────────────────────────
 
-function createResumeBtns(sessionId) {
+function createResumeBtns(sessionId, projectPath) {
   const wrap = document.createElement('span');
   wrap.className = 'resume-btns';
-  wrap.appendChild(makeResumeBtn(sessionId, false));
-  wrap.appendChild(makeResumeBtn(sessionId, true));
+  wrap.appendChild(makeResumeBtn(sessionId, false, projectPath));
+  wrap.appendChild(makeResumeBtn(sessionId, true, projectPath));
   return wrap;
 }
 
-function makeResumeBtn(sessionId, yolo) {
+function makeResumeBtn(sessionId, yolo, projectPath) {
   const btn = document.createElement('button');
   btn.className = yolo ? 'resume-btn resume-yolo' : 'resume-btn';
   const label = yolo ? 'YOLO' : '\u25B6 Resume';
@@ -1374,6 +1374,7 @@ function makeResumeBtn(sessionId, yolo) {
     e.stopPropagation();
     let cmd = 'claude --resume ' + sessionId;
     if (yolo) cmd += ' --dangerously-skip-permissions';
+    if (projectPath) cmd = 'cd "' + projectPath + '" && ' + cmd;
     navigator.clipboard.writeText(cmd).then(() => {
       btn.textContent = '\u2713 Copied';
       btn.classList.add('copied');
@@ -1663,7 +1664,7 @@ async function handleCheckboxToggle(filePath, lineNumber, newChecked, expectedLi
 // in ~/Documents/Projects/). There is no server, no external data
 // input, and no untrusted content. This is a personal offline tool.
 
-function openSlideOver(title, content, sessionId) {
+function openSlideOver(title, content, sessionId, projectPath) {
   const backdrop = document.getElementById('slide-over-backdrop');
   if (!backdrop) return;
 
@@ -1687,7 +1688,7 @@ function openSlideOver(title, content, sessionId) {
   if (oldBtns) oldBtns.remove();
   if (sessionId) {
     const closeBtn = header.querySelector('.slide-over-close');
-    header.insertBefore(createResumeBtns(sessionId), closeBtn);
+    header.insertBefore(createResumeBtns(sessionId, projectPath), closeBtn);
   }
 
   // Meta
@@ -1841,7 +1842,7 @@ async function loadAllRecentLogs(limit = 20) {
   for (const project of state.projects) {
     const logs = await loadProjectLogs(project.relPath);
     for (const log of logs) {
-      allLogs.push({ ...log, projectName: project.name, projectSlug: project.slug });
+      allLogs.push({ ...log, projectName: project.name, projectSlug: project.slug, projectPath: project.relPath });
     }
   }
 

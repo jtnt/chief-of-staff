@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-10 06:43 PM EST
+**Last Updated:** 2026-02-10 06:00 PM PST
 
 ## Tasks
 
@@ -114,6 +114,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - Provides automatic continuity without manual "catch me up" requests
 - Proactive loading before first response (not reactive/on-demand)
 - On-demand log search remains available via session workflow for deeper dives
+- Cross-project log search uses glob pattern `**/logs/YYYYMMDD-*.md` to find all logs from a date across all projects simultaneously
 
 ### Check-In System
 - Four skills: `/morning`, `/evening`, `/thought`, `/journal` (converted from commands)
@@ -138,6 +139,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ## Key Decisions
 
 ### Architecture Decisions
+
+- **CLAUDE.md content discipline** (2026-02-10): Established "mistake prevention" filter for CLAUDE.md files. Each line should answer: "Would removing this cause Claude to make mistakes?" Only document non-obvious gotchas, required contracts, and things not discoverable by reading code. Cut architectural descriptions, file structure maps, and anything Claude can figure out in 30 seconds. Goal: smallest file that prevents most mistakes. See [[logs/20260210-dashboard-resume-button-cd-claudemd.md]], [[session-patterns/20260210-dashboard-resume-button-cd-claudemd.md]].
 
 - **Thought/Link skill separation** (2026-02-10): `/thought` stripped of all URL-handling logic. Explicit redirect added: "If input contains URL, use `/link` instead." Clean boundary: `/thought` = non-URL content (quotes, ideas, observations), `/link` = any URL (saves to project research folders). Previous overlap caused routing ambiguity. See [[logs/20260210-thought-link-skill-separation.md]].
 
