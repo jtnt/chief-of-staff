@@ -177,6 +177,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-10: Dashboard Resume Button CD + CLAUDE.md Discipline
+
+Enhanced dashboard resume session buttons to prepend `cd "~/Documents/Projects/{project}" && ` before `claude --resume` command. Created [[Tools/dashboard/CLAUDE.md]], then aggressively trimmed based on "mistake prevention" filter. Final version keeps only non-obvious lifecycle hooks and alert() gotcha. Pattern documented: CLAUDE.md files should be minimal, not comprehensive. See [[logs/20260210-dashboard-resume-button-cd-claudemd.md]], [[session-patterns/20260210-dashboard-resume-button-cd-claudemd.md]].
+
 ### 2026-02-10: Thought/Link Skill Separation
 
 Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handling logic from `/thought`, added explicit redirect to `/link` for any URL input. Pattern documented: skill overlap creates friction when two skills can handle same input type. See [[logs/20260210-thought-link-skill-separation.md]], [[session-patterns/20260210-thought-link-skill-separation.md]].
@@ -192,10 +196,6 @@ Fixed multiple display inconsistencies in CoS dashboard. Timestamps were showing
 ### 2026-02-09: PreCompact Handover System Planning
 
 Designed PreCompact hook system to auto-generate handover summaries before context auto-compaction. Complements SessionEnd auto-capture: SessionEnd handles normal session endings, PreCompact handles edge case of long sessions hitting memory limits. Complete implementation plan at `~/.claude/plans/gentle-foraging-tiger.md`. Key decisions: `auto` matcher only (manual compact is intentional), save to working directory (not auto-commit), non-blocking background execution. Task added to Inbox.
-
-### 2026-02-08: WikiLink Documentation Standard
-
-Established WikiLink format (`[[path/to/file]]`) for all file references in session logs and documentation. Updated session-capture skill to enforce this, added documentation to both CLAUDE.md files. Retroactively converted 105 existing logs across all tracked projects (436 WikiLinks created). Cleaned up redundant directives — standard lives in CLAUDE.md, skill references those locations.
 
 ---
 
