@@ -251,9 +251,11 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 **Status:** Active - Repository
 **What it is:** Central repository for all writing (LinkedIn posts, blog articles, thought leadership)
 **Source:** `/Users/jtnt/Documents/Projects/Writing`
-**Last synced:** 2026-01-17
+**Last synced:** 2026-02-12
 
-Organized by status (Drafts/, Published/). Each piece has front-matter linking to related projects. 5 published pieces.
+Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 5 published pieces.
+
+**Recent:** Renamed Drafts/ folder to lowercase drafts/ for consistent folder naming conventions. Updated all documentation references to maintain consistency.
 
 ---
 

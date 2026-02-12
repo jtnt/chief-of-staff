@@ -186,6 +186,15 @@
   },
   "active": "a7cc095dd1b47ab5",
   "lastOpenFiles": [
+    "Resources/humans-plus-agents/00-synthesis.md",
+    "Resources/humans-plus-agents/roi-association-ai-folio.md",
+    "Resources/humans-plus-agents/roi-association-atelier.md",
+    "Resources/humans-plus-agents/roi-association-repertoire.md",
+    "Resources/humans-plus-agents/roi-association-consultant-book.md",
+    "Resources/humans-plus-agents/gtm-ai-podcast-claude-cowork-setup.md",
+    "Resources/humans-plus-agents/humansplusagents-ai-site.md",
+    "Resources/humans-plus-agents/ai-steve-linkedin-profile.md",
+    "Resources/humans-plus-agents",
     "session-patterns/20260210-dashboard-resume-button-cd-claudemd.md",
     "session-patterns/20260210-cross-project-log-search.md",
     "logs/20260210-dashboard-resume-button-cd-claudemd.md",
@@ -204,14 +213,6 @@
     "Meetings/20260121-nicholas-ken-intro/summary.md",
     "Meetings/20260122-dc-founders-panel/summary.md",
     "logs/20260209-trivial-session-2.md",
-    "logs/20260210-ai-compounding-process-improvement-thought.md",
-    "logs/20260210-daily-task-creation.md",
-    "logs/20260210-dashboard-subtask-improvements.md",
-    "logs/20260210-personal-os-research-capture.md",
-    "logs/20260210-razzo-docx-skill-fix-round-2.md",
-    "logs/20260210-razzo-docx-task-creation.md",
-    "logs/20260210-thought-link-skill-separation.md",
-    "logs/20260109-command-dependencies-doc-sync.md",
     "completed-items.md.bak",
     "CLAUDE.md.bak",
     "Tools/dashboard/health.html",
@@ -220,7 +221,6 @@
     "Resources/claude-code-dashboard.html",
     "Tools/dashboard/patterns.html",
     "Resources/claude-code-usage-infographic.html",
-    "Tools/dashboard/project.html",
-    "Tools/dashboard/index.html"
+    "Tools/dashboard/project.html"
   ]
 }
