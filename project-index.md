@@ -253,9 +253,9 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 **Source:** `/Users/jtnt/Documents/Projects/Writing`
 **Last synced:** 2026-02-12
 
-Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 5 published pieces.
+Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 6 published pieces.
 
-**Recent:** Renamed Drafts/ folder to lowercase drafts/ for consistent folder naming conventions. Updated all documentation references to maintain consistency.
+**Recent:** Published major Substack article "What an AI mindset actually looks like" - explores thesis that AI conversations are more valuable than outputs, with two practical methods for building compounding systems from conversations.
 
 ---
 
