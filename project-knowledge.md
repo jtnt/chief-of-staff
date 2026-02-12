@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-10 06:00 PM PST
+**Last Updated:** 2026-02-12 18:31 EST
 
 ## Tasks
 
@@ -140,6 +140,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
+- **System simplification approach** (2026-02-12): Simplification should be structural, not cosmetic. Audit actual usage, delete unused features entirely (not just their docs), match system to workflow (not vice versa). Document what you DO, not what's possible. Plan created: delete 4 skills, 6 commands, 2 hooks; flatten tasks to plain checkboxes; strip ~60 CLAUDE.md lines. See [[logs/20260212-cos-simplification-planning.md]].
+
 - **CLAUDE.md content discipline** (2026-02-10): Established "mistake prevention" filter for CLAUDE.md files. Each line should answer: "Would removing this cause Claude to make mistakes?" Only document non-obvious gotchas, required contracts, and things not discoverable by reading code. Cut architectural descriptions, file structure maps, and anything Claude can figure out in 30 seconds. Goal: smallest file that prevents most mistakes. See [[logs/20260210-dashboard-resume-button-cd-claudemd.md]], [[session-patterns/20260210-dashboard-resume-button-cd-claudemd.md]].
 
 - **Thought/Link skill separation** (2026-02-10): `/thought` stripped of all URL-handling logic. Explicit redirect added: "If input contains URL, use `/link` instead." Clean boundary: `/thought` = non-URL content (quotes, ideas, observations), `/link` = any URL (saves to project research folders). Previous overlap caused routing ambiguity. See [[logs/20260210-thought-link-skill-separation.md]].
@@ -192,6 +194,10 @@ Implemented second round of fixes for persistent Word document formatting issues
 ### 2026-02-09: Dashboard Timestamp and Preview Fixes
 
 Fixed multiple display inconsistencies in CoS dashboard. Timestamps were showing in three different formats (12h/24h with mixed timezones) because formatting function only handled 12-hour format. Preview text was including YAML frontmatter and cutting off at 120 chars due to CSS constraints. Enhanced `formatDisplayDate()` to handle both time formats with timezone conversion, stripped frontmatter from preview extraction, expanded to 2-line previews with sentence boundaries. Also documented dashboard in CLAUDE.md for discoverability. See [[logs/20260209-dashboard-timestamp-preview-fixes.md]].
+
+### 2026-02-12: CoS Simplification Planning
+
+Created comprehensive plan to strip CoS to what's actually used. System had grown to 12 commands, 21 skills, 10 hooks, hundreds of lines of docs — actual usage: auto-capture, `/link`, `/thought`, task checkboxes. Plan deletes 4 skills (morning/evening/journal/capture), 6 commands (Links/ system + review-checkins), 2 hooks (briefing/morning-greeting), simplifies session-start hook from ~100 to ~15 lines, flattens task format from 4 subsections to plain checkboxes, strips ~60 lines from CLAUDE.md files. Key insight: document usage, not capabilities. See [[logs/20260212-cos-simplification-planning.md]], [[session-patterns/20260212-cos-simplification-planning.md]].
 
 ### 2026-02-09: PreCompact Handover System Planning
 
