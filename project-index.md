@@ -125,13 +125,13 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 **Status:** Active - Infrastructure
 **What it is:** Root folder for all client engagements with shared cross-client context
 **Source:** `/Users/jtnt/Documents/Projects/Clients`
-**Last synced:** 2026-02-10
+**Last synced:** 2026-02-12
 
 Central repository for client engagement folders. Contains `z_context/` with cross-client reference materials including engagement models, pricing frameworks, and strategic patterns. Key resource: Fractional CAIO engagement model ($6K/month structure).
 
 Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Rental) are tracked separately below.
 
-**Recent:** Built `razzo-proposal` skill to automate proposal quality control. Prevents mechanical rework that consumed ~40% of revision time on recent proposals. Skill enforces third-person register, scans for and fixes em dashes/negation endings/engagement bait, always creates new versions rather than editing in place. Three components: SKILL.md instructions, reference proposals as assets (Mythos advisory-only, Beekeeper foundation+advisory).
+**Recent:** Created value proposition section for Mythos-More Vang AI advisory proposal using successful Beekeeper pattern. Focus on quantifiable time-savings ($6K+ annually for 30min/day project), strategic AI capability development, and employee retention benefits. Removed fabricated specifics, used conservative math approach.
 
 **Open Items:**
 - Test `/razzo-proposal` skill when next opportunity arises
