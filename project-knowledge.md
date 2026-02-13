@@ -1,12 +1,13 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-12 22:06 EST
+**Last Updated:** 2026-02-13 14:33 EST
 
 ## Tasks
 
 - [ ] I-Corps mentor prep [[Tasks/20260203-icorps-mentor-prep.md]]
 - [ ] Implement PreCompact handover hook
 - [ ] Evaluate Carl Vellotti's Personal OS patterns for CoS
+- [ ] Evaluate Murchison's AI Chief of Staff patterns for CoS — [[research/20260213_ai-chief-of-staff-claude-code-mike-murchison/]] `#link` `2026-02-13`
 - [ ] Build client-facing envoy skills from Razzo worksheets
 - [ ] Review Boris Cherny's Claude Code tips
 - [ ] Review and implement CoS automation recommendations
@@ -134,6 +135,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-13: Murchison Chief of Staff Research
+
+Captured and analyzed Mike Murchison's (CEO, Ada) AI Chief of Staff implementation. His open-source system processes ~500 background jobs/day with 15+ MCP integrations but uses only ~10 core files (markdown + YAML + cron). Architectural simplicity (no code, no database, CLAUDE.md as sole abstraction) reveals our system optimizes for different outcomes: his breadth-first daily integration vs our depth-first knowledge management. User noted transferability potential — setting up similar systems for executives maps to Razzo Sprint + CPF engagement model. See [[research/20260213_ai-chief-of-staff-claude-code-mike-murchison/]].
+
 ### 2026-02-10: Dashboard Resume Button CD + CLAUDE.md Discipline
 
 Enhanced dashboard resume session buttons to prepend `cd "~/Documents/Projects/{project}" && ` before `claude --resume` command. Created [[Tools/dashboard/CLAUDE.md]], then aggressively trimmed based on "mistake prevention" filter. Final version keeps only non-obvious lifecycle hooks and alert() gotcha. Pattern documented: CLAUDE.md files should be minimal, not comprehensive. See [[logs/20260210-dashboard-resume-button-cd-claudemd.md]], [[session-patterns/20260210-dashboard-resume-button-cd-claudemd.md]].
@@ -153,10 +158,6 @@ Fixed multiple display inconsistencies in CoS dashboard. Timestamps were showing
 ### 2026-02-12: CoS Simplification (Planning + Implementation)
 
 Planned and executed complete simplification of CoS system. Removed unused features (4 skills: morning/evening/journal/capture; briefing system; morning greeting hook; review-checkins command), flattened task management from 4 subsections (Inbox/Active/Backlog/Done) to plain checkboxes + Done section, created `/todo` skill, renamed `/thought` to `/note`, archived check-in folders to `_archive/`, stripped session-start hook from ~100 to ~17 lines, updated dashboard to parse new flat task format. Result: system matches actual usage — auto-capture, `/link`, `/note`, `/todo`, task checkboxes, pattern review. See [[logs/20260212-cos-simplification-planning.md]], [[logs/20260212-cos-simplification.md]], [[session-patterns/20260212-cos-simplification-planning.md]], [[session-patterns/20260212-cos-simplification.md]].
-
-### 2026-02-09: PreCompact Handover System Planning
-
-Designed PreCompact hook system to auto-generate handover summaries before context auto-compaction. Complements SessionEnd auto-capture: SessionEnd handles normal session endings, PreCompact handles edge case of long sessions hitting memory limits. Complete implementation plan at `~/.claude/plans/gentle-foraging-tiger.md`. Key decisions: `auto` matcher only (manual compact is intentional), save to working directory (not auto-commit), non-blocking background execution. Task added to Inbox.
 
 ---
 
