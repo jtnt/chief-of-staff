@@ -1,45 +1,16 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-12 18:31 EST
+**Last Updated:** 2026-02-12
 
 ## Tasks
 
-### Inbox
-
-- [ ] **Start I-Corps Mentor prep work**
-	- Begin preparation for I-Corps mentor program (linked to Active task) `#manual` `2026-02-10`
-- [ ] **Implement PreCompact handover hook**
-	- Auto-generate handover summary before context auto-compaction. Complements SessionEnd auto-capture. Plan drafted in `~/.claude/plans/gentle-foraging-tiger.md` `#session` `2026-02-09`
-
-### Active
-
-- [ ] **I-Corps mentor prep**
-	- NSF program application via Glenn Hellman `#meeting` `2026-02-02` [[Tasks/20260203-icorps-mentor-prep.md]]
-  - [ ] Complete mentor interest form `due:2026-02-10`
-  - [ ] Take I-Corps prep course `due:2026-02-10`
-  - [ ] Schedule video interview with Glen `due:2026-02-10`
-
-### Backlog
-
-- [ ] **Evaluate Carl Vellotti's Personal OS patterns for CoS**
-	- GOALS.md (standalone priorities file), workflow folders with scoped CLAUDE.md, Knowledge/People/ (stakeholder tracking), _temp/ capture, CLAUDE.md "pointers over content" audit `#link` `2026-02-10` [[research/20260210_personal-os-claude-code-carl-vellotti/analysis.md]]
-- [ ] **Build client-facing envoy skills from Razzo worksheets**
-	- Apply envoy framework to AI Workflow Opportunity Worksheet and Planning Template `#session` `2026-02-03` [[Tasks/20260203-envoy-client-skills-plan.md]]
-- [ ] **Review Boris Cherny's Claude Code tips**
-	- 10 tips from Claude Code creator `#link` `2026-01-31`
-  - [x] Try voice dictation (fn fn) for longer prompts
-  - [ ] Add "scrap this and implement the elegant solution" to prompting vocabulary
-  - [ ] Build habit: "Update your CLAUDE.md" after corrections
-  - [x] Explore `/statusline` customization
-  - [ ] Consider building a `/learn` spaced-repetition skill
-- [ ] **Review and implement CoS automation recommendations**
-	- 5 targeted improvements from analysis sessions `#session` `2026-01-30`
-  - [x] Session start visibility improvements
-  - [x] Notification hook for background work completion
-  - [ ] Block external edits hook
-  - [x] Build `/project-health`, `/weekly-review`, `/cross-project-synthesis` skills
-- [ ] **Explore insights report suggestions**
-	- Workflow automation ideas from Claude Code Insights report `#session` `2026-02-04` [[Tasks/20260204-insights-suggestions-followup.md]]
+- [ ] I-Corps mentor prep [[Tasks/20260203-icorps-mentor-prep.md]]
+- [ ] Implement PreCompact handover hook
+- [ ] Evaluate Carl Vellotti's Personal OS patterns for CoS
+- [ ] Build client-facing envoy skills from Razzo worksheets
+- [ ] Review Boris Cherny's Claude Code tips
+- [ ] Review and implement CoS automation recommendations
+- [ ] Explore insights report suggestions
 
 ### Done
 
@@ -102,26 +73,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - Trivial sessions (< 3 user messages or < 2KB) skipped automatically
 - `/log` and `/save` commands deprecated
 
-### Strategic Briefing
-- Runs 1-3x daily via `BRIEFING_REQUIRED` flag from SessionStart hook
-- Format: Calendar → Projects → Content → Inbox → Meetings
-- Four-section inbox: Inbox (untriaged) → Active (this week) → Backlog → Done
-- Obsidian-native checkbox format (`- [ ]` / `- [x]`) for interactive task management
-- Bias toward project deliverables principle embedded in briefing template
-
-### Session Context Loading
-- Global CLAUDE.md directive ensures `project-knowledge.md` is read at start of every project session
-- Provides automatic continuity without manual "catch me up" requests
-- Proactive loading before first response (not reactive/on-demand)
-- On-demand log search remains available via session workflow for deeper dives
-- Cross-project log search uses glob pattern `**/logs/YYYYMMDD-*.md` to find all logs from a date across all projects simultaneously
-
-### Check-In System
-- Four skills: `/morning`, `/evening`, `/thought`, `/journal` (converted from commands)
-- Model-optimized: morning/evening/journal use Sonnet, thought uses Haiku
-- Interactive prompts via `AskUserQuestion` with structured options
-- Natural language detection via hooks still operational
-- Project routing: check-in content mentioning tracked projects can push to project inboxes
+### Quick Capture
+- `/link` for URLs → project `research/` folders
+- `/note` for ideas/quotes/observations → `Notes/`
+- `/todo` for task items → project `project-knowledge.md` `## Tasks`
 
 ### MCP & External Services
 - Google Calendar + Gmail MCP (project-scoped, OAuth via Cloud project `claude-code-484521`)

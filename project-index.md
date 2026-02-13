@@ -42,7 +42,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
 **Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
-**Last synced:** 2026-02-10
+**Last synced:** 2026-02-12
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers). The product will help them build it.
 
@@ -63,6 +63,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 **Connection to Razzo:** Same ICP, complementary offerings. Training teaches AI usage; CPF solves the creation friction.
 
 **Recent Highlights:**
+- Airstore filesystem research captured — pure access layer approach using natural language "smart folders" as organizing principle. Opposite end of spectrum from structured approaches (2026-02-12)
 - Captured Brian Madden's GitHub gist with practical 6-area interview framework for AI second brain creation — validates interview-based articulation approach as solution to "knowledge in heads" problem (2026-02-10)
 - Captured Brian Madden's LinkedIn article on AI second brains — first external appearance of CPF layer terminology in mainstream context discussion (2026-02-10)
 - OneContext competitive analysis: identified third source of context creation (observation - agent trajectories as byproduct) and synthesis timing as design dimension (2026-02-09)

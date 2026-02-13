@@ -591,6 +591,11 @@ a:hover { color: var(--accent-hover); }
   color: #4ade80;
   border-color: #4ade80;
 }
+.resume-btn.resume-id {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+}
 .resume-btn.resume-yolo {
   color: #f87171;
   border-color: rgba(248, 113, 113, 0.4);

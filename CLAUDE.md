@@ -6,17 +6,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal Chief of Staff system - a knowledge management and strategic planning repository, not a codebase. The purpose is to help the user track work across multiple projects, synthesize information, analyze patterns, and make strategic decisions.
 
-## Session Start: Strategic Briefing
-
-When you see `BRIEFING_REQUIRED` in session context, execute strategic briefing instructions from:
-```
-~/.claude/hooks/briefing-template.md
-```
-
-This runs 1-3x daily (critical workflow). Full steps, edge cases, and format templates are documented in the hook file.
-
-**Quick reference:** Calendar → Projects → Content → Inbox → Meetings
-
 ## Proactive Knowledge Capture
 
 **Goal:** Capture significant insights and decisions during sessions so they persist in `project-knowledge.md`.
@@ -44,17 +33,14 @@ This runs 1-3x daily (critical workflow). Full steps, edge cases, and format tem
 
 ```
 Chief of Staff/
-├── Check-Ins/                          # Personal check-ins and reflections
-│   ├── daily/                          # Morning and evening check-ins
-│   ├── thoughts/                       # Quick captures (quotes, links, ideas)
-│   └── journal/                        # Personal reflections
+├── Notes/                              # Quick captures via /note
+├── Check-Ins/
+│   └── _archive/                       # Old check-in files (daily, weekly, journal)
 │
 ├── logs/                               # Chief of Staff's own session logs
 │   └── YYYYMMDD-*.md                   # Dated sync files for CoS itself
 │
 ├── Resources/                          # Reference materials and guides
-│   ├── Claude Code/                    # Claude Code documentation
-│   └── Donald Miller StoryBrand Framework.md  # Marketing reference
 │
 ├── Tasks/                              # Detailed specs for complex tasks (linked from project-knowledge.md)
 │   └── YYYYMMDD-*.md                   # Task specs with checklists and context
@@ -138,73 +124,13 @@ Never use plain text file references or markdown links for internal files.
 
 ## Tasks
 
-Tasks live in the `## Tasks` section at the **top** of each project's `project-knowledge.md` (right after the title/header). Uses Obsidian-native checkboxes (`- [ ]` / `- [x]`).
-
-**CoS project-knowledge.md** uses subsections: `### Inbox` (untriaged) → `### Active` (this week) → `### Backlog` (later) → `### Done` (completed)
-
-**External projects** use a flat list under `## Tasks` with a `### Done` subsection.
-
-**Task line format:**
-```
-- [ ] **Title**
-	- Context description `#source` `2026-02-08` [[optional Tasks/link]]
-```
-
-- Title goes on the first line (checkbox + bold title only)
-- Description/context goes on an indented sub-bullet (tab + `- `)
-- `#source` tags: `#meeting`, `#session`, `#thought`, `#link`, `#manual`
-- Sub-tasks indent under parent as checkboxes (`- [ ]`); max 3, use Tasks/ file + wikilink for more
-- New items go to `### Inbox` in CoS, or top of `## Tasks` in external projects (newest at top). User triages to Active or Backlog.
-- Completed items: `- [x]` with `done:YYYY-MM-DD` appended
-
-**Completed task archival:** The `### Done` section in `project-knowledge.md` keeps only the **last 5** completed items. When a new item completes and pushes past 5, move the oldest to the project's `completed-tasks.md` file (newest at top). Create the file if it doesn't exist. Tasks are always per-project — never aggregate completed items from multiple projects into one file.
-
-**Tasks/ folder** holds detailed specs for complex tasks, linked from Tasks section via `[[wikilinks]]`.
-
-**When adding to Tasks/:**
-- Use descriptive filenames: `YYYYMMDD-description.md`
-- Include YAML frontmatter with `status: active` and `created:` date
-- If a task grows into a larger project, migrate it to a tracked project folder
-
-**When routing to a project's tasks:** Add to `## Tasks` section in that project's `project-knowledge.md`:
-```
-- [ ] **Title**
-	- Context description `#source` `YYYY-MM-DD`
-```
+Tasks are checkboxes in `## Tasks` at the top of `project-knowledge.md`. Same format everywhere. Completed items move to `### Done` (keeps last 5; older items roll to `completed-tasks.md` for permanent archive). `/todo` skill adds new items to any project. `Tasks/` folder holds detailed specs linked via `[[wikilinks]]`.
 
 **Note:** Auto-capture skips the CoS sync step for this repo (we ARE CoS).
 
-## Check-In System
+## Quick Capture
 
-**See global CLAUDE.md** (`~/.claude/CLAUDE.md`) for check-in triggers, commands, and natural language detection.
-
-### CoS-Specific: Folder Structure
-
-```
-Check-Ins/
-├── daily/           # Morning and evening check-ins
-├── thoughts/        # Quick captures (quotes, links, ideas)
-└── journal/         # Personal reflections (never routed)
-```
-
-**Filename convention for thoughts:** Use descriptive, searchable filenames (e.g., `20260114-maven-ai-product-sense-vibe-code-personal-os.md` not `20260114-maven-course.md`).
-
-### CoS-Specific: Project Routing
-
-When check-in content relates to a tracked project:
-
-1. Ask user: "This mentions [Project]. Want me to add it to that project's tasks?"
-2. If yes, add to `## Tasks` section in that project's `project-knowledge.md` (newest at top):
-     ```
-     - [ ] **Title**
-     	- Context description `#source` `YYYY-MM-DD`
-     ```
-   If no `## Tasks` section exists, append one at the end of the file.
-3. Also create project log: `[ProjectName]/logs/YYYYMMDD-checkin-note.md`
-
-**On project open:** SessionStart hook checks `project-knowledge.md` for pending tasks → injects `COS_INBOX` flag → Claude notifies user.
-
-**Original check-in stays in Check-Ins/** (single source of truth). Journal entries never routed.
+`/note` → `Notes/`. `/link` → project `research/` folders. `/todo` → project tasks.
 
 ## Note: Cowork Mode Git Config Issue
 

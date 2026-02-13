@@ -247,7 +247,7 @@ async function discoverProjects() {
     else if (p.name === 'Chief of Staff') category = 'infrastructure';
     else category = 'active';
 
-    return { name: p.name, slug, relPath, status, category };
+    return { name: p.name, slug, relPath, source: p.source, status, category };
   });
 
   // Load task counts + last activity date for each project (parallel)
@@ -1359,9 +1359,30 @@ function getCurrentSlug() {
 function createResumeBtns(sessionId, projectPath) {
   const wrap = document.createElement('span');
   wrap.className = 'resume-btns';
+  wrap.appendChild(makeCopyIdBtn(sessionId));
   wrap.appendChild(makeResumeBtn(sessionId, false, projectPath));
   wrap.appendChild(makeResumeBtn(sessionId, true, projectPath));
   return wrap;
+}
+
+function makeCopyIdBtn(sessionId) {
+  const btn = document.createElement('button');
+  btn.className = 'resume-btn resume-id';
+  const label = 'ID';
+  btn.title = 'Copy session ID';
+  btn.textContent = label;
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(sessionId).then(() => {
+      btn.textContent = '\u2713 Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = label;
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  });
+  return btn;
 }
 
 function makeResumeBtn(sessionId, yolo, projectPath) {
@@ -1374,7 +1395,7 @@ function makeResumeBtn(sessionId, yolo, projectPath) {
     e.stopPropagation();
     let cmd = 'claude --resume ' + sessionId;
     if (yolo) cmd += ' --dangerously-skip-permissions';
-    if (projectPath) cmd = 'cd ~/Documents/Projects/"' + projectPath + '" && ' + cmd;
+    if (projectPath) cmd = 'cd "' + projectPath + '" && ' + cmd;
     navigator.clipboard.writeText(cmd).then(() => {
       btn.textContent = '\u2713 Copied';
       btn.classList.add('copied');
@@ -1842,7 +1863,7 @@ async function loadAllRecentLogs(limit = 20) {
   for (const project of state.projects) {
     const logs = await loadProjectLogs(project.relPath);
     for (const log of logs) {
-      allLogs.push({ ...log, projectName: project.name, projectSlug: project.slug, projectPath: project.relPath });
+      allLogs.push({ ...log, projectName: project.name, projectSlug: project.slug, projectPath: project.source });
     }
   }
 

@@ -299,7 +299,7 @@
         item.className = 'activity-item';
         item.addEventListener('click', (e) => {
           if (e.target.closest('.resume-btn')) return;
-          const projPath = log.projectPath ? '~/Documents/Projects/' + log.projectPath : null;
+          const projPath = log.projectPath || null;
           openSlideOver(log.title, log.content, log.sessionId, projPath);
         });
 
@@ -331,7 +331,7 @@
         }
 
         if (log.sessionId) {
-          const projPath = log.projectPath ? '~/Documents/Projects/' + log.projectPath : null;
+          const projPath = log.projectPath || null;
           const resumeRow = document.createElement('div');
           resumeRow.className = 'activity-resume';
           resumeRow.appendChild(createResumeBtns(log.sessionId, projPath));

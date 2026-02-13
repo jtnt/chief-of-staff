@@ -173,7 +173,7 @@
           // Click to open slide-over (but don't intercept resume button clicks)
           item.addEventListener('click', (e) => {
             if (e.target.closest('.resume-btn')) return;
-            const projPath = currentProject ? '~/Documents/Projects/' + currentProject.relPath : null;
+            const projPath = currentProject ? currentProject.source : null;
             openSlideOver(log.title, log.content, log.sessionId, projPath);
           });
 
@@ -200,7 +200,7 @@
           }
 
           if (log.sessionId) {
-            const projPath = currentProject ? '~/Documents/Projects/' + currentProject.relPath : null;
+            const projPath = currentProject ? currentProject.source : null;
             const resumeRow = document.createElement('div');
             resumeRow.className = 'activity-resume';
             resumeRow.appendChild(createResumeBtns(log.sessionId, projPath));
@@ -505,7 +505,7 @@
           // Click opens slide-over (but don't intercept resume button clicks)
           entryHeader.addEventListener('click', (e) => {
             if (e.target.closest('.resume-btn')) return;
-            const projPath = currentProject ? '~/Documents/Projects/' + currentProject.relPath : null;
+            const projPath = currentProject ? currentProject.source : null;
             openSlideOver(log.title, log.content, log.sessionId, projPath);
           });
 
@@ -520,7 +520,7 @@
           entryHeader.appendChild(titleEl);
 
           if (log.sessionId) {
-            const projPath = currentProject ? '~/Documents/Projects/' + currentProject.relPath : null;
+            const projPath = currentProject ? currentProject.source : null;
             entryHeader.appendChild(createResumeBtns(log.sessionId, projPath));
           }
 
