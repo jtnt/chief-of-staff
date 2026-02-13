@@ -284,7 +284,7 @@
         addRow.className = 'add-task-row';
         const input = document.createElement('input');
         input.type = 'text';
-        input.placeholder = 'Add task... (Title \u2014 context)';
+        input.placeholder = 'Add task...';
         input.addEventListener('keydown', async (e) => {
           if (e.key === 'Enter' && input.value.trim()) {
             await addProjectTask(input.value.trim());
@@ -317,40 +317,16 @@
       const content = await readFile(state.rootHandle, ...pathParts);
       if (!content) return;
 
-      const today = new Date().toISOString().split('T')[0];
-      let title = text;
-      let context = '';
-      const dashIdx = text.indexOf(' \u2014 ');
-      if (dashIdx > 0) {
-        title = text.slice(0, dashIdx);
-        context = text.slice(dashIdx + 3);
-      }
-      const newLine = context
-        ? '- [ ] **' + title + '**\n\t- ' + context + ' `#manual` `' + today + '`'
-        : '- [ ] **' + title + '**\n\t- `#manual` `' + today + '`';
+      const newLine = '- [ ] ' + text;
 
       const lines = content.split('\n');
       let insertIdx = -1;
 
-      // Find ## Tasks header and insert after it (or after ### Inbox if it exists)
+      // Find ## Tasks, insert at top
       for (let i = 0; i < lines.length; i++) {
         if (/^## Tasks$/.test(lines[i])) {
-          // Look for ### Inbox first (CoS pattern)
-          let found = false;
-          for (let j = i + 1; j < lines.length; j++) {
-            if (/^### Inbox$/.test(lines[j])) {
-              insertIdx = j + 1;
-              while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
-              found = true;
-              break;
-            }
-            if (/^#{2,3} /.test(lines[j]) && !/^### Inbox/.test(lines[j])) break;
-          }
-          if (!found) {
-            // No subsections — insert right after ## Tasks
-            insertIdx = i + 1;
-            while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
-          }
+          insertIdx = i + 1;
+          while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
           break;
         }
       }

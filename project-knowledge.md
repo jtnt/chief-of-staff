@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-12
+**Last Updated:** 2026-02-12 22:06 EST
 
 ## Tasks
 
@@ -74,9 +74,9 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - `/log` and `/save` commands deprecated
 
 ### Quick Capture
-- `/link` for URLs → project `research/` folders
-- `/note` for ideas/quotes/observations → `Notes/`
-- `/todo` for task items → project `project-knowledge.md` `## Tasks`
+- `/link` for URLs → project `research/` folders (saves article + analysis)
+- `/note` for ideas/quotes/observations → `Notes/` (renamed from `/thought`)
+- `/todo` for task items → project `project-knowledge.md` `## Tasks` (new)
 
 ### MCP & External Services
 - Google Calendar + Gmail MCP (project-scoped, OAuth via Cloud project `claude-code-484521`)
@@ -95,7 +95,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
-- **System simplification approach** (2026-02-12): Simplification should be structural, not cosmetic. Audit actual usage, delete unused features entirely (not just their docs), match system to workflow (not vice versa). Document what you DO, not what's possible. Plan created: delete 4 skills, 6 commands, 2 hooks; flatten tasks to plain checkboxes; strip ~60 CLAUDE.md lines. See [[logs/20260212-cos-simplification-planning.md]].
+- **System simplification approach** (2026-02-12): Simplification should be structural, not cosmetic. Audit actual usage, delete unused features entirely (not just their docs), match system to workflow (not vice versa). Document what you DO, not what's possible. Implemented: deleted 4 skills, 1 command, 2 hooks; created `/todo` skill; renamed `/thought` to `/note`; flattened tasks to plain checkboxes; archived check-in folders; updated dashboard. Pattern: comprehensive inventory prevents orphaned references across multiple repos. See [[logs/20260212-cos-simplification-planning.md]], [[logs/20260212-cos-simplification.md]].
 
 - **CLAUDE.md content discipline** (2026-02-10): Established "mistake prevention" filter for CLAUDE.md files. Each line should answer: "Would removing this cause Claude to make mistakes?" Only document non-obvious gotchas, required contracts, and things not discoverable by reading code. Cut architectural descriptions, file structure maps, and anything Claude can figure out in 30 seconds. Goal: smallest file that prevents most mistakes. See [[logs/20260210-dashboard-resume-button-cd-claudemd.md]], [[session-patterns/20260210-dashboard-resume-button-cd-claudemd.md]].
 
@@ -109,7 +109,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 - **Logs live with projects** (2026-01-14): Each project has its own `logs/` folder. Chief of Staff is an index/dashboard, not a repository. Portable history.
 
-- **Tasks merged into project-knowledge.md** (2026-02-08): Eliminated standalone cos-inbox.md files. Tasks now live as `## Tasks` section at the top of each project's project-knowledge.md. CoS uses four subsections (Inbox/Active/Backlog/Done); external projects use flat list + Done. Same checkbox format, same source tags. One file per project instead of two.
+- **Tasks merged into project-knowledge.md** (2026-02-08, updated 2026-02-12): Eliminated standalone cos-inbox.md files. Tasks now live as `## Tasks` section at the top of each project's project-knowledge.md. Originally used four subsections (Inbox/Active/Backlog/Done); simplified 2026-02-12 to flat checkboxes + Done across all projects. Completed items move to `### Done` (last 5 kept, older roll to `completed-tasks.md`).
 
 - **Checkbox-based task management** (2026-02-07): Obsidian-native checkbox format. Interactive checkboxes (`- [ ]`/`- [x]`), bold titles, source tags, wikilinks to Tasks/ detail files.
 
@@ -150,9 +150,9 @@ Implemented second round of fixes for persistent Word document formatting issues
 
 Fixed multiple display inconsistencies in CoS dashboard. Timestamps were showing in three different formats (12h/24h with mixed timezones) because formatting function only handled 12-hour format. Preview text was including YAML frontmatter and cutting off at 120 chars due to CSS constraints. Enhanced `formatDisplayDate()` to handle both time formats with timezone conversion, stripped frontmatter from preview extraction, expanded to 2-line previews with sentence boundaries. Also documented dashboard in CLAUDE.md for discoverability. See [[logs/20260209-dashboard-timestamp-preview-fixes.md]].
 
-### 2026-02-12: CoS Simplification Planning
+### 2026-02-12: CoS Simplification (Planning + Implementation)
 
-Created comprehensive plan to strip CoS to what's actually used. System had grown to 12 commands, 21 skills, 10 hooks, hundreds of lines of docs — actual usage: auto-capture, `/link`, `/thought`, task checkboxes. Plan deletes 4 skills (morning/evening/journal/capture), 6 commands (Links/ system + review-checkins), 2 hooks (briefing/morning-greeting), simplifies session-start hook from ~100 to ~15 lines, flattens task format from 4 subsections to plain checkboxes, strips ~60 lines from CLAUDE.md files. Key insight: document usage, not capabilities. See [[logs/20260212-cos-simplification-planning.md]], [[session-patterns/20260212-cos-simplification-planning.md]].
+Planned and executed complete simplification of CoS system. Removed unused features (4 skills: morning/evening/journal/capture; briefing system; morning greeting hook; review-checkins command), flattened task management from 4 subsections (Inbox/Active/Backlog/Done) to plain checkboxes + Done section, created `/todo` skill, renamed `/thought` to `/note`, archived check-in folders to `_archive/`, stripped session-start hook from ~100 to ~17 lines, updated dashboard to parse new flat task format. Result: system matches actual usage — auto-capture, `/link`, `/note`, `/todo`, task checkboxes, pattern review. See [[logs/20260212-cos-simplification-planning.md]], [[logs/20260212-cos-simplification.md]], [[session-patterns/20260212-cos-simplification-planning.md]], [[session-patterns/20260212-cos-simplification.md]].
 
 ### 2026-02-09: PreCompact Handover System Planning
 

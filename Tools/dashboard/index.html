@@ -204,10 +204,10 @@
       addRow.className = 'add-task-row';
       const input = document.createElement('input');
       input.type = 'text';
-      input.placeholder = 'Add task to CoS Inbox... (Title \u2014 context)';
+      input.placeholder = 'Add task to Chief of Staff...';
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && input.value.trim()) {
-          addNewTask('Inbox', input.value.trim());
+          addNewTask(input.value.trim());
           input.value = '';
         }
       });
@@ -217,31 +217,20 @@
       column.appendChild(addSection);
     }
 
-    async function addNewTask(sectionName, text) {
+    async function addNewTask(text) {
       const content = await readFile(state.rootHandle, 'Chief of Staff', 'project-knowledge.md');
       if (!content) return;
 
-      const today = new Date().toISOString().split('T')[0];
-      let title = text;
-      let context = '';
-      const dashIdx = text.indexOf(' \u2014 ');
-      if (dashIdx > 0) {
-        title = text.slice(0, dashIdx);
-        context = text.slice(dashIdx + 3);
-      }
-      const newLine = context
-        ? '- [ ] **' + title + '**\n\t- ' + context + ' `#manual` `' + today + '`'
-        : '- [ ] **' + title + '**\n\t- `#manual` `' + today + '`';
+      const newLine = '- [ ] ' + text;
 
       const lines = content.split('\n');
       let insertIdx = -1;
 
+      // Find ## Tasks, insert at top
       for (let i = 0; i < lines.length; i++) {
-        if (lines[i].match(new RegExp('^#{2,3} ' + escapeRegex(sectionName) + '$'))) {
+        if (/^## Tasks$/.test(lines[i])) {
           insertIdx = i + 1;
-          while (insertIdx < lines.length && lines[insertIdx].trim() === '') {
-            insertIdx++;
-          }
+          while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
           break;
         }
       }

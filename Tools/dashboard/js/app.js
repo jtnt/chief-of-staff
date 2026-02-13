@@ -507,6 +507,7 @@ function parseInbox(content, lineOffset) {
 
 function parseTaskLine(text, checked, lineNumber, rawLine) {
   // Extract **Title** — context `#source` `date` [[link]] done:date
+  // Also handles plain text tasks (no bold formatting)
   let title = '';
   let context = '';
   let source = '';
@@ -514,7 +515,7 @@ function parseTaskLine(text, checked, lineNumber, rawLine) {
   let link = '';
   let doneDate = '';
 
-  // Title: **text**
+  // Title: **text** (old format)
   const titleMatch = text.match(/\*\*(.+?)\*\*/);
   if (titleMatch) title = titleMatch[1];
 
@@ -537,6 +538,16 @@ function parseTaskLine(text, checked, lineNumber, rawLine) {
   // Done date
   const doneMatch = text.match(/done:(\d{4}-\d{2}-\d{2})/);
   if (doneMatch) doneDate = doneMatch[1];
+
+  // Plain text task (no **bold**): use full text (cleaned) as title
+  if (!title) {
+    title = text
+      .replace(/`#\w+`/g, '')
+      .replace(/`\d{4}-\d{2}-\d{2}`/g, '')
+      .replace(/\[\[.+?\]\]/g, '')
+      .replace(/done:\d{4}-\d{2}-\d{2}/g, '')
+      .trim();
+  }
 
   return { title, context, source, date, link, doneDate, checked, lineNumber, rawLine, subtasks: [] };
 }
@@ -1117,46 +1128,16 @@ async function addQuickTask(text, project) {
   const content = await readFile(state.rootHandle, ...pathParts);
   if (!content) return false;
 
-  const today = new Date().toISOString().split('T')[0];
-  let title = text;
-  let context = '';
-  const dashIdx = text.indexOf(' \u2014 ');
-  if (dashIdx > 0) {
-    title = text.slice(0, dashIdx);
-    context = text.slice(dashIdx + 3);
-  }
-  const newLine = context
-    ? '- [ ] **' + title + '**\n\t- ' + context + ' `#manual` `' + today + '`'
-    : '- [ ] **' + title + '**\n\t- `#manual` `' + today + '`';
+  const newLine = '- [ ] ' + text;
 
   const lines = content.split('\n');
   let insertIdx = -1;
 
-  // Find ## Tasks, then ### Inbox if it exists, otherwise insert at top of Tasks
+  // Find ## Tasks, insert at top (before ### Done if it exists)
   for (let i = 0; i < lines.length; i++) {
     if (/^## Tasks$/.test(lines[i])) {
-      // Look for ### Inbox (CoS pattern)
-      for (let j = i + 1; j < lines.length; j++) {
-        if (/^### Inbox$/.test(lines[j])) {
-          insertIdx = j + 1;
-          while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
-          break;
-        }
-        if (/^#{2,3} /.test(lines[j]) && !/^### Inbox/.test(lines[j])) break;
-      }
-      if (insertIdx === -1) {
-        insertIdx = i + 1;
-        while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
-        // Insert before ### Done if it exists
-        for (let j = insertIdx; j < lines.length; j++) {
-          if (/^### Done$/.test(lines[j])) {
-            insertIdx = j;
-            while (insertIdx > i + 1 && lines[insertIdx - 1].trim() === '') insertIdx--;
-            break;
-          }
-          if (/^## (?!#)/.test(lines[j])) break;
-        }
-      }
+      insertIdx = i + 1;
+      while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
       break;
     }
   }
@@ -1181,7 +1162,7 @@ function buildQuickAddBar() {
   const input = document.createElement('input');
   input.type = 'text';
   input.className = 'quick-add-input';
-  input.placeholder = 'Add task... (Title \u2014 context)';
+  input.placeholder = 'Add task...';
 
   const select = document.createElement('select');
   select.className = 'quick-add-project';
@@ -1189,7 +1170,7 @@ function buildQuickAddBar() {
   // CoS default
   const cosOpt = document.createElement('option');
   cosOpt.value = '';
-  cosOpt.textContent = 'CoS Inbox';
+  cosOpt.textContent = 'Chief of Staff';
   select.appendChild(cosOpt);
 
   // All non-paused projects
@@ -1261,23 +1242,7 @@ async function triageTask(item, fromFilePath, destination) {
 
   const taskLines = lines.slice(startIdx, endIdx);
 
-  if (typeof destination === 'string') {
-    // Moving within same file (Inbox → Active or Backlog)
-    lines.splice(startIdx, endIdx - startIdx);
-
-    let insertIdx = -1;
-    for (let i = 0; i < lines.length; i++) {
-      if (new RegExp('^### ' + escapeRegex(destination) + '$').test(lines[i])) {
-        insertIdx = i + 1;
-        while (insertIdx < lines.length && lines[insertIdx].trim() === '') insertIdx++;
-        break;
-      }
-    }
-    if (insertIdx === -1) return false;
-
-    lines.splice(insertIdx, 0, ...taskLines);
-    return await writeFile(state.rootHandle, fromParts, lines.join('\n'));
-  } else {
+  if (typeof destination === 'object') {
     // Moving to a different project — read target FIRST before modifying source
     const toParts = destination.relPath.split('/').filter(Boolean).concat('project-knowledge.md');
     let toContent = await readFile(state.rootHandle, ...toParts);
@@ -1329,6 +1294,8 @@ async function triageTask(item, fromFilePath, destination) {
     lines.splice(startIdx, endIdx - startIdx);
     return await writeFile(state.rootHandle, fromParts, lines.join('\n'));
   }
+
+  return false;
 }
 
 // ─── Reconnect FS ────────────────────────────────────
@@ -1484,72 +1451,54 @@ function createTaskItemEl(item, filePath, sectionName, projectName) {
   if (hasMeta) content.appendChild(meta);
   div.appendChild(content);
 
-  // Triage dropdown for Inbox items
-  if (sectionName === 'Inbox' && !item.checked) {
-    const select = document.createElement('select');
-    select.className = 'task-triage-select';
-    select.title = 'Move to...';
-
-    const placeholder = document.createElement('option');
-    placeholder.value = '';
-    placeholder.textContent = 'Move \u25BE';
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    select.appendChild(placeholder);
-
-    // CoS internal moves
-    const cosGroup = document.createElement('optgroup');
-    cosGroup.label = 'Chief of Staff';
-    for (const dest of ['Active', 'Backlog']) {
-      const opt = document.createElement('option');
-      opt.value = 'cos:' + dest;
-      opt.textContent = dest;
-      cosGroup.appendChild(opt);
-    }
-    select.appendChild(cosGroup);
-
-    // External projects
-    const extProjects = state.projects.filter(p => p.name !== 'Chief of Staff' && p.category !== 'paused');
+  // Route-to-project dropdown for unchecked tasks (cross-project routing)
+  if (!item.checked && sectionName !== 'Done') {
+    const extProjects = state.projects.filter(p => p.name !== projectName && p.category !== 'paused');
     if (extProjects.length > 0) {
-      const projGroup = document.createElement('optgroup');
-      projGroup.label = 'Route to project';
+      const select = document.createElement('select');
+      select.className = 'task-triage-select';
+      select.title = 'Route to project...';
+
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = '\u2192'; // arrow
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      select.appendChild(placeholder);
+
       for (const p of extProjects) {
         const opt = document.createElement('option');
         opt.value = 'project:' + p.slug;
         opt.textContent = p.name;
-        projGroup.appendChild(opt);
+        select.appendChild(opt);
       }
-      select.appendChild(projGroup);
+
+      select.addEventListener('change', async () => {
+        const val = select.value;
+        if (!val) return;
+
+        select.disabled = true;
+        let ok = false;
+
+        if (val.startsWith('project:')) {
+          const slug = val.replace('project:', '');
+          const project = state.projects.find(p => p.slug === slug);
+          if (project) ok = await triageTask(item, filePath, project);
+        }
+
+        if (ok && typeof onCheckboxToggled === 'function') onCheckboxToggled();
+        else if (ok) window.location.reload();
+        else {
+          console.error('Route failed for', item.title, 'to', val);
+          select.disabled = false;
+          select.value = '';
+          select.style.outline = '2px solid #f87171';
+          setTimeout(() => { select.style.outline = ''; }, 2000);
+        }
+      });
+
+      div.appendChild(select);
     }
-
-    select.addEventListener('change', async () => {
-      const val = select.value;
-      if (!val) return;
-
-      select.disabled = true;
-      let ok = false;
-
-      if (val.startsWith('cos:')) {
-        ok = await triageTask(item, filePath, val.replace('cos:', ''));
-      } else if (val.startsWith('project:')) {
-        const slug = val.replace('project:', '');
-        const project = state.projects.find(p => p.slug === slug);
-        if (project) ok = await triageTask(item, filePath, project);
-      }
-
-      if (ok && typeof onCheckboxToggled === 'function') onCheckboxToggled();
-      else if (ok) window.location.reload();
-      else {
-        console.error('Triage failed for', item.title, 'to', val);
-        select.disabled = false;
-        select.value = '';
-        // Brief visual error feedback
-        select.style.outline = '2px solid #f87171';
-        setTimeout(() => { select.style.outline = ''; }, 2000);
-      }
-    });
-
-    div.appendChild(select);
   }
 
   // Copy prompt button (top-level tasks only, not in Done section)
@@ -1898,14 +1847,11 @@ async function loadAllTasks(limit = 20) {
     const { project, parsed, filePath } = result;
 
     for (const section of parsed.sections) {
-      // Determine priority: Active/Tasks (flat) = 1, Inbox = 2, Backlog = 3, Done = skip
+      // Determine priority: Tasks = 1, Done = skip
       let priority;
       const sName = section.name;
       if (sName === 'Done') continue;
-      if (sName === 'Active' || sName === 'Tasks') priority = 1;
-      else if (sName === 'Inbox') priority = 2;
-      else if (sName === 'Backlog') priority = 3;
-      else priority = 1; // default for unknown sections
+      priority = 1;
 
       for (const item of section.items) {
         if (!item.checked) {
