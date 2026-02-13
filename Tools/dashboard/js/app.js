@@ -1374,7 +1374,7 @@ function makeResumeBtn(sessionId, yolo, projectPath) {
     e.stopPropagation();
     let cmd = 'claude --resume ' + sessionId;
     if (yolo) cmd += ' --dangerously-skip-permissions';
-    if (projectPath) cmd = 'cd "' + projectPath + '" && ' + cmd;
+    if (projectPath) cmd = 'cd ~/Documents/Projects/"' + projectPath + '" && ' + cmd;
     navigator.clipboard.writeText(cmd).then(() => {
       btn.textContent = '\u2713 Copied';
       btn.classList.add('copied');
