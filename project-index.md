@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-10 20:13 PST
+**Last Updated:** 2026-02-17 18:54 EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -12,7 +12,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **Status:** Active - Primary Focus
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
-**Source:** `/Users/jtnt/Documents/Projects/Razzo`
+**Source:** `/Users/jtnt/Documents/Projects/razzo`
 **Last synced:** 2026-02-06
 
 **Current Strategic Direction:**
@@ -41,7 +41,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 ### Context Profile Framework
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
-**Source:** `/Users/jtnt/Documents/Projects/Context Profile Framework`
+**Source:** `/Users/jtnt/Documents/Projects/context_profile_framework`
 **Last synced:** 2026-02-12
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers). The product will help them build it.
@@ -80,7 +80,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 ### Context Profile Builder
 **Status:** Active - Potential Rebuild
 **What it is:** Web app for creating Context Profile Framework documents
-**Source:** `/Users/jtnt/Documents/Projects/Code/context-profile-builder`
+**Source:** `/Users/jtnt/Documents/Projects/code/context-profile-builder`
 **GitHub:** https://github.com/jtnt/context-profile-builder.git
 **Last synced:** 2026-01-16
 
@@ -95,12 +95,12 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 ### Job Search
 **Status:** Active - Personal
 **What it is:** Personal job search toolkit with workflow-optimized materials and processes
-**Source:** `/Users/jtnt/Documents/Projects/Job Search`
+**Source:** `/Users/jtnt/Documents/Projects/job_search`
 **Last synced:** 2026-01-20
 
 **Context:** Laid off March 2025; building Razzo while exploring job opportunities. 25+ years across B2B and DTC, agency and in-house. Target industries: Audio/Music/Consumer Electronics, AI Enablement, Premium Consumer Brands, SaaS/Tech.
 
-**Key Files:** Master profile, achievements (STAR-ready), career narrative, skills inventory, cover letter template, behavioral questions — all in `Toolkit/`.
+**Key Files:** Master profile, achievements (STAR-ready), career narrative, skills inventory, cover letter template, behavioral questions — all in `toolkit/`.
 
 **Current Status:** PostHog TAM application stalled after v10 planning failed. Needs fundamentally different approach, not more iterations.
 
@@ -109,7 +109,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 ### qontext-clone
 **Status:** Active - Exploration Phase
 **What it is:** Building a Qontext.ai clone (context layer for AI with knowledge graph architecture)
-**Source:** `/Users/jtnt/Documents/Projects/Code/qontext-clone`
+**Source:** `/Users/jtnt/Documents/Projects/code/qontext-clone`
 **Last synced:** 2026-02-06
 
 3-stage pipeline (Ingest → Structure → Retrieve) for building context vaults. Proposed stack: TypeScript monorepo, Fastify + Next.js, PostgreSQL (pgvector) + Neo4j. Planning session only — no implementation yet.
@@ -122,17 +122,13 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 
 ## Client Projects
 
-### Clients
+### Razzo Clients
 **Status:** Active - Infrastructure
-**What it is:** Root folder for all client engagements with shared cross-client context
-**Source:** `/Users/jtnt/Documents/Projects/Clients`
-**Last synced:** 2026-02-12
+**What it is:** Client engagement folders under `razzo/clients/` with shared cross-client context
+**Source:** `/Users/jtnt/Documents/Projects/razzo/clients`
+**Last synced:** 2026-02-17
 
-Central repository for client engagement folders. Contains `z_context/` with cross-client reference materials including engagement models, pricing frameworks, and strategic patterns. Key resource: Fractional CAIO engagement model ($6K/month structure).
-
-Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Rental) are tracked separately below.
-
-**Recent:** Created value proposition section for Mythos-More Vang AI advisory proposal using successful Beekeeper pattern. Focus on quantifiable time-savings ($6K+ annually for 30min/day project), strategic AI capability development, and employee retention benefits. Removed fabricated specifics, used conservative math approach.
+Client engagement folders now live under `razzo/clients/` (gitignored in Razzo repo). Cross-client reference materials (engagement models, pricing) in `razzo/z_context/`. Key resource: Fractional CAIO engagement model ($6K/month structure).
 
 **Open Items:**
 - Test `/razzo-proposal` skill when next opportunity arises
@@ -142,7 +138,7 @@ Individual client projects (JRAD, SalesIntel, Mythos, Beekeeper Group, Party Ren
 ### Mythos-More Vang
 **Status:** Active - Client Project
 **What it is:** Fractional AI officer engagement (3-month retainer proposal in progress)
-**Source:** `/Users/jtnt/Documents/Projects/Clients/Mythos-More Vang`
+**Source:** `/Users/jtnt/Documents/Projects/razzo/clients/mythos_more_vang`
 **Last synced:** 2026-02-09
 
 Mythos is a donor communications and stewardship platform for advancement professionals (higher ed and healthcare). More Vang is a print services and marketing firm. Both companies owned by Jon Budington. 4-session AI training series completed Q4 2025-early 2026. Jon agreed Feb 9 to 3-month fractional CAIO retainer.
@@ -159,7 +155,7 @@ Mythos is a donor communications and stewardship platform for advancement profes
 ### SalesIntel
 **Status:** Active - Client Project (Engagement Stalled)
 **What it is:** AI training and consulting engagement with SalesIntel (B2B sales intelligence platform)
-**Source:** `/Users/jtnt/Documents/Projects/Clients/SalesIntel`
+**Source:** `/Users/jtnt/Documents/Projects/razzo/clients/salesintel`
 **Last synced:** 2026-02-08
 
 **Recent:** Documentation cleanup - corrected engagement history (removed proposed work, kept only delivered work), migrated to minimal CLAUDE.md + detailed project-knowledge.md pattern, implemented WikiLinks across all file references for Obsidian backlinks.
@@ -175,7 +171,7 @@ Mythos is a donor communications and stewardship platform for advancement profes
 ### Beekeeper Group
 **Status:** Active - Client Project (Proposal Delivered)
 **What it is:** Government affairs and public policy firm exploring fractional AI Officer engagement
-**Source:** `/Users/jtnt/Documents/Projects/Clients/Beekeeper Group`
+**Source:** `/Users/jtnt/Documents/Projects/razzo/clients/beekeeper_group`
 **Last synced:** 2026-02-10
 
 **Recent:** Created and delivered comprehensive AI Advisory proposal. Two-phase engagement: Month 1 foundation (assessment, AI enablement & governance, team training) + Months 2-3 advisory. $6,000/month pricing with multi-month commitment structure. Proposal includes ROI calculations showing 3:1 return on initial commitment. Razzo-branded Word document and email delivered.
@@ -189,7 +185,7 @@ Mythos is a donor communications and stewardship platform for advancement profes
 ### Party Rental
 **Status:** Active - Client Project (New)
 **What it is:** Party rental business exploring AI adoption for operations
-**Source:** `/Users/jtnt/Documents/Projects/Clients/Party Rental`
+**Source:** `/Users/jtnt/Documents/Projects/razzo/clients/party_rental`
 **Last synced:** 2026-02-03
 
 Team has bottom-up AI adoption (ChatGPT for emails, writing). Gary's vision: end-to-end AI event planning. No clear business use case identified yet. Team is curious but cautious about accuracy.
@@ -199,7 +195,7 @@ Team has bottom-up AI adoption (ChatGPT for emails, writing). Gary's vision: end
 ### JRAD
 **Status:** Client - Inactive / On Request
 **What it is:** WordPress-to-static-site conversion for joerussosalmostdead.com
-**Source:** `/Users/jtnt/Documents/Projects/Clients/JRAD`
+**Source:** `/Users/jtnt/Documents/Projects/razzo/clients/jrad`
 **Last synced:** 2026-01-30
 
 Static HTML/CSS site with Seated widget for tour dates. Conversion mostly complete. Last activity was DNS troubleshooting for www subdomain (needs CNAME record).
@@ -211,7 +207,7 @@ Static HTML/CSS site with Seated widget for tour dates. Conversion mostly comple
 ### LinkedIn My Posts Extractor
 **Status:** Stable
 **What it is:** Chrome extension that scrapes your own LinkedIn posts for analysis/backup
-**Source:** `/Users/jtnt/Documents/Projects/Code/linkedin-my-posts-extractor`
+**Source:** `/Users/jtnt/Documents/Projects/code/linkedin-my-posts-extractor`
 
 Chrome Extension (Manifest V3), vanilla JavaScript. Working and stable.
 
@@ -220,7 +216,7 @@ Chrome Extension (Manifest V3), vanilla JavaScript. Working and stable.
 ### LinkedIn Scraper Extension
 **Status:** Stable
 **What it is:** Chrome extension that scrapes LinkedIn saved posts
-**Source:** `/Users/jtnt/Documents/Projects/Code/linkedin-scraper-extension`
+**Source:** `/Users/jtnt/Documents/Projects/code/linkedin-scraper-extension`
 
 Chrome Extension (Manifest V3), vanilla JavaScript. Working and stable.
 
@@ -229,7 +225,7 @@ Chrome Extension (Manifest V3), vanilla JavaScript. Working and stable.
 ### Chatbot Linebreaker
 **Status:** Stable (Phase 4 remaining)
 **What it is:** Chrome extension that swaps Enter/Shift+Enter in AI chatbot interfaces
-**Source:** `/Users/jtnt/Documents/Projects/Code/chatbot-linebreaker`
+**Source:** `/Users/jtnt/Documents/Projects/code/chatbot-linebreaker`
 **GitHub:** https://github.com/jtnt/chatbot-linebreaker
 
 Works on Claude.ai, ChatGPT, Gemini. 42 commits pushed. Phase 4 (badge indicator) remaining.
@@ -239,7 +235,7 @@ Works on Claude.ai, ChatGPT, Gemini. 42 commits pushed. Phase 4 (badge indicator
 ### Feed Digest
 **Status:** Stable
 **What it is:** Daily email digest with AI-generated summaries from RSS feeds
-**Source:** `/Users/jtnt/Documents/Projects/Code/feed-digest`
+**Source:** `/Users/jtnt/Documents/Projects/code/feed-digest`
 **GitHub:** https://github.com/jtnt/feed-digest.git
 
 Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Cannonball GTM, The Signal, Ben's Bites). Built and deployed.
@@ -251,12 +247,12 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 ### Writing
 **Status:** Active - Repository
 **What it is:** Central repository for all writing (LinkedIn posts, blog articles, thought leadership)
-**Source:** `/Users/jtnt/Documents/Projects/Writing`
+**Source:** `/Users/jtnt/Documents/Projects/writing`
 **Last synced:** 2026-02-17
 
 Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 7 published pieces.
 
-**Recent:** Implemented `/nt-editor` skill for editorial review of writing drafts. Creates comprehensive editorial feedback (not rewrites) calibrated against voice profile and writing standards, with self-improvement via feedback logging. 8-step workflow: parallel analysis subagents → QA validation → interactive editing with real-time pattern capture.
+**Recent:** Established publishing workflow convention — draft history (all versioned iterations) moves into a `drafts/` subfolder within the Published folder on publish. Applied retroactively to `ai-mindset` post. Convention documented in CLAUDE.md.
 
 ---
 
@@ -271,7 +267,7 @@ Still in "figuring out exactly what it should do" phase. Building MVP with Repli
 ### Chief of Staff
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
-**Source:** `/Users/jtnt/Documents/Projects/Chief of Staff`
+**Source:** `/Users/jtnt/Documents/Projects/chief_of_staff`
 
 Three-layer documentation model, two-way project sync, check-in system, auto-capture pipeline, task notifications across projects. See `project-knowledge.md` for system details and `USAGE-GUIDE.md` for reference.
 

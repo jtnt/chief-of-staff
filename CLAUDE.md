@@ -32,23 +32,23 @@ This is a personal Chief of Staff system - a knowledge management and strategic 
 ## Folder Structure
 
 ```
-Chief of Staff/
-├── Notes/                              # Quick captures via /note
-├── Check-Ins/
+chief_of_staff/
+├── notes/                              # Quick captures via /note
+├── check_ins/
 │   └── _archive/                       # Old check-in files (daily, weekly, journal)
 │
 ├── logs/                               # Chief of Staff's own session logs
 │   └── YYYYMMDD-*.md                   # Dated sync files for CoS itself
 │
-├── Resources/                          # Reference materials and guides
+├── resources/                          # Reference materials and guides
 │
-├── Tasks/                              # Detailed specs for complex tasks (linked from project-knowledge.md)
+├── tasks/                              # Detailed specs for complex tasks (linked from project-knowledge.md)
 │   └── YYYYMMDD-*.md                   # Task specs with checklists and context
 │
-├── Tools/                              # Interactive tools and utilities
+├── tools/                              # Interactive tools and utilities
 │   └── dashboard/                      # Web-based project dashboard (see Dashboard section)
 │
-├── Weekly Reviews/                     # Periodic synthesis documents
+├── weekly_reviews/                     # Periodic synthesis documents
 │
 ├── CLAUDE.md                           # Instructions for Claude Code (this file)
 ├── project-knowledge.md                # About Chief of Staff itself (system state, decisions)
@@ -72,7 +72,7 @@ Chief of Staff/
 
 ## Dashboard
 
-**Location:** `Tools/dashboard/`
+**Location:** `tools/dashboard/`
 
 A browser-based dashboard for visualizing and managing projects, tasks, and activity:
 - **Home**: Cross-project task inbox, recent activity feed, health alerts
@@ -87,7 +87,7 @@ A browser-based dashboard for visualizing and managing projects, tasks, and acti
 - `health.html` - Project health dashboard
 - `js/app.js` - Core application logic and date formatting
 
-**Opening:** Open `Tools/dashboard/index.html` in Chrome. Uses File System Access API for live file editing.
+**Opening:** Open `tools/dashboard/index.html` in Chrome. Uses File System Access API for live file editing.
 
 ## When Updating project-index.md
 
@@ -110,7 +110,7 @@ A browser-based dashboard for visualizing and managing projects, tasks, and acti
 **WikiLinks:** Always use Obsidian-style WikiLinks (`[[filename]]` or `[[path/to/filename]]`) when referencing files in documentation and session logs. This creates backlinks in Obsidian for better cross-referencing. Examples:
 - File in same project: `[[project-knowledge.md]]`
 - File in subdirectory: `[[logs/20260208-session.md]]`
-- File in another project: `[[../Writing/standards/elements-of-style.md]]`
+- File in another project: `[[../writing/standards/elements-of-style.md]]`
 
 Never use plain text file references or markdown links for internal files.
 
@@ -124,13 +124,13 @@ Never use plain text file references or markdown links for internal files.
 
 ## Tasks
 
-Tasks are checkboxes in `## Tasks` at the top of `project-knowledge.md`. Same format everywhere. Completed items move to `### Done` (keeps last 5; older items roll to `completed-tasks.md` for permanent archive). `/todo` skill adds new items to any project. `Tasks/` folder holds detailed specs linked via `[[wikilinks]]`.
+Tasks are checkboxes in `## Tasks` at the top of `project-knowledge.md`. Same format everywhere. Completed items move to `### Done` (keeps last 5; older items roll to `completed-tasks.md` for permanent archive). `/todo` skill adds new items to any project. `tasks/` folder holds detailed specs linked via `[[wikilinks]]`.
 
 **Note:** Auto-capture skips the CoS sync step for this repo (we ARE CoS).
 
 ## Quick Capture
 
-`/note` → `Notes/`. `/link` → project `research/` folders. `/todo` → project tasks.
+`/note` → `notes/`. `/link` → project `research/` folders. `/todo` → project tasks.
 
 ## Note: Cowork Mode Git Config Issue
 
@@ -147,6 +147,24 @@ Then retry push. Otherwise, workflows are identical to CLI.
 When checking calendar or asking "what's on my calendar":
 - Always check BOTH calendars: `primary` (jtntolson@gmail.com) and `nicholas@razzohq.com`
 - Combine and show events from both calendars
+
+## Session Routing
+
+CoS works well as a central starting point for most work. These guidelines help when you want to start in a project folder instead.
+
+**Start in CoS for:**
+- Cross-project synthesis and weekly reviews
+- System work (CLAUDE.md, skills, hooks, dashboard)
+- Quick captures where the project home is unclear
+- Morning planning and cross-project status checks
+
+**Start in the PROJECT folder for:**
+- Meeting processing → project that owns the meeting (e.g., razzo/ for Razzo meetings)
+- Research capture → project that will USE it
+- Writing drafts → writing/ (or razzo/writing/ for Razzo copy)
+- Client deliverables → razzo/ (which now contains clients/)
+
+**Why it matters:** Sessions log to their working directory. Starting in the project keeps that project's history complete and portable.
 
 ## Current Projects
 

@@ -185,10 +185,10 @@ function relativePathFromAbsolute(absPath) {
 }
 
 async function discoverProjects() {
-  const sourcesContent = await readFile(state.rootHandle, 'Chief of Staff', 'project-sources.md');
+  const sourcesContent = await readFile(state.rootHandle, 'chief_of_staff', 'project-sources.md');
   if (!sourcesContent) return [];
 
-  const indexContent = await readFile(state.rootHandle, 'Chief of Staff', 'project-index.md');
+  const indexContent = await readFile(state.rootHandle, 'chief_of_staff', 'project-index.md');
 
   const projects = [];
   const lines = sourcesContent.split('\n');
@@ -244,7 +244,7 @@ async function discoverProjects() {
     if (/^Clients\//i.test(relPath)) category = 'clients';
     else if (/^Code\//i.test(relPath)) category = 'tools';
     else if (/paused/i.test(status)) category = 'paused';
-    else if (p.name === 'Chief of Staff') category = 'infrastructure';
+    else if (p.name === 'chief_of_staff') category = 'infrastructure';
     else category = 'active';
 
     return { name: p.name, slug, relPath, source: p.source, status, category };
@@ -968,7 +968,7 @@ function buildSidebar(activeSlug) {
   const brand = document.createElement('div');
   brand.className = 'sidebar-brand';
   const h1 = document.createElement('h1');
-  h1.textContent = 'Chief of Staff';
+  h1.textContent = 'chief_of_staff';
   brand.appendChild(h1);
   sidebar.appendChild(brand);
 
@@ -1025,12 +1025,12 @@ function buildSidebar(activeSlug) {
   homeSection.appendChild(healthLink);
 
   // Chief of Staff pinned at top
-  const cosProject = state.projects.find(p => p.name === 'Chief of Staff');
+  const cosProject = state.projects.find(p => p.name === 'chief_of_staff');
   if (cosProject) {
     const cosLink = document.createElement('a');
     cosLink.className = 'sidebar-item' + (activeSlug === cosProject.slug ? ' active' : '');
     cosLink.href = 'project.html?project=' + cosProject.slug;
-    cosLink.title = 'Chief of Staff';
+    cosLink.title = 'chief_of_staff';
     const cosIcon = document.createElement('span');
     cosIcon.className = 'icon';
     cosIcon.textContent = '\u2699';
@@ -1059,7 +1059,7 @@ function buildSidebar(activeSlug) {
   for (const key of groupOrder) {
     const group = groups[key];
     if (!group) continue;
-    const items = group.items.filter(p => p.name !== 'Chief of Staff');
+    const items = group.items.filter(p => p.name !== 'chief_of_staff');
     if (!items.length) continue;
 
     const section = document.createElement('div');
@@ -1123,7 +1123,7 @@ async function addQuickTask(text, project) {
 
   const pathParts = project
     ? project.relPath.split('/').filter(Boolean).concat('project-knowledge.md')
-    : ['Chief of Staff', 'project-knowledge.md'];
+    : ['chief_of_staff', 'project-knowledge.md'];
 
   const content = await readFile(state.rootHandle, ...pathParts);
   if (!content) return false;
@@ -1170,11 +1170,11 @@ function buildQuickAddBar() {
   // CoS default
   const cosOpt = document.createElement('option');
   cosOpt.value = '';
-  cosOpt.textContent = 'Chief of Staff';
+  cosOpt.textContent = 'chief_of_staff';
   select.appendChild(cosOpt);
 
   // All non-paused projects
-  const projects = state.projects.filter(p => p.name !== 'Chief of Staff' && p.category !== 'paused');
+  const projects = state.projects.filter(p => p.name !== 'chief_of_staff' && p.category !== 'paused');
   if (projects.length) {
     for (const p of projects) {
       const opt = document.createElement('option');
@@ -1707,7 +1707,7 @@ function openSlideOver(title, content, sessionId, projectPath) {
 
 async function openTaskDetail(linkPath) {
   // linkPath is relative to Chief of Staff, e.g. "Tasks/20260203-foo.md"
-  const content = await readFile(state.rootHandle, 'Chief of Staff', ...linkPath.split('/'));
+  const content = await readFile(state.rootHandle, 'chief_of_staff', ...linkPath.split('/'));
   if (!content) {
     alert('Could not read file: ' + linkPath);
     return;
