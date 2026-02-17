@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Skill Optimization Report</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fc;
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        @keyframes progressFill {
+            from { stroke-dashoffset: 314; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-animate {
+            animation: fadeInUp 0.4s ease-out both;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ─── Data ───────────────────────────────────────────────
+        const skills = [
+            {
+                id: 'session-capture',
+                name: 'Session Capture Pipeline',
+                description: 'Automated end-of-session logging with pattern extraction, project-knowledge updates, git commits, and CoS sync. Runs via SessionEnd hook with zero manual intervention.',
+                category: 'optimized',
+                questions: [
+                    { id: 'q1', text: 'What additional metadata would you want captured per session? (e.g., mood, energy level, blockers)', answer: '' },
+                    { id: 'q2', text: 'Should the skill auto-tag sessions by project or topic?', answer: '' },
+                    { id: 'q3', text: 'Do you want a weekly digest summarizing all captured sessions?', answer: '' }
+                ]
+            },
+            {
+                id: 'meeting-intelligence',
+                name: 'Meeting Intelligence',
+                description: 'Full meeting processing pipeline — Granola transcript extraction, structured summaries, action item routing, and follow-up tracking via the meeting-review skill.',
+                category: 'optimized',
+                questions: [
+                    { id: 'q1', text: 'What meeting types do you have most often? (client calls, internal, discovery, etc.)', answer: '' },
+                    { id: 'q2', text: 'Do you want auto-generated follow-up emails drafted after meetings?', answer: '' },
+                    { id: 'q3', text: 'Should meeting insights auto-update the relevant project-knowledge.md?', answer: '' }
+                ]
+            },
+            {
+                id: 'knowledge-capture',
+                name: 'Knowledge Capture System',
+                description: 'Three-skill capture suite (/link, /note, /todo) with searchable link index, Obsidian WikiLinks, and cross-project task tracking in project-knowledge.md files.',
+                category: 'optimized',
+                questions: [
+                    { id: 'q1', text: 'Are there capture types you wish you had beyond links, notes, and tasks?', answer: '' },
+                    { id: 'q2', text: 'Do you want auto-tagging or categorization of captured items?', answer: '' },
+                    { id: 'q3', text: 'Should captured links auto-summarize and extract key quotes?', answer: '' }
+                ]
+            },
+            {
+                id: 'cpf-research',
+                name: 'Company Research (CPF)',
+                description: 'Full context profile research pipeline with agent orchestration: researcher → verifier → loop. Produces structured company profiles with validated citations for client prep and sales intelligence.',
+                category: 'optimized',
+                questions: [
+                    { id: 'q1', text: 'What industries do you research most frequently?', answer: '' },
+                    { id: 'q2', text: 'Do you want research profiles auto-linked to client project folders?', answer: '' },
+                    { id: 'q3', text: 'Should the skill track research freshness and flag stale profiles?', answer: '' }
+                ]
+            },
+            {
+                id: 'weekly-review',
+                name: 'Weekly Strategic Review',
+                description: 'You do cross-project reviews regularly but manually assemble the picture each time. A skill could auto-pull all project statuses, recent logs, open tasks, and patterns into a structured strategic brief — ready for your analysis, not just raw data.',
+                category: 'identified',
+                questions: [
+                    { id: 'q1', text: 'What day and time do you typically do your weekly review?', answer: '' },
+                    { id: 'q2', text: 'What questions should the review answer? (e.g., "What shipped?", "What\'s stuck?", "What needs attention next week?")', answer: '' },
+                    { id: 'q3', text: 'Do you want time-spent analysis across projects included?', answer: '' }
+                ]
+            },
+            {
+                id: 'client-engagement',
+                name: 'Client Engagement Pipeline',
+                description: 'You manage multiple clients (SalesIntel, Beekeeper, JRAD, Mythos, Party Rental) with CPF research and razzo-docx proposals — but the end-to-end flow from prospect → research → proposal → onboarding → delivery isn\'t a single streamlined process yet.',
+                category: 'identified',
+                questions: [
+                    { id: 'q1', text: 'What\'s your typical client lifecycle? (discovery call → proposal → contract → onboarding → delivery)', answer: '' },
+                    { id: 'q2', text: 'Should the skill auto-create project folder structure and CLAUDE.md for new clients?', answer: '' },
+                    { id: 'q3', text: 'Do you want engagement health tracking? (last contact, deliverable status, next milestone)', answer: '' }
+                ]
+            },
+            {
+                id: 'content-pipeline',
+                name: 'Content Editorial Pipeline',
+                description: 'You have writing standards, a humanize skill, and published work — but the full workflow from ideation → outline → draft → edit → polish → publish isn\'t captured as a repeatable skill that guides you through each stage.',
+                category: 'identified',
+                questions: [
+                    { id: 'q1', text: 'What content types do you write most? (blog posts, newsletters, LinkedIn, client-facing docs)', answer: '' },
+                    { id: 'q2', text: 'What\'s your biggest bottleneck: ideation, drafting, editing, or publishing?', answer: '' },
+                    { id: 'q3', text: 'Should the skill auto-check against your writing standards and flag AI-isms?', answer: '' }
+                ]
+            },
+            {
+                id: 'pre-meeting-briefing',
+                name: 'Pre-Meeting Briefing',
+                description: 'You have all the components — calendar access (2 accounts), CPF research profiles, meeting history, project context — but no skill that says "brief me on tomorrow\'s meetings" and assembles attendee backgrounds, last interactions, open items, and company context into a ready-to-scan prep doc.',
+                category: 'untapped',
+                questions: [
+                    { id: 'q1', text: 'When do you want briefings — morning of, night before, or on-demand?', answer: '' },
+                    { id: 'q2', text: 'What context matters most per meeting? (attendee backgrounds, last interaction, open action items, company intel)', answer: '' },
+                    { id: 'q3', text: 'Should briefings be generated for all meetings or just external/client meetings?', answer: '' }
+                ]
+            },
+            {
+                id: 'email-triage',
+                name: 'Email Triage & Action Routing',
+                description: 'Gmail MCP tools are connected but you\'re processing email manually. A skill could batch-scan your inbox, categorize by urgency and type (client requests, scheduling, newsletters), draft responses, create tasks from action items, and flag items needing your attention — turning email from interrupt-driven to batch-processed.',
+                category: 'untapped',
+                questions: [
+                    { id: 'q1', text: 'How often do you want to process email? (real-time, 2-3x daily, once daily, on-demand)', answer: '' },
+                    { id: 'q2', text: 'What categories matter? (client requests, invoices/billing, scheduling, newsletters, personal)', answer: '' },
+                    { id: 'q3', text: 'What actions should be auto-suggested? (reply draft, task creation, calendar event, archive, forward)', answer: '' }
+                ]
+            }
+        ];
+
+        const categoryColors = {
+            optimized: { text: '#059669', dot: '#10b981', bg: '#ecfdf5', border: '#a7f3d0' },
+            identified: { text: '#d97706', dot: '#f59e0b', bg: '#fffbeb', border: '#fde68a' },
+            untapped: { text: '#dc2626', dot: '#ef4444', bg: '#fef2f2', border: '#fecaca' }
+        };
+
+        const categoryLabels = {
+            optimized: 'Optimized',
+            identified: 'Identified',
+            untapped: 'Untapped'
+        };
+
+        // ─── Components ─────────────────────────────────────────
+
+        const Header = () => (
+            <div style={{ textAlign: 'center', marginBottom: 40, paddingTop: 48 }}>
+                <div className="mono" style={{
+                    fontSize: 12, fontWeight: 600, letterSpacing: '0.1em',
+                    color: '#6366f1', textTransform: 'uppercase', marginBottom: 8
+                }}>
+                    CLAUDE SKILL GRADER
+                </div>
+                <h1 style={{
+                    fontSize: 36, fontWeight: 700, color: '#1e293b',
+                    marginBottom: 8, lineHeight: 1.2
+                }}>
+                    Your Skill Optimization Report
+                </h1>
+                <p style={{ fontSize: 16, color: '#64748b', maxWidth: 480, margin: '0 auto' }}>
+                    Based on your Claude usage patterns and workflow analysis
+                </p>
+            </div>
+        );
+
+        const CircularProgress = ({ score }) => {
+            const radius = 50;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference * (1 - score / 100);
+
+            return (
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r={radius}
+                        fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="8" />
+                    <circle cx="60" cy="60" r={radius}
+                        fill="none" stroke="#a5b4fc" strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeDasharray={circumference}
+                        strokeDashoffset={offset}
+                        transform="rotate(-90 60 60)"
+                        style={{ animation: `progressFill 1.2s ease-out`, transition: 'stroke-dashoffset 1.2s ease-out' }}
+                    />
+                    <text x="60" y="56" textAnchor="middle" fill="white"
+                        style={{ fontSize: 28, fontWeight: 700, fontFamily: 'Inter' }}>
+                        {score}%
+                    </text>
+                    <text x="60" y="74" textAnchor="middle" fill="rgba(255,255,255,0.7)"
+                        style={{ fontSize: 11, fontFamily: 'Inter' }}>
+                        optimized
+                    </text>
+                </svg>
+            );
+        };
+
+        const ScoreDashboard = ({ optimized, identified, untapped, total, score }) => (
+            <div style={{
+                background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #3730a3 100%)',
+                borderRadius: 16, padding: '36px 40px', marginBottom: 24,
+                display: 'flex', alignItems: 'center', gap: 40,
+                flexWrap: 'wrap'
+            }}>
+                <CircularProgress score={score} />
+                <div style={{ flex: 1, minWidth: 260 }}>
+                    <div className="mono" style={{
+                        fontSize: 11, fontWeight: 500, color: '#a5b4fc',
+                        textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4
+                    }}>
+                        Skill Optimization Score
+                    </div>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: 'white', marginBottom: 6 }}>
+                        {optimized} of {total} skills optimized
+                    </div>
+                    <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', marginBottom: 16, lineHeight: 1.5 }}>
+                        You've built exceptional automation infrastructure. Your capture and research pipelines are elite-level.
+                        The gap is in the strategic layer — reviews, client ops, and proactive briefings.
+                    </p>
+                    <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+                        {[
+                            { label: 'Optimized', count: optimized, color: '#10b981' },
+                            { label: 'Identified', count: identified, color: '#f59e0b' },
+                            { label: 'Untapped', count: untapped, color: '#ef4444' }
+                        ].map(item => (
+                            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                <div style={{
+                                    width: 8, height: 8, borderRadius: '50%',
+                                    backgroundColor: item.color
+                                }} />
+                                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)' }}>
+                                    {item.label}: {item.count}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+
+        const Commentary = () => (
+            <div className="card-animate" style={{
+                background: 'white', borderRadius: 12,
+                border: '1px solid #e2e8f0',
+                padding: '28px 32px', marginBottom: 24,
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+            }}>
+                <div style={{ marginBottom: 20 }}>
+                    <span style={{
+                        display: 'inline-block', fontSize: 12, fontWeight: 600,
+                        color: '#059669', backgroundColor: '#ecfdf5',
+                        border: '1px solid #a7f3d0',
+                        padding: '3px 10px', borderRadius: 20, marginBottom: 10
+                    }}>
+                        Your Strengths
+                    </span>
+                    <p style={{ fontSize: 14, color: '#334155', lineHeight: 1.7 }}>
+                        Your session capture pipeline is genuinely rare — a fully automated hook that creates logs,
+                        extracts patterns, updates project knowledge, and commits to git with zero manual steps.
+                        Most power users never get past manual workflows. Your CPF research pipeline with agent
+                        orchestration (researcher → verifier → loop) is production-grade tooling that would be
+                        impressive in a company, let alone a solo practice. The three-skill quick capture system
+                        (/link, /note, /todo) gives you low-friction entry points that actually get used.
+                    </p>
+                </div>
+                <div style={{ marginBottom: 20 }}>
+                    <span style={{
+                        display: 'inline-block', fontSize: 12, fontWeight: 600,
+                        color: '#d97706', backgroundColor: '#fffbeb',
+                        border: '1px solid #fde68a',
+                        padding: '3px 10px', borderRadius: 20, marginBottom: 10
+                    }}>
+                        Opportunities
+                    </span>
+                    <p style={{ fontSize: 14, color: '#334155', lineHeight: 1.7 }}>
+                        Your biggest gap is the strategic synthesis layer. You capture everything beautifully but
+                        still manually assemble the weekly picture across 10+ projects — a skill could do the
+                        heavy lifting and hand you a decision-ready brief (~2-3 hrs/week saved). Your client
+                        pipeline is another clear win: you have CPF for research and razzo-docx for proposals, but
+                        the connective tissue between "new prospect" and "active engagement" is manual folder
+                        creation and context assembly. And you're leaving Gmail MCP completely on the table — batch
+                        email processing alone could recover ~1 hr/day.
+                    </p>
+                </div>
+                <div style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 10,
+                    padding: '14px 18px', background: '#f8f9fc',
+                    borderRadius: 8, borderLeft: '3px solid #6366f1'
+                }}>
+                    <span style={{ fontSize: 16, flexShrink: 0 }}>⚡</span>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: '#4338ca', lineHeight: 1.6 }}>
+                        Build the Weekly Strategic Review skill first — it touches every project, happens every week,
+                        and its output directly drives your prioritization decisions across your entire practice.
+                    </p>
+                </div>
+            </div>
+        );
+
+        const InstructionBanner = () => (
+            <div className="card-animate" style={{
+                background: '#eef2ff', borderRadius: 10,
+                padding: '16px 24px', marginBottom: 28,
+                display: 'flex', alignItems: 'center', gap: 12,
+                border: '1px solid #c7d2fe'
+            }}>
+                <span style={{ fontSize: 18, flexShrink: 0 }}>💡</span>
+                <p style={{ fontSize: 14, color: '#3730a3', lineHeight: 1.5 }}>
+                    Click <strong>Configure →</strong> to answer quick questions, then copy a ready-made prompt.
+                    Paste it into a new Claude chat to build your skill instantly.
+                </p>
+            </div>
+        );
+
+        const SkillCard = ({ skill, isExpanded, onToggle, answers, onAnswerChange, copiedId, onCopy }) => {
+            const colors = categoryColors[skill.category];
+            const label = categoryLabels[skill.category];
+
+            const generatePrompt = () => {
+                const answerLines = skill.questions.map(q => {
+                    const ans = answers[`${skill.id}-${q.id}`] || '[not specified]';
+                    return `- ${q.text}: ${ans}`;
+                }).join('\n');
+
+                return `Build me a Claude Skill called "${skill.name}".
+
+Description: ${skill.description}
+
+Here are my specific requirements:
+${answerLines}
+
+Context about my setup:
+- I use Claude Code (CLI) with a Chief of Staff knowledge management system
+- Skills live in ~/.claude/skills/[skill-name]/SKILL.md
+- I use Obsidian with WikiLinks for cross-referencing
+- I have Gmail MCP and Google Calendar MCP connected
+- I track projects in project-knowledge.md files with checkbox tasks
+- Session logs go in project logs/ folders with YYYYMMDD-identifier.md naming
+- I have a project-sources.md that maps all tracked project paths
+
+Requirements for the skill:
+1. Create a complete SKILL.md file I can add to my Claude Skills
+2. Include clear trigger conditions (when should this skill activate)
+3. Define the expected inputs and outputs
+4. Include step-by-step instructions Claude should follow
+5. Add example usage patterns
+6. Make it production-ready — something I'll use daily/weekly
+
+Format the output as a single markdown file I can copy and save as SKILL.md.`;
+            };
+
+            const handleCopy = async () => {
+                try {
+                    await navigator.clipboard.writeText(generatePrompt());
+                    onCopy(skill.id);
+                } catch (err) {
+                    // Fallback for non-HTTPS contexts
+                    const textarea = document.createElement('textarea');
+                    textarea.value = generatePrompt();
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    onCopy(skill.id);
+                }
+            };
+
+            return (
+                <div className="card-animate" style={{
+                    background: 'white', borderRadius: 12,
+                    border: '1px solid #e2e8f0', marginBottom: 12,
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                    overflow: 'hidden',
+                    transition: 'box-shadow 0.2s ease',
+                    ...(isExpanded ? { boxShadow: '0 4px 12px rgba(0,0,0,0.08)' } : {})
+                }}>
+                    <div style={{
+                        padding: '20px 24px',
+                        display: 'flex', alignItems: 'center', gap: 16,
+                        cursor: 'pointer'
+                    }} onClick={onToggle}>
+                        <div style={{ flex: 1 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+                                <span style={{
+                                    fontSize: 11, fontWeight: 600,
+                                    color: colors.text,
+                                    backgroundColor: colors.bg,
+                                    border: `1px solid ${colors.border}`,
+                                    padding: '2px 10px', borderRadius: 20,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.04em',
+                                    fontFamily: "'JetBrains Mono', monospace"
+                                }}>
+                                    {label}
+                                </span>
+                            </div>
+                            <div style={{ fontSize: 17, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>
+                                {skill.name}
+                            </div>
+                            <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5 }}>
+                                {skill.description}
+                            </p>
+                        </div>
+                        <button style={{
+                            background: isExpanded ? '#6366f1' : '#f1f5f9',
+                            color: isExpanded ? 'white' : '#6366f1',
+                            border: 'none',
+                            padding: '8px 16px', borderRadius: 8,
+                            fontSize: 13, fontWeight: 600,
+                            cursor: 'pointer',
+                            whiteSpace: 'nowrap',
+                            transition: 'all 0.2s ease',
+                            flexShrink: 0
+                        }}>
+                            {isExpanded ? 'Close ×' : 'Configure →'}
+                        </button>
+                    </div>
+
+                    {isExpanded && (
+                        <div style={{
+                            padding: '0 24px 24px',
+                            borderTop: '1px solid #f1f5f9'
+                        }}>
+                            <div className="mono" style={{
+                                fontSize: 11, fontWeight: 600, color: '#6366f1',
+                                textTransform: 'uppercase', letterSpacing: '0.08em',
+                                marginTop: 20, marginBottom: 16
+                            }}>
+                                QUICK CONFIGURATION
+                            </div>
+
+                            {skill.questions.map(q => (
+                                <div key={q.id} style={{ marginBottom: 14 }}>
+                                    <label style={{
+                                        display: 'block', fontSize: 13,
+                                        fontWeight: 500, color: '#334155',
+                                        marginBottom: 6
+                                    }}>
+                                        {q.text}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={answers[`${skill.id}-${q.id}`] || ''}
+                                        onChange={e => onAnswerChange(`${skill.id}-${q.id}`, e.target.value)}
+                                        placeholder="Type your answer..."
+                                        style={{
+                                            width: '100%', padding: '10px 14px',
+                                            border: '1px solid #e2e8f0', borderRadius: 8,
+                                            fontSize: 14, fontFamily: 'Inter, sans-serif',
+                                            color: '#1e293b', outline: 'none',
+                                            transition: 'border-color 0.2s ease',
+                                            background: '#fafbfc'
+                                        }}
+                                        onFocus={e => e.target.style.borderColor = '#6366f1'}
+                                        onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                                    />
+                                </div>
+                            ))}
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 20 }}>
+                                <button onClick={handleCopy} style={{
+                                    background: copiedId === skill.id ? '#059669' : '#6366f1',
+                                    color: 'white', border: 'none',
+                                    padding: '10px 20px', borderRadius: 8,
+                                    fontSize: 14, fontWeight: 600,
+                                    cursor: 'pointer',
+                                    transition: 'background 0.2s ease',
+                                    display: 'flex', alignItems: 'center', gap: 8
+                                }}>
+                                    {copiedId === skill.id
+                                        ? '✓ Copied! Paste into Claude →'
+                                        : '📋 Copy Build Prompt'}
+                                </button>
+                                <span style={{ fontSize: 12, color: '#94a3b8' }}>
+                                    Works without answers too — but answers make better skills
+                                </span>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const Footer = () => (
+            <div style={{
+                textAlign: 'center', padding: '32px 0 48px',
+                fontSize: 13, color: '#94a3b8', lineHeight: 1.5
+            }}>
+                Skills are ranked by estimated weekly time savings. Build the top-scoring ones first for maximum impact.
+            </div>
+        );
+
+        // ─── App ────────────────────────────────────────────────
+
+        const App = () => {
+            const [expandedId, setExpandedId] = useState(null);
+            const [answers, setAnswers] = useState({});
+            const [copiedId, setCopiedId] = useState(null);
+
+            const optimizedCount = skills.filter(s => s.category === 'optimized').length;
+            const identifiedCount = skills.filter(s => s.category === 'identified').length;
+            const untappedCount = skills.filter(s => s.category === 'untapped').length;
+            const totalCount = skills.length;
+            const score = Math.round((optimizedCount / totalCount) * 100);
+
+            const handleToggle = (id) => {
+                setExpandedId(prev => prev === id ? null : id);
+            };
+
+            const handleAnswerChange = (key, value) => {
+                setAnswers(prev => ({ ...prev, [key]: value }));
+            };
+
+            const handleCopy = (id) => {
+                setCopiedId(id);
+                setTimeout(() => setCopiedId(null), 3000);
+            };
+
+            // Sort: untapped first, then identified, then optimized
+            const sortedSkills = [...skills].sort((a, b) => {
+                const order = { untapped: 0, identified: 1, optimized: 2 };
+                return order[a.category] - order[b.category];
+            });
+
+            return (
+                <div style={{ maxWidth: 760, margin: '0 auto', padding: '0 20px' }}>
+                    <Header />
+                    <ScoreDashboard
+                        optimized={optimizedCount}
+                        identified={identifiedCount}
+                        untapped={untappedCount}
+                        total={totalCount}
+                        score={score}
+                    />
+                    <Commentary />
+                    <InstructionBanner />
+
+                    {sortedSkills.map((skill, i) => (
+                        <SkillCard
+                            key={skill.id}
+                            skill={skill}
+                            isExpanded={expandedId === skill.id}
+                            onToggle={() => handleToggle(skill.id)}
+                            answers={answers}
+                            onAnswerChange={handleAnswerChange}
+                            copiedId={copiedId}
+                            onCopy={handleCopy}
+                        />
+                    ))}
+
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

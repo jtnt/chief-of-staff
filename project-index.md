@@ -252,11 +252,11 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 **Status:** Active - Repository
 **What it is:** Central repository for all writing (LinkedIn posts, blog articles, thought leadership)
 **Source:** `/Users/jtnt/Documents/Projects/Writing`
-**Last synced:** 2026-02-12
+**Last synced:** 2026-02-17
 
-Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 6 published pieces.
+Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 7 published pieces.
 
-**Recent:** Published major Substack article "What an AI mindset actually looks like" - explores thesis that AI conversations are more valuable than outputs, with two practical methods for building compounding systems from conversations.
+**Recent:** Archived "Claude Code as Hitchhiker's Guide text game" LinkedIn post (published Feb 13) — compares Claude Code's addictive but CLI-only interface to the original text adventure game; argues GUI wrappers (Cowork, Codex) are the natural next step. Task in project-knowledge.md marked done.
 
 ---
 
