@@ -250,9 +250,9 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 **Source:** `/Users/jtnt/Documents/Projects/writing`
 **Last synced:** 2026-02-17
 
-Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 7 published pieces.
+Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 8 published pieces.
 
-**Recent:** Established publishing workflow convention — draft history (all versioned iterations) moves into a `drafts/` subfolder within the Published folder on publish. Applied retroactively to `ai-mindset` post. Convention documented in CLAUDE.md.
+**Recent:** Published "What's the difference between Claude Chat, Cowork, and Claude Code?" to LinkedIn. v6 saved as canonical; folder moved to Published. Part of "How to Actually Work with AI" series. [[published/20260211_how-to-work-with-ai-series/claude-chat-cowork-code-v6.md]]
 
 ---
 
