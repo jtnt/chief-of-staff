@@ -256,7 +256,7 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 
 Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 7 published pieces.
 
-**Recent:** Archived "Claude Code as Hitchhiker's Guide text game" LinkedIn post (published Feb 13) — compares Claude Code's addictive but CLI-only interface to the original text adventure game; argues GUI wrappers (Cowork, Codex) are the natural next step. Task in project-knowledge.md marked done.
+**Recent:** Implemented `/nt-editor` skill for editorial review of writing drafts. Creates comprehensive editorial feedback (not rewrites) calibrated against voice profile and writing standards, with self-improvement via feedback logging. 8-step workflow: parallel analysis subagents → QA validation → interactive editing with real-time pattern capture.
 
 ---
 
