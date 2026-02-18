@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-17 22:21 EST
+**Last Updated:** 2026-02-18 08:49 EST
 
 ## Tasks
 
@@ -69,7 +69,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 ### Auto-Capture System (replaced /log and /save)
 - **SessionEnd hook** spawns background Claude to capture sessions automatically
 - `/session-capture` skill: reads transcript → creates log → extracts patterns → updates project-knowledge.md → commits/pushes → syncs to CoS
-- `/review-patterns` skill for reviewing CLAUDE.md suggestions from patterns
+- `/review-patterns` skill: generates HTML playground with pre-analyzed suggestions (5 criteria, theme-grouped table, bulk actions) — reduces review from 37 individual judgments to confirm/override
 - `PATTERNS_PENDING` flag surfaced at session start when suggestions exist
 - Plan files from `~/.claude/plans/` preserved verbatim in session logs
 - Trivial sessions (< 3 user messages or < 2KB) skipped automatically
@@ -138,6 +138,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-18: Review Patterns Skill Overhauled
+
+Rewrote `/review-patterns` to reduce cognitive load of reviewing CLAUDE.md suggestions. New flow: extract suggestions from pattern files → subagent pre-analyzes each against 8 official CLAUDE.md criteria → inject into HTML playground → user reviews in browser, copies prompt, pastes back. Table-based layout grouped into 10 themes with per-theme bulk actions; dismissed suggestions hidden by default. Key insight: the bottleneck is evaluation, not navigation — pre-analysis offloads the "is this worth adding?" judgment. 37 suggestions analyzed: 5 approve, 26 dismiss, 6 skip. Playground untested end-to-end (paste-back step). See [[logs/20260218-review-patterns-analysis-overhaul.md]].
+
 ### 2026-02-17: Skill Audit Report Built
 
 Built interactive HTML skill audit tool (`tools/skill-audit-report.html`). Scored current CoS skill inventory: 5/9 workflows fully optimized (56%). Optimized: Session Capture, Meeting Intelligence, Knowledge Capture, CPF Research, Editorial Pipeline. Identified gaps: Weekly Strategic Review skill, Client Engagement Pipeline. Untapped: Pre-Meeting Briefing, Email Triage. Stop hook error investigated: stale binary path after Claude Code auto-update — fix is restart. User asked about turning auditor into a repeatable skill; answer was yes. See [[logs/20260217-skill-audit-report.md]].
@@ -157,10 +161,6 @@ Enhanced dashboard resume session buttons to prepend `cd "~/Documents/Projects/{
 ### 2026-02-10: Thought/Link Skill Separation
 
 Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handling logic from `/thought`, added explicit redirect to `/link` for any URL input. Pattern documented: skill overlap creates friction when two skills can handle same input type. See [[logs/20260210-thought-link-skill-separation.md]], [[session-patterns/20260210-thought-link-skill-separation.md]].
-
-### 2026-02-10: Razzo-docx Skill Formatting (Round 2)
-
-Implemented second round of fixes for persistent Word document formatting issues in razzo-docx skill. Added XML border clearing to remove Title style's built-in blue bottom border, replaced VML footer with dotted paragraph border matching template, strengthened markdown `---` handling rules (skip these markers entirely in Razzo docs), updated code examples to be more explicit. Changes committed to `~/.claude/skills/razzo-docx/SKILL.md` (commit ee17279). See [[logs/20260210-razzo-docx-skill-fix-round-2.md]].
 
 ---
 
