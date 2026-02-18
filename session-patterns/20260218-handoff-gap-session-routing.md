@@ -12,25 +12,27 @@ transcript: /Users/jtnt/.claude/projects/-Users-jtnt-Documents-Projects-chief-of
 
 **Session routing friction:** Session started in CoS because the user was brainstorming; by the time writing started, the session was already "logged to CoS." User wanted session log to end up in `writing/logs/`. Neither mid-session routing nor retroactive log placement is currently possible. This came up again (it has come up before).
 
+## Resolution (implemented in same session)
+
+**Handoff gap fixed** — session continued past initial capture and implemented the fix:
+- `~/.claude/hooks/cos-session-start.sh` updated to check for `.claude/handoff.md` and emit `HANDOFF_PENDING` context
+- `~/.claude/CLAUDE.md` updated with handler under "Chief of Staff Integration > Hooks"
+- `~/.claude/skills/handoff/SKILL.md` updated to note auto-detection
+
+**Remaining gap:** Hook injects context but nothing displays to user until they type the first message. User must type something before Claude acts on `HANDOFF_PENDING`. Could add stderr output for a visual heads-up in terminal before first prompt — not yet implemented.
+
+**Session routing friction remains unresolved** — no mechanism for mid-session log routing or retroactive placement.
+
 ## CLAUDE.md Suggestions
-
-### For Project CLAUDE.md (`writing/CLAUDE.md` or CoS `CLAUDE.md`)
-
-```suggestion:project
-## Handoff Resume
-
-At session start: check if `.claude/handoff.md` exists in the current project folder. If it does, read it and offer to resume from the handoff prompt before doing anything else.
-```
 
 ### For Global ~/.claude/CLAUDE.md
 
-No global suggestion — this is project-level behavior.
+Already implemented — HANDOFF_PENDING handler added to global CLAUDE.md. No further suggestion needed.
 
-### Potential Hook
+### Remaining suggestion: stderr heads-up for handoff
 
-A SessionStart hook for writing/ (or globally) could auto-detect and surface handoff.md:
-- Check `$CWD/.claude/handoff.md` exists
-- If yes, print a notice: "Handoff file found. Read it before starting."
-- User can then paste the resume prompt or skip
+```suggestion:global
+## Handoff Visual Indicator
 
-This is more reliable than a CLAUDE.md instruction because it fires automatically, not based on Claude remembering to check.
+When `HANDOFF_PENDING` is in session context, tell the user you see a handoff file and will summarize it now. Don't wait for them to ask.
+```

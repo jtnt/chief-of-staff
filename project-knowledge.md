@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-18 08:52 EST
+**Last Updated:** 2026-02-18 10:11 EST
 
 ## Tasks
 
@@ -138,9 +138,9 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
-### 2026-02-18: Claude.md Engineering Post Draft (Writing)
+### 2026-02-18: Claude.md Engineering Post + Handoff Hook
 
-Mined 9 patterns from CLAUDE.md files for a blog post draft. Three versions written in writing/drafts/: v1 rejected (AI-slop voice, listicle anti-patterns), v2 rejected (overcorrected to personal essay), v3 current (listicle back, tighter, honest framing). Handoff gap discovered: `handoff.md` is written but nothing auto-surfaces it in the next session. Session started in CoS; artifacts in writing/; log here by necessity. See [[logs/20260218-claude-md-engineering-draft.md]].
+Mined 9 patterns from CLAUDE.md files for a blog post draft. Three versions written in writing/drafts/: v1 rejected (AI-slop voice, listicle anti-patterns), v2 rejected (overcorrected to personal essay), v3 current (listicle back, tighter). Also fixed handoff gap: updated SessionStart hook to emit `HANDOFF_PENDING`, added handler to global CLAUDE.md, updated handoff skill. Fixed JSON bug (literal newline in hook output). See [[logs/20260218-claude-md-engineering-draft.md]].
 
 ### 2026-02-18: Review Patterns Skill Overhauled
 
@@ -171,7 +171,7 @@ Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handl
 ## Open Items
 
 - **Gmail/Google Calendar MCP reconnection** — Root cause found and fixed: `~/.claude.json` still had old `Chief of Staff` paths after the restructure. Updated to `chief_of_staff`. Confirm both integrations reconnect on next Claude Code restart. Note: `~/.claude.json` is a SEPARATE config from `~/.claude/settings.json` — both need path updates during folder renames.
-- **Handoff gap** — `/handoff` saves `.claude/handoff.md` but nothing auto-surfaces it at session start. Options: SessionStart hook, CLAUDE.md instruction, or both. Discussed 2026-02-18, not yet implemented.
+- **Handoff visual indicator** — Handoff hook implemented (2026-02-18), but user must type something before Claude acts on `HANDOFF_PENDING` context. Could add stderr output to hook for immediate visual heads-up in terminal before first prompt.
 - **SessionEnd exit delay** — Auto-capture adds ~20 second delay on session exit. Not blocking but worth investigating if it gets worse.
 - **Cross-project session limitation** — Sessions log to cwd only. If a session touches multiple projects, secondary projects don't get logs. User can manually point at transcript for relevant extraction.
 - Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
