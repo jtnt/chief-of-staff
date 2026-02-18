@@ -27,6 +27,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 - Context Profile Framework: landing page + waitlist for app
 
 **Recent Highlights:**
+- Client communication system established: email style documentation at clients/ level, SalesIntel check-in email crafted with Revenue Leadership Podcast insights (2026-02-18)
 - AI Advisory updated: $8k/month, async email support added, on-site preferred, CPF removed from nav, Scaling AI for Managers removed (2026-02-18)
 - Client organization: Georgetown Learning Centers setup, meetings convention established, cross-project resume work (2026-02-18)
 - AI Advisory standalone page launched at `/ai-advisory/` — full pricing transparency, scannable layout, 8 cross-site links updated (2026-02-17)
