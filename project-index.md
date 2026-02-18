@@ -249,11 +249,13 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 **Status:** Active - Repository
 **What it is:** Central repository for all writing (LinkedIn posts, blog articles, thought leadership)
 **Source:** `/Users/jtnt/Documents/Projects/writing`
-**Last synced:** 2026-02-17
+**Last synced:** 2026-02-18
 
 Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 8 published pieces.
 
-**Recent:** Published "What's the difference between Claude Chat, Cowork, and Claude Code?" to LinkedIn. v6 saved as canonical; folder moved to Published. Part of "How to Actually Work with AI" series. [[published/20260211_how-to-work-with-ai-series/claude-chat-cowork-code-v6.md]]
+**Recent:** CLAUDE.md engineering post through v5 — major thesis reframe from rules listicle to self-improving feedback loop framing. Positioned as sequel to AI mindset post. Voice profile built for nt-editor skill. Post draft-ready; platform/title decision remaining.
+
+**In Progress:** CLAUDE.md engineering post (`drafts/20260217_claude-md-engineering/post-v5.md`) — platform decision + publish.
 
 ---
 
