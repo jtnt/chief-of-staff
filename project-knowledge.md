@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-17 20:23 EST
+**Last Updated:** 2026-02-17 20:58 EST
 
 ## Tasks
 
@@ -165,6 +165,7 @@ Planned and executed complete simplification of CoS system. Removed unused featu
 
 ## Open Items
 
+- **Gmail/Google Calendar MCP reconnection** — Failed repeatedly post-restructure. Tried /mcp reconnect, re-auth on claude.ai, /login — still failing. May need `~/.claude/` auth file inspection or Claude Code restart.
 - **SessionEnd exit delay** — Auto-capture adds ~20 second delay on session exit. Not blocking but worth investigating if it gets worse.
 - **Cross-project session limitation** — Sessions log to cwd only. If a session touches multiple projects, secondary projects don't get logs. User can manually point at transcript for relevant extraction.
 - Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
