@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-18 17:50 EST
+**Last Updated:** 2026-02-18 18:24 EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -23,7 +23,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 - Sales Teams Bootcamp: 4 sessions, $5,000
 - Marketing Teams Bootcamp: 4 sessions, $5,000
 - Office Hours: $250/hr
-- AI Advisory: embedded, $8,000/month, 3-month commitment - updated price + terms
+- AI Advisory: embedded, $7,500/month, 3-month commitment
 - Context Profile Framework: landing page + waitlist for app
 
 **Recent Highlights:**
