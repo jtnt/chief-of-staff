@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-18 14:02 EST
+**Last Updated:** 2026-02-18 18:39 EST
 
 ## Tasks
 
@@ -86,7 +86,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - `/todo` for task items → project `project-knowledge.md` `## Tasks` (new)
 
 ### MCP & External Services
-- Google Calendar + Gmail MCP (project-scoped, OAuth via Cloud project `claude-code-484521`)
+- Google Calendar + Gmail MCP (project-scoped, OAuth via Cloud project `claude-code-484521`; tokens expire ~7-11 days — re-auth via `auth` arg; last authed 2026-02-18)
 - Brave Search MCP (user-level, global)
 - Notion MCP (project-scoped via `.mcp.json`)
 
@@ -143,6 +143,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-18: Gmail + Calendar OAuth Re-auth
+
+Both MCP integrations had expired OAuth tokens (~7-11 day Google TTL). Gmail credentials found at `chief_of_staff/.claude/gmail-credentials.json`; Calendar at `~/.config/google-calendar-mcp/tokens.json`. Fix: delete expired files, run package auth server with `auth` argument — opens browser OAuth window. Key: Gmail requires explicit `auth` arg to trigger flow (without it, server starts silently). See [[logs/20260218-gmail-oauth-fix.md]], [[logs/20260218-oauth-reauth-complete.md]].
+
 ### 2026-02-18: PK Loading + Resume-Project Skill Migration
 
 Added `### Session Start` instruction to global `~/.claude/CLAUDE.md`: read `./project-knowledge.md` at session start, skip if absent. Completes the three-layer context model (handoff hook → PK loading → `/resume-project` on demand). Migrated `/resume-project` from `~/.claude/commands/resume-project.md` to `~/.claude/skills/nt-resume-project/SKILL.md` — two-phase workflow (orientation menu → full context loading). Old command deleted. See [[logs/20260218-pk-loading-resume-skill-migration.md]].
@@ -175,7 +179,7 @@ Enhanced dashboard resume session buttons to prepend `cd "~/Documents/Projects/{
 
 ## Open Items
 
-- **Gmail/Google Calendar MCP reconnection** — Root cause found and fixed: `~/.claude.json` still had old `Chief of Staff` paths after the restructure. Updated to `chief_of_staff`. Confirm both integrations reconnect on next Claude Code restart. Note: `~/.claude.json` is a SEPARATE config from `~/.claude/settings.json` — both need path updates during folder renames.
+- **Gmail/Google Calendar MCP — OAuth TTL** — Both integrations re-authed 2026-02-18. Google OAuth refresh tokens expire every ~7-11 days. Next re-auth needed ~Feb 25–Mar 1. Gmail: `npx @gongrzhe/server-gmail-autoauth-mcp auth`. Calendar: run `auth-server.js` via node. Both open browser OAuth window.
 - **Handoff visual indicator** — Handoff hook implemented (2026-02-18), but user must type something before Claude acts on `HANDOFF_PENDING` context. Could add stderr output to hook for immediate visual heads-up in terminal before first prompt.
 - **SessionEnd exit delay** — Auto-capture adds ~20 second delay on session exit. Not blocking but worth investigating if it gets worse.
 - **Cross-project session limitation** — Sessions log to cwd only. If a session touches multiple projects, secondary projects don't get logs. User can manually point at transcript for relevant extraction.
