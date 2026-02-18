@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-17 18:54 EST
+**Last Updated:** 2026-02-17 22:18 EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -13,7 +13,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/razzo`
-**Last synced:** 2026-02-06
+**Last synced:** 2026-02-17
 
 **Current Strategic Direction:**
 The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows. Key insight: professionals adopt tools by solving real problems, not through passive learning.
@@ -24,12 +24,13 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 - Marketing Teams Bootcamp: 4 sessions, $5,000
 - Sales Managers Workshop: 90 min, $1,500
 - Office Hours: $250/hr
+- AI Advisory: embedded, $7,500/month, 3-month minimum - NEW standalone page
 - Context Profile Framework: landing page + waitlist for app
 
 **Recent Highlights:**
+- AI Advisory standalone page launched at `/ai-advisory/` — full pricing transparency, scannable layout, 8 cross-site links updated (2026-02-17)
 - AI adoption research synthesis with Every.to articles; enablement plan framework built (2026-02-04)
 - CPF landing page completed at `/context-profile-framework/` (2026-01-15)
-- StoryBrand messaging exploration in progress — still searching for the right problem soundbite
 
 **Open Questions:**
 - What's the right problem soundbite? (StoryBrand "own the hole")
