@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-18 14:30 EST
+**Last Updated:** 2026-02-18 17:50 EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -22,16 +22,15 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 - AI Workflow Sprint: 2 weeks, $3,500 (individual) or $7,500 (team) - LEAD OFFERING
 - Sales Teams Bootcamp: 4 sessions, $5,000
 - Marketing Teams Bootcamp: 4 sessions, $5,000
-- Sales Managers Workshop: 90 min, $1,500
 - Office Hours: $250/hr
-- AI Advisory: embedded, $7,500/month, 3-month minimum - NEW standalone page
+- AI Advisory: embedded, $8,000/month, 3-month commitment - updated price + terms
 - Context Profile Framework: landing page + waitlist for app
 
 **Recent Highlights:**
+- AI Advisory updated: $8k/month, async email support added, on-site preferred, CPF removed from nav, Scaling AI for Managers removed (2026-02-18)
 - Client organization: Georgetown Learning Centers setup, meetings convention established, cross-project resume work (2026-02-18)
 - AI Advisory standalone page launched at `/ai-advisory/` — full pricing transparency, scannable layout, 8 cross-site links updated (2026-02-17)
 - AI adoption research synthesis with Every.to articles; enablement plan framework built (2026-02-04)
-- CPF landing page completed at `/context-profile-framework/` (2026-01-15)
 
 **Open Questions:**
 - What's the right problem soundbite? (StoryBrand "own the hole")
