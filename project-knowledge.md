@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-18 08:49 EST
+**Last Updated:** 2026-02-18 08:52 EST
 
 ## Tasks
 
@@ -138,6 +138,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-18: Claude.md Engineering Post Draft (Writing)
+
+Mined 9 patterns from CLAUDE.md files for a blog post draft. Three versions written in writing/drafts/: v1 rejected (AI-slop voice, listicle anti-patterns), v2 rejected (overcorrected to personal essay), v3 current (listicle back, tighter, honest framing). Handoff gap discovered: `handoff.md` is written but nothing auto-surfaces it in the next session. Session started in CoS; artifacts in writing/; log here by necessity. See [[logs/20260218-claude-md-engineering-draft.md]].
+
 ### 2026-02-18: Review Patterns Skill Overhauled
 
 Rewrote `/review-patterns` to reduce cognitive load of reviewing CLAUDE.md suggestions. New flow: extract suggestions from pattern files → subagent pre-analyzes each against 8 official CLAUDE.md criteria → inject into HTML playground → user reviews in browser, copies prompt, pastes back. Table-based layout grouped into 10 themes with per-theme bulk actions; dismissed suggestions hidden by default. Key insight: the bottleneck is evaluation, not navigation — pre-analysis offloads the "is this worth adding?" judgment. 37 suggestions analyzed: 5 approve, 26 dismiss, 6 skip. Playground untested end-to-end (paste-back step). See [[logs/20260218-review-patterns-analysis-overhaul.md]].
@@ -167,6 +171,7 @@ Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handl
 ## Open Items
 
 - **Gmail/Google Calendar MCP reconnection** — Root cause found and fixed: `~/.claude.json` still had old `Chief of Staff` paths after the restructure. Updated to `chief_of_staff`. Confirm both integrations reconnect on next Claude Code restart. Note: `~/.claude.json` is a SEPARATE config from `~/.claude/settings.json` — both need path updates during folder renames.
+- **Handoff gap** — `/handoff` saves `.claude/handoff.md` but nothing auto-surfaces it at session start. Options: SessionStart hook, CLAUDE.md instruction, or both. Discussed 2026-02-18, not yet implemented.
 - **SessionEnd exit delay** — Auto-capture adds ~20 second delay on session exit. Not blocking but worth investigating if it gets worse.
 - **Cross-project session limitation** — Sessions log to cwd only. If a session touches multiple projects, secondary projects don't get logs. User can manually point at transcript for relevant extraction.
 - Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
