@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-17 20:58 EST
+**Last Updated:** 2026-02-17 22:11 EST
 
 ## Tasks
 
@@ -96,7 +96,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
-- **Projects folder restructure** (2026-02-17): Standardized all project folders to lowercase_with_underscores. Absorbed `Clients/` into `razzo/clients/` (gitignored in Razzo). Created `Projects/CLAUDE.md` as shared context layer. 17 files updated. APFS CWD hazard: renaming the session's working directory breaks bash — use Task agents if it happens. See [[logs/20260217-projects-folder-restructure.md]].
+- **Projects folder restructure** (2026-02-17): Standardized all project folders to lowercase_with_underscores. Absorbed `Clients/` into `razzo/clients/` (gitignored in Razzo). Created `Projects/CLAUDE.md` as shared context layer. 17 files updated. APFS CWD hazard: renaming the session's working directory breaks bash — use Task agents if it happens. Post-restructure: `~/.claude.json` was missed (separate from `~/.claude/settings.json`) — contained old MCP paths for Gmail/Calendar. Both must be updated during folder renames. See [[logs/20260217-projects-folder-restructure.md]], [[logs/20260217-mcp-path-fix-session-end.md]].
 
 - **System simplification approach** (2026-02-12): Simplification should be structural, not cosmetic. Audit actual usage, delete unused features entirely (not just their docs), match system to workflow (not vice versa). Document what you DO, not what's possible. Implemented: deleted 4 skills, 1 command, 2 hooks; created `/todo` skill; renamed `/thought` to `/note`; flattened tasks to plain checkboxes; archived check-in folders; updated dashboard. Pattern: comprehensive inventory prevents orphaned references across multiple repos. See [[logs/20260212-cos-simplification-planning.md]], [[logs/20260212-cos-simplification.md]].
 
@@ -137,9 +137,9 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
-### 2026-02-17: Projects Folder Restructure
+### 2026-02-17: Projects Folder Restructure + MCP Path Fix
 
-Full restructure of `~/Documents/Projects/`: Clients absorbed into `razzo/clients/` (gitignored); all top-level and second-level folders renamed to lowercase_with_underscores; new `Projects/CLAUDE.md` shared context layer created; Session Routing section added to CoS CLAUDE.md. 17 files updated across skills, settings, CLAUDE.md files, and dashboard. APFS CWD hazard discovered: renaming the running session's directory breaks bash tools — use Task agents as workaround. See [[logs/20260217-projects-folder-restructure.md]].
+Full restructure of `~/Documents/Projects/`: Clients absorbed into `razzo/clients/` (gitignored); all top-level and second-level folders renamed to lowercase_with_underscores; new `Projects/CLAUDE.md` shared context layer created; Session Routing section added to CoS CLAUDE.md. 17 files updated across skills, settings, CLAUDE.md files, and dashboard. Post-restructure: Gmail/Calendar MCP reconnection failures — root cause was `~/.claude.json` (separate from settings.json) still pointing to old `Chief of Staff` path. Fixed. APFS CWD hazard: renaming the running session's directory breaks bash — use Task agents as workaround. See [[logs/20260217-projects-folder-restructure.md]], [[logs/20260217-mcp-path-fix-session-end.md]].
 
 ### 2026-02-13: Murchison Chief of Staff Research
 
@@ -165,7 +165,7 @@ Planned and executed complete simplification of CoS system. Removed unused featu
 
 ## Open Items
 
-- **Gmail/Google Calendar MCP reconnection** — Failed repeatedly post-restructure. Tried /mcp reconnect, re-auth on claude.ai, /login — still failing. May need `~/.claude/` auth file inspection or Claude Code restart.
+- **Gmail/Google Calendar MCP reconnection** — Root cause found and fixed: `~/.claude.json` still had old `Chief of Staff` paths after the restructure. Updated to `chief_of_staff`. Confirm both integrations reconnect on next Claude Code restart. Note: `~/.claude.json` is a SEPARATE config from `~/.claude/settings.json` — both need path updates during folder renames.
 - **SessionEnd exit delay** — Auto-capture adds ~20 second delay on session exit. Not blocking but worth investigating if it gets worse.
 - **Cross-project session limitation** — Sessions log to cwd only. If a session touches multiple projects, secondary projects don't get logs. User can manually point at transcript for relevant extraction.
 - Review saved ContextOS integration plan at `~/.claude/plans/spicy-popping-puzzle.md`
