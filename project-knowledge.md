@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-17 22:11 EST
+**Last Updated:** 2026-02-17 22:21 EST
 
 ## Tasks
 
@@ -12,6 +12,7 @@
 - [ ] Review Boris Cherny's Claude Code tips
 - [ ] Review and implement CoS automation recommendations
 - [ ] Explore insights report suggestions
+- [ ] Build skill auditor as repeatable skill (audit → regenerate HTML report; quarterly cadence)
 
 ### Done
 
@@ -137,6 +138,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-17: Skill Audit Report Built
+
+Built interactive HTML skill audit tool (`tools/skill-audit-report.html`). Scored current CoS skill inventory: 5/9 workflows fully optimized (56%). Optimized: Session Capture, Meeting Intelligence, Knowledge Capture, CPF Research, Editorial Pipeline. Identified gaps: Weekly Strategic Review skill, Client Engagement Pipeline. Untapped: Pre-Meeting Briefing, Email Triage. Stop hook error investigated: stale binary path after Claude Code auto-update — fix is restart. User asked about turning auditor into a repeatable skill; answer was yes. See [[logs/20260217-skill-audit-report.md]].
+
 ### 2026-02-17: Projects Folder Restructure + MCP Path Fix
 
 Full restructure of `~/Documents/Projects/`: Clients absorbed into `razzo/clients/` (gitignored); all top-level and second-level folders renamed to lowercase_with_underscores; new `Projects/CLAUDE.md` shared context layer created; Session Routing section added to CoS CLAUDE.md. 17 files updated across skills, settings, CLAUDE.md files, and dashboard. Post-restructure: Gmail/Calendar MCP reconnection failures — root cause was `~/.claude.json` (separate from settings.json) still pointing to old `Chief of Staff` path. Fixed. APFS CWD hazard: renaming the running session's directory breaks bash — use Task agents as workaround. See [[logs/20260217-projects-folder-restructure.md]], [[logs/20260217-mcp-path-fix-session-end.md]].
@@ -156,10 +161,6 @@ Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handl
 ### 2026-02-10: Razzo-docx Skill Formatting (Round 2)
 
 Implemented second round of fixes for persistent Word document formatting issues in razzo-docx skill. Added XML border clearing to remove Title style's built-in blue bottom border, replaced VML footer with dotted paragraph border matching template, strengthened markdown `---` handling rules (skip these markers entirely in Razzo docs), updated code examples to be more explicit. Changes committed to `~/.claude/skills/razzo-docx/SKILL.md` (commit ee17279). See [[logs/20260210-razzo-docx-skill-fix-round-2.md]].
-
-### 2026-02-12: CoS Simplification (Planning + Implementation)
-
-Planned and executed complete simplification of CoS system. Removed unused features (4 skills: morning/evening/journal/capture; briefing system; morning greeting hook; review-checkins command), flattened task management from 4 subsections (Inbox/Active/Backlog/Done) to plain checkboxes + Done section, created `/todo` skill, renamed `/thought` to `/note`, archived check-in folders to `_archive/`, stripped session-start hook from ~100 to ~17 lines, updated dashboard to parse new flat task format. Result: system matches actual usage — auto-capture, `/link`, `/note`, `/todo`, task checkboxes, pattern review. See [[logs/20260212-cos-simplification-planning.md]], [[logs/20260212-cos-simplification.md]], [[session-patterns/20260212-cos-simplification-planning.md]], [[session-patterns/20260212-cos-simplification.md]].
 
 ---
 
