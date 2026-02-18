@@ -13,7 +13,7 @@ This file contains summaries of all tracked projects. For information about Chie
 **What it is:** AI training for sales and marketing teams
 **Website:** razzohq.com
 **Source:** `/Users/jtnt/Documents/Projects/razzo`
-**Last synced:** 2026-02-17
+**Last synced:** 2026-02-18
 
 **Current Strategic Direction:**
 The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "training company" to "workflow enablement company." The Sprint is a 2-week engagement where teams build real, working AI workflows. Key insight: professionals adopt tools by solving real problems, not through passive learning.
@@ -28,6 +28,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 - Context Profile Framework: landing page + waitlist for app
 
 **Recent Highlights:**
+- Client organization: Georgetown Learning Centers setup, meetings convention established, cross-project resume work (2026-02-18)
 - AI Advisory standalone page launched at `/ai-advisory/` — full pricing transparency, scannable layout, 8 cross-site links updated (2026-02-17)
 - AI adoption research synthesis with Every.to articles; enablement plan framework built (2026-02-04)
 - CPF landing page completed at `/context-profile-framework/` (2026-01-15)
