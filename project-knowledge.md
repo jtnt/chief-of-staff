@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-18 10:11 EST
+**Last Updated:** 2026-02-18 14:02 EST
 
 ## Tasks
 
@@ -75,6 +75,11 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 - Trivial sessions (< 3 user messages or < 2KB) skipped automatically
 - `/log` and `/save` commands deprecated
 
+### Three-Layer Session Context Model (complete as of 2026-02-18)
+- **Layer 1 — Handoff** (SessionStart hook, mechanical): specific in-flight task when `.claude/handoff.md` exists
+- **Layer 2 — PK loading** (global CLAUDE.md instruction, every session): reads `./project-knowledge.md` at session start; ambient project awareness
+- **Layer 3 — `/resume-project`** (manual, on demand): `nt-resume-project` skill; reads full logs + referenced files; deep context for complex multi-session work
+
 ### Quick Capture
 - `/link` for URLs → project `research/` folders (saves article + analysis)
 - `/note` for ideas/quotes/observations → `Notes/` (renamed from `/thought`)
@@ -138,6 +143,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-18: PK Loading + Resume-Project Skill Migration
+
+Added `### Session Start` instruction to global `~/.claude/CLAUDE.md`: read `./project-knowledge.md` at session start, skip if absent. Completes the three-layer context model (handoff hook → PK loading → `/resume-project` on demand). Migrated `/resume-project` from `~/.claude/commands/resume-project.md` to `~/.claude/skills/nt-resume-project/SKILL.md` — two-phase workflow (orientation menu → full context loading). Old command deleted. See [[logs/20260218-pk-loading-resume-skill-migration.md]].
+
 ### 2026-02-18: Claude.md Engineering Post + Handoff Hook
 
 Mined 9 patterns from CLAUDE.md files for a blog post draft. Three versions written in writing/drafts/: v1 rejected (AI-slop voice, listicle anti-patterns), v2 rejected (overcorrected to personal essay), v3 current (listicle back, tighter). Also fixed handoff gap: updated SessionStart hook to emit `HANDOFF_PENDING`, added handler to global CLAUDE.md, updated handoff skill. Fixed JSON bug (literal newline in hook output). See [[logs/20260218-claude-md-engineering-draft.md]].
@@ -161,10 +170,6 @@ Captured and analyzed Mike Murchison's (CEO, Ada) AI Chief of Staff implementati
 ### 2026-02-10: Dashboard Resume Button CD + CLAUDE.md Discipline
 
 Enhanced dashboard resume session buttons to prepend `cd "~/Documents/Projects/{project}" && ` before `claude --resume` command. Created [[Tools/dashboard/CLAUDE.md]], then aggressively trimmed based on "mistake prevention" filter. Final version keeps only non-obvious lifecycle hooks and alert() gotcha. Pattern documented: CLAUDE.md files should be minimal, not comprehensive. See [[logs/20260210-dashboard-resume-button-cd-claudemd.md]], [[session-patterns/20260210-dashboard-resume-button-cd-claudemd.md]].
-
-### 2026-02-10: Thought/Link Skill Separation
-
-Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handling logic from `/thought`, added explicit redirect to `/link` for any URL input. Pattern documented: skill overlap creates friction when two skills can handle same input type. See [[logs/20260210-thought-link-skill-separation.md]], [[session-patterns/20260210-thought-link-skill-separation.md]].
 
 ---
 
