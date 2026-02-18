@@ -1,6 +1,6 @@
 # Chief of Staff: Project Knowledge
 
-**Last Updated:** 2026-02-13 14:33 EST
+**Last Updated:** 2026-02-17 20:23 EST
 
 ## Tasks
 
@@ -96,6 +96,8 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### Architecture Decisions
 
+- **Projects folder restructure** (2026-02-17): Standardized all project folders to lowercase_with_underscores. Absorbed `Clients/` into `razzo/clients/` (gitignored in Razzo). Created `Projects/CLAUDE.md` as shared context layer. 17 files updated. APFS CWD hazard: renaming the session's working directory breaks bash — use Task agents if it happens. See [[logs/20260217-projects-folder-restructure.md]].
+
 - **System simplification approach** (2026-02-12): Simplification should be structural, not cosmetic. Audit actual usage, delete unused features entirely (not just their docs), match system to workflow (not vice versa). Document what you DO, not what's possible. Implemented: deleted 4 skills, 1 command, 2 hooks; created `/todo` skill; renamed `/thought` to `/note`; flattened tasks to plain checkboxes; archived check-in folders; updated dashboard. Pattern: comprehensive inventory prevents orphaned references across multiple repos. See [[logs/20260212-cos-simplification-planning.md]], [[logs/20260212-cos-simplification.md]].
 
 - **CLAUDE.md content discipline** (2026-02-10): Established "mistake prevention" filter for CLAUDE.md files. Each line should answer: "Would removing this cause Claude to make mistakes?" Only document non-obvious gotchas, required contracts, and things not discoverable by reading code. Cut architectural descriptions, file structure maps, and anything Claude can figure out in 30 seconds. Goal: smallest file that prevents most mistakes. See [[logs/20260210-dashboard-resume-button-cd-claudemd.md]], [[session-patterns/20260210-dashboard-resume-button-cd-claudemd.md]].
@@ -135,6 +137,10 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ## Recent Work
 
+### 2026-02-17: Projects Folder Restructure
+
+Full restructure of `~/Documents/Projects/`: Clients absorbed into `razzo/clients/` (gitignored); all top-level and second-level folders renamed to lowercase_with_underscores; new `Projects/CLAUDE.md` shared context layer created; Session Routing section added to CoS CLAUDE.md. 17 files updated across skills, settings, CLAUDE.md files, and dashboard. APFS CWD hazard discovered: renaming the running session's directory breaks bash tools — use Task agents as workaround. See [[logs/20260217-projects-folder-restructure.md]].
+
 ### 2026-02-13: Murchison Chief of Staff Research
 
 Captured and analyzed Mike Murchison's (CEO, Ada) AI Chief of Staff implementation. His open-source system processes ~500 background jobs/day with 15+ MCP integrations but uses only ~10 core files (markdown + YAML + cron). Architectural simplicity (no code, no database, CLAUDE.md as sole abstraction) reveals our system optimizes for different outcomes: his breadth-first daily integration vs our depth-first knowledge management. User noted transferability potential — setting up similar systems for executives maps to Razzo Sprint + CPF engagement model. See [[research/20260213_ai-chief-of-staff-claude-code-mike-murchison/]].
@@ -150,10 +156,6 @@ Fixed skill routing ambiguity between `/thought` and `/link`. Stripped URL-handl
 ### 2026-02-10: Razzo-docx Skill Formatting (Round 2)
 
 Implemented second round of fixes for persistent Word document formatting issues in razzo-docx skill. Added XML border clearing to remove Title style's built-in blue bottom border, replaced VML footer with dotted paragraph border matching template, strengthened markdown `---` handling rules (skip these markers entirely in Razzo docs), updated code examples to be more explicit. Changes committed to `~/.claude/skills/razzo-docx/SKILL.md` (commit ee17279). See [[logs/20260210-razzo-docx-skill-fix-round-2.md]].
-
-### 2026-02-09: Dashboard Timestamp and Preview Fixes
-
-Fixed multiple display inconsistencies in CoS dashboard. Timestamps were showing in three different formats (12h/24h with mixed timezones) because formatting function only handled 12-hour format. Preview text was including YAML frontmatter and cutting off at 120 chars due to CSS constraints. Enhanced `formatDisplayDate()` to handle both time formats with timezone conversion, stripped frontmatter from preview extraction, expanded to 2-line previews with sentence boundaries. Also documented dashboard in CLAUDE.md for discoverability. See [[logs/20260209-dashboard-timestamp-preview-fixes.md]].
 
 ### 2026-02-12: CoS Simplification (Planning + Implementation)
 
