@@ -254,7 +254,7 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 
 Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 8 published pieces.
 
-**Recent:** File naming convention updated — `post.md` replaced with `topic-slug-NN.md` pattern (e.g. `ai-mindset-01.md`). Applied retroactively to ai-mindset article and all its drafts. Convention documented in CLAUDE.md.
+**Recent:** Added "The Reader Test" to writing standards — pre-publish gate asking whether a CEO/CMO/CRO would forward the piece to their leadership team, with Ogilvy lens diagnostics when the answer is no.
 
 **In Progress:** CLAUDE.md engineering post (`drafts/20260217_claude-md-engineering/post-v5.md`) — platform decision + publish.
 
