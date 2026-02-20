@@ -32,7 +32,7 @@ This is a personal Chief of Staff system - a knowledge management and strategic 
 ## Folder Structure
 
 ```
-chief_of_staff/
+chief-of-staff/
 ├── notes/                              # Quick captures via /note
 ├── check_ins/
 │   └── _archive/                       # Old check-in files (daily, weekly, journal)

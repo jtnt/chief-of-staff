@@ -145,7 +145,7 @@ Chief of Staff system, LinkedIn tools, Caregiver App - these are either infrastr
 
 ### 2026-02-18: Gmail + Calendar OAuth Re-auth
 
-Both MCP integrations had expired OAuth tokens (~7-11 day Google TTL). Gmail credentials found at `chief_of_staff/.claude/gmail-credentials.json`; Calendar at `~/.config/google-calendar-mcp/tokens.json`. Fix: delete expired files, run package auth server with `auth` argument — opens browser OAuth window. Key: Gmail requires explicit `auth` arg to trigger flow (without it, server starts silently). See [[logs/20260218-gmail-oauth-fix.md]], [[logs/20260218-oauth-reauth-complete.md]].
+Both MCP integrations had expired OAuth tokens (~7-11 day Google TTL). Gmail credentials found at `chief-of-staff/.claude/gmail-credentials.json`; Calendar at `~/.config/google-calendar-mcp/tokens.json`. Fix: delete expired files, run package auth server with `auth` argument — opens browser OAuth window. Key: Gmail requires explicit `auth` arg to trigger flow (without it, server starts silently). See [[logs/20260218-gmail-oauth-fix.md]], [[logs/20260218-oauth-reauth-complete.md]].
 
 ### 2026-02-18: PK Loading + Resume-Project Skill Migration
 

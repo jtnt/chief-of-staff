@@ -1,6 +1,6 @@
 # Project Index
 
-**Last Updated:** 2026-02-18 18:24 EST
+**Last Updated:** 2026-02-20 09:50 EST
 
 This file contains summaries of all tracked projects. For information about Chief of Staff itself, see `project-knowledge.md`.
 
@@ -43,7 +43,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 ### Context Profile Framework
 **Status:** Active - R&D / Product Direction
 **What it is:** Framework + product for creating context infrastructure that makes general AI chatbots more effective
-**Source:** `/Users/jtnt/Documents/Projects/context_profile_framework`
+**Source:** `/Users/jtnt/Documents/Projects/context-profile-framework`
 **Last synced:** 2026-02-12
 
 **The Problem:** Organizations underutilize AI because they start every conversation from scratch. The framework teaches *what* to build (four layers). The product will help them build it.
@@ -97,7 +97,7 @@ The AI Workflow Sprint is the primary go-to-market focus, shifting Razzo from "t
 ### Job Search
 **Status:** Active - Personal
 **What it is:** Personal job search toolkit with workflow-optimized materials and processes
-**Source:** `/Users/jtnt/Documents/Projects/job_search`
+**Source:** `/Users/jtnt/Documents/Projects/job-search`
 **Last synced:** 2026-02-18 (MicroStrategy resume/cover letter iterations v7-v11)
 
 **Context:** Laid off March 2025; building Razzo while exploring job opportunities. 25+ years across B2B and DTC, agency and in-house. Target industries: Audio/Music/Consumer Electronics, AI Enablement, Premium Consumer Brands, SaaS/Tech.
@@ -250,11 +250,11 @@ Python + Claude Haiku + Gmail SMTP + GitHub Actions. 4 feeds (Ethan Mollick, Can
 **Status:** Active - Repository
 **What it is:** Central repository for all writing (LinkedIn posts, blog articles, thought leadership)
 **Source:** `/Users/jtnt/Documents/Projects/writing`
-**Last synced:** 2026-02-18
+**Last synced:** 2026-02-20
 
 Organized by status (drafts/, Published/). Each piece has front-matter linking to related projects. 8 published pieces.
 
-**Recent:** CLAUDE.md engineering post through v5 — major thesis reframe from rules listicle to self-improving feedback loop framing. Positioned as sequel to AI mindset post. Voice profile built for nt-editor skill. Post draft-ready; platform/title decision remaining.
+**Recent:** File naming convention updated — `post.md` replaced with `topic-slug-NN.md` pattern (e.g. `ai-mindset-01.md`). Applied retroactively to ai-mindset article and all its drafts. Convention documented in CLAUDE.md.
 
 **In Progress:** CLAUDE.md engineering post (`drafts/20260217_claude-md-engineering/post-v5.md`) — platform decision + publish.
 
@@ -271,7 +271,7 @@ Still in "figuring out exactly what it should do" phase. Building MVP with Repli
 ### Chief of Staff
 **Status:** Active - Infrastructure
 **What it is:** Personal knowledge management and strategic planning system
-**Source:** `/Users/jtnt/Documents/Projects/chief_of_staff`
+**Source:** `/Users/jtnt/Documents/Projects/chief-of-staff`
 
 Three-layer documentation model, two-way project sync, check-in system, auto-capture pipeline, task notifications across projects. See `project-knowledge.md` for system details and `USAGE-GUIDE.md` for reference.
 

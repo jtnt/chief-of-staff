@@ -10,7 +10,7 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Last synced:** 2026-01-21
 
 ## Context Profile Framework
-- **Source:** `/Users/jtnt/Documents/Projects/context_profile_framework`
+- **Source:** `/Users/jtnt/Documents/Projects/context-profile-framework`
 - **Key files:** `project-knowledge.md`, `CLAUDE.md`, `Business/business-knowledge.md`, `Research/Industry Thinking.md`, `Working/contextos-analysis.md`
 - **Last synced:** 2026-01-20
 
@@ -41,7 +41,7 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Last synced:** 2026-01-18
 
 ## Job Search
-- **Source:** `/Users/jtnt/Documents/Projects/job_search`
+- **Source:** `/Users/jtnt/Documents/Projects/job-search`
 - **Key files:** `CLAUDE.md`, `toolkit/Profile/master-profile.md`, `toolkit/Profile/achievements.md`
 - **Last synced:** 2026-01-20 (PostHog TAM v10 planning - failed)
 
@@ -63,7 +63,7 @@ Projects tracked by Chief of Staff with external source folders. When asked to "
 - **Last synced:** 2026-02-01 (initial build)
 
 ## Chief of Staff
-- **Source:** `/Users/jtnt/Documents/Projects/chief_of_staff`
+- **Source:** `/Users/jtnt/Documents/Projects/chief-of-staff`
 - **Key files:** `project-knowledge.md`, `project-index.md`, `CLAUDE.md`
 - **Last synced:** 2026-01-24
 - **Note:** This is the CoS system itself - tracked so session capture can pull CoS session logs
