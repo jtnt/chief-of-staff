@@ -4,6 +4,7 @@
 
 ## Tasks
 
+- [ ] Add cross-project handoff tracking to CoS — scan all tracked projects for .claude/handoff.md files, surface them in SessionStart hook when starting from CoS, and add a handoff status panel to the dashboard (tools/dashboard/)
 - [ ] I-Corps mentor prep [[Tasks/20260203-icorps-mentor-prep.md]]
 - [ ] Implement PreCompact handover hook
 - [ ] Evaluate Carl Vellotti's Personal OS patterns for CoS
