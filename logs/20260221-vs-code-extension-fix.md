@@ -14,12 +14,14 @@ User ran `/ide` to install the Claude Code VS Code extension and got an error: `
 
 Root cause: the `code` CLI wasn't in PATH, so the `/ide` command couldn't invoke it.
 
-Fix offered:
-1. In VS Code, run **"Shell Command: Install 'code' command in PATH"** via Command Palette (`Cmd+Shift+P`)
-2. Restart terminal, retry `/ide`
-3. Alternative: install manually from Extensions panel (`Cmd+Shift+X`), search "Claude Code" by Anthropic
+**Resolution process:**
+1. Diagnosed missing `code` CLI via `which code` check
+2. User installed "Shell Command: Install 'code' command in PATH" via VS Code Command Palette
+3. Confirmed `code` CLI was now available with `code --version`
+4. Discovered Claude Code extension was already installed (v2.1.49)
+5. `/ide` command appears to have display glitch when extension already exists
 
-Session ended before confirming resolution.
+**Final status:** Extension working, user directed to reload VS Code window to ensure Claude Code sidebar appears.
 
 ## Key Decisions
 
@@ -35,4 +37,4 @@ No files were modified.
 
 ## Open Items
 
-- Unclear if VS Code extension was successfully installed — user may need to follow up with manual install if PATH fix doesn't work.
+None identified - VS Code extension issue resolved.
